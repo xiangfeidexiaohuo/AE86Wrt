@@ -17,17 +17,17 @@ echo -e "src-git passwall https://github.com/xiaorouji/openwrt-passwall" >> feed
 echo -e "src-git helloworld https://github.com/fw876/helloworld" >> feeds.conf.default
 echo -e "src-git OpenAppFilter https://github.com/destan19/OpenAppFilter" >> feeds.conf.default
 echo -e "src-git OpenClash https://github.com/vernesong/OpenClash" >> feeds.conf.default
-echo -e "src-git ddnsto https://github.com/xiangfeidexiaohuo/ddnsto-openwrt" >> feeds.conf.default
-echo -e "src-git linkease https://github.com/linkease/linkease-openwrt" >> feeds.conf.default
 
 rm -rf ./package/yaodao
 ##bypass/dnsfilter
 git clone -b main --depth 1 https://github.com/garypang13/luci-app-bypass.git ./package/yaodao/luci-app-bypass
 git clone -b main --depth 1 https://github.com/garypang13/luci-app-dnsfilter.git ./package/yaodao/luci-app-dnsfilter
+#更换bypass的smartdns依赖
+sed -i 's/smartdns-le/smartdns/g' ./package/yaodao/luci-app-bypass/Makefile
 
 ##jerrykuku
 git clone -b 18.06 --depth 1 https://github.com/jerrykuku/luci-theme-argon.git ./package/yaodao/luci-theme-argon
 git clone -b master --depth 1 https://github.com/jerrykuku/luci-app-argon-config.git ./package/yaodao/luci-app-argon-config
 git clone -b master --depth 1 https://github.com/jerrykuku/luci-app-vssr.git ./package/yaodao/luci-app-vssr
 git clone -b master --depth 1 https://github.com/jerrykuku/luci-app-jd-dailybonus.git ./package/yaodao/luci-app-jd-dailybonus
-git clone -b master --depth 1 https://github.com/jerrykuku/lua-maxminddb.git ./package/yaodao/lua-maxminddb
+#git clone -b master --depth 1 https://github.com/jerrykuku/lua-maxminddb.git ./package/yaodao/lua-maxminddb
