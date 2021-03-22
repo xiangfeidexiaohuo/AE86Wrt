@@ -89,4 +89,21 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: K3-OpenWrt_419
-        path: K3_Out/*.trx              
+        path: K3_Out/*.trx  
+        
+    - name: Generate Tag & Release Name
+      id: generate_name
+      run: |
+        time=$(date +%Y%m%d%H%M)
+        release_tag="$time"
+        release_name="K3-OpenWrt-4.19-$time"
+        echo "##[set-output name=release_name;]$release_name"
+        echo "##[set-output name=release_tag;]$release_tag"        
+
+    - name: Create Release & Upload
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: K3_Out/*.trx
+        name: ${{ steps.generate_name.outputs.release_name }}
+        tag: ${{ steps.generate_name.outputs.release_tag }}
+        token: ${{ secrets.GITHUB_TOKEN }}                       
