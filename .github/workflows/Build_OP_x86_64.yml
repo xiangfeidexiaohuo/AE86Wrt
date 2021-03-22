@@ -91,3 +91,22 @@ jobs:
       with:
         name: X86-OpenWrt
         path: X86_Out/*.img.gz
+        
+    - name: Generate Tag & Release Name
+      id: generate_name
+      run: |
+        time=$(date +%Y%m%d%H%M)
+        release_tag="$time"
+        release_name="X86-OpenWrt-$time"
+        echo "##[set-output name=release_name;]$release_name"
+        echo "##[set-output name=release_tag;]$release_tag"        
+
+    - name: Create Release & Upload
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: X86_Out/*.img.gz 
+        name: ${{ steps.generate_name.outputs.release_name }}
+        tag: ${{ steps.generate_name.outputs.release_tag }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+                         
+        
