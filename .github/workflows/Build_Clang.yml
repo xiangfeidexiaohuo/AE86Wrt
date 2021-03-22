@@ -58,12 +58,13 @@ jobs:
         touch VERSION
         echo "Clang v13.0.0-$(date +%Y%m%d) By YaoDao" >> VERSION
         mv VERSION ./clang-$(date +%Y%m%d)/
+        tar zcvf Clang13-$(date +%Y%m%d).tar.gz clang-$(date +%Y%m%d)/*
                
     - name: Upload Clang
       uses: actions/upload-artifact@main
       with:
         name: Clang13
-        path: Clang_Out/* 
+        path: Clang_Out/*.tar.gz 
 
     - name: Generate Tag & Release Name
       id: generate_name
@@ -74,10 +75,10 @@ jobs:
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
-    - name: Create Release
+    - name: Create Release & Upload
       uses: ncipollo/release-action@v1
       with:
-        artifacts: Clang_Out/* 
+        artifacts: Clang_Out/*.tar.gz 
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
