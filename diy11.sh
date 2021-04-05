@@ -17,11 +17,8 @@ echo -e "src-git OpenAppFilter https://github.com/destan19/OpenAppFilter" >> fee
 echo -e "src-git OpenClash https://github.com/vernesong/OpenClash" >> feeds.conf.default
 
 rm -rf ./package/yaodao
-##bypass/dnsfilter
-git clone -b main --depth 1 https://github.com/garypang13/luci-app-bypass.git ./package/yaodao/luci-app-bypass
+##dnsfilter
 git clone -b main --depth 1 https://github.com/garypang13/luci-app-dnsfilter.git ./package/yaodao/luci-app-dnsfilter
-#更换bypass的smartdns依赖
-sed -i 's/smartdns-le/smartdns/g' ./package/yaodao/luci-app-bypass/Makefile
 
 ##jerrykuku
 git clone -b master --depth 1 https://github.com/jerrykuku/luci-theme-argon.git ./package/yaodao/luci-theme-argon
