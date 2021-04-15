@@ -12,6 +12,7 @@ rm -rf ./package/lean/luci-theme-argon
 rm -rf ./package/lean/luci-app-jd-dailybonus
 rm -rf ./package/lean/luci-app-diskman
 rm -rf ./package/lean/qBittorrent
+rm -rf ./package/lean/v2ray-plugin
                
 echo -e "\nsrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" >> feeds.conf.default
 echo -e "src-git passwall https://github.com/xiaorouji/openwrt-passwall" >> feeds.conf.default
