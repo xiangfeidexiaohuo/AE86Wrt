@@ -11,6 +11,7 @@ rm -rf ./package/diy/luci-app-adguardhome
 rm -rf ./package/diy/OpenAppFilter
                
 echo -e "\nsrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" >> feeds.conf.default
+echo -e "src-git nas https://github.com/linkease/nas-packages.git;master" >> feeds.conf.default
 echo -e "src-git passwall https://github.com/xiaorouji/openwrt-passwall" >> feeds.conf.default
 echo -e "src-git helloworld https://github.com/fw876/helloworld" >> feeds.conf.default
 echo -e "src-git OpenAppFilter https://github.com/destan19/OpenAppFilter" >> feeds.conf.default
