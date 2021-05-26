@@ -7,6 +7,7 @@
 rm -rf ./package/lean/k3screenctrl
 rm -rf ./package/lean/luci-app-sfe
 rm -rf ./package/lean/luci-app-syncdial
+rm -rf ./package/lean/qBittorrent
 rm -rf ./package/diy/luci-app-adguardhome
 rm -rf ./package/diy/OpenAppFilter
                
