@@ -17,6 +17,10 @@ ln -s -f ../../../feeds/xiangfeidexiaohuo/docker-op/libnetwork package/feeds/xia
 ln -s -f ../../../feeds/xiangfeidexiaohuo/k3screenctrl package/feeds/xiangfeidexiaohuo/k3screenctrl 
 ln -s -f ../../../feeds/xiangfeidexiaohuo/smartdns package/feeds/xiangfeidexiaohuo/smartdns              
 
+sed -i 's/docker-ce/docker/g' feeds/packages/utils/docker-compose/Makefile
+sed -i 's/1.26.2/1.28.2/g' feeds/packages/utils/docker-compose/Makefile
+sed -i 's/576b0f81d1a1325941b3ce3436efd51f28b9ecd85b10dd6daa7d51793e187b30/2f148b590414915d029dad7551f4cdf0b03a774dc9baa674480217236d260cc1/g' feeds/packages/utils/docker-compose/Makefile
+
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/files/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
 cp -f ./feeds/xiangfeidexiaohuo/files/mwan3.po ./feeds/luci/applications/luci-app-mwan3/po/zh-cn
