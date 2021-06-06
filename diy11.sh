@@ -9,6 +9,9 @@ rm -rf ./package/lean/luci-app-sfe
 rm -rf ./package/lean/luci-app-syncdial
 rm -rf ./package/diy/luci-app-adguardhome
 rm -rf ./package/diy/OpenAppFilter
+#qb
+rm -rf ./package/lean/qBittorrent
+rm -rf ./package/lean/libtorrent-rasterbar
                
 echo -e "\nsrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" >> feeds.conf.default
 echo -e "src-git nas https://github.com/linkease/nas-packages.git;master" >> feeds.conf.default
