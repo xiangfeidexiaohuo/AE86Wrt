@@ -83,7 +83,7 @@ jobs:
       run: |
         rm -rf ./K3_Out
         mkdir -p ./K3_Out/
-        cp -a openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm-k3-squashfs.trx ./K3_Out/K3-OpenWrt-4.19-$(date +%Y%m%d)_YaoDao.trx
+        cp -a openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm-k3-squashfs.trx ./K3_Out/K3-OpenWrt-Lean-4.19-$(date +%Y%m%d)_YaoDao.trx
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main

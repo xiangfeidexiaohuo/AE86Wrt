@@ -83,8 +83,8 @@ jobs:
       run: |
         rm -rf ./X86_Out
         mkdir -p ./X86_Out/
-        cp -a openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined.img.gz ./X86_Out/YaoDao-$(date +%Y%m%d)_openwrt-R21.02-x86-64-squashfs-combined.img.gz
-        cp -a openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img.gz ./X86_Out/YaoDao-$(date +%Y%m%d)_openwrt-R21.02-x86-64-squashfs-combined-efi.img.gz
+        cp -a openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined.img.gz ./X86_Out/X86_64-OpenWrt-Lienol-R21.02-squashfs-combined-$(date +%Y%m%d)_YaoDao.img.gz
+        cp -a openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img.gz ./X86_Out/X86_64-OpenWrt-Lienol-R21.02-squashfs-combined-efi-$(date +%Y%m%d)_YaoDao.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
