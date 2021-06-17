@@ -4,22 +4,10 @@
 # jsjson@163.com 
 #=================================================
 ##链接
-rm -rf package/feeds/packages/containerd
-rm -rf package/feeds/packages/runc
-rm -rf package/feeds/packages/tini
-rm -rf package/feeds/packages/libnetwork
 rm -rf package/feeds/packages/smartdns
 
-ln -s -f ../../../feeds/xiangfeidexiaohuo/docker-op/containerd package/feeds/xiangfeidexiaohuo/containerd
-ln -s -f ../../../feeds/xiangfeidexiaohuo/docker-op/runc package/feeds/xiangfeidexiaohuo/runc
-ln -s -f ../../../feeds/xiangfeidexiaohuo/docker-op/tini package/feeds/xiangfeidexiaohuo/tini
-ln -s -f ../../../feeds/xiangfeidexiaohuo/docker-op/libnetwork package/feeds/xiangfeidexiaohuo/libnetwork
 ln -s -f ../../../feeds/xiangfeidexiaohuo/k3screenctrl package/feeds/xiangfeidexiaohuo/k3screenctrl 
 ln -s -f ../../../feeds/xiangfeidexiaohuo/smartdns package/feeds/xiangfeidexiaohuo/smartdns              
-
-sed -i 's/docker-ce/docker/g' feeds/packages/utils/docker-compose/Makefile
-sed -i 's/1.26.2/1.28.2/g' feeds/packages/utils/docker-compose/Makefile
-sed -i 's/576b0f81d1a1325941b3ce3436efd51f28b9ecd85b10dd6daa7d51793e187b30/2f148b590414915d029dad7551f4cdf0b03a774dc9baa674480217236d260cc1/g' feeds/packages/utils/docker-compose/Makefile
 
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/files/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
@@ -28,7 +16,6 @@ cp -f ./feeds/xiangfeidexiaohuo/files/mwan3.po ./feeds/luci/applications/luci-ap
  ##配置ip等
 sed -i 's|^TARGET_|# TARGET_|g; s|# TARGET_DEVICES += phicomm-k3|TARGET_DEVICES += phicomm-k3| ; s|# TARGET_DEVICES += phicomm_k3|TARGET_DEVICES += phicomm_k3|' target/linux/bcm53xx/image/Makefile
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-#sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=5.4/g' target/linux/bcm53xx/Makefile
 
 ##取消bootstrap为默认主题
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
