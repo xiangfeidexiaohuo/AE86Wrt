@@ -95,9 +95,9 @@ jobs:
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
-        time=$(date +%Y%m%d)
+        time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="X86-OpenWrt-Lienol-R21.02-$time"
+        release_name="X86-OpenWrt-Lienol-R21.02-$(date +%Y%m%d)"
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
