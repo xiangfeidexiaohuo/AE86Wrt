@@ -12,6 +12,7 @@ rm -rf ./package/diy/OpenAppFilter
 #qb
 rm -rf ./package/lean/qBittorrent
 rm -rf ./package/lean/libtorrent-rasterbar
+rm -rf ./package/lean/qt5
                
 echo -e "\nsrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" >> feeds.conf.default
 echo -e "src-git nas https://github.com/linkease/nas-packages.git;master" >> feeds.conf.default
