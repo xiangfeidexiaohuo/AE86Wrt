@@ -41,7 +41,7 @@ jobs:
     - name: Clone source code
       env: 
         REPO_URL: https://github.com/Lienol/openwrt
-        REPO_BRANCH: 21.02
+        REPO_BRANCH: main
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
