@@ -15,8 +15,8 @@ rm -rf ./package/lean/luci-app-diskman
                
 echo -e "\nsrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" >> feeds.conf.default
 echo -e "src-git nas https://github.com/linkease/nas-packages.git;master" >> feeds.conf.default
-echo -e "src-git passwall https://github.com/xiaorouji/openwrt-passwall" >> feeds.conf.default
 echo -e "src-git helloworld https://github.com/fw876/helloworld" >> feeds.conf.default
+echo -e "src-git passwall https://github.com/xiaorouji/openwrt-passwall" >> feeds.conf.default
 echo -e "src-git OpenAppFilter https://github.com/destan19/OpenAppFilter" >> feeds.conf.default
 echo -e "src-git OpenClash https://github.com/vernesong/OpenClash" >> feeds.conf.default
 
