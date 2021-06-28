@@ -7,9 +7,9 @@
 rm -rf package/feeds/packages/smartdns
 rm -rf package/feeds/packages/ninja
 
-ln -s -f ../../../feeds/xiangfeidexiaohuo/k3screenctrl package/feeds/xiangfeidexiaohuo/k3screenctrl 
-ln -s -f ../../../feeds/xiangfeidexiaohuo/smartdns package/feeds/xiangfeidexiaohuo/smartdns 
-ln -s -f ../../../feeds/xiangfeidexiaohuo/ninja package/feeds/packages/ninja             
+ln -s -f ../../../feeds/xiangfeidexiaohuo/k3screenctrl package/feeds/xiangfeidexiaohuo/k3screenctrl
+ln -s -f ../../../feeds/xiangfeidexiaohuo/smartdns package/feeds/xiangfeidexiaohuo/smartdns
+ln -s -f ../../../feeds/xiangfeidexiaohuo/ninja package/feeds/packages/ninja          
 
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/files/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
@@ -26,5 +26,5 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-n
 
 
 ##加入作者信息
-sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='R21.02 YaoDao $(date +%Y%m%d)'/g" package/default-settings/files/zzz-default-settings
+sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='YaoDao $(date +%Y%m%d)'/g" package/default-settings/files/zzz-default-settings
 
