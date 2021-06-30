@@ -57,7 +57,10 @@ jobs:
 
         cp -f ../diy22.sh ./        
         chmod +x ./diy22.sh && ./diy22.sh       
-        echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt 
+        echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
+        
+        rm -rf package/feeds/packages/ninja
+        ln -s -f ../../../feeds/xiangfeidexiaohuo/ninja package/feeds/packages/ninja
         
     - name: Configuration Customization - Build_Lienol_x86_64
       env:
