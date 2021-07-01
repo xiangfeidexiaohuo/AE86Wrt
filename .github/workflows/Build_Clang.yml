@@ -55,7 +55,7 @@ jobs:
         mkdir -p ./Clang_Out/
         mv tc-build/clang-tmp ./Clang_Out/clang-$(date +%Y%m%d)
         cd Clang_Out
-        echo "Clang v13.0.0-$(date +%Y%m%d) By YaoDao" >> VERSION
+        echo "AE86 Clang13-$(date +%Y%m%d)_YaoDao" >> VERSION
         mv VERSION ./clang-$(date +%Y%m%d)/
         tar zcvf AE86-Clang13-$(date +%Y%m%d).tar.gz clang-$(date +%Y%m%d)/*
                
