@@ -58,7 +58,7 @@ jobs:
         cp -f ../diy2.sh ./        
         chmod +x ./diy2.sh && ./diy2.sh
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv5.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt 
-        sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=5.4/g' target/linux/bcm53xx/Makefile 
+       
               
     - name: Configuration Customization - Build_k3
       env:
