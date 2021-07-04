@@ -57,7 +57,7 @@ jobs:
 
         cp -f ../diy2.sh ./        
         chmod +x ./diy2.sh && ./diy2.sh
-        echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv7.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt 
+        echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
        
               
     - name: Configuration Customization - Build_ax6
