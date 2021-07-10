@@ -56,7 +56,8 @@ jobs:
         ./scripts/feeds install -a
 
         cp -f ../diy2.sh ./        
-        chmod +x ./diy2.sh && ./diy2.sh
+        chmod +x ./diy2.sh && ./diy2.sh       
+        sed -i 's/+!TARGET_ramips:kmod-usb-storage-uas //g'  ./package/lean/automount/Makefile
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv5.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt 
        
               
