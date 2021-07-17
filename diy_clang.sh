@@ -10,7 +10,7 @@ rm -rf clang-tmp
 	--targets "ARM;AArch64;X86" \
 	--install-folder "clang-tmp" \
 	--clang-vendor "AE86-$(date +%Y%m%d)" \
-	--additional-build-arguments "CLANG_REPOSITORY_STRING=GitHub.com/xiangfeidexiaohuo" 
+	--additional-build-arguments "CLANG_REPOSITORY_STRING=https://github.com/xiangfeidexiaohuo" 
 
 
 #rm -rf binutils-tmp
