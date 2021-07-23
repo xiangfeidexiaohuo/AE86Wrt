@@ -4,6 +4,9 @@
 rm -rf clang-tmp
 
 ./build-llvm.py \
+	--update \
+	--update-llvm \
+	--update-binutils \
 	--build-stage1-only \
 	--install-stage1-only \
 	--projects "clang;lld;polly" \
