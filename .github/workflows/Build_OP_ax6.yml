@@ -85,12 +85,13 @@ jobs:
         rm -rf ./AX6_Out
         mkdir -p ./AX6_Out/
         cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-sysupgrade.bin ./AX6_Out/AX6-OpenWrt-Lean-5.10-squashfs-nand-sysupgrade-$(date +%Y%m%d)_YaoDao.bin
+        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-factory.ubi ./AX6_Out/AX6-OpenWrt-Lean-5.10-squashfs-nand-factory-$(date +%Y%m%d)_YaoDao.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
         name: AX6-OpenWrt
-        path: AX6_Out/*.bin 
+        path: AX6_Out/AX6* 
         
     - name: Generate Tag & Release Name
       id: generate_name
@@ -104,7 +105,7 @@ jobs:
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
       with:
-        artifacts: AX6_Out/*.bin
+        artifacts: AX6_Out/AX6*
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}                 
