@@ -55,9 +55,9 @@ jobs:
         mkdir -p ./Clang_Out/
         mv tc-build/clang-tmp ./Clang_Out/clang-$(date +%Y%m%d)
         cd Clang_Out
-        echo "AE86-Clang13($(date +%Y%m%d))-YaoDao" >> VERSION
+        echo "AE86-Clang14($(date +%Y%m%d))-YaoDao" >> VERSION
         mv VERSION ./clang-$(date +%Y%m%d)/
-        tar zcvf AE86-Clang13-$(date +%Y%m%d).tar.gz clang-$(date +%Y%m%d)/*
+        tar zcvf AE86-Clang14-$(date +%Y%m%d).tar.gz clang-$(date +%Y%m%d)/*
                
     - name: Upload Clang
       uses: actions/upload-artifact@main
@@ -70,7 +70,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="AE86-Clang13-$(date +%Y%m%d)"
+        release_name="AE86-Clang14-$(date +%Y%m%d)"
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
