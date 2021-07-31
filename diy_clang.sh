@@ -1,6 +1,7 @@
 #!/bin/bash
 
-
+###
+###
 rm -rf clang-tmp
 
 ./build-llvm.py \
@@ -16,11 +17,14 @@ rm -rf clang-tmp
 	--additional-build-arguments "CLANG_REPOSITORY_STRING=https://github.com/xiangfeidexiaohuo" 
 
 
-#rm -rf binutils-tmp
 
-#./build-binutils.py \
-#	--targets arm aarch64 \
-#	--install-folder "binutils-tmp"
+###
+###
+rm -rf binutils-tmp
+sed -i '/if (bfd_link_pic (info) && (sec->flags & SEC_ALLOC) != 0)/,+22d'  ./binutils/bfd/elfnn-aarch64.c
+./build-binutils.py \
+	--targets arm aarch64 \
+	--install-folder "binutils-tmp"
 
 
 
