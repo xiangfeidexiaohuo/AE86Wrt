@@ -19,8 +19,4 @@ echo -e "src-git OpenAppFilter https://github.com/destan19/OpenAppFilter" >> fee
 echo -e "src-git OpenClash https://github.com/vernesong/OpenClash" >> feeds.conf.default
 echo -e "src-git jerryk https://github.com/jerrykuku/openwrt-package" >> feeds.conf.default
 
-## Add KPR
-rm -rf ./package/lean/luci-app-godproxy
-git clone -b main --depth 1 https://github.com/project-lede/luci-app-godproxy.git ./package/lean/luci-app-godproxy
-
 
