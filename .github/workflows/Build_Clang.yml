@@ -68,20 +68,20 @@ jobs:
         name: Compiler-Tools
         path: Clang_Out/*.tar.gz 
 
-    - name: Generate Tag & Release Name
-      id: generate_name
-      run: |
-        time=$(date +%Y%m%d%H%M)
-        release_tag="$time"
-        release_name="Compiler-Tools-$(date +%Y%m%d)"
-        echo "##[set-output name=release_name;]$release_name"
-        echo "##[set-output name=release_tag;]$release_tag"        
+#    - name: Generate Tag & Release Name
+#      id: generate_name
+#      run: |
+#        time=$(date +%Y%m%d%H%M)
+#        release_tag="$time"
+#        release_name="Compiler-Tools-$(date +%Y%m%d)"
+#        echo "##[set-output name=release_name;]$release_name"
+#        echo "##[set-output name=release_tag;]$release_tag"        
 
-    - name: Create Release & Upload
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: Clang_Out/*.tar.gz 
-        name: ${{ steps.generate_name.outputs.release_name }}
-        tag: ${{ steps.generate_name.outputs.release_tag }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Create Release & Upload
+#      uses: ncipollo/release-action@v1
+#      with:
+#        artifacts: Clang_Out/*.tar.gz 
+#        name: ${{ steps.generate_name.outputs.release_name }}
+#        tag: ${{ steps.generate_name.outputs.release_tag }}
+#        token: ${{ secrets.GITHUB_TOKEN }}
                  
