@@ -45,18 +45,18 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy1.sh ./
-        chmod +x ./diy1.sh && ./diy1.sh
+        cp -f ../lean1.sh ./
+        chmod +x ./lean1.sh && ./lean1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
       run: |
         ./scripts/feeds update -a
-        ./scripts/feeds install -a
+
         ./scripts/feeds install -a
 
-        cp -f ../diy2.sh ./        
-        chmod +x ./diy2.sh && ./diy2.sh       
+        cp -f ../lean2.sh ./        
+        chmod +x ./lean2.sh && ./lean2.sh       
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt 
         
     - name: Configuration Customization - Build_x86_64
