@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
 # 定时触发编译
-#  schedule:
-#    - cron: 0 15 * * *
+  schedule:
+    - cron: 0 11 * * *
 
 # 点赞☆Star触发编译
 #  watch:
@@ -45,22 +45,19 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy11.sh ./
-        chmod +x ./diy11.sh && ./diy11.sh
+        cp -f ../lienol1.sh ./
+        chmod +x ./lienol1.sh && ./lienol1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
       run: |
         ./scripts/feeds update -a
-        ./scripts/feeds install -a
+                
         ./scripts/feeds install -a
 
-        cp -f ../diy22.sh ./        
-        chmod +x ./diy22.sh && ./diy22.sh       
+        cp -f ../lienol2.sh ./        
+        chmod +x ./lienol2.sh && ./lienol2.sh       
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
-        
-        rm -rf package/feeds/packages/ninja
-        ln -s -f ../../../feeds/xiangfeidexiaohuo/ninja package/feeds/packages/ninja
         
     - name: Configuration Customization - Build_Lienol_x86_64
       env:
@@ -86,8 +83,7 @@ jobs:
       run: |
         rm -rf ./X86_Out
         mkdir -p ./X86_Out/
-        cp -a openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined.img.gz ./X86_Out/X86_64-OpenWrt-Lienol-squashfs-combined-$(date +%Y%m%d)_YaoDao.img.gz
-        cp -a openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img.gz ./X86_Out/X86_64-OpenWrt-Lienol-squashfs-combined-efi-$(date +%Y%m%d)_YaoDao.img.gz
+        cp -a openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img.gz ./X86_Out/X86_64-OpenWrt-Lienol-5.4-squashfs-combined-efi-$(date +%Y%m%d)_YaoDao.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
