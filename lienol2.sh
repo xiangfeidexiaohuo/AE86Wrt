@@ -28,5 +28,8 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-n
 
 
 ##加入作者信息
-sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='YaoDao $(date +%Y%m%d)'/g" package/default-settings/files/zzz-default-settings
+#sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='YaoDao $(date +%Y%m%d)'/g" package/default-settings/files/zzz-default-settings
+sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='$(date +%Y%m%d)'/g" package/default-settings/files/zzz-default-settings
+sed -i "s/DISTRIB_DESCRIPTION='OpenWrt SNAPSHOT '/DISTRIB_DESCRIPTION='OpenWrt YaoDao '/g" package/default-settings/files/zzz-default-settings
+
 
