@@ -26,4 +26,4 @@ echo -e "src-git OpenAppFilter https://github.com/destan19/OpenAppFilter" >> fee
 echo -e "src-git OpenClash https://github.com/vernesong/OpenClash" >> feeds.conf.default
 echo -e "src-git jerryk https://github.com/jerrykuku/openwrt-package" >> feeds.conf.default
 
-
+sed -i "s/openwrt-luci.git;main/openwrt-luci.git;18.06-dev/g" feeds.conf.default

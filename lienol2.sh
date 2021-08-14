@@ -23,10 +23,11 @@ sed -i "s/hostname='OpenWrt'/hostname='AE86'/g" package/base-files/files/bin/con
 
 ##取消bootstrap为默认主题
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-nginx/Makefile
-
+sed -i 's/luci-theme-argon/luci-theme-argon-18.06/g' feeds/luci/collections/luci/Makefile
+sed -i 's/luci-theme-argon/luci-theme-argon-18.06/g' feeds/luci/collections/luci-nginx/Makefile
 
 ##加入作者信息
-sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='YaoDao $(date +%Y%m%d)'/g" package/default-settings/files/zzz-default-settings
+sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='$(date +%Y%m%d)'/g" package/default-settings/files/zzz-default-settings
+sed -i "s/DISTRIB_DESCRIPTION='OpenWrt SNAPSHOT '/DISTRIB_DESCRIPTION='OpenWrt YaoDao '/g" package/default-settings/files/zzz-default-settings
+
 
