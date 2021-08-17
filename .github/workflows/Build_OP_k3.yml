@@ -90,7 +90,7 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: K3-OpenWrt_54
+        name: K3-OpenWrt-$(date +%Y%m%d)
         path: K3_Out/*.trx   
         
     - name: Generate Tag & Release Name

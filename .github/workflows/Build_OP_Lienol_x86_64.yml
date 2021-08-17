@@ -88,7 +88,7 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: X86-OpenWrt-R21.02
+        name: X86-OpenWrt-R21.02-$(date +%Y%m%d)
         path: X86_Out/*.img.gz
         
     - name: Generate Tag & Release Name

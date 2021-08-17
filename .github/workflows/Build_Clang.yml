@@ -65,7 +65,7 @@ jobs:
     - name: Upload Clang
       uses: actions/upload-artifact@main
       with:
-        name: Compiler-Tools
+        name: Compiler-Tools-$(date +%Y%m%d)
         path: Clang_Out/*.tar.gz 
 
 #    - name: Generate Tag & Release Name

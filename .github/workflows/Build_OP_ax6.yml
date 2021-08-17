@@ -90,7 +90,7 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: AX6-OpenWrt
+        name: AX6-OpenWrt-$(date +%Y%m%d)
         path: AX6_Out/AX6* 
         
     - name: Generate Tag & Release Name
