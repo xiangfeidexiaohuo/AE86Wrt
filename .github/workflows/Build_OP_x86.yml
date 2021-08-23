@@ -1,4 +1,4 @@
-name: Build_x86_64
+name: Build_x86
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 0 1 * * *
+    - cron: 30 0 * * *
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_x86_64:
+  Build_x86:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -59,7 +59,7 @@ jobs:
         chmod +x ./lean2.sh && ./lean2.sh       
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt 
         
-    - name: Configuration Customization - Build_x86_64
+    - name: Configuration Customization - Build_x86
       env:
         CONFIG_FILE: 'x86.config'
       run: |
@@ -88,7 +88,7 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: X86-OpenWrt
+        name: X86-OpenWrt-5.4
         path: X86_Out/*.img.gz
         
     - name: Generate Tag & Release Name
