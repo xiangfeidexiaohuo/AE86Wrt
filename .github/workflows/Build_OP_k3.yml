@@ -59,6 +59,7 @@ jobs:
         chmod +x ./lean2.sh && ./lean2.sh       
         sed -i 's/+!TARGET_ramips:kmod-usb-storage-uas //g'  ./package/lean/automount/Makefile
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv5.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt 
+        mv ./feeds/xiangfeidexiaohuo/files/k3_index.htm ./package/lean/autocore/files/arm/index.htm
        
               
     - name: Configuration Customization - Build_k3
