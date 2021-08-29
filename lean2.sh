@@ -53,8 +53,8 @@ sed -i 's/services/vpn/g' package/feeds/jerryk/luci-app-vssr/luasrc/controller/*
 sed -i 's/services/vpn/g' package/feeds/jerryk/luci-app-vssr/luasrc/model/cbi/vssr/*.lua
 sed -i 's/services/vpn/g' package/feeds/jerryk/luci-app-vssr/luasrc/view/vssr/*.htm
 
-sed -i 's/services/vpn/g' package/feeds/OpenClash/luci-app-openclash/luasrc/controller/*.lua
-sed -i 's/services/vpn/g' package/feeds/OpenClash/luci-app-openclash/luasrc/*.lua
-sed -i 's/services/vpn/g' package/feeds/OpenClash/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
-sed -i 's/services/vpn/g' package/feeds/OpenClash/luci-app-openclash/luasrc/view/openclash/*.htm
+sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/controller/*.lua
+sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/*.lua
+sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
+sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/view/openclash/*.htm
 
