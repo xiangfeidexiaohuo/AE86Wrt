@@ -45,7 +45,7 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../lienol1.sh ./
+        cp -f ../diy/lienol1.sh ./
         chmod +x ./lienol1.sh && ./lienol1.sh
 
     - name: Update & Install feeds
@@ -55,13 +55,13 @@ jobs:
                 
         ./scripts/feeds install -a
 
-        cp -f ../lienol2.sh ./        
+        cp -f ../diy/lienol2.sh ./        
         chmod +x ./lienol2.sh && ./lienol2.sh       
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
         
     - name: Configuration Customization - Build_Lienol_x86_64
       env:
-        CONFIG_FILE: 'Lienol_x86.config'
+        CONFIG_FILE: './configs/Lienol_x86.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig

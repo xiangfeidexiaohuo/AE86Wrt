@@ -45,7 +45,7 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../lean1.sh ./
+        cp -f ../diy/lean1.sh ./
         chmod +x ./lean1.sh && ./lean1.sh
 
     - name: Update & Install feeds
@@ -55,7 +55,7 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../lean2.sh ./        
+        cp -f ../diy/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
         mv ./feeds/xiangfeidexiaohuo/files/ax6_index.htm ./package/lean/autocore/files/arm/index.htm
@@ -63,7 +63,7 @@ jobs:
               
     - name: Configuration Customization - Build_ax6
       env:
-        CONFIG_FILE: 'ax6.config'
+        CONFIG_FILE: './configs/ax6.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
