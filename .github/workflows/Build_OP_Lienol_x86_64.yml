@@ -63,7 +63,7 @@ jobs:
       env:
         CONFIG_FILE: 'Lienol_x86.config'
       run: |
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        [ -e $CONFIG_FILE ] && mv ./configs/$CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
         
     - name: Download package
