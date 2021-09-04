@@ -49,9 +49,9 @@ sed -i 's/services/vpn/g' package/feeds/passwall/luci-app-passwall/luasrc/view/p
 sed -i 's/services/vpn/g' package/feeds/passwall/luci-app-passwall/luasrc/view/passwall/rule/*.htm
 sed -i 's/services/vpn/g' package/feeds/passwall/luci-app-passwall/luasrc/view/passwall/server/*.htm
 
-sed -i 's/services/vpn/g' package/feeds/jerryk/luci-app-vssr/luasrc/controller/*.lua
-sed -i 's/services/vpn/g' package/feeds/jerryk/luci-app-vssr/luasrc/model/cbi/vssr/*.lua
-sed -i 's/services/vpn/g' package/feeds/jerryk/luci-app-vssr/luasrc/view/vssr/*.htm
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-vssr/luasrc/controller/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-vssr/luasrc/model/cbi/vssr/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-vssr/luasrc/view/vssr/*.htm
 
 sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/*.lua
