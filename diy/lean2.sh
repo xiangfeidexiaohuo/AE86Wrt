@@ -8,6 +8,12 @@ ln -s -f ../../../feeds/xiangfeidexiaohuo/k3screenctrl package/feeds/xiangfeidex
 rm -rf package/feeds/packages/smartdns
 ln -s -f ../../../feeds/xiangfeidexiaohuo/smartdns package/feeds/xiangfeidexiaohuo/smartdns            
 
+rm -rf package/feeds/packages/aria2
+rm -rf package/feeds/packages/ariang
+ln -s -f ../../../feeds/xiangfeidexiaohuo/aria2-op/aria2 package/feeds/xiangfeidexiaohuo/aria2
+ln -s -f ../../../feeds/xiangfeidexiaohuo/aria2-op/ariang package/feeds/xiangfeidexiaohuo/ariang
+
+
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/files/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
 cp -f ./feeds/xiangfeidexiaohuo/files/mwan3.po ./feeds/luci/applications/luci-app-mwan3/po/zh-cn
