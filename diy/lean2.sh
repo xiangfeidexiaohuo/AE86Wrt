@@ -4,7 +4,7 @@
 # jsjson@163.com 
 #=================================================
 ##链接
-ln -s -f ../../../feeds/xiangfeidexiaohuo/k3screenctrl package/feeds/xiangfeidexiaohuo/k3screenctrl
+ln -s -f ../../../feeds/xiangfeidexiaohuo/k3/k3screenctrl package/feeds/xiangfeidexiaohuo/k3screenctrl
 rm -rf package/feeds/packages/smartdns
 ln -s -f ../../../feeds/xiangfeidexiaohuo/smartdns package/feeds/xiangfeidexiaohuo/smartdns            
 
