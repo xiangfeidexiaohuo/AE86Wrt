@@ -41,7 +41,7 @@ jobs:
     - name: Clone source code and  Build
       env: 
         REPO_URL: https://github.com/xiangfeidexiaohuo/tc-build
-        REPO_BRANCH: main
+        REPO_BRANCH: personal
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH tc-build
         cd tc-build
