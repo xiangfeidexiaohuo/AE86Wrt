@@ -8,7 +8,7 @@ rm -rf ./package/lean/k3screenctrl
 rm -rf ./package/lean/luci-app-syncdial
 rm -rf ./package/lean/luci-theme-argon
 rm -rf ./package/lean/luci-app-jd-dailybonus
-rm -rf ./package/lean/luci-app-diskman
+#rm -rf ./package/lean/luci-app-diskman
 rm -rf ./package/lean/luci-lib-docker
 rm -rf ./package/lean/luci-app-pushbot
                
