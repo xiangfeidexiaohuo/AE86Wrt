@@ -59,7 +59,11 @@ jobs:
         chmod +x ./lean2.sh && ./lean2.sh       
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt 
         mv ./feeds/xiangfeidexiaohuo/files/x86_index.htm ./package/lean/autocore/files/x86/index.htm
+
+        cp -f ../diy/fix510.patch ./
+        git apply fix510.patch
         
+                
     - name: Configuration Customization - Build_x86_510
       env:
         CONFIG_FILE: './configs/x86_510.config'
