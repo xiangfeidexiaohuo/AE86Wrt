@@ -58,7 +58,6 @@ jobs:
         cp -f ../diy/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
-        mv ./feeds/xiangfeidexiaohuo/files/ax6_index.htm ./package/lean/autocore/files/arm/index.htm
        
               
     - name: Configuration Customization - Build_ax6
