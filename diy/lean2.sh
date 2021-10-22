@@ -3,15 +3,18 @@
 # DIY script
 # jsjson@163.com 
 #=================================================
-##链接
+##替换一些底层插件
 ln -s -f ../../../feeds/xiangfeidexiaohuo/k3/k3screenctrl package/feeds/xiangfeidexiaohuo/k3screenctrl
-rm -rf package/feeds/packages/smartdns
-ln -s -f ../../../feeds/xiangfeidexiaohuo/smartdns package/feeds/xiangfeidexiaohuo/smartdns            
 
-rm -rf package/feeds/packages/aria2
-rm -rf package/feeds/packages/ariang
-ln -s -f ../../../feeds/xiangfeidexiaohuo/aria2-op/aria2 package/feeds/xiangfeidexiaohuo/aria2
-ln -s -f ../../../feeds/xiangfeidexiaohuo/aria2-op/ariang package/feeds/xiangfeidexiaohuo/ariang
+rm -rf feeds/packages/net/smartdns/*
+rm -rf feeds/packages/net/ariang/*
+rm -rf feeds/packages/utils/docker/*
+rm -rf feeds/packages/utils/dockerd/*
+
+cp -af feeds/xiangfeidexiaohuo/smartdns/* feeds/packages/net/smartdns/
+cp -af feeds/xiangfeidexiaohuo/aria2-op/ariang/* feeds/packages/net/ariang/
+cp -af feeds/xiangfeidexiaohuo/docker-op/docker/* feeds/packages/utils/docker/
+cp -af feeds/xiangfeidexiaohuo/docker-op/dockerd/* feeds/packages/utils/dockerd/
 
 
 ##补充汉化       
