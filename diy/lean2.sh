@@ -16,6 +16,12 @@ cp -af feeds/xiangfeidexiaohuo/aria2-op/ariang/* feeds/packages/net/ariang/
 cp -af feeds/xiangfeidexiaohuo/docker-op/docker/* feeds/packages/utils/docker/
 cp -af feeds/xiangfeidexiaohuo/docker-op/dockerd/* feeds/packages/utils/dockerd/
 
+###
+rm -rf feeds/packages/libs/glib2/*
+rm -rf feeds/packages/libs/nss/*
+cp -af feeds/xiangfeidexiaohuo/patch/glib2/* feeds/packages/libs/glib2/
+cp -af feeds/xiangfeidexiaohuo/patch/nss/* feeds/packages/libs/nss/
+
 
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/files/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
