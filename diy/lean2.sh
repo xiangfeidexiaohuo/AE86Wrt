@@ -72,3 +72,8 @@ sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/*.lua
 sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
 sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/view/openclash/*.htm
 
+
+##Dropbear实例接口改未指定
+sed -i "s/option Interface    'lan'/option Interface    ' '/g" package/network/services/dropbear/files/dropbear.config
+
+
