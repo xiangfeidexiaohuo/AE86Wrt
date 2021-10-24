@@ -8,11 +8,13 @@ ln -s -f ../../../feeds/xiangfeidexiaohuo/k3/k3screenctrl package/feeds/xiangfei
 
 rm -rf feeds/packages/net/smartdns/*
 rm -rf feeds/packages/net/ariang/*
+rm -rf feeds/luci/applications/luci-app-aria2/*
 rm -rf feeds/packages/utils/docker/*
 rm -rf feeds/packages/utils/dockerd/*
 
 cp -af feeds/xiangfeidexiaohuo/smartdns/* feeds/packages/net/smartdns/
 cp -af feeds/xiangfeidexiaohuo/aria2-op/ariang/* feeds/packages/net/ariang/
+cp -af feeds/xiangfeidexiaohuo/aria2-op/luci-app-aria2/* feeds/luci/applications/luci-app-aria2/
 cp -af feeds/xiangfeidexiaohuo/docker-op/docker/* feeds/packages/utils/docker/
 cp -af feeds/xiangfeidexiaohuo/docker-op/dockerd/* feeds/packages/utils/dockerd/
 
@@ -79,7 +81,6 @@ sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/model/cbi/openc
 sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/view/openclash/*.htm
 
 
-##Dropbear实例接口改未指定
-sed -i "s/option Interface    'lan'/option Interface    ' '/g" package/network/services/dropbear/files/dropbear.config
+sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.config
 
 
