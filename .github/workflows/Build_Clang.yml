@@ -56,7 +56,7 @@ jobs:
         mv tc-build/clang-tmp ./Clang_Out/clang-$(date +%Y%m%d)
         mv tc-build/binutils-tmp ./Clang_Out/binutils-$(date +%Y%m%d)
         cd Clang_Out
-        echo "AE86-Clang14($(date +%Y%m%d))-YaoDao" >> VERSION
+        echo "AE86-Clang v14.0.0-$(date +%Y%m%d)-YaoDao" > VERSION
         mv VERSION ./clang-$(date +%Y%m%d)/
         tar zcvf AE86-Clang14-$(date +%Y%m%d).tar.gz clang-$(date +%Y%m%d)/*
         tar zcvf AE86-binutils-$(date +%Y%m%d).tar.gz binutils-$(date +%Y%m%d)/*
