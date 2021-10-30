@@ -17,7 +17,8 @@ rm -rf feeds/luci/applications/luci-app-dawn/*
 rm -rf feeds/packages/net/dawn/*
 rm -rf feeds/packages/utils/ntfs-3g/*
 rm -rf feeds/packages/lang/node/*
-
+rm -rf feeds/packages/net/zerotier/*
+##
 cp -af feeds/xiangfeidexiaohuo/smartdns/* feeds/packages/net/smartdns/
 cp -af feeds/xiangfeidexiaohuo/aria2-op/ariang/* feeds/packages/net/ariang/
 cp -af feeds/xiangfeidexiaohuo/aria2-op/luci-app-aria2/* feeds/luci/applications/luci-app-aria2/
@@ -29,8 +30,7 @@ cp -af feeds/xiangfeidexiaohuo/luci-app-dawn/* feeds/luci/applications/luci-app-
 cp -af feeds/xiangfeidexiaohuo/dawn/*  feeds/packages/net/dawn/
 cp -af feeds/xiangfeidexiaohuo/ntfs-3g/*  feeds/packages/utils/ntfs-3g/
 cp -af feeds/xiangfeidexiaohuo/node/*  feeds/packages/lang/node/
-
-
+cp -af feeds/xiangfeidexiaohuo/zerotier/*  feeds/packages/net/zerotier/
 ###
 rm -rf feeds/packages/libs/glib2/*
 rm -rf feeds/packages/libs/nss/*
