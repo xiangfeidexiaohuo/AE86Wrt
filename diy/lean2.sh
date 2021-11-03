@@ -13,6 +13,7 @@ rm -rf feeds/packages/utils/docker/*
 rm -rf feeds/packages/utils/dockerd/*
 rm -rf feeds/packages/utils/containerd/*
 rm -rf feeds/packages/utils/runc/*
+rm -rf feeds/packages/utils/docker-compose/*
 rm -rf feeds/luci/applications/luci-app-dawn/*
 rm -rf feeds/packages/net/dawn/*
 rm -rf feeds/packages/utils/ntfs-3g/*
@@ -26,16 +27,12 @@ cp -af feeds/xiangfeidexiaohuo/docker-op/docker/* feeds/packages/utils/docker/
 cp -af feeds/xiangfeidexiaohuo/docker-op/dockerd/* feeds/packages/utils/dockerd/
 cp -af feeds/xiangfeidexiaohuo/docker-op/containerd/* feeds/packages/utils/containerd/
 cp -af feeds/xiangfeidexiaohuo/docker-op/runc/* feeds/packages/utils/runc/
+cp -af feeds/xiangfeidexiaohuo/docker-op/docker-compose/* feeds/packages/utils/docker-compose/
 cp -af feeds/xiangfeidexiaohuo/luci-app-dawn/* feeds/luci/applications/luci-app-dawn/
 cp -af feeds/xiangfeidexiaohuo/dawn/*  feeds/packages/net/dawn/
 cp -af feeds/xiangfeidexiaohuo/ntfs-3g/*  feeds/packages/utils/ntfs-3g/
 cp -af feeds/xiangfeidexiaohuo/node/*  feeds/packages/lang/node/
 cp -af feeds/xiangfeidexiaohuo/zerotier/*  feeds/packages/net/zerotier/
-###
-rm -rf feeds/packages/libs/glib2/*
-rm -rf feeds/packages/libs/nss/*
-cp -af feeds/xiangfeidexiaohuo/patch/glib2/* feeds/packages/libs/glib2/
-cp -af feeds/xiangfeidexiaohuo/patch/nss/* feeds/packages/libs/nss/
 
 
 ##补充汉化       
