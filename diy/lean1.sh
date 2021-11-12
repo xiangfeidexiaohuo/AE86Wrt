@@ -17,6 +17,7 @@ rm -rf ./package/lean/luci-app-aliyundrive-webdav
 rm -rf ./package/lean/go-aliyundrive-webdav
 rm -rf ./package/lean/luci-app-go-aliyundrive-webdav
 rm -rf ./package/lean/luci-app-easymesh
+rm -rf ./package/lean/autocore
                
 echo -e "\nsrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" >> feeds.conf.default
 echo -e "src-git passwall https://github.com/xiaorouji/openwrt-passwall" >> feeds.conf.default
