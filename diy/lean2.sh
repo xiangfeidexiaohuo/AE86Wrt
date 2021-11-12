@@ -29,7 +29,9 @@ cp -af feeds/xiangfeidexiaohuo/docker-op/docker-compose/* feeds/packages/utils/d
 cp -af feeds/xiangfeidexiaohuo/luci-app-dawn/* feeds/luci/applications/luci-app-dawn/
 cp -af feeds/xiangfeidexiaohuo/ntfs-3g/*  feeds/packages/utils/ntfs-3g/
 cp -af feeds/xiangfeidexiaohuo/zerotier/*  feeds/packages/net/zerotier/
-
+##
+rm -rf package/qca/firmware/nss-firmware/*
+cp -af feeds/xiangfeidexiaohuo/nss-firmware/* /package/qca/firmware/nss-firmware/
 
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/files/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
