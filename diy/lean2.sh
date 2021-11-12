@@ -15,9 +15,7 @@ rm -rf feeds/packages/utils/containerd/*
 rm -rf feeds/packages/utils/runc/*
 rm -rf feeds/packages/utils/docker-compose/*
 rm -rf feeds/luci/applications/luci-app-dawn/*
-rm -rf feeds/packages/net/dawn/*
 rm -rf feeds/packages/utils/ntfs-3g/*
-rm -rf feeds/packages/lang/node/*
 rm -rf feeds/packages/net/zerotier/*
 ##
 cp -af feeds/xiangfeidexiaohuo/smartdns/* feeds/packages/net/smartdns/
@@ -29,9 +27,7 @@ cp -af feeds/xiangfeidexiaohuo/docker-op/containerd/* feeds/packages/utils/conta
 cp -af feeds/xiangfeidexiaohuo/docker-op/runc/* feeds/packages/utils/runc/
 cp -af feeds/xiangfeidexiaohuo/docker-op/docker-compose/* feeds/packages/utils/docker-compose/
 cp -af feeds/xiangfeidexiaohuo/luci-app-dawn/* feeds/luci/applications/luci-app-dawn/
-cp -af feeds/xiangfeidexiaohuo/dawn/*  feeds/packages/net/dawn/
 cp -af feeds/xiangfeidexiaohuo/ntfs-3g/*  feeds/packages/utils/ntfs-3g/
-cp -af feeds/xiangfeidexiaohuo/node/*  feeds/packages/lang/node/
 cp -af feeds/xiangfeidexiaohuo/zerotier/*  feeds/packages/net/zerotier/
 
 
