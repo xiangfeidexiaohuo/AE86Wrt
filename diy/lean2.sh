@@ -13,20 +13,18 @@ rm -rf feeds/packages/utils/docker/*
 rm -rf feeds/packages/utils/dockerd/*
 rm -rf feeds/packages/utils/containerd/*
 rm -rf feeds/packages/utils/runc/*
-rm -rf feeds/packages/utils/docker-compose/*
 rm -rf feeds/packages/utils/ntfs-3g/*
 rm -rf feeds/packages/net/zerotier/*
 ##
-cp -af feeds/xiangfeidexiaohuo/smartdns/* feeds/packages/net/smartdns/
+cp -af feeds/xiangfeidexiaohuo/smartdns-op/smartdns/* feeds/packages/net/smartdns/
 cp -af feeds/xiangfeidexiaohuo/aria2-op/ariang/* feeds/packages/net/ariang/
 cp -af feeds/xiangfeidexiaohuo/aria2-op/luci-app-aria2/* feeds/luci/applications/luci-app-aria2/
 cp -af feeds/xiangfeidexiaohuo/docker-op/docker/* feeds/packages/utils/docker/
 cp -af feeds/xiangfeidexiaohuo/docker-op/dockerd/* feeds/packages/utils/dockerd/
 cp -af feeds/xiangfeidexiaohuo/docker-op/containerd/* feeds/packages/utils/containerd/
 cp -af feeds/xiangfeidexiaohuo/docker-op/runc/* feeds/packages/utils/runc/
-cp -af feeds/xiangfeidexiaohuo/docker-op/docker-compose/* feeds/packages/utils/docker-compose/
-cp -af feeds/xiangfeidexiaohuo/ntfs-3g/*  feeds/packages/utils/ntfs-3g/
-cp -af feeds/xiangfeidexiaohuo/zerotier/*  feeds/packages/net/zerotier/
+cp -af feeds/xiangfeidexiaohuo/patch/ntfs-3g/*  feeds/packages/utils/ntfs-3g/
+cp -af feeds/xiangfeidexiaohuo/patch/zerotier/*  feeds/packages/net/zerotier/
 
 
 ##补充汉化       
