@@ -3,9 +3,7 @@
 # DIY script
 # jsjson@163.com 
 #=================================================
-##替换一些底层插件
-ln -s -f ../../../feeds/xiangfeidexiaohuo/k3/k3screenctrl package/feeds/xiangfeidexiaohuo/k3screenctrl
-
+##替换一些新插件
 rm -rf feeds/luci/applications/luci-app-aria2/*
 rm -rf feeds/packages/utils/ntfs-3g/*
 
