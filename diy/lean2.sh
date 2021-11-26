@@ -14,6 +14,9 @@ cp -af feeds/xiangfeidexiaohuo/docker-op/docker/* feeds/packages/utils/docker/
 cp -af feeds/xiangfeidexiaohuo/docker-op/dockerd/* feeds/packages/utils/dockerd/
 cp -af feeds/xiangfeidexiaohuo/docker-op/containerd/* feeds/packages/utils/containerd/
 
+rm -rf feeds/packages/utils/coremark/*
+cp -af feeds/xiangfeidexiaohuo/patch/coremark/* feeds/packages/utils/coremark/
+
 
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/files/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
