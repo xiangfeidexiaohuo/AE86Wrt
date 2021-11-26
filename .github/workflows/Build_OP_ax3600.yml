@@ -1,4 +1,4 @@
-name: Build_ax6
+name: Build_ax3600
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 0 17 * * *
+    - cron: 30 19 * * *
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_ax6:
+  Build_ax3600:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -58,12 +58,12 @@ jobs:
         cp -f ../diy/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
-        sed -i "s/hostname='OpenWrt'/hostname='AE86-AX6'/g" package/base-files/files/bin/config_generate
+        sed -i "s/hostname='OpenWrt'/hostname='AE86-AX3600'/g" package/base-files/files/bin/config_generate
        
               
-    - name: Configuration Customization - Build_ax6
+    - name: Configuration Customization - Build_ax3600
       env:
-        CONFIG_FILE: './configs/ax6.config'
+        CONFIG_FILE: './configs/ax3600.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -83,30 +83,30 @@ jobs:
     - name: Assemble Artifact
       id: assemble_artifact
       run: |
-        rm -rf ./AX6_Out
-        mkdir -p ./AX6_Out/
-        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-sysupgrade.bin ./AX6_Out/AX6-OpenWrt-Lean-5.10-squashfs-nand-sysupgrade-$(date +%Y%m%d)_YaoDao.bin
-        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-factory.ubi ./AX6_Out/AX6-OpenWrt-Lean-5.10-squashfs-nand-factory-$(date +%Y%m%d)_YaoDao.ubi
+        rm -rf ./AX3600_Out
+        mkdir -p ./AX3600_Out/
+        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin ./AX3600_Out/AX3600-OpenWrt-Lean-5.10-squashfs-nand-sysupgrade-$(date +%Y%m%d)_YaoDao.bin
+        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-factory.ubi ./AX3600_Out/AX3600-OpenWrt-Lean-5.10-squashfs-nand-factory-$(date +%Y%m%d)_YaoDao.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: AX6-OpenWrt
-        path: AX6_Out/AX6* 
+        name: AX3600-OpenWrt
+        path: AX3600_Out/AX3600* 
         
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="红米AX6-OpenWrt-5.10内核-$(date +%Y%m%d)"
+        release_name="小米AX3600-OpenWrt-5.10内核-$(date +%Y%m%d)"
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
       with:
-        artifacts: AX6_Out/AX6*
+        artifacts: AX3600_Out/AX3600*
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}                 
