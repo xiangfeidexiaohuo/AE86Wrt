@@ -10,9 +10,11 @@ cp -af feeds/xiangfeidexiaohuo/aria2-op/luci-app-aria2/* feeds/luci/applications
 rm -rf feeds/packages/utils/docker/*
 rm -rf feeds/packages/utils/dockerd/*
 rm -rf feeds/packages/utils/containerd/*
+rm -rf feeds/packages/utils/runc/*
 cp -af feeds/xiangfeidexiaohuo/docker-op/docker/* feeds/packages/utils/docker/
 cp -af feeds/xiangfeidexiaohuo/docker-op/dockerd/* feeds/packages/utils/dockerd/
 cp -af feeds/xiangfeidexiaohuo/docker-op/containerd/* feeds/packages/utils/containerd/
+cp -af feeds/xiangfeidexiaohuo/docker-op/runc/* feeds/packages/utils/runc/
 
 
 ##补充汉化       
