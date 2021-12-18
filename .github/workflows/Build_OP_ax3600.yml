@@ -85,8 +85,8 @@ jobs:
       run: |
         rm -rf ./AX3600_Out
         mkdir -p ./AX3600_Out/
-        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin ./AX3600_Out/AX3600-OpenWrt-Lean-5.10-squashfs-nand-sysupgrade-$(date +%Y%m%d)_YaoDao.bin
-        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-factory.ubi ./AX3600_Out/AX3600-OpenWrt-Lean-5.10-squashfs-nand-factory-$(date +%Y%m%d)_YaoDao.ubi
+        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin ./AX3600_Out/AX3600-OpenWrt-5.10-sysupgrade-$(date +%Y%m%d)_YaoDao.bin
+        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-factory.ubi ./AX3600_Out/AX3600-OpenWrt-5.10-factory-$(date +%Y%m%d)_YaoDao.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main

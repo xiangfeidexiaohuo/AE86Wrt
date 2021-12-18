@@ -86,12 +86,12 @@ jobs:
       run: |
         rm -rf ./K3_Out
         mkdir -p ./K3_Out/
-        cp -a openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm_k3-squashfs.trx ./K3_Out/K3-OpenWrt-Lean-5.4-$(date +%Y%m%d)_YaoDao.trx
+        cp -a openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm_k3-squashfs.trx ./K3_Out/K3-OpenWrt-5.4-$(date +%Y%m%d)_YaoDao.trx
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: K3-OpenWrt_54
+        name: K3-OpenWrt_504
         path: K3_Out/*.trx   
         
     - name: Generate Tag & Release Name
