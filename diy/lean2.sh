@@ -7,6 +7,12 @@
 rm -rf feeds/luci/applications/luci-app-aria2/*
 cp -af feeds/xiangfeidexiaohuo/aria2-op/luci-app-aria2/* feeds/luci/applications/luci-app-aria2/
 
+rm -rf feeds/packages/admin/netdata/*
+cp -af feeds/xiangfeidexiaohuo/netdata-op/netdata/* feeds/packages/admin/netdata/
+
+rm -rf feeds/packages/net/ariang/*
+cp -af feeds/xiangfeidexiaohuo/aria2-op/ariang/* feeds/packages/net/ariang/
+
 rm -rf feeds/packages/utils/docker/*
 rm -rf feeds/packages/utils/dockerd/*
 rm -rf feeds/packages/utils/containerd/*
