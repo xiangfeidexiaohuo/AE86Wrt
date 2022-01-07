@@ -3,28 +3,9 @@
 # DIY script
 # jsjson@163.com 
 #=================================================
-##替换一些新插件
+##替换一些插件
 rm -rf feeds/luci/applications/luci-app-aria2/*
 cp -af feeds/xiangfeidexiaohuo/aria2-op/luci-app-aria2/* feeds/luci/applications/luci-app-aria2/
-
-rm -rf feeds/packages/admin/netdata/*
-cp -af feeds/xiangfeidexiaohuo/netdata-op/netdata/* feeds/packages/admin/netdata/
-
-rm -rf feeds/packages/lang/php8/*
-cp -af feeds/xiangfeidexiaohuo/php8/* feeds/packages/lang/php8/
-
-rm -rf feeds/packages/net/ariang/*
-cp -af feeds/xiangfeidexiaohuo/aria2-op/ariang/* feeds/packages/net/ariang/
-
-rm -rf feeds/packages/utils/docker/*
-rm -rf feeds/packages/utils/dockerd/*
-rm -rf feeds/packages/utils/containerd/*
-rm -rf feeds/packages/utils/runc/*
-cp -af feeds/xiangfeidexiaohuo/docker-op/docker/* feeds/packages/utils/docker/
-cp -af feeds/xiangfeidexiaohuo/docker-op/dockerd/* feeds/packages/utils/dockerd/
-cp -af feeds/xiangfeidexiaohuo/docker-op/containerd/* feeds/packages/utils/containerd/
-cp -af feeds/xiangfeidexiaohuo/docker-op/runc/* feeds/packages/utils/runc/
-
 
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/files/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
