@@ -113,5 +113,8 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Upload Aliyun
-      run: |      
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600" --file "AX3600_Out"                         
+      run: |  
+        cd AX3600_Out
+        zip AX3600-$(date +%Y%m%d).zip *
+        cd ..    
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600" --file "AX3600_Out/AX3600-$(date +%Y%m%d).zip"                         

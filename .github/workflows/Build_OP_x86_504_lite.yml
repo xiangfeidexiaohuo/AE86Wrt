@@ -115,6 +115,9 @@ jobs:
 
 
     - name: Upload Aliyun
-      run: |      
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86-Lite" --file "X86_Out"                         
+      run: |
+        cd X86_Out
+        zip X86-Lite-5.4-$(date +%Y%m%d).zip *
+        cd ..              
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86-Lite" --file "X86_Out/X86-Lite-5.4-$(date +%Y%m%d).zip"                         
         
