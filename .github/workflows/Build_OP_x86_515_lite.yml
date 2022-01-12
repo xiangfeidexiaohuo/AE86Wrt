@@ -113,7 +113,8 @@ jobs:
     - name: Upload Aliyun
       run: |  
         cd X86_Out
-        zip X86-Lite-5.15-$(date +%Y%m%d).zip *
+        echo "解压ZIP即可得到固件，请自动忽略META-INF文件夹。" > 说明.txt
+        jar cf X86-Lite-5.15-$(date +%Y%m%d).zip *
         cd ..        
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86-Lite" --file "X86_Out/X86-Lite-5.15-$(date +%Y%m%d).zip"  
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86-Lite/5.15" --file "X86_Out/X86-Lite-5.15-$(date +%Y%m%d).zip"  
                 
