@@ -87,7 +87,18 @@ jobs:
       run: |
         rm -rf ./K3_Out
         mkdir -p ./K3_Out/
-        cp -a openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm_k3-squashfs.trx ./K3_Out/K3-OpenWrt-5.4-$(date +%Y%m%d)_YaoDao.trx
+        
+        getmd5()
+        {
+        md5sum=`md5sum $1`
+        md5=`echo ${md5sum% *}`
+        md5=`echo ${md5:0:10}`
+        }
+        
+        rom=openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm_k3-squashfs.trx
+        getmd5 $rom
+                
+        cp -a $rom ./K3_Out/K3-OpenWrt-5.4-$(date +%Y%m%d)_YaoDao_${md5}.trx
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main

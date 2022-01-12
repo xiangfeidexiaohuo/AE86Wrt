@@ -86,8 +86,21 @@ jobs:
       run: |
         rm -rf ./AX6_Out
         mkdir -p ./AX6_Out/
-        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-sysupgrade.bin ./AX6_Out/AX6-OpenWrt-5.10-sysupgrade-$(date +%Y%m%d)_YaoDao.bin
-        cp -a openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-factory.ubi ./AX6_Out/AX6-OpenWrt-5.10-factory-$(date +%Y%m%d)_YaoDao.ubi
+        
+        getmd5()
+        {
+        md5sum=`md5sum $1`
+        md5=`echo ${md5sum% *}`
+        md5=`echo ${md5:0:10}`
+        }
+        
+        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./AX6_Out/AX6-OpenWrt-5.10-sysupgrade-$(date +%Y%m%d)_YaoDao_${md5}.bin
+        
+        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-factory.ubi
+        getmd5 $rom           
+        cp -a $rom ./AX6_Out/AX6-OpenWrt-5.10-factory-$(date +%Y%m%d)_YaoDao_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
