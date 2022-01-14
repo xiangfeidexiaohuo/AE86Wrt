@@ -109,7 +109,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="软路由(X86_64)-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        release_name="软路由(X86_64)全能版-OpenWrt-5.15内核-$(date +%Y%m%d)"
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
