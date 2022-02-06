@@ -57,6 +57,10 @@ sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/*.lua
 sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
 sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/view/openclash/*.htm
 
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-v2raya/luasrc/controller/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-v2raya/luasrc/model/cbi/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-v2raya/luasrc/view/v2raya/*.htm
+
 
 sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.config
 
