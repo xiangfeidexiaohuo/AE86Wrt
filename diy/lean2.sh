@@ -52,10 +52,10 @@ sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-vssr/luasrc/c
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-vssr/luasrc/model/cbi/vssr/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-vssr/luasrc/view/vssr/*.htm
 
-sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/controller/*.lua
-sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/*.lua
-sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
-sed -i 's/services/vpn/g' package/lean/luci-app-openclash/luasrc/view/openclash/*.htm
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/luasrc/controller/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/luasrc/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/luasrc/view/openclash/*.htm
 
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-v2raya/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-v2raya/luasrc/model/cbi/*.lua
