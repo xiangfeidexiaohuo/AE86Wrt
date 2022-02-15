@@ -21,8 +21,7 @@ rm -rf ./package/lean/autocore
 rm -rf ./package/lean/luci-app-cpufreq
 rm -rf ./package/lean/luci-app-kodexplorer
                
-echo -e "\nsrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" >> feeds.conf.default
-echo -e "src-git passwall https://github.com/xiaorouji/openwrt-passwall" >> feeds.conf.default
-echo -e "src-git helloworld https://github.com/fw876/helloworld" >> feeds.conf.default
-
+sed -i "1isrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" feeds.conf.default
+sed -i "2isrc-git passwall https://github.com/xiaorouji/openwrt-passwall" feeds.conf.default
+sed -i "3isrc-git helloworld https://github.com/fw876/helloworld\n" feeds.conf.default
 
