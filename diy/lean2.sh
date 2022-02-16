@@ -3,9 +3,7 @@
 # DIY script
 # jsjson@163.com 
 #=================================================
-##替换一些插件
-rm -rf feeds/luci/applications/luci-app-aria2/*
-cp -af feeds/xiangfeidexiaohuo/aria2-op/luci-app-aria2/* feeds/luci/applications/luci-app-aria2/
+
 
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/files/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
@@ -57,9 +55,6 @@ sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/luasrc/view/openclash/*.htm
 
-sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-v2raya/luasrc/controller/*.lua
-sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-v2raya/luasrc/model/cbi/*.lua
-sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-v2raya/luasrc/view/v2raya/*.htm
 
 
 sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.config
