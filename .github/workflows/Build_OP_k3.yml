@@ -106,6 +106,12 @@ jobs:
       with:
         name: K3-OpenWrt_504
         path: K3_Out/*.trx   
+ 
+    - name: Upload Packages
+      uses: actions/upload-artifact@main
+      with:
+        name: K3-Packages
+        path: openwrt/bin/packages 
         
     - name: Generate Tag & Release Name
       id: generate_name

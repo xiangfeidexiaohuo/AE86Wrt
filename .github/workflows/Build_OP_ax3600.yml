@@ -108,6 +108,12 @@ jobs:
       with:
         name: AX3600-OpenWrt
         path: AX3600_Out/AX3600* 
+
+    - name: Upload Packages
+      uses: actions/upload-artifact@main
+      with:
+        name: AX3600-Packages
+        path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
       id: generate_name

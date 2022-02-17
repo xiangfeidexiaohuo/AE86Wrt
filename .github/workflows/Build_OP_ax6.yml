@@ -108,7 +108,13 @@ jobs:
       with:
         name: AX6-OpenWrt
         path: AX6_Out/AX6* 
-        
+
+    - name: Upload Packages
+      uses: actions/upload-artifact@main
+      with:
+        name: AX6-Packages
+        path: openwrt/bin/packages
+                
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
