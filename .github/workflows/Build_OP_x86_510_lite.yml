@@ -63,7 +63,6 @@ jobs:
         sed -i "s/hostname='OpenWrt'/hostname='AE86-X86'/g" package/base-files/files/bin/config_generate
         sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='Lite $(date +%Y%m%d) By YaoDao'/g" package/lean/default-settings/files/zzz-default-settings
         
-        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.4/g" target/linux/x86/Makefile
         sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.10/g" target/linux/x86/Makefile
         
     - name: Configuration Customization - Build_x86_510_lite
