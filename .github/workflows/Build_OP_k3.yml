@@ -61,7 +61,6 @@ jobs:
         chmod +x ./lean2.sh && ./lean2.sh       
         sed -i 's/+!TARGET_ramips:kmod-usb-storage-uas //g'  ./package/lean/automount/Makefile
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv5.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
-        sed -i "s/hostname='OpenWrt'/hostname='AE86-K3'/g" package/base-files/files/bin/config_generate
        
               
     - name: Configuration Customization - Build_k3
