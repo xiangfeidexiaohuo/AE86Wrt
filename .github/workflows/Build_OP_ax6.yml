@@ -108,6 +108,12 @@ jobs:
         name: AX6-OpenWrt
         path: AX6_Out/AX6* 
 
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: ax6-config
+        path: openwrt/.config
+
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:

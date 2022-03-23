@@ -105,6 +105,12 @@ jobs:
       with:
         name: K3-OpenWrt_504
         path: K3_Out/*.trx   
+
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: k3-config
+        path: openwrt/.config  
  
     - name: Upload Packages
       uses: actions/upload-artifact@main

@@ -108,6 +108,12 @@ jobs:
         name: AX3600-OpenWrt
         path: AX3600_Out/AX3600* 
 
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: ax3600-config
+        path: openwrt/.config
+
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:

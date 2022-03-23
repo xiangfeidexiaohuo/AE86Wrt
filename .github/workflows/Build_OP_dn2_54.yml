@@ -108,6 +108,12 @@ jobs:
         name: dn2-OpenWrt-5.4
         path: dn2_Out/*.img.gz
         
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: dn2-config
+        path: openwrt/.config      
+               
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:

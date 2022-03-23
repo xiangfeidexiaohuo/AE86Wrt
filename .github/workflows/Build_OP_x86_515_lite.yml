@@ -104,6 +104,12 @@ jobs:
       with:
         name: X86-OpenWrt-5.15-lite
         path: X86_Out/*.img.gz
+
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: x86-5.15-lite-config
+        path: openwrt/.config
         
     - name: Generate Tag & Release Name
       id: generate_name
