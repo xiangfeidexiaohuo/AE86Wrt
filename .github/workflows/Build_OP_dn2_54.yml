@@ -130,6 +130,7 @@ jobs:
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: Upload Aliyun
       run: | 
         cd dn2_Out
