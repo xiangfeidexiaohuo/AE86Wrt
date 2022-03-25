@@ -1,19 +1,19 @@
-name: Build_x86_515_lite
+name: Build_x86_510
 
 on: 
   repository_dispatch:
   workflow_dispatch:
 
 # 定时触发编译
-  schedule:
-    - cron: 35 4 * * 1,5
+#  schedule:
+#    - cron: 10 17 * * 0,4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_x86_515_lite:
+  Build_x86_510:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -60,11 +60,12 @@ jobs:
         cp -f ../diy/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh       
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
-        sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='Lite $(date +%Y%m%d) By YaoDao'/g" package/lean/default-settings/files/zzz-default-settings
         
-    - name: Configuration Customization - Build_x86_515_lite
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.10/g" target/linux/x86/Makefile
+   
+    - name: Configuration Customization - Build_x86_510
       env:
-        CONFIG_FILE: './configs/x86_515_lite.config'
+        CONFIG_FILE: './configs/x86_510.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -96,19 +97,19 @@ jobs:
         
         rom=openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img.gz
         getmd5 $rom
-
-        cp -a $rom ./X86_Out/X86_64-OpenWrt-Lite-5.15-$(date +%Y%m%d)_YaoDao_${md5}.img.gz
+                
+        cp -a $rom ./X86_Out/X86_64-OpenWrt-5.10-$(date +%Y%m%d)_YaoDao_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: X86-OpenWrt-5.15-lite
+        name: X86-OpenWrt-5.10
         path: X86_Out/*.img.gz
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: x86-5.15-lite-config
+        name: x86-5.10-config
         path: openwrt/.config
         
     - name: Generate Tag & Release Name
@@ -116,7 +117,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="软路由(X86_64)精简版-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        release_name="软路由(X86_64)全能版-OpenWrt-5.10内核-$(date +%Y%m%d)"
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
@@ -132,7 +133,7 @@ jobs:
       run: |  
         cd X86_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf X86-Lite-5.15-$(date +%Y%m%d).zip *
-        cd ..        
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86-Lite/5.15" --file "X86_Out/X86-Lite-5.15-$(date +%Y%m%d).zip"  
-                
+        jar cf X86-5.10-$(date +%Y%m%d).zip *
+        cd ..           
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86/5.10" --file "X86_Out/X86-5.10-$(date +%Y%m%d).zip"  
+                   
