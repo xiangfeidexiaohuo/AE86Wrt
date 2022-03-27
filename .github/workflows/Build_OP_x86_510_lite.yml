@@ -6,7 +6,7 @@ on:
 
 # 定时触发编译
 #  schedule:
-#    - cron: 40 4 * * 1,5
+#    - cron: 5 17 * * 0,4
 
 # 点赞☆Star触发编译
 #  watch:
