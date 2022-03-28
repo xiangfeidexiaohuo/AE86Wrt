@@ -64,7 +64,7 @@ jobs:
               
     - name: Configuration Customization - Build_ax6_NoNSS
       env:
-        CONFIG_FILE: './configs/nonss/ax6.config'
+        CONFIG_FILE: './configs/ax6-nonss.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
