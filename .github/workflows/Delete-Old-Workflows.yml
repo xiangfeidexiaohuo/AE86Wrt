@@ -1,4 +1,4 @@
-name: Update
+name: Delete-Old-Workflows
 
 on: 
   repository_dispatch:
@@ -9,7 +9,7 @@ on:
     - cron: 0 0 * * 0
 
 jobs:
-  Update:
+  Delete-Old-Workflows:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
