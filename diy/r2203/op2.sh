@@ -18,6 +18,14 @@ sed -i "s/hostname='.*'/hostname='AE86Wrt'/g" package/base-files/files/bin/confi
 rm -rf feeds/xiangfeidexiaohuo/patch/autocore
 svn export https://github.com/xiangfeidexiaohuo/other-package/trunk/autocore feeds/xiangfeidexiaohuo/patch/autocore
 
+
+##
+svn export https://github.com/coolsnowwolf/luci/trunk/libs/luci-lib-fs feeds/luci/libs/luci-lib-fs
+ln -s ../../../feeds/luci/libs/luci-lib-fs package/feeds/xiangfeidexiaohuo/luci-lib-fs
+svn export https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-filetransfer feeds/luci/applications/luci-app-filetransfer
+ln -s ../../../feeds/luci/applications/luci-app-filetransfer package/feeds/xiangfeidexiaohuo/luci-app-filetransfer
+
+
 ##
 sed -i "53iLUCI_LANG.zh-cn=\$(LUCI_LANG.zh_Hans)" feeds/luci/luci.mk
 sed -i "54iLUCI_LANG.zh-tw=\$(LUCI_LANG.zh_Hant)" feeds/luci/luci.mk

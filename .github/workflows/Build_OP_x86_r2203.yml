@@ -79,6 +79,9 @@ jobs:
     - name: Build firmware
       working-directory: ./openwrt
       run: |
+        sed -i "s/# CONFIG_PACKAGE_luci-i18n-quickstart-zh-cn is not set/CONFIG_PACKAGE_luci-i18n-quickstart-zh-cn=y/g" .config
+        sed -i "s/# CONFIG_PACKAGE_luci-i18n-filetransfer-zh-cn is not set/CONFIG_PACKAGE_luci-i18n-filetransfer-zh-cn=y/g" .config
+        
         make -j$(nproc) V=s
 
     - name: Assemble Artifact
