@@ -1,4 +1,4 @@
-name: Build_ax3600
+name: Build_ax3600_515
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_ax3600:
+  Build_ax3600_515:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -42,13 +42,13 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/xiangfeidexiaohuo/lede
-        REPO_BRANCH: AX6
+        REPO_URL: https://github.com/xiangfeidexiaohuo/openwrt-ipq807x-5.15
+        REPO_BRANCH: ipq807x-5.15
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/lean/lean1.sh ./
-        chmod +x ./lean1.sh && ./lean1.sh
+        cp -f ../diy/r2203/op1.sh ./
+        chmod +x ./op1.sh && ./op1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -57,14 +57,14 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/lean/lean2.sh ./        
+        cp -f ../diy/r2203/op2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
        
               
-    - name: Configuration Customization - Build_ax3600
+    - name: Configuration Customization - Build_ax3600_515
       env:
-        CONFIG_FILE: './configs/ipq807/ax3600.config'
+        CONFIG_FILE: './configs/ipq807/ax3600-515.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -79,6 +79,9 @@ jobs:
     - name: Build firmware
       working-directory: ./openwrt
       run: |
+        sed -i "s/# CONFIG_PACKAGE_luci-i18n-quickstart-zh-cn is not set/CONFIG_PACKAGE_luci-i18n-quickstart-zh-cn=y/g" .config
+        sed -i "s/# CONFIG_PACKAGE_luci-i18n-filetransfer-zh-cn is not set/CONFIG_PACKAGE_luci-i18n-filetransfer-zh-cn=y/g" .config      
+      
         make -j$(nproc) V=s
         
     - name: Assemble Artifact
@@ -96,11 +99,11 @@ jobs:
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./AX3600_Out/AX3600-OpenWrt-5.10-sysupgrade-$(date +%Y%m%d)_YaoDao_${md5}.bin
+        cp -a $rom ./AX3600_Out/AX3600-OpenWrt-5.15-sysupgrade-$(date +%Y%m%d)_YaoDao_${md5}.bin
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-factory.ubi
         getmd5 $rom         
-        cp -a $rom ./AX3600_Out/AX3600-OpenWrt-5.10-factory-$(date +%Y%m%d)_YaoDao_${md5}.ubi
+        cp -a $rom ./AX3600_Out/AX3600-OpenWrt-5.15-factory-$(date +%Y%m%d)_YaoDao_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -117,7 +120,7 @@ jobs:
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX3600-Packages
+        name: AX3600-515-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
@@ -125,7 +128,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="小米AX3600-OpenWrt-5.10内核-$(date +%Y%m%d)"
+        release_name="小米AX3600-OpenWrt-5.15内核-$(date +%Y%m%d)"
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
@@ -141,6 +144,8 @@ jobs:
       run: |  
         cd AX3600_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf AX3600-$(date +%Y%m%d).zip *
+        jar cf AX3600-5.15-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600" --file "AX3600_Out/AX3600-$(date +%Y%m%d).zip"                         
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600-5.15" --file "AX3600_Out/AX3600-5.15-$(date +%Y%m%d).zip"  
+       
+                               
