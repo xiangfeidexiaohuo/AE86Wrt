@@ -42,7 +42,7 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/xiangfeidexiaohuo/openwrt-ipq807x-5.15
+        REPO_URL: https://github.com/robimarko/openwrt
         REPO_BRANCH: ipq807x-5.15
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
