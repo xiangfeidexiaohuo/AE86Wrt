@@ -99,11 +99,11 @@ jobs:
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./AX3600_Out/AX3600-OpenWrt-5.15-sysupgrade-$(date +%Y%m%d)_YaoDao_${md5}.bin
+        cp -a $rom ./AX3600_Out/AE86-OpenWrt-AX3600-5.15-sysupgrade-$(date +%Y%m%d)_YaoDao_${md5}.bin
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-factory.ubi
         getmd5 $rom         
-        cp -a $rom ./AX3600_Out/AX3600-OpenWrt-5.15-factory-$(date +%Y%m%d)_YaoDao_${md5}.ubi
+        cp -a $rom ./AX3600_Out/AE86-OpenWrt-AX3600-5.15-factory-$(date +%Y%m%d)_YaoDao_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main

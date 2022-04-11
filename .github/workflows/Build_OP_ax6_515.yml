@@ -99,17 +99,17 @@ jobs:
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./AX6_Out/AX6-OpenWrt-5.15-sysupgrade-$(date +%Y%m%d)_YaoDao_${md5}.bin
+        cp -a $rom ./AX6_Out/AE86-OpenWrt-AX6-5.15-sysupgrade-$(date +%Y%m%d)_YaoDao_${md5}.bin
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-factory.ubi
         getmd5 $rom           
-        cp -a $rom ./AX6_Out/AX6-OpenWrt-5.15-factory-$(date +%Y%m%d)_YaoDao_${md5}.ubi
+        cp -a $rom ./AX6_Out/AE86-OpenWrt-AX6-5.15-factory-$(date +%Y%m%d)_YaoDao_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
         name: AX6-OpenWrt
-        path: AX6_Out/AX6* 
+        path: AX6_Out/AE86* 
 
     - name: Upload config
       uses: actions/upload-artifact@main
@@ -135,7 +135,7 @@ jobs:
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
       with:
-        artifacts: AX6_Out/AX6*
+        artifacts: AX6_Out/AE86*
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
