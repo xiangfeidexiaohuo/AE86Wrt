@@ -1,0 +1,152 @@
+name: Build_ax3600_515_nss
+
+on: 
+  repository_dispatch:
+  workflow_dispatch:
+
+# 定时触发编译
+  schedule:
+    - cron: 2 22 * * 0,4
+
+# 点赞☆Star触发编译
+#  watch:
+#    types: [started]
+
+jobs:
+  Build_ax3600_515_nss:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Clone Repository
+      uses: actions/checkout@v2
+
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo timedatectl set-timezone "Asia/Shanghai" 
+        sudo -E swapoff -a
+        sudo -E rm -f /swapfile
+        sudo -E docker image prune -a -f
+        sudo -E snap set system refresh.retain=2
+        sudo -E apt-get -y purge azure* dotnet* firefox ghc* google* hhvm llvm* mono* mysql* openjdk* php* zulu*
+        sudo -E apt-get -y autoremove --purge
+        sudo -E rm -rf /usr/share/dotnet /usr/local/lib/android/sdk /etc/mysql /etc/php /usr/local/share/boost
+        [ -n "$AGENT_TOOLSDIRECTORY" ] && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        sudo -E apt-get update -y
+        sudo -E apt-get install -y build-essential rsync asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core p7zip p7zip-full msmtp libssl-dev texinfo libreadline-dev libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint ccache curl wget vim nano python3 python3-pip python3-ply haveged lrzsz device-tree-compiler scons
+        wget -qO - https://raw.githubusercontent.com/friendlyarm/build-env-on-ubuntu-bionic/master/install.sh | sed 's/python-/python3-/g' | /bin/bash
+        pip install aligo
+        sudo -E apt-get clean
+        git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
+        df -h
+        
+    - name: Clone source code
+      env: 
+        REPO_URL: https://github.com/Boos4721/openwrt
+        REPO_BRANCH: master
+      run: |
+        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+        cd openwrt
+        cp -f ../diy/lean/lean1.sh ./
+        chmod +x ./lean1.sh && ./lean1.sh
+
+    - name: Update & Install feeds
+      working-directory: ./openwrt
+      run: |
+        ./scripts/feeds update -a
+
+        ./scripts/feeds install -a
+
+        cp -f ../diy/lean/lean2.sh ./        
+        chmod +x ./lean2.sh && ./lean2.sh
+        echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
+        sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION='NSS $(date +%Y%m%d) By YaoDao'/g" package/lean/default-settings/files/zzz-default-settings
+       
+              
+    - name: Configuration Customization - Build_ax3600_515_nss
+      env:
+        CONFIG_FILE: './configs/ipq807/ax3600-515-nss.config'
+      run: |
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        cd openwrt && make defconfig
+        
+    - name: Download package
+      working-directory: ./openwrt
+      run: |
+        make download -j$(nproc)
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: Build firmware
+      working-directory: ./openwrt
+      run: |
+        sed -i "s/# CONFIG_PACKAGE_luci-i18n-quickstart-zh-cn is not set/CONFIG_PACKAGE_luci-i18n-quickstart-zh-cn=y/g" .config
+        sed -i "s/# CONFIG_PACKAGE_luci-i18n-filetransfer-zh-cn is not set/CONFIG_PACKAGE_luci-i18n-filetransfer-zh-cn=y/g" .config      
+      
+        make -j$(nproc) V=s
+        
+    - name: Assemble Artifact
+      id: assemble_artifact
+      run: |
+        rm -rf ./AX3600_Out
+        mkdir -p ./AX3600_Out/
+        
+        getmd5()
+        {
+        md5sum=`md5sum $1`
+        md5=`echo ${md5sum% *}`
+        md5=`echo ${md5:0:10}`
+        }
+        
+        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./AX3600_Out/AE86-OpenWrt-AX3600_NSS-5.15-sysupgrade-$(date +%Y%m%d)_YaoDao_${md5}.bin
+        
+        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-factory.ubi
+        getmd5 $rom         
+        cp -a $rom ./AX3600_Out/AE86-OpenWrt-AX3600_NSS-5.15-factory-$(date +%Y%m%d)_YaoDao_${md5}.ubi
+               
+    - name: Upload Firmwares
+      uses: actions/upload-artifact@main
+      with:
+        name: AX3600-OpenWrt
+        path: AX3600_Out/AE86* 
+
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: ax3600-config
+        path: openwrt/.config
+
+    - name: Upload Packages
+      uses: actions/upload-artifact@main
+      with:
+        name: AX3600-515-Packages
+        path: openwrt/bin/packages
+        
+    - name: Generate Tag & Release Name
+      id: generate_name
+      run: |
+        time=$(date +%Y%m%d%H%M)
+        release_tag="$time"
+        release_name="小米AX3600-NSS-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        echo "##[set-output name=release_name;]$release_name"
+        echo "##[set-output name=release_tag;]$release_tag"        
+
+    - name: Create Release & Upload
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: AX3600_Out/AE86*
+        name: ${{ steps.generate_name.outputs.release_name }}
+        tag: ${{ steps.generate_name.outputs.release_tag }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Upload Aliyun
+      run: |  
+        cd AX3600_Out
+        echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
+        jar cf AX3600-NSS-5.15-$(date +%Y%m%d).zip *
+        cd ..    
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600-5.15" --file "AX3600_Out/AX3600-NSS-5.15-$(date +%Y%m%d).zip"  
+       
+                               
