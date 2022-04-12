@@ -64,7 +64,7 @@ jobs:
               
     - name: Configuration Customization - Build_ax3600_515
       env:
-        CONFIG_FILE: './configs/ipq807/ax3600-515.config'
+        CONFIG_FILE: './configs/ipq807/515/ax3600-515.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
