@@ -44,6 +44,12 @@ sed -i "54iLUCI_LANG.zh-tw=\$(LUCI_LANG.zh_Hant)" feeds/luci/luci.mk
 rm -rf package/feeds/luci/luci-app-dockerman
 ln -s ../../../feeds/xiangfeidexiaohuo/lisaac/luci-app-dockerman package/feeds/luci/luci-app-dockerman
 
+rm -rf feeds/xiangfeidexiaohuo/patch/autocore
+svn export https://github.com/Lienol/openwrt-package/branches/other/lean/autocore feeds/xiangfeidexiaohuo/patch/autocore
+
+rm -rf feeds/packages/utils/coremark
+svn export https://github.com/coolsnowwolf/packages/trunk/utils/coremark feeds/packages/utils/coremark
+
 
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-ssr-plus/luasrc/controller/*.lua
