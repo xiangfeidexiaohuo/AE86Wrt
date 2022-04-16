@@ -50,6 +50,9 @@ svn export https://github.com/Lienol/openwrt-package/branches/other/lean/autocor
 rm -rf feeds/packages/utils/coremark
 svn export https://github.com/coolsnowwolf/packages/trunk/utils/coremark feeds/packages/utils/coremark
 
+svn export https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-socat feeds/luci/applications/luci-app-socat
+ln -s ../feeds/luci/applications/luci-app-socat package/luci-app-socat
+
 
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-ssr-plus/luasrc/controller/*.lua
