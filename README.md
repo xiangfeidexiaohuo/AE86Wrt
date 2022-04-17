@@ -1,51 +1,35 @@
 #### LEDE-Lean
 
-#### 软路由/红米AX6/斐讯K3 OpenWrt固件
+* 基于[Lean源码](https://github.com/coolsnowwolf/lede)编译的固件：
 
-* 基于[Lean源码](https://github.com/coolsnowwolf/lede)
+[OpenWrt-X86_64-全能极速](https://www.right.com.cn/forum/thread-4054849-1-1.html)
 
-* 默认管理：192.168.2.1  密码：password
+[OpenWrt+R2203-X86_64-精简版多内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
 
-* 默认主题：Argon
+[斐讯K3-OpenWrt](https://www.right.com.cn/forum/thread-4052645-1-1.html)
 
-* [下载固件](https://github.com/xiangfeidexiaohuo/OpenWrt_Build/releases)
+[红米AX6 OpenWrt-5.10.x](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=6770103&page=1&extra=#pid14665099)
 
-#### x86_64软路由刷机：
+[小米AX3600 OpenWrt-5.10.x](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7310044&page=1&extra=#pid15314306)
 
-* 用工具(balenaEtcher等)直接将固件写入软路由硬盘
+* OpenWrt+R2203-X86_64-精简版固件带QuickStart便捷首页和iStore
 
+* 红米AX6/小米AX3600固件带iStore
 
-#### 斐讯K3刷机：
+* QuickStart便捷首页截图欣赏：
 
-* 在OpenWrt/LEDE系统，不保留配置刷此固件
+![jpg](./pic/1.jpg)
 
-* 其他系统，建议刷tb的官root固件，用SSH工具，刷入OpenWrt/LEDE后，不保留配置，刷此固件
+![jpg](./pic/2.jpg)
 
+![jpg](./pic/3.jpg)
 
-#### 红米AX6刷机：
+* iStore截图欣赏：
 
-* 解锁SSH [解锁教程](https://qust.me/post/hong-mi-ax6-jie-suo-ssh-an-zhuang-shi-yong-shellclash-jiao-cheng/)
+![jpg](./pic/4.jpg)
 
-* 根据此 [AX6刷第三方openwrt固件](https://www.right.com.cn/forum/thread-4111331-1-1.html)，执行到第五步
+![jpg](./pic/5.jpg)
 
-* 使用WinSCP登录AX6，把ubi后缀的固件(比如:AX6-OpenWrt-Lean-5.10-squashfs-nand-factory-20211112_YaoDao.ubi)传到路由器tmp目录
-
-SSH执行以下几条令：
-```
-ubiformat /dev/mtd13 -y -f /tmp/AX6-OpenWrt-Lean-5.10-squashfs-nand-factory-20211112_YaoDao.ubi
-
-fw_setenv flag_last_success 1
-
-fw_setenv flag_boot_rootfs 1
-```
-然后重启路由器，即可享受OpenWrt！
-
-* 以后更新固件，直接WEB更新bin后缀的固件(比如:AX6-OpenWrt-Lean-5.10-squashfs-nand-sysupgrade-20211112_YaoDao.bin)
-
-* 若在其他作者可WEB更新的OpenWrt固件，直接不保留配置刷入bin后缀的固件
-
-
-
-
+* [个人自用插件库](https://github.com/xiangfeidexiaohuo/openwrt-packages)
 
 
