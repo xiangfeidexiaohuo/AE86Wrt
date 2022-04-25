@@ -9,10 +9,10 @@ rm -rf feeds/packages/utils/docker
 rm -rf feeds/packages/utils/dockerd
 rm -rf feeds/packages/utils/containerd
 rm -rf feeds/packages/utils/runc
-svn export https://github.com/xiangfeidexiaohuo/openwrt-tmp/trunk/docker feeds/packages/utils/docker
-svn export https://github.com/xiangfeidexiaohuo/openwrt-tmp/trunk/dockerd feeds/packages/utils/dockerd
-svn export https://github.com/xiangfeidexiaohuo/openwrt-tmp/trunk/containerd feeds/packages/utils/containerd
-svn export https://github.com/xiangfeidexiaohuo/openwrt-tmp/trunk/runc feeds/packages/utils/runc
+svn export https://github.com/coolsnowwolf/packages/trunk/utils/docker feeds/packages/utils/docker
+svn export https://github.com/coolsnowwolf/packages/trunk/utils/dockerd feeds/packages/utils/dockerd
+svn export https://github.com/coolsnowwolf/packages/trunk/utils/containerd feeds/packages/utils/containerd
+svn export https://github.com/coolsnowwolf/packages/trunk/utils/runc feeds/packages/utils/runc
 
 ##配置IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
