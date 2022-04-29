@@ -12,7 +12,7 @@
 
 [小米AX3600 OpenWrt-5.10.x](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7310044&page=1&extra=#pid15314306)
 
-* OpenWrt+R2203-X86_64-精简版固件带QuickStart便捷首页和iStore
+* R2203-X86_64固件带QuickStart便捷首页和iStore
 
 * 红米AX6/小米AX3600固件带iStore
 
