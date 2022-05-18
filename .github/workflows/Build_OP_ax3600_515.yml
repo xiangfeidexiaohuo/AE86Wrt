@@ -60,6 +60,7 @@ jobs:
         cp -f ../diy/r2203/op2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-AX3600-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
        
               
     - name: Configuration Customization - Build_ax3600_515
