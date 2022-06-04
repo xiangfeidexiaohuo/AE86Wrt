@@ -42,8 +42,8 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/Boos4721/openwrt
-        REPO_BRANCH: master
+        REPO_URL: https://github.com/xiangfeidexiaohuo/openwrt-ipq807x
+        REPO_BRANCH: 515-stable
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
