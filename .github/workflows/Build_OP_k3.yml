@@ -66,7 +66,7 @@ jobs:
               
     - name: Configuration Customization - Build_k3
       env:
-        CONFIG_FILE: './configs/k3.config'
+        CONFIG_FILE: './configs/ARM/k3.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
