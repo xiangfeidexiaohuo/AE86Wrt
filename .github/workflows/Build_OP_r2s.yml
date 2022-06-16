@@ -42,7 +42,7 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/coolsnowwolf/lede
+        REPO_URL: https://github.com/Boos4721/openwrt
         REPO_BRANCH: master
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
@@ -64,7 +64,12 @@ jobs:
         chmod +x ./r2s.sh && ./r2s.sh
                 
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R2S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings  
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R2S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+        
+        sed -i 's/10.10.10.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+        sed -i 's/$1$WplwC1t5$HBAtVXABp7XbvVjG4193B.:18753/:/g' package/base-files/files/etc/shadow
+        sed -i "s/encryption=.*/encryption=none/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
+        sed -i "/key=.*/d" package/kernel/mac80211/files/lib/wifi/mac80211.sh
        
               
     - name: Configuration Customization - Build_r2s
@@ -102,7 +107,7 @@ jobs:
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz
         getmd5 $rom
                 
-        cp -a $rom ./R2s_Out/AE86-OpenWrt-R2S-5.10-$(date +%Y%m%d)_YaoDao_${md5}.img.gz
+        cp -a $rom ./R2s_Out/AE86-OpenWrt-R2S-5.15-$(date +%Y%m%d)_YaoDao_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -127,7 +132,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="R2S-OpenWrt-5.10内核-$(date +%Y%m%d)"
+        release_name="R2S-OpenWrt-5.15内核-$(date +%Y%m%d)"
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
