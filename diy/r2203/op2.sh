@@ -53,16 +53,6 @@ svn export https://github.com/Lienol/openwrt-package/branches/other/lean/autocor
 rm -rf feeds/packages/utils/coremark
 svn export https://github.com/coolsnowwolf/packages/trunk/utils/coremark feeds/packages/utils/coremark
 
-## 防火墙新增翻译
-echo -e "\n## 妖刀新增翻译" >> feeds/luci/modules/luci-base/po/zh_Hans/base.po
-echo -e "msgid \"Legacy rules detected\"" >> feeds/luci/modules/luci-base/po/zh_Hans/base.po
-echo -e "msgstr \"检测到旧版规则\"" >> feeds/luci/modules/luci-base/po/zh_Hans/base.po
-
-echo -e "\nmsgid \"There are legacy iptables rules present on the system. Mixing iptables and nftables rules is discouraged and may lead to incomplete traffic filtering.\"" >> feeds/luci/modules/luci-base/po/zh_Hans/base.po
-echo -e "msgstr \"系统上存在旧版iptables规则。不建议混合使用iptables和nftables规则，可能会导致流量过滤不完整。\"" >> feeds/luci/modules/luci-base/po/zh_Hans/base.po
-
-echo -e "\nmsgid \"Open iptables rules overview…\"" >> feeds/luci/modules/luci-base/po/zh_Hans/base.po
-echo -e "msgstr \"打开iptables规则概述…\"" >> feeds/luci/modules/luci-base/po/zh_Hans/base.po
 
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-ssr-plus/luasrc/controller/*.lua
