@@ -112,7 +112,7 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: R2S-OpenWrt_510
+        name: R2S-OpenWrt_515
         path: R2s_Out/*.img.gz 
 
     - name: Upload config
