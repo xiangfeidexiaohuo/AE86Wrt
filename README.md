@@ -8,11 +8,13 @@
 
 * [斐讯K3-OpenWrt](https://www.right.com.cn/forum/thread-4052645-1-1.html)
 
-* [红米AX6 OpenWrt-5.10.x](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=6770103&page=1&extra=#pid14665099)
+* [红米AX6 OpenWrt-5.10.x](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=6770103&page=1&extra=#pid14665099) [停更]
 
-* [小米AX3600 OpenWrt-5.10.x](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7310044&page=1&extra=#pid15314306)
+* [小米AX3600 OpenWrt-5.10.x](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7310044&page=1&extra=#pid15314306) [停更]
 
 * [小米AX6/AX3600 OpenWrt-5.15.x](https://www.right.com.cn/forum/thread-8218915-1-1.html)
+
+* [R2S OpenWrt-5.15.x](https://www.right.com.cn/forum/thread-8239527-1-1.html)
 
 ***
 
@@ -22,7 +24,7 @@
 
 * x86-R2203固件带QuickStart便捷首页和iStore
 
-* AX6/AX3600/x86-Lite版仅带iStore
+* AX6/AX3600/x86-Lite版/R2S仅带iStore
 
 ***
 
