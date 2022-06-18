@@ -30,17 +30,14 @@
 
 * QuickStart便捷首页截图欣赏：
 
-![jpg](./diy/pic/1.jpg)
+![jpg](./diy/pic/1.png)
 
-![jpg](./diy/pic/2.jpg)
-
-![jpg](./diy/pic/3.jpg)
+![jpg](./diy/pic/2.png)
 
 * iStore截图欣赏：
 
-![jpg](./diy/pic/4.jpg)
+![jpg](./diy/pic/3.png)
 
-![jpg](./diy/pic/5.jpg)
 
 ***
 
