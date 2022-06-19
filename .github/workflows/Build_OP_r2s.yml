@@ -59,6 +59,9 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
+
+        cp -f ../diy/lean/rk.sh ./        
+        chmod +x ./rk.sh && ./rk.sh
         
         cp -f ../diy/lean/r2s.sh ./        
         chmod +x ./r2s.sh && ./r2s.sh
