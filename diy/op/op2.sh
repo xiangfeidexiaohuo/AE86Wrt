@@ -4,7 +4,7 @@
 # jsjson@163.com 
 #=================================================             
 
-# Docker v20.10.15
+# Docker v20.10.17
 rm -rf feeds/packages/utils/docker
 rm -rf feeds/packages/utils/dockerd
 rm -rf feeds/packages/utils/containerd
