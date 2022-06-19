@@ -47,7 +47,7 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/r2203/op1.sh ./
+        cp -f ../diy/op/op1.sh ./
         chmod +x ./op1.sh && ./op1.sh
 
     - name: Update & Install feeds
@@ -57,7 +57,7 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/r2203/op2.sh ./        
+        cp -f ../diy/op/op2.sh ./        
         chmod +x ./op2.sh && ./op2.sh       
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-r22.03-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
