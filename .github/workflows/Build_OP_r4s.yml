@@ -49,6 +49,9 @@ jobs:
         cd openwrt
         cp -f ../diy/lean/lean1.sh ./
         chmod +x ./lean1.sh && ./lean1.sh
+        
+        cp -rf ../diy/rockchip ./
+        git am ./rockchip/*.patch
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -59,9 +62,6 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
-
-        cp -f ../diy/lean/rk.sh ./        
-        chmod +x ./rk.sh && ./rk.sh
                 
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_${Arch}.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R4S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
