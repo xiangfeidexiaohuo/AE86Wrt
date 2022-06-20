@@ -101,7 +101,7 @@ jobs:
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
         getmd5 $rom
                 
-        cp -a $rom ./R4s_Out/AE86-OpenWrt-R4S-5.15-$(date +%Y%m%d)_YaoDao_${md5}.img.gz
+        cp -a $rom ./R4s_Out/AE86Wrt-R4S-5.15-$(date +%Y%m%d)_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
