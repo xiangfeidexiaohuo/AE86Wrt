@@ -26,15 +26,46 @@
 
 * AX6/AX3600/x86-Lite版/R2S仅带iStore
 
+
 ***
 
-* QuickStart便捷首页截图欣赏：
+#### X86全能版截图预览：
+
+![jpg](./diy/pic/argon.png)
+
+![jpg](./diy/pic/all.png)
+
+
+***
+
+#### 更多主题预览：
+
+* neobird:
+
+![jpg](./diy/pic/neobird.png)
+
+* opentopd:
+
+![jpg](./diy/pic/opentopd.png)
+
+* edge:
+
+![jpg](./diy/pic/edge.png)
+
+* ifit:
+
+![jpg](./diy/pic/ifit.png)
+
+
+***
+
+#### QuickStart便捷首页截图欣赏：
 
 ![jpg](./diy/pic/1.png)
 
 ![jpg](./diy/pic/2.png)
 
-* iStore截图欣赏：
+#### iStore截图欣赏：
 
 ![jpg](./diy/pic/3.png)
 
