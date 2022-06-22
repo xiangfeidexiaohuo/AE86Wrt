@@ -4,7 +4,9 @@
 
 * [OpenWrt-X86_64-全能极速](https://www.right.com.cn/forum/thread-4054849-1-1.html) 
 
-* [OpenWrt+R2203-X86_64-精简版多内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
+* [OpenWrt-X86_64-精简版多内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
+
+* [OpenWrt-R2203-X86_64-精简版](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
 
 * [斐讯K3-OpenWrt](https://www.right.com.cn/forum/thread-4052645-1-1.html)
 
@@ -16,15 +18,18 @@
 
 * [R2S OpenWrt-5.15.x](https://www.right.com.cn/forum/thread-8239527-1-1.html)
 
+
 ***
 
 * 不出意外，固件每周五上午更新！
 
-* x86-全能版各种插件都内置了，不带istore
+* X86_64全能版各种插件都内置了，不带istore
 
-* x86-R2203固件带QuickStart便捷首页和iStore
+* X86_64精简版仅带iStore，无Dcoker，极速轻量
 
-* AX6/AX3600/x86-Lite版/R2S仅带iStore
+* X86_64-R2203精简版带QuickStart便捷首页和iStore，有Docker，基于官方openwrt-r2203分支
+
+* AX6/AX3600/R2S仅带iStore
 
 
 ***
