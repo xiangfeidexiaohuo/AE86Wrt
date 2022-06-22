@@ -40,7 +40,9 @@
 
 #### 更多主题预览：
 
-* 主题下载(仅适用于Lean的LEDE源码的固件，不适用于openwrt-r2102、r2203）：[edge](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-edge_2.5-20210107_all.ipk) [ifit](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-ifit_1.6-1_all.ipk) [neobird](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-neobird_2.1-20220621_all.ipk) [opentopd](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-opentopd_1.4.9-20220220_all.ipk) [argon](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-argon-18.06_1.7.3-20220421_all.ipk)
+* 主题下载(仅适用于Lean的LEDE源码的固件，不适用于openwrt-r2102、r2203）：
+
+[edge](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-edge_2.5-20210107_all.ipk) 、[ifit](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-ifit_1.6-1_all.ipk) 、[neobird](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-neobird_2.1-20220621_all.ipk) 、[opentopd](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-opentopd_1.4.9-20220220_all.ipk) 、[argon](https://raw.githubusercontent.com/xiangfeidexiaohuo/OpenWrt_Build/master/theme/luci-theme-argon-18.06_1.7.3-20220421_all.ipk)
 
 
 * neobird:
