@@ -33,6 +33,9 @@ sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' YaoDao'/g" package/lean/defa
 ##更改主机名
 sed -i "s/hostname='.*'/hostname='AE86Wrt'/g" package/base-files/files/bin/config_generate
 
+##切换为samba4
+sed -i 's/luci-app-samba/luci-app-samba4/g' package/lean/autosamba/Makefile
+
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-ssr-plus/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua
