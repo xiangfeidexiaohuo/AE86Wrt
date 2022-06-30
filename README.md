@@ -36,9 +36,9 @@
 
 #### X86全能版截图预览：
 
-![jpg](./diy/pic/argon.png)
+![jpg](./diy/preview/argon.png)
 
-![jpg](./diy/pic/all.png)
+![jpg](./diy/preview/all.png)
 
 
 ***
@@ -52,32 +52,32 @@
 
 * neobird:
 
-![jpg](./diy/pic/neobird.png)
+![jpg](./diy/preview/neobird.png)
 
 * opentopd:
 
-![jpg](./diy/pic/opentopd.png)
+![jpg](./diy/preview/opentopd.png)
 
 * edge:
 
-![jpg](./diy/pic/edge.png)
+![jpg](./diy/preview/edge.png)
 
 * ifit:
 
-![jpg](./diy/pic/ifit.png)
+![jpg](./diy/preview/ifit.png)
 
 
 ***
 
 #### QuickStart便捷首页截图欣赏：
 
-![jpg](./diy/pic/1.png)
+![jpg](./diy/preview/1.png)
 
-![jpg](./diy/pic/2.png)
+![jpg](./diy/preview/2.png)
 
 #### iStore截图欣赏：
 
-![jpg](./diy/pic/3.png)
+![jpg](./diy/preview/3.png)
 
 
 ***
