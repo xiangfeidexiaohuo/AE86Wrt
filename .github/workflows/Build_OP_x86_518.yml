@@ -58,7 +58,9 @@ jobs:
         ./scripts/feeds install -a
 
         cp -f ../diy/lean/lean2.sh ./        
-        chmod +x ./lean2.sh && ./lean2.sh       
+        chmod +x ./lean2.sh && ./lean2.sh
+        
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.18/g" target/linux/x86/Makefile      
     
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Almighty-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
 
