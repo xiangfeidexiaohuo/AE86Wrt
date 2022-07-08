@@ -65,6 +65,9 @@ jobs:
         
         cp -f ../diy/lean/r2s.sh ./        
         chmod +x ./r2s.sh && ./r2s.sh
+        
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.15/g" target/linux/rockchip/Makefile
+        sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=5.15/g" target/linux/rockchip/Makefile
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R2S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
