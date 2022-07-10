@@ -2,6 +2,9 @@
 
 * 基于[Lean源码](https://github.com/coolsnowwolf/lede)编译的固件：
 
+<details>
+<summary>点击展开，查看固件！</summary>
+
 * [OpenWrt-X86_64-全能版5.15/5.18内核](https://www.right.com.cn/forum/thread-4054849-1-1.html) 
 
 * [OpenWrt-X86_64-精简版5.4/5.15/5.18内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
@@ -18,6 +21,7 @@
 
 * [R2S/R4S OpenWrt-5.15/5.18内核](https://www.right.com.cn/forum/thread-8239527-1-1.html)
 
+</details>
 
 ***
 
@@ -29,7 +33,7 @@
 
 * X86_64-R2203精简版带QuickStart便捷首页和iStore，有Docker，基于官方openwrt-r2203分支
 
-* AX6/AX3600/R2S仅带iStore
+* AX6/AX3600/R2S/R4s仅带iStore
 
 
 ***
