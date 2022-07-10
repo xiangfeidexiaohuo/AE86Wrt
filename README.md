@@ -36,9 +36,9 @@
 
 #### X86全能版截图预览：
 
-![jpg](./diy/preview/argon.png)
+![jpg](./diy/preview/argon.jpg)
 
-![jpg](./diy/preview/all.png)
+![jpg](./diy/preview/all.jpg)
 
 
 ***
