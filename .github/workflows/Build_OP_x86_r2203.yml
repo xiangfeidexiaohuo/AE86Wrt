@@ -145,5 +145,5 @@ jobs:
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf X86-R22.03-$(date +%Y%m%d).zip *
         cd ..              
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86-R22.03" --file "X86_Out/X86-R22.03-$(date +%Y%m%d).zip"                         
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86-Lite/r22.03" --file "X86_Out/X86-R22.03-$(date +%Y%m%d).zip"                         
         
