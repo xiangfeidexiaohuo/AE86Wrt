@@ -49,6 +49,8 @@
 
 * [点击下载，解压后手动安装，链接密码:lede](https://eto.lanzouw.com/b0exvb20h) 
 
+<details>
+<summary>点击展开预览！</summary>
 
 * neobird:
 
@@ -66,19 +68,29 @@
 
 ![jpg](./diy/preview/ifit.png)
 
+</details>
 
 ***
 
 #### QuickStart便捷首页截图欣赏：
 
+<details>
+<summary>点击展开预览！</summary>
+
 ![jpg](./diy/preview/1.png)
 
 ![jpg](./diy/preview/2.png)
 
+</details>
+
 #### iStore截图欣赏：
+
+<details>
+<summary>点击展开预览！</summary>
 
 ![jpg](./diy/preview/3.png)
 
+</details>
 
 ***
 
