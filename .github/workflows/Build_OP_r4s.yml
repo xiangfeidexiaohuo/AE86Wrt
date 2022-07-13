@@ -71,7 +71,7 @@ jobs:
               
     - name: Configuration Customization - Build_r4s
       env:
-        CONFIG_FILE: './configs/ARM/r4s.config'
+        CONFIG_FILE: './configs/ARM/rk/r4s.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig

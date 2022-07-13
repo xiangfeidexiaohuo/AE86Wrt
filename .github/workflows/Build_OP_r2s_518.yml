@@ -74,7 +74,7 @@ jobs:
               
     - name: Configuration Customization - Build_r2s_518
       env:
-        CONFIG_FILE: './configs/ARM/r2s_518.config'
+        CONFIG_FILE: './configs/ARM/rk/r2s_518.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
