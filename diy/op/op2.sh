@@ -24,6 +24,8 @@ svn export https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-file
 sed -i "s/\.\.\/\.\./\$\(TOPDIR\)\/feeds\/luci/g" ./package/add/luci-app-filetransfer/Makefile
 cp -af ./package/add/luci-app-filetransfer/po/zh-cn  ./package/add/luci-app-filetransfer/po/zh_Hans
 
+svn export https://github.com/coolsnowwolf/lede/trunk/package/lean/shortcut-fe ./package/add/shortcut-fe
+
 
 ##配置IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
