@@ -100,4 +100,4 @@
 
 * [个人自用插件库](https://github.com/xiangfeidexiaohuo/openwrt-packages)
 
-
+![](http://profile-counter.glitch.me/xiangfeidexiaohuo/OpenWrt_Build/count.svg)
