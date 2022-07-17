@@ -47,8 +47,8 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/lean/lean1.sh ./
-        chmod +x ./lean1.sh && ./lean1.sh
+        cp -f ../diy/lean/lean1_ipq807x.sh ./
+        chmod +x ./lean1_ipq807x.sh && ./lean1_ipq807x.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -57,16 +57,11 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/lean/lean2.sh ./        
-        chmod +x ./lean2.sh && ./lean2.sh
+        cp -f ../diy/lean/lean2_ipq807x.sh ./        
+        chmod +x ./lean2_ipq807x.sh && ./lean2_ipq807x.sh
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-AX3600-NSS-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-        
-        sed -i 's/10.10.10.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-        sed -i 's/$1$WplwC1t5$HBAtVXABp7XbvVjG4193B.:18753/:/g' package/base-files/files/etc/shadow
-        sed -i "s/encryption=.*/encryption=none/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
-        sed -i "/key=.*/d" package/kernel/mac80211/files/lib/wifi/mac80211.sh
-       
+      
               
     - name: Configuration Customization - Build_ax3600_515_nss
       env:
