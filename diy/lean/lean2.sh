@@ -21,9 +21,6 @@ sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generat
 
 sed -i '/root::0:0:99999/d' package/lean/default-settings/files/zzz-default-settings
 
-##临时修复fast-classifier
-sed -i "s/LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0) && LINUX_VERSION_CODE < KERNEL_VERSION(5, 18, 0)/LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)/g"  package/lean/shortcut-fe/fast-classifier/src/fast-classifier.c
-
 ##替换K3无线驱动为69027
 rm -rf ./package/lean/k3-brcmfmac4366c-firmware/files/lib/firmware/brcm/brcmfmac4366c-pcie.bin
 svn export https://github.com/xiangfeidexiaohuo/Phicomm-K3_Wireless-Firmware/trunk/brcmfmac4366c-pcie.bin_69027 ./package/lean/k3-brcmfmac4366c-firmware/files/lib/firmware/brcm/brcmfmac4366c-pcie.bin
