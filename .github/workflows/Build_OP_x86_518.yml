@@ -6,7 +6,7 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 0 17 * * 4
+    - cron: 1 17 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
@@ -63,8 +63,6 @@ jobs:
         sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.18/g" target/linux/x86/Makefile     
     
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Almighty-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-        
-        sed -i 's/mm_segment_t fs;//g' feeds/xiangfeidexiaohuo/op-oaf/oaf/src/app_filter.c
 
         
     - name: Configuration Customization - Build_x86_518
