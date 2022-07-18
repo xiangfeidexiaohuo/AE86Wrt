@@ -63,15 +63,15 @@ jobs:
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
         
-        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.18/g" target/linux/rockchip/Makefile
-        sed -i "s/KERNEL_TESTING_PATCHVER=*.*/KERNEL_TESTING_PATCHVER=5.18/g" target/linux/rockchip/Makefile       
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.18/g" target/linux/rockchip/Makefile
+        sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=5.18/g" target/linux/rockchip/Makefile      
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R4S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
     - name: Configuration Customization - Build_r4s_518
       env:
-        CONFIG_FILE: './configs/ARM/rk/r4s_518.config'
+        CONFIG_FILE: './configs/ARM/rockchip/r4s_518.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
