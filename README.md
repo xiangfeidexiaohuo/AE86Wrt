@@ -1,15 +1,13 @@
-#### LEDE-Lean
-
-* 基于[Lean源码](https://github.com/coolsnowwolf/lede)编译的固件：
+#### OpenWrt 自娱自乐
 
 <details>
-<summary>点击展开，查看固件！</summary>
+<summary>点击展开，查看固件详情！</summary>
+
+* 基于[Lean源码](https://github.com/coolsnowwolf/lede)编译的固件：
 
 * [OpenWrt-X86_64-全能版5.15/5.18内核](https://www.right.com.cn/forum/thread-4054849-1-1.html) 
 
 * [OpenWrt-X86_64-精简版5.4/5.15/5.18内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
-
-* [OpenWrt-R2203-X86_64-精简版](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
 
 * [斐讯K3-OpenWrt](https://www.right.com.cn/forum/thread-4052645-1-1.html)
 
@@ -21,20 +19,30 @@
 
 * [R2S/R4S OpenWrt-5.15/5.18内核](https://www.right.com.cn/forum/thread-8239527-1-1.html)
 
+***
+
+* 基于[官方OpenWrt-r22.03](https://github.com/openwrt/openwrt/tree/openwrt-22.03)编译的固件：
+
+* [OpenWrt-R2203-X86_64-精简版](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
+
+
 </details>
 
 ***
 
-* 不出意外，固件每周五上午更新！
+* 不出意外，固件每周五上午更新！[此处寻找自己的设备下载固件](https://github.com/xiangfeidexiaohuo/OpenWrt_Build/releases)
 
-* X86_64全能版各种插件都内置了，不带istore
+* 固件管理ip：192.168.2.1  用户名：root   密码：password (后期固件默认无密码)
 
-* X86_64精简版仅带iStore，无Dcoker，极速轻量
+* X86_64全能版自带超全插件，各种调试工具，各种FQ插件、Docker、下载工具等
 
-* X86_64-R2203精简版带QuickStart便捷首页和iStore，有Docker，基于官方openwrt-r2203分支
+* X86_64精简版带iStore插件商店，和一些常规插件，尽量轻量化，无Dcoker
 
-* AX6/AX3600/R2S/R4s仅带iStore
+* R2S/R4s带iStore插件商店，和一些常规插件，尽量轻量化，带Dcoker
 
+* AX6/AX3600带iStore插件商店，和少量常规插件，轻量化，固件控制在29M以内
+
+* X86_64-R2203精简版带iStore插件商店，和一些常规插件，尽量轻量化，带QuickStart便捷首页，带Docker
 
 ***
 
@@ -87,12 +95,16 @@
 
 </details>
 
-#### iStore截图欣赏：
+#### iStore插件商店截图欣赏：
 
 <details>
 <summary>点击展开预览！</summary>
 
 ![jpg](./diy/preview/3.png)
+
+![jpg](./diy/preview/4.png)
+
+![jpg](./diy/preview/5.png)
 
 </details>
 
