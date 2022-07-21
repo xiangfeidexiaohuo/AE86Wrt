@@ -32,8 +32,11 @@
 
 * 不出意外，固件每周五上午更新！[此处寻找自己的设备下载固件](https://github.com/xiangfeidexiaohuo/OpenWrt_Build/releases)
 
-* 固件管理ip：192.168.2.1  用户名：root   密码：password (后期固件默认无密码)
-
+```
+固件管理ip：192.168.2.1  
+用户名：root
+密码：password (后期固件默认无密码)
+```
 * X86_64全能版自带超全插件，各种调试工具，各种FQ插件、Docker、下载工具等
 
 * X86_64精简版带iStore插件商店，和一些常规插件，尽量轻量化，无Dcoker
