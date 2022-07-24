@@ -42,6 +42,14 @@ sed -i "s/hostname='.*'/hostname='AE86Wrt'/g" package/base-files/files/bin/confi
 ##切换为samba4
 sed -i 's/luci-app-samba/luci-app-samba4/g' package/lean/autosamba/Makefile
 
+
+##boos4721
+sed -i 's/10.10.10.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+sed -i 's/$1$WplwC1t5$HBAtVXABp7XbvVjG4193B.:18753/:/g' package/base-files/files/etc/shadow
+sed -i "s/encryption=.*/encryption=none/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i "/key=.*/d" package/kernel/mac80211/files/lib/wifi/mac80211.sh
+
+
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-ssr-plus/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua

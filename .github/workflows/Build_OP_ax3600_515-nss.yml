@@ -46,8 +46,8 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/lean/lean1_ipq807x.sh ./
-        chmod +x ./lean1_ipq807x.sh && ./lean1_ipq807x.sh
+        cp -f ../diy/lean/lean1.sh ./
+        chmod +x ./lean1.sh && ./lean1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -56,8 +56,8 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/lean/lean2_ipq807x.sh ./        
-        chmod +x ./lean2_ipq807x.sh && ./lean2_ipq807x.sh
+        cp -f ../diy/lean/lean2.sh ./        
+        chmod +x ./lean2.sh && ./lean2.sh
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-AX3600-NSS-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
