@@ -85,12 +85,6 @@ sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.c
 
 
 ## rockchip
-wget -P target/linux/rockchip/armv8/base-files/etc/init.d/ https://github.com/friendlyarm/friendlywrt/raw/master-v22.03/target/linux/rockchip/armv8/base-files/etc/init.d/fa-fancontrol
-wget -P target/linux/rockchip/armv8/base-files/etc/rc.d/ https://github.com/friendlyarm/friendlywrt/raw/master-v22.03/target/linux/rockchip/armv8/base-files/etc/rc.d/S21fa-fancontrol
+cp -af feeds/xiangfeidexiaohuo/patch/rockchip/*  target/linux/rockchip/armv8/base-files/
 
-wget -P target/linux/rockchip/armv8/base-files/usr/bin/ https://github.com/friendlyarm/friendlywrt/raw/master-v22.03/target/linux/rockchip/armv8/base-files/usr/bin/cputemp.sh
-wget -P target/linux/rockchip/armv8/base-files/usr/bin/ https://github.com/friendlyarm/friendlywrt/raw/master-v22.03/target/linux/rockchip/armv8/base-files/usr/bin/fa-fancontrol-direct.sh
-wget -P target/linux/rockchip/armv8/base-files/usr/bin/ https://github.com/friendlyarm/friendlywrt/raw/master-v22.03/target/linux/rockchip/armv8/base-files/usr/bin/fa-fancontrol.sh
-
-cp -af feeds/xiangfeidexiaohuo/patch/opkg  target/linux/rockchip/armv8/base-files/etc/
 
