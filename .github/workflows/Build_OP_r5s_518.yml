@@ -48,9 +48,6 @@ jobs:
         cd openwrt
         cp -f ../diy/lean/lean1.sh ./
         chmod +x ./lean1.sh && ./lean1.sh
-        
-        cp -rf ../diy/rockchip ./
-        git am ./rockchip/*.patch
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -61,9 +58,13 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
+             
+        cp -f ../diy/lean/r5s.sh ./        
+        chmod +x ./r5s.sh && ./r5s.sh
         
+        ## 强制默认r2s/r4s/r5s编译内核为5.18  
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.18/g" target/linux/rockchip/Makefile
-        sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=5.18/g" target/linux/rockchip/Makefile      
+        sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=5.18/g" target/linux/rockchip/Makefile           
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R5S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
