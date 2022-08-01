@@ -84,8 +84,8 @@ jobs:
     - name: Assemble Artifact
       id: assemble_artifact
       run: |
-        rm -rf ./AX3600_Out
-        mkdir -p ./AX3600_Out/
+        rm -rf ./ARM_Out
+        mkdir -p ./ARM_Out/
         
         getmd5()
         {
@@ -96,17 +96,17 @@ jobs:
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./AX3600_Out/AE86Wrt-AX3600_NSS-5.15-sysupgrade-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-AX3600_NSS-5.15-sysupgrade-$(date +%Y%m%d)_${md5}.bin
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-factory.ubi
         getmd5 $rom         
-        cp -a $rom ./AX3600_Out/AE86Wrt-AX3600_NSS-5.15-factory-$(date +%Y%m%d)_${md5}.ubi
+        cp -a $rom ./ARM_Out/AE86Wrt-AX3600_NSS-5.15-factory-$(date +%Y%m%d)_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
         name: AX3600-OpenWrt
-        path: AX3600_Out/AE86* 
+        path: ARM_Out/AE86* 
 
     - name: Upload config
       uses: actions/upload-artifact@main
@@ -132,17 +132,17 @@ jobs:
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
       with:
-        artifacts: AX3600_Out/AE86*
+        artifacts: ARM_Out/AE86*
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Upload Aliyun
       run: |  
-        cd AX3600_Out
+        cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf AX3600-NSS-5.15-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600/5.15" --file "AX3600_Out/AX3600-NSS-5.15-$(date +%Y%m%d).zip"  
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600/5.15" --file "ARM_Out/AX3600-NSS-5.15-$(date +%Y%m%d).zip"  
        
                                

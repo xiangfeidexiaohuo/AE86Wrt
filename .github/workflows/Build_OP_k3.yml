@@ -85,8 +85,8 @@ jobs:
     - name: Assemble Artifact
       id: assemble_artifact
       run: |
-        rm -rf ./K3_Out
-        mkdir -p ./K3_Out/
+        rm -rf ./ARM_Out
+        mkdir -p ./ARM_Out/
         
         getmd5()
         {
@@ -98,13 +98,13 @@ jobs:
         rom=openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm_k3-squashfs.trx
         getmd5 $rom
                 
-        cp -a $rom ./K3_Out/AE86Wrt-K3-5.4-$(date +%Y%m%d)_${md5}.trx
+        cp -a $rom ./ARM_Out/AE86Wrt-K3-5.4-$(date +%Y%m%d)_${md5}.trx
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
         name: K3-OpenWrt_504
-        path: K3_Out/*.trx   
+        path: ARM_Out/*.trx   
 
     - name: Upload config
       uses: actions/upload-artifact@main
@@ -130,15 +130,15 @@ jobs:
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
       with:
-        artifacts: K3_Out/*.trx
+        artifacts: ARM_Out/*.trx
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Upload Aliyun
       run: | 
-        cd K3_Out
+        cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf K3-$(date +%Y%m%d).zip *
         cd ..       
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/K3" --file "K3_Out/K3-$(date +%Y%m%d).zip"                        
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/K3" --file "ARM_Out/K3-$(date +%Y%m%d).zip"                        
