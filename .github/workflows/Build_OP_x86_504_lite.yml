@@ -6,7 +6,7 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 1 18 * * 4
+    - cron: 4 18 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
@@ -34,7 +34,7 @@ jobs:
         [ -n "$AGENT_TOOLSDIRECTORY" ] && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
         sudo -E apt-get update -y
         sudo -E apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3.8 python3-pip libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
-        pip install aligo==v5.0.1
+        pip install aligo
         sudo -E apt-get clean
         git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
         df -h
