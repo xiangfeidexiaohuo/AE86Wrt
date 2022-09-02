@@ -101,7 +101,7 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyelec_nanopi-r5s-squashfs-sysupgrade.img.gz
+        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
         getmd5 $rom
                 
         cp -a $rom ./ARM_Out/AE86Wrt-R5S-5.15-$(date +%Y%m%d)_${md5}.img.gz
