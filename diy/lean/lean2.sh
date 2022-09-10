@@ -41,7 +41,7 @@ cp -af feeds/xiangfeidexiaohuo/patch/banner  package/base-files/files/etc/
 sed -i "s/hostname='.*'/hostname='AE86Wrt'/g" package/base-files/files/bin/config_generate
 
 ##切换为samba4
-sed -i 's/luci-app-samba/luci-app-samba4/g' package/lean/autosamba/Makefile
+#sed -i 's/luci-app-samba/luci-app-samba4/g' package/lean/autosamba/Makefile
 
 
 ##boos4721
