@@ -41,8 +41,8 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/xiangfeidexiaohuo/lede
-        REPO_BRANCH: K3
+        REPO_URL: https://github.com/coolsnowwolf/lede
+        REPO_BRANCH: master
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
@@ -59,7 +59,6 @@ jobs:
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh       
         sed -i 's/+!TARGET_ramips:kmod-usb-storage-uas //g'  ./package/lean/automount/Makefile
-        sed -i 's/luci-app-samba/luci-app-samba4/g' package/lean/autosamba/Makefile
         echo 'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv5.tar.gz' > feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K3-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings  
        
