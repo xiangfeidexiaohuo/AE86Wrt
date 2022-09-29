@@ -88,4 +88,6 @@ sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.c
 ## rockchip
 cp -af feeds/xiangfeidexiaohuo/patch/rockchip/*  target/linux/rockchip/armv8/base-files/
 
+## AX6000
+cp -af feeds/xiangfeidexiaohuo/patch/rockchip/etc/opkg  target/linux/mediatek/filogic/base-files/etc/
 
