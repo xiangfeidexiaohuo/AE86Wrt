@@ -1,4 +1,4 @@
-name: Build_ax3600_515_nss
+name: Build_ax6_515
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 33 22 * * 4
+    - cron: 30 22 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_ax3600_515_nss:
+  Build_ax6_515:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -41,8 +41,8 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/xiangfeidexiaohuo/openwrt-ipq807x
-        REPO_BRANCH: 515-dev
+        REPO_URL: https://github.com/xiangfeidexiaohuo/lede
+        REPO_BRANCH: ipq807x-515
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
@@ -59,12 +59,12 @@ jobs:
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-AX3600-NSS-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-      
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Redmi-AX6-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+
               
-    - name: Configuration Customization - Build_ax3600_515_nss
+    - name: Configuration Customization - Build_ax6_515
       env:
-        CONFIG_FILE: './configs/ARM/ipq807x/ax3600-515-nss.config'
+        CONFIG_FILE: './configs/ARM/ipq807x/ax6_515.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -78,7 +78,7 @@ jobs:
 
     - name: Build firmware
       working-directory: ./openwrt
-      run: |      
+      run: |     
         make -j$(nproc) V=s
         
     - name: Assemble Artifact
@@ -94,38 +94,38 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin
+        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-AX3600_NSS-5.15-sysupgrade-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-Redmi-AX6-5.15-sysupgrade-$(date +%Y%m%d)_${md5}.bin
         
-        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-factory.ubi
-        getmd5 $rom         
-        cp -a $rom ./ARM_Out/AE86Wrt-AX3600_NSS-5.15-factory-$(date +%Y%m%d)_${md5}.ubi
+        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-redmi_ax6-squashfs-nand-factory.ubi
+        getmd5 $rom           
+        cp -a $rom ./ARM_Out/AE86Wrt-Redmi-AX6-5.15-factory-$(date +%Y%m%d)_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: AX3600-OpenWrt
+        name: AX6-OpenWrt
         path: ARM_Out/AE86* 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: ax3600-config
+        name: ax6-config
         path: openwrt/.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX3600-515-Packages
+        name: AX6-515-Packages
         path: openwrt/bin/packages
-        
+                
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="小米AX3600-NSS-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        release_name="红米AX6-NSS-OpenWrt-5.15内核-$(date +%Y%m%d)"
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
@@ -138,11 +138,11 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Upload Aliyun
-      run: |  
+      run: | 
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf AX3600-NSS-5.15-$(date +%Y%m%d).zip *
-        cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600/5.15" --file "ARM_Out/AX3600-NSS-5.15-$(date +%Y%m%d).zip"  
+        jar cf Redmi-AX6-5.15-$(date +%Y%m%d).zip *
+        cd ..      
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX6/5.15_new" --file "ARM_Out/Redmi-AX6-5.15-$(date +%Y%m%d).zip"   
        
-                               
+                              
