@@ -42,7 +42,7 @@ jobs:
     - name: Clone source code
       env: 
         REPO_URL: https://github.com/xiangfeidexiaohuo/lede
-        REPO_BRANCH: ipq807x-515
+        REPO_BRANCH: master
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
@@ -125,7 +125,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="红米AX6-NSS-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        release_name="红米AX6-OpenWrt-5.15内核-$(date +%Y%m%d)"
         echo "##[set-output name=release_name;]$release_name"
         echo "##[set-output name=release_tag;]$release_tag"        
 
