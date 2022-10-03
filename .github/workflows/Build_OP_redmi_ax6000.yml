@@ -64,7 +64,7 @@ jobs:
               
     - name: Configuration Customization - Build_redmi_ax6000
       env:
-        CONFIG_FILE: './configs/ARM/mtk/redmi_ax6000.config'
+        CONFIG_FILE: './configs/ARM/mi/redmi_ax6000.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
