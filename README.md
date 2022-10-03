@@ -5,11 +5,11 @@
 
 * 基于[Lean源码](https://github.com/coolsnowwolf/lede)编译的固件：
 
-* [OpenWrt-X86_64-全能版5.15/5.18/5.19内核](https://www.right.com.cn/forum/thread-4054849-1-1.html) 
+* [OpenWrt-X86_64-全能版5.15/5.19内核](https://www.right.com.cn/forum/thread-4054849-1-1.html) 
 
-* [OpenWrt-X86_64-精简版五种内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
+* [OpenWrt-X86_64-精简版多种内核5.4/5.15/5.19内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
 
-* [斐讯K3-OpenWrt](https://www.right.com.cn/forum/thread-4052645-1-1.html)
+* [斐讯K3-OpenWrt-5.4](https://www.right.com.cn/forum/thread-4052645-1-1.html)
 
 * [红米AX6 OpenWrt-5.10内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=6770103&page=1&extra=#pid14665099) [停更]
 
@@ -17,13 +17,13 @@
 
 * [小米AX6/AX3600 OpenWrt-5.15内核](https://www.right.com.cn/forum/thread-8218915-1-1.html)
 
-* [R2S/R4S OpenWrt-5.19内核](https://www.right.com.cn/forum/thread-8239527-1-1.html)
+* [R2S/R4S/R4SE/R5S/R68S OpenWrt-5.15内核](https://www.right.com.cn/forum/thread-8239527-1-1.html)
 
 ***
 
 * 基于[官方OpenWrt-r22.03](https://github.com/openwrt/openwrt/tree/openwrt-22.03)编译的固件：
 
-* [OpenWrt-R2203-X86_64-精简版](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
+* [OpenWrt-R2203-X86_64-精简版5.10内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
 
 
 </details>
@@ -41,11 +41,11 @@
 
 * X86_64精简版带iStore插件商店，和一些常规插件，尽量轻量化，无Dcoker
 
-* R2S/R4s带iStore插件商店，和一些常规插件，尽量轻量化，带Dcoker
+* R2S/R4S/R4SE/R5S/R68S带iStore插件商店，和一些常规插件，尽量轻量化，带Dcoker
 
 * AX6/AX3600带iStore插件商店，和少量常规插件，轻量化，固件控制在29M以内
 
-* X86_64-R2203精简版带iStore插件商店，和一些常规插件，尽量轻量化，带QuickStart便捷首页，带Docker
+* X86_64-R2203精简版带iStore插件商店+QuickStart便捷首页+Docker，和一些常规插件，尽量轻量化
 
 ***
 
