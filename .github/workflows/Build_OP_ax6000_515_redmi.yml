@@ -1,4 +1,4 @@
-name: Build_redmi_ax6000
+name: Build_ax6000_515_redmi
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_redmi_ax6000:
+  Build_ax6000_515_redmi:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -62,9 +62,9 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Redmi-AX6000-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
               
-    - name: Configuration Customization - Build_redmi_ax6000
+    - name: Configuration Customization - Build_ax6000_515_redmi
       env:
-        CONFIG_FILE: './configs/ARM/mi/redmi_ax6000.config'
+        CONFIG_FILE: './configs/ARM/mi/ax6000_515_redmi.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -96,7 +96,7 @@ jobs:
         
         rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-Redmi-AX600-5.15-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-Redmi-AX6000-5.15-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
