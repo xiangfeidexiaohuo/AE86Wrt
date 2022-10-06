@@ -99,7 +99,7 @@ jobs:
         rom=openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img.gz
         getmd5 $rom
         
-        cp -a $rom ./X86_Out/AE86Wrt-X86_64-5.15-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./X86_Out/AE86Wrt-X86_64-Full-5.15-$(date +%Y%m%d)_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -140,8 +140,8 @@ jobs:
       run: | 
         cd X86_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf X86-5.15-$(date +%Y%m%d).zip *
+        jar cf X86-Full-5.15-$(date +%Y%m%d).zip *
         cd ..       
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86/5.15" --file "X86_Out/X86-5.15-$(date +%Y%m%d).zip"  
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/X86/5.15" --file "X86_Out/X86-Full-5.15-$(date +%Y%m%d).zip"  
                                     
         
