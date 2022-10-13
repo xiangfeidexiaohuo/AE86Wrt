@@ -91,3 +91,7 @@ cp -af feeds/xiangfeidexiaohuo/patch/rockchip/*  target/linux/rockchip/armv8/bas
 ## AX6000
 cp -af feeds/xiangfeidexiaohuo/patch/rockchip/etc/opkg  target/linux/mediatek/filogic/base-files/etc/
 
+## Alist
+rm -rf feeds/packages/lang/golang
+svn export https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/packages/lang/golang
+
