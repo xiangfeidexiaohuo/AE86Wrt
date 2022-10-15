@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set git
       run : |
@@ -22,8 +22,8 @@ jobs:
         sudo timedatectl set-timezone "Asia/Shanghai"
 
     - name: Delete workflow runs
-      uses: GitRML/delete-workflow-runs@main
+      uses: xiangfeidexiaohuo/delete-workflow-runs@main
       continue-on-error: true
       with:
-        retain_days: 7
+        retain_days: 3
         keep_minimum_runs: 0
