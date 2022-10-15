@@ -5,9 +5,9 @@
 
 * 基于[Lean源码](https://github.com/coolsnowwolf/lede)编译的固件：
 
-* [OpenWrt-X86_64-全能版5.15/5.19内核](https://www.right.com.cn/forum/thread-4054849-1-1.html) 
+* [OpenWrt-X86_64-全能版5.15/5.19/6.0内核](https://www.right.com.cn/forum/thread-4054849-1-1.html) 
 
-* [OpenWrt-X86_64-精简版多种内核5.4/5.15/5.19内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
+* [OpenWrt-X86_64-精简版多种内核5.4/5.15/5.19/6.0内核](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=7182055&page=1&extra=)
 
 * [斐讯K3-OpenWrt-5.4](https://www.right.com.cn/forum/thread-4052645-1-1.html)
 
