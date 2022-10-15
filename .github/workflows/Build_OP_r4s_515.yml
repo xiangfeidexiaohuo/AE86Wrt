@@ -127,8 +127,8 @@ jobs:
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
         release_name="R4S-OpenWrt-5.15内核-$(date +%Y%m%d)"
-        echo "##[set-output name=release_name;]$release_name"
-        echo "##[set-output name=release_tag;]$release_tag"        
+        echo "release_name=$release_name" >> $GITHUB_OUTPUT
+        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
