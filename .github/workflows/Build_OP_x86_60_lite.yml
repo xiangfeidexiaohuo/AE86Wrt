@@ -113,7 +113,7 @@ jobs:
         path: openwrt/.config
         
     - name: Generate Tag & Release Name
-      id: generate_namea
+      id: generate_name
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
