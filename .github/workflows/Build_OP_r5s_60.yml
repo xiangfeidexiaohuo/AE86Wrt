@@ -1,4 +1,4 @@
-name: Build_r4s_515
+name: Build_r5s_60
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 4 23 * * 4
+    - cron: 25 23 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_r4s_515:
+  Build_r5s_60:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -58,17 +58,20 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
+             
+        cp -f ../diy/lean/r5s.sh ./        
+        chmod +x ./r5s.sh && ./r5s.sh
+        
+        ## 强制默认r2s/r4s/r5s编译内核为6.0  
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.0/g" target/linux/rockchip/Makefile
+        sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=6.0/g" target/linux/rockchip/Makefile           
 
-        ## 强制默认r2s/r4s/r5s编译内核为5.15  
-        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.15/g" target/linux/rockchip/Makefile
-        sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=5.15/g" target/linux/rockchip/Makefile          
-
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R4S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R5S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
-    - name: Configuration Customization - Build_r4s_515
+    - name: Configuration Customization - Build_r5s_60
       env:
-        CONFIG_FILE: './configs/ARM/rockchip/r4s_515.config'
+        CONFIG_FILE: './configs/ARM/rockchip/r5s_60.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -98,37 +101,38 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
+        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
         getmd5 $rom
                 
-        cp -a $rom ./ARM_Out/AE86Wrt-R4S-5.15-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-R5S-6.0-$(date +%Y%m%d)_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: R4S-OpenWrt_515
+        name: R5S-OpenWrt_60
         path: ARM_Out/*.img.gz 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: r4s-515-config
+        name: r5s-60-config
         path: openwrt/.config  
  
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: R4S-Packages
+        name: R5S-Packages
         path: openwrt/bin/packages 
-        
+
+
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="R4S-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        release_name="R5S-OpenWrt-6.0内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
-        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
+        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT        
 
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
@@ -137,11 +141,12 @@ jobs:
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
+
         
     - name: Upload Aliyun
       run: | 
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf R4S-5.15-$(date +%Y%m%d).zip *
+        jar cf R5S-6.0-$(date +%Y%m%d).zip *
         cd ..       
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/R4S/5.15" --file "ARM_Out/R4S-5.15-$(date +%Y%m%d).zip"                        
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/R5S/6.0" --file "ARM_Out/R5S-6.0-$(date +%Y%m%d).zip"                        
