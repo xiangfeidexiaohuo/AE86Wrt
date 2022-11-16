@@ -68,13 +68,7 @@ jobs:
         CONFIG_FILE: './configs/X86/Lite/x86_60_lite_docker.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-
-        cd openwrt        
-
-        sed -i 's/# CONFIG_PACKAGE_luci-app-dockerman is not set/CONFIG_PACKAGE_luci-app-dockerman=y/g' .config
-        sed -i 's/# CONFIG_PACKAGE_docker-compose is not set/CONFIG_PACKAGE_docker-compose=y/g' .config
-        
-        make defconfig
+        cd openwrt && make defconfig
         
         
     - name: Download package
