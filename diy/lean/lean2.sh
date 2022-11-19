@@ -95,3 +95,6 @@ cp -af feeds/xiangfeidexiaohuo/patch/rockchip/etc/opkg  target/linux/mediatek/fi
 rm -rf feeds/packages/lang/golang
 svn export https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/packages/lang/golang
 
+##
+echo -e "CONFIG_BLK_DEV_NVME=y" >> target/linux/x86/config-6.0
+
