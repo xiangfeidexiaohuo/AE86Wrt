@@ -98,3 +98,6 @@ svn export https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/pac
 ##
 echo -e "CONFIG_BLK_DEV_NVME=y" >> target/linux/x86/config-6.0
 
+sed -i '/High Performing Mode/d' package/feeds/xiangfeidexiaohuo/luci-app-turboacc/luasrc/model/cbi/turboacc.lua
+sed -i '/High Performing Mode/d' package/feeds/luci/luci-app-firewall/luasrc/model/cbi/firewall/zones.lua
+
