@@ -39,8 +39,8 @@ sed -i "s/hostname='.*'/hostname='AE86Wrt'/g" package/base-files/files/bin/confi
 
 ##加入作者信息
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
-sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' YaoDao'/g" package/base-files/files/etc/openwrt_release
-
+sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' By YaoDao'/g" package/base-files/files/etc/openwrt_release
+cp -af feeds/xiangfeidexiaohuo/patch/banner  package/base-files/files/etc/
 
 ##
 sed -i "53iLUCI_LANG.zh-cn=\$(LUCI_LANG.zh_Hans)" feeds/luci/luci.mk
