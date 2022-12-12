@@ -112,6 +112,12 @@ jobs:
       with:
         name: x86-6.0-lite-config
         path: openwrt/.config
+
+    - name: Upload Packages
+      uses: actions/upload-artifact@main
+      with:
+        name: X86-60-Packages
+        path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
       id: generate_name
