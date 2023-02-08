@@ -125,7 +125,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="红米AX6-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        release_name="红米AX6-OpenWrt-5.15内核-大于29M-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT     
 
@@ -143,6 +143,6 @@ jobs:
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf Redmi-AX6-5.15-$(date +%Y%m%d).zip *
         cd ..      
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX6/5.15" --file "ARM_Out/Redmi-AX6-5.15-$(date +%Y%m%d).zip"   
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX6/5.15-new" --file "ARM_Out/Redmi-AX6-5.15-$(date +%Y%m%d).zip"   
        
                               
