@@ -96,11 +96,11 @@ jobs:
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-5.15-sysupgrade-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-5.15-sysupgrade(>29M)-$(date +%Y%m%d)_${md5}.bin
         
         rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-factory.ubi
         getmd5 $rom         
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-5.15-factory-$(date +%Y%m%d)_${md5}.ubi
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-5.15-factory(>29M)-$(date +%Y%m%d)_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -125,7 +125,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M)
         release_tag="$time"
-        release_name="小米AX3600-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        release_name="小米AX3600-OpenWrt-5.15内核-大于29M-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 
@@ -143,6 +143,6 @@ jobs:
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf Xiaomi-AX3600-5.15-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600/5.15" --file "ARM_Out/Xiaomi-AX3600-5.15-$(date +%Y%m%d).zip"  
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/AX3600/5.15-new" --file "ARM_Out/Xiaomi-AX3600-5.15-$(date +%Y%m%d).zip"  
        
                                
