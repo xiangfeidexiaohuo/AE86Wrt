@@ -91,5 +91,5 @@ cp -af feeds/xiangfeidexiaohuo/patch/rockchip/etc/opkg  target/linux/mediatek/fi
 
 ## Alist
 rm -rf feeds/packages/lang/golang
-svn export https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/packages/lang/golang
+svn export https://github.com/immortalwrt/packages/trunk/lang/golang feeds/packages/lang/golang
 
