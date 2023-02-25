@@ -140,6 +140,6 @@ jobs:
       run: | 
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf K3-$(date +%Y%m%d).zip *
+        jar cf K3-5.4-$(date +%Y%m%d).zip *
         cd ..       
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/K3/5.4" --file "ARM_Out/K3-$(date +%Y%m%d).zip"                        
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/K3/5.4" --file "ARM_Out/K3-5.4-$(date +%Y%m%d).zip"                        
