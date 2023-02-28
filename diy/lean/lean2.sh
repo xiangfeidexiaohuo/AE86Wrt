@@ -5,6 +5,19 @@
 #=================================================
 
 
+# Docker v20.10.23
+rm -rf feeds/packages/utils/docker
+rm -rf feeds/packages/utils/dockerd
+rm -rf feeds/packages/utils/containerd
+rm -rf feeds/packages/utils/runc
+rm -rf feeds/packages/utils/libnetwork
+svn export https://github.com/xiangfeidexiaohuo/op-docker/trunk/docker feeds/packages/utils/docker
+svn export https://github.com/xiangfeidexiaohuo/op-docker/trunk/dockerd feeds/packages/utils/dockerd
+svn export https://github.com/xiangfeidexiaohuo/op-docker/trunk/containerd feeds/packages/utils/containerd
+svn export https://github.com/xiangfeidexiaohuo/op-docker/trunk/runc feeds/packages/utils/runc
+svn export https://github.com/xiangfeidexiaohuo/op-docker/trunk/libnetwork feeds/packages/utils/libnetwork
+
+
 ##补充汉化       
 cp -f ./feeds/xiangfeidexiaohuo/patch/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
 ##
