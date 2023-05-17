@@ -27,6 +27,18 @@ svn export https://github.com/xiangfeidexiaohuo/Phicomm-K3_Wireless-Firmware/tru
 
 
 ##取消bootstrap为默认主题
+rm -rf ./feeds/xiangfeidexiaohuo/jerrykuku/luci-theme-argon
+rm -rf ./feeds/luci/themes/luci-theme-argon
+rm -rf ./feeds/luci/themes/luci-theme-design
+rm -rf ./feeds/luci/themes/luci-theme-argon-mod
+
+rm -rf ./package/feeds/xiangfeidexiaohuo/luci-theme-argon
+rm -rf ./package/feeds/luci/luci-theme-argon
+rm -rf ./package/feeds/luci/luci-theme-design
+rm -rf ./package/feeds/luci/luci-theme-argon-mod
+
+sed -i 's/+luci-theme-argon/+luci-theme-argon-18.06/g' ./feeds/xiangfeidexiaohuo/jerrykuku/luci-app-argon-config/Makefile
+
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 sed -i 's/luci-theme-bootstrap/luci-theme-argon-18.06/g' feeds/luci/collections/luci/Makefile
 sed -i 's/luci-theme-bootstrap/luci-theme-argon-18.06/g' feeds/luci/collections/luci-nginx/Makefile
