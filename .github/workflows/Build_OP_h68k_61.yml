@@ -149,4 +149,4 @@ jobs:
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf H68K-6.1-$(date +%Y%m%d).zip *
         cd ..       
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/H68K/6.1" --file "ARM_Out/H68K-6.1-$(date +%Y%m%d).zip"                        
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Rockchip/H68K/6.1" --file "ARM_Out/H68K-6.1-$(date +%Y%m%d).zip"                        
