@@ -1,5 +1,52 @@
 #### OpenWrt 自娱自乐
 
+
+#### 提供国内网盘下载地址，当然在本项目releases页面也能下载。
+
+#### AE86Wrt路由固件阿里网盘分享链接：
+
+<details>
+<summary>点击展开，查看网盘地址！</summary>
+
+* XiaoMi系列固件
+`https://www.aliyundrive.com/s/v89b36sCo8x`
+提取码: xiaomi
+
+包括小米AX6/AX3600/AX9000、红米AX6000
+
+
+* X86_64系列固件
+`https://www.aliyundrive.com/s/3v92BZKz1Es`
+提取码: x86
+
+包括X86全能版和X86-Lite精简版
+
+
+* Rockchip系列固件
+`https://www.aliyundrive.com/s/AGSmrUpjD4T`
+提取码: rock
+
+包括友善R2S/R2C、R4S/R4SE、R5S、电犀牛R66S/R68S、HinLink的H68K
+
+
+* 斐讯K3固件
+https://www.aliyundrive.com/s/BHieh2CwShL
+提取码: k3
+
+包括斐讯K3
+
+
+* 注：
+* 请大家根据自己的机型选择对应的固件，不要刷错机型，会死歇菜的。
+
+* 文件夹内的数字如：5.4/5.15/6.1等，代表固件的内核版本。
+
+</details>
+
+
+***
+
+
 <details>
 <summary>点击展开，查看固件详情！</summary>
 
