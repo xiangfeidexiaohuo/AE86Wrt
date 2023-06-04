@@ -103,7 +103,3 @@ cp -af feeds/xiangfeidexiaohuo/patch/rockchip/*  target/linux/rockchip/armv8/bas
 ## AX6000
 cp -af feeds/xiangfeidexiaohuo/patch/rockchip/etc/opkg  target/linux/mediatek/filogic/base-files/etc/
 
-##MT7921
-rm -rf package/kernel/mt76
-cp -af feeds/xiangfeidexiaohuo/patch/mt76 package/kernel/
-
