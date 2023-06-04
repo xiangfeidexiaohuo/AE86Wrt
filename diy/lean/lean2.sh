@@ -108,3 +108,5 @@ cp -af feeds/xiangfeidexiaohuo/patch/rockchip/etc/opkg  target/linux/mediatek/fi
 # svn export https://github.com/immortalwrt/packages/trunk/lang/golang feeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
 
+##MT7921
+sed -i "s/openwrt\/mt76/littoy\/mt76/g" package/kernel/mt76/Makefile
