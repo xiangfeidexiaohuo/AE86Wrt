@@ -103,8 +103,7 @@ cp -af feeds/xiangfeidexiaohuo/patch/rockchip/*  target/linux/rockchip/armv8/bas
 ## AX6000
 cp -af feeds/xiangfeidexiaohuo/patch/rockchip/etc/opkg  target/linux/mediatek/filogic/base-files/etc/
 
-## Alist
-# rm -rf feeds/packages/lang/golang
-# svn export https://github.com/immortalwrt/packages/trunk/lang/golang feeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
+##MT7921
+rm -rf package/kernel/mt76
+cp -af feeds/xiangfeidexiaohuo/patch/mt76 package/kernel/
 
