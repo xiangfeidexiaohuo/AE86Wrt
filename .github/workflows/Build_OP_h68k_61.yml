@@ -58,9 +58,6 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
-             
-        cp -f ../diy/lean/r5s.sh ./        
-        chmod +x ./r5s.sh && ./r5s.sh
         
         ## 强制默认rockchip编译内核为6.1  
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.1/g" target/linux/rockchip/Makefile
