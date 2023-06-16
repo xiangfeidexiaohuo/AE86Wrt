@@ -11,32 +11,32 @@
 ***
 
 * XiaoMi系列固件
-`https://www.aliyundrive.com/s/v89b36sCo8x`
-提取码: xiaomi
+`https://www.aliyundrive.com/s/FGwQ1fJfTyN`
+提取码: x86
 
 包括小米AX6/AX3600/AX9000、红米AX6000
 
 ***
 
 * X86_64系列固件
-`https://www.aliyundrive.com/s/3v92BZKz1Es`
-提取码: x86
+`https://www.aliyundrive.com/s/qTEiXnFkz5c`
+提取码: 61uk
 
 包括X86全能版和X86-Lite精简版
 
 ***
 
 * Rockchip系列固件
-`https://www.aliyundrive.com/s/AGSmrUpjD4T`
-提取码: rock
+`https://www.aliyundrive.com/s/8AP654obufE`
+提取码: d2s4
 
 包括友善R2S/R2C、R4S/R4SE、R5S、电犀牛R66S/R68S、HinLink的H68K
 
 ***
 
 * 斐讯K3固件
-`https://www.aliyundrive.com/s/BHieh2CwShL`
-提取码: k3
+`https://www.aliyundrive.com/s/rGAX5PdBqf1`
+提取码: 8al1
 
 包括斐讯K3
 
