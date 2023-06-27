@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
 # 定时触发编译
-  schedule:
-    - cron: 9 20 * * 4
+#  schedule:
+#    - cron: 9 20 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
@@ -59,9 +59,8 @@ jobs:
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
              
-        ##快速出来WiFi
-        sed -i "s/exit\ 0/wifi\ config\ \&\&\ wifi\nexit\ 0/g"  target/linux/rockchip/armv8/base-files/etc/board.d/02_network
-        sed -i "s/exit\ 0/wifi\ config\ \&\&\ wifi\nexit\ 0/g"  target/linux/x86/base-files/etc/board.d/02_network
+        cp -f ../diy/lean/mt76.sh ./        
+        chmod +x ./mt76.sh && ./mt76.sh
         
         ## 强制默认rockchip编译内核为5.15
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.15/g" target/linux/rockchip/Makefile
