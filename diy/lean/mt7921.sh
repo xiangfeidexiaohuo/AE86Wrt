@@ -16,5 +16,5 @@ sed -i "s/exit\ 0/wifi\ config\ \&\&\ wifi\nexit\ 0/g"  target/linux/x86/base-fi
 
 
 ##net:mt76:fix mt76 build failure
-cp -af feeds/xiangfeidexiaohuo/patch/mt7921/* target/linux/generic/pending-6.1/
+# cp -af feeds/xiangfeidexiaohuo/patch/mt7921/* target/linux/generic/pending-6.1/
 
