@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_k3:
+  Build_k2p:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -58,6 +58,8 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
+        
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K2P-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
     - name: Configuration Customization - Build_k2p
@@ -92,16 +94,16 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/ramips/*/openwrt-ramips-mt7621-phicomm_k2p-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-phicomm_k2p-squashfs-sysupgrade.bin
         getmd5 $rom
                 
-        cp -a $rom ./ARM_Out/AE86Wrt-K2P-A-$(date +%Y%m%d)_${md5}.trx
+        cp -a $rom ./ARM_Out/AE86Wrt-K2P-A-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
         name: K2P-OpenWrt_504
-        path: ARM_Out/*.trx   
+        path: ARM_Out/*.bin 
 
     - name: Upload config
       uses: actions/upload-artifact@main
@@ -127,7 +129,7 @@ jobs:
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
       with:
-        artifacts: ARM_Out/*.trx
+        artifacts: ARM_Out/*.bin
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
