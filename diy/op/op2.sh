@@ -19,6 +19,13 @@ git clone https://github.com/pymumu/luci-app-smartdns ./feeds/xiangfeidexiaohuo/
 ##配置IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
+##
+rm -rf ./feeds/xiangfeidexiaohuo/theme/luci-theme-argon-18.06
+rm -rf ./feeds/xiangfeidexiaohuo/theme/luci-app-argon-config-18.06
+
+rm -rf ./package/feeds/xiangfeidexiaohuo/luci-theme-argon-18.06
+rm -rf ./package/feeds/xiangfeidexiaohuo/luci-app-argon-config-18.06
+
 ##取消bootstrap为默认主题
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
