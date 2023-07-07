@@ -126,7 +126,7 @@ jobs:
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
-        time=$(date +%Y%m%d%H%M)
+        time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
         release_name="软路由(X86_64)全能版-OpenWrt-6.1内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT

@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
 # 定时触发编译
-  schedule:
-    - cron: 3 22 * * 4
+#  schedule:
+#    - cron: 3 22 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
@@ -120,7 +120,7 @@ jobs:
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
-        time=$(date +%Y%m%d%H%M)
+        time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
         release_name="斐讯K2P-A版-OpenWrt-5.4内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
