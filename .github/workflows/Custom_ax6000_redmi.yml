@@ -1,4 +1,4 @@
-name: Build_ax6000_redmi
+name: Custom_ax6000_redmi
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_ax6000_redmi:
+  Custom_ax6000_redmi:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -60,9 +60,9 @@ jobs:
         chmod +x ./diy.sh && ./diy.sh
       
               
-    - name: Configuration Customization - Build_ax6000_redmi
+    - name: Configuration Customization - Custom_ax6000_redmi
       env:
-        CONFIG_FILE: './configs/ARM/mi/ax6000_redmi.config'
+        CONFIG_FILE: './configs/ARM/Custom/ax6000_redmi.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
