@@ -1,19 +1,19 @@
-name: Build_k2p
+name: Build_360_t7
 
 on: 
   repository_dispatch:
   workflow_dispatch:
 
 # 定时触发编译
-#  schedule:
-#    - cron: 3 22 * * 4
+  schedule:
+    - cron: 23 22 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_k2p:
+  Build_360_t7:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -41,8 +41,8 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/coolsnowwolf/lede
-        REPO_BRANCH: master
+        REPO_URL: https://github.com/xiangfeidexiaohuo/lede
+        REPO_BRANCH: ipq807x
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
@@ -58,13 +58,13 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
-        
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K2P-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-       
+
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-360-T7-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+      
               
-    - name: Configuration Customization - Build_k2p
+    - name: Configuration Customization - Build_360_t7
       env:
-        CONFIG_FILE: './configs/ARM/other/k2p.config'
+        CONFIG_FILE: './configs/ARM/other/360_t7.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -78,7 +78,7 @@ jobs:
 
     - name: Build firmware
       working-directory: ./openwrt
-      run: |
+      run: |      
         make -j$(nproc) V=s
         
     - name: Assemble Artifact
@@ -94,37 +94,36 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-phicomm_k2p-squashfs-sysupgrade.bin
-        getmd5 $rom
-                
-        cp -a $rom ./ARM_Out/AE86Wrt-K2P-A-$(date +%Y%m%d)_${md5}.bin
+        rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-*-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-360-T7-5.15-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: K2P-OpenWrt_504
-        path: ARM_Out/*.bin 
+        name: 360-T7-OpenWrt
+        path: ARM_Out/*.bin
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: k2p-config
-        path: openwrt/.config  
- 
+        name: t7-config
+        path: openwrt/.config
+
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: K2P-Packages
-        path: openwrt/bin/packages 
+        name: 360-T7-Packages
+        path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="斐讯K2P-A版-OpenWrt-5.4内核-$(date +%Y%m%d)"
+        release_name="360-T7-OpenWrt-5.15内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
-        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
+        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
@@ -135,9 +134,11 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Upload Aliyun
-      run: | 
+      run: |  
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf K2P-A-$(date +%Y%m%d).zip *
-        cd ..       
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/K2P" --file "ARM_Out/K2P-A-$(date +%Y%m%d).zip"                        
+        jar cf 360-T7-5.15-$(date +%Y%m%d).zip *
+        cd ..    
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/T7" --file "ARM_Out/360-T7-5.15-$(date +%Y%m%d).zip"  
+       
+                               
