@@ -1,4 +1,4 @@
-name: Custom_ax6000_redmi
+name: Custom_t7
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Custom_ax6000_redmi:
+  Custom_t7:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -62,9 +62,9 @@ jobs:
         cp -f ../diy/lean/hostapd.sh ./        
         chmod +x ./hostapd.sh && ./hostapd.sh      
               
-    - name: Configuration Customization - Custom_ax6000_redmi
+    - name: Configuration Customization - Custom_t7
       env:
-        CONFIG_FILE: './configs/ARM/Custom/ax6000_redmi.config'
+        CONFIG_FILE: './configs/ARM/Custom/t7.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -94,26 +94,27 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-qihoo_360t7-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/Routes.Live-R2023_Redmi-AX6000-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/Routes.Live-R2023_360-T7-$(date +%Y%m%d)_${md5}.bin
+     
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: AX6000-OpenWrt
+        name: T7-OpenWrt
         path: ARM_Out/*.bin
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: ax6000-config
+        name: t7-config
         path: openwrt/.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX6000-515-Packages
+        name: T7-Packages
         path: openwrt/bin/packages
 
 
@@ -121,6 +122,6 @@ jobs:
       run: |  
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf Redmi-AX6000-$(date +%Y%m%d).zip *
+        jar cf T7-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/diy" --file "ARM_Out/Redmi-AX6000-$(date +%Y%m%d).zip"                               
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/diy" --file "ARM_Out/T7-$(date +%Y%m%d).zip"                               
