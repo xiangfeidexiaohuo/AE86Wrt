@@ -41,8 +41,8 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/xiangfeidexiaohuo/lede
-        REPO_BRANCH: ipq807x
+        REPO_URL: https://github.com/coolsnowwolf/lede
+        REPO_BRANCH: master
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
@@ -57,7 +57,11 @@ jobs:
         ./scripts/feeds install -a
 
         cp -f ../diy/lean/lean2.sh ./        
-        chmod +x ./lean2.sh && ./lean2.sh       
+        chmod +x ./lean2.sh && ./lean2.sh
+        
+        cp -f ../diy/lean/hostapd.sh ./        
+        chmod +x ./hostapd.sh && ./hostapd.sh
+            
         sed -i 's/+!TARGET_ramips:kmod-usb-storage-uas //g'  ./package/lean/automount/Makefile
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.4/g" target/linux/bcm53xx/Makefile
         sed -i 's/\${Arch}/armv5/g' feeds/xiangfeidexiaohuo/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
