@@ -59,6 +59,7 @@ jobs:
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
         
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.4/g" target/linux/ramips/Makefile
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K2P-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
