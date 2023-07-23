@@ -62,6 +62,19 @@ sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall/luas
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall/luasrc/view/passwall/rule/*.htm
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall/luasrc/view/passwall/server/*.htm
 
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/controller/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/passwall2/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/model/cbi/passwall2/client/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/model/cbi/passwall2/server/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/view/passwall2/app_update/*.htm
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/view/passwall2/auto_switch/*.htm
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/view/passwall2/global/*.htm
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/view/passwall2/haproxy/*.htm
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/view/passwall2/log/*.htm
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/view/passwall2/node_list/*.htm
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/view/passwall2/rule/*.htm
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-passwall2/luasrc/view/passwall2/server/*.htm
+
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-vssr/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-vssr/luasrc/model/cbi/vssr/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-vssr/luasrc/view/vssr/*.htm
@@ -71,4 +84,7 @@ sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-openclash/luasrc/view/openclash/*.htm
 
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/controller/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/model/cbi/bypass/*.lua
+sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/view/bypass/*.htm
 

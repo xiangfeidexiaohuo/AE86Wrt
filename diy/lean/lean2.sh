@@ -41,8 +41,6 @@ rm -rf ./package/feeds/luci/luci-theme-argon
 rm -rf ./package/feeds/luci/luci-theme-design
 rm -rf ./package/feeds/luci/luci-theme-argon-mod
 
-# sed -i 's/+luci-theme-argon/+luci-theme-argon-18.06/g' ./feeds/xiangfeidexiaohuo/theme/luci-app-argon-config-18.06/Makefile
-
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 sed -i 's/luci-theme-bootstrap/luci-theme-argon-18.06/g' feeds/luci/collections/luci/Makefile
 sed -i 's/luci-theme-bootstrap/luci-theme-argon-18.06/g' feeds/luci/collections/luci-nginx/Makefile
@@ -55,16 +53,6 @@ cp -af feeds/xiangfeidexiaohuo/patch/banner  package/base-files/files/etc/
 
 ##更改主机名
 sed -i "s/hostname='.*'/hostname='AE86Wrt'/g" package/base-files/files/bin/config_generate
-
-##切换为samba4
-#sed -i 's/luci-app-samba/luci-app-samba4/g' package/lean/autosamba/Makefile
-
-
-##boos4721
-sed -i 's/10.10.10.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-sed -i 's/$1$WplwC1t5$HBAtVXABp7XbvVjG4193B.:18753/:/g' package/base-files/files/etc/shadow
-sed -i "s/encryption=.*/encryption=none/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
-sed -i "/key=.*/d" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 
 ##FQ全部调到VPN菜单
@@ -118,6 +106,4 @@ sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.c
 ## rockchip
 cp -af feeds/xiangfeidexiaohuo/patch/rockchip/*  target/linux/rockchip/armv8/base-files/
 
-## AX6000
-cp -af feeds/xiangfeidexiaohuo/patch/rockchip/etc/opkg  target/linux/mediatek/filogic/base-files/etc/
 
