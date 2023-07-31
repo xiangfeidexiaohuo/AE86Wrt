@@ -27,8 +27,6 @@ cp -af ./package/add/luci-app-filetransfer/po/zh-cn  ./package/add/luci-app-file
 
 rm -rf package/feeds/xiangfeidexiaohuo/luci-app-turboacc
 
-rm -rf ./feeds/xiangfeidexiaohuo/op-smartdns/luci-app-smartdns
-git clone https://github.com/pymumu/luci-app-smartdns ./feeds/xiangfeidexiaohuo/op-smartdns/luci-app-smartdns
 
 ##配置IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
