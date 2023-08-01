@@ -9,7 +9,7 @@
 ```
 * #### 在本项目 [releases页面](https://github.com/xiangfeidexiaohuo/OpenWrt_Build/releases) 下载固件。
 
-* <details>
+<details>
 <summary>点击查看网盘地址~</summary>
 
 ```
