@@ -1,15 +1,15 @@
 ## AE86Wrt
 
-#### * 自娱自乐编译的OpenWrt项目
+* #### 自娱自乐编译的OpenWrt项目
 
 ```
 固件管理ip：192.168.2.1  
 用户名：root
 密码：password (或为空)
 ```
-#### * 在本项目 [releases页面](https://github.com/xiangfeidexiaohuo/OpenWrt_Build/releases) 下载固件。
+* #### 在本项目 [releases页面](https://github.com/xiangfeidexiaohuo/OpenWrt_Build/releases) 下载固件。
 
-#### * 阿里网盘分享链接：
+* #### 阿里网盘分享链接：
 
 <details>
 <summary>点击展开，查看网盘地址！</summary>
@@ -53,5 +53,5 @@ https://www.aliyundrive.com/s/CHsLpYj6ccs
 
 </details>
 
-#### * [个人插件库](https://github.com/xiangfeidexiaohuo/openwrt-packages)
+* #### [个人插件库](https://github.com/xiangfeidexiaohuo/openwrt-packages)
 
