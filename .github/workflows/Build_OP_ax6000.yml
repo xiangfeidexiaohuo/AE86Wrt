@@ -1,4 +1,4 @@
-name: Build_ax6000_515_redmi
+name: Build_ax6000
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_ax6000_515_redmi:
+  Build_ax6000:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -65,9 +65,9 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Redmi-AX6000-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
               
-    - name: Configuration Customization - Build_ax6000_515_redmi
+    - name: Configuration Customization - Build_ax6000
       env:
-        CONFIG_FILE: './configs/ARM/mi/ax6000_515_redmi.config'
+        CONFIG_FILE: './configs/ARM/mi/ax6000_515.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
