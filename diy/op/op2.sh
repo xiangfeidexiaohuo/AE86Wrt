@@ -13,8 +13,6 @@ cp -af ./package/add/luci-app-filetransfer/po/zh-cn  ./package/add/luci-app-file
 
 rm -rf package/feeds/xiangfeidexiaohuo/luci-app-turboacc
 
-rm -rf ./feeds/xiangfeidexiaohuo/op-smartdns/luci-app-smartdns
-git clone https://github.com/pymumu/luci-app-smartdns ./feeds/xiangfeidexiaohuo/op-smartdns/luci-app-smartdns
 
 ##配置IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
@@ -22,9 +20,19 @@ sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generat
 ##
 rm -rf ./feeds/xiangfeidexiaohuo/theme/luci-theme-argon-18.06
 rm -rf ./feeds/xiangfeidexiaohuo/theme/luci-app-argon-config-18.06
+rm -rf ./feeds/xiangfeidexiaohuo/theme/luci-theme-design
+rm -rf ./feeds/xiangfeidexiaohuo/theme/luci-theme-edge
+rm -rf ./feeds/xiangfeidexiaohuo/theme/luci-theme-ifit
+rm -rf ./feeds/xiangfeidexiaohuo/theme/luci-theme-opentopd
+rm -rf ./feeds/xiangfeidexiaohuo/theme/luci-theme-neobird
 
 rm -rf ./package/feeds/xiangfeidexiaohuo/luci-theme-argon-18.06
 rm -rf ./package/feeds/xiangfeidexiaohuo/luci-app-argon-config-18.06
+rm -rf ./package/feeds/xiangfeidexiaohuo/theme/luci-theme-design
+rm -rf ./package/feeds/xiangfeidexiaohuo/theme/luci-theme-edge
+rm -rf ./package/feeds/xiangfeidexiaohuo/theme/luci-theme-ifit
+rm -rf ./package/feeds/xiangfeidexiaohuo/theme/luci-theme-opentopd
+rm -rf ./package/feeds/xiangfeidexiaohuo/theme/luci-theme-neobird
 
 ##取消bootstrap为默认主题
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
