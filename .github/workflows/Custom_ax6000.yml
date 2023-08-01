@@ -1,4 +1,4 @@
-name: Custom_ax6000_redmi
+name: Custom_ax6000
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Custom_ax6000_redmi:
+  Custom_ax6000:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -62,9 +62,9 @@ jobs:
         cp -f ../diy/lean/hostapd.sh ./        
         chmod +x ./hostapd.sh && ./hostapd.sh      
               
-    - name: Configuration Customization - Custom_ax6000_redmi
+    - name: Configuration Customization - Custom_ax6000
       env:
-        CONFIG_FILE: './configs/ARM/Custom/ax6000_redmi.config'
+        CONFIG_FILE: './configs/ARM/Custom/lean_ax6000.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
