@@ -9,10 +9,8 @@
 ```
 * #### 在本项目 [releases页面](https://github.com/xiangfeidexiaohuo/OpenWrt_Build/releases) 下载固件。
 
-* #### 阿里网盘分享链接：
-
-<details>
-<summary>点击展开，查看网盘地址！</summary>
+* <details>
+<summary>点击查看网盘地址~</summary>
 
 ```
 🚗X86_64系列固件
