@@ -4,14 +4,6 @@ on:
   repository_dispatch:
   workflow_dispatch:
 
-# 定时触发编译
-#  schedule:
-#    - cron: 1 23 * * 4
-
-# 点赞☆Star触发编译
-#  watch:
-#    types: [started]
-
 jobs:
   Custom_t7:
     runs-on: ubuntu-20.04
@@ -124,4 +116,4 @@ jobs:
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf T7-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/diy" --file "ARM_Out/T7-$(date +%Y%m%d).zip"                               
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Custom" --file "ARM_Out/T7-$(date +%Y%m%d).zip"                               
