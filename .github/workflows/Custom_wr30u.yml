@@ -24,7 +24,7 @@ jobs:
         sudo -E rm -rf /usr/share/dotnet /usr/local/lib/android/sdk /etc/mysql /etc/php /usr/local/share/boost
         [ -n "$AGENT_TOOLSDIRECTORY" ] && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
         sudo -E apt-get update -y
-        sudo -E apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev python3-setuptools
+        sudo -E apt-get install -y ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3.8 python3-pip libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libfuse-dev libfuse-dev python3-setuptools
         pip install aligo
         sudo -E apt-get clean
         git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
@@ -32,13 +32,13 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/coolsnowwolf/lede
-        REPO_BRANCH: master
+        REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x
+        REPO_BRANCH: openwrt-21.02
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/lean/lean1.sh ./
-        chmod +x ./lean1.sh && ./lean1.sh
+        cp -f ../diy/mt798x/op1.sh ./
+        chmod +x ./op1.sh && ./op1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -47,15 +47,12 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/lean/diy.sh ./        
-        chmod +x ./diy.sh && ./diy.sh
-
-        cp -f ../diy/lean/hostapd.sh ./        
-        chmod +x ./hostapd.sh && ./hostapd.sh      
+        cp -f ../diy/mt798x/op3.sh ./        
+        chmod +x ./op3.sh && ./op3.sh      
               
     - name: Configuration Customization - Custom_wr30u
       env:
-        CONFIG_FILE: './configs/ARM/Custom/lean_wr30u.config'
+        CONFIG_FILE: './configs/ARM/Custom/mt_wr30u.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -85,7 +82,7 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-xiaomi_mi-router-wr30u-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-xiaomi_mi-router-wr30u-112m-squashfs-sysupgrade.bin
         getmd5 $rom        
         cp -a $rom ./ARM_Out/Routes.Live-R2023_Xiaomi-WR30U-$(date +%Y%m%d)_${md5}.bin
      
@@ -113,6 +110,6 @@ jobs:
       run: |  
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf Xiaomi-WR30U-$(date +%Y%m%d).zip *
+        jar cf WR30U-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Custom" --file "ARM_Out/Xiaomi-WR30U-$(date +%Y%m%d).zip"                               
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Custom" --file "ARM_Out/WR30U-$(date +%Y%m%d).zip"                               
