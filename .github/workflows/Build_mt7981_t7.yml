@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
 # 定时触发编译
-#  schedule:
-#    - cron: 17 22 * * 4
+  schedule:
+    - cron: 17 22 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
@@ -131,5 +131,13 @@ jobs:
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Upload Aliyun
+      run: |
+        cd ARM_Out
+        echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
+        jar cf 360-T7-5.4-$(date +%Y%m%d).zip *
+        cd ..    
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/T7/5.4" --file "ARM_Out/360-T7-5.4-$(date +%Y%m%d).zip"  
        
                                
