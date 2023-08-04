@@ -1,10 +1,11 @@
-name: Custom_wr30u
+name: x_ax6000
 
 on: 
   repository_dispatch:
   workflow_dispatch:
+
 jobs:
-  Custom_wr30u:
+  x_ax6000:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -47,15 +48,15 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/lean/diy.sh ./        
-        chmod +x ./diy.sh && ./diy.sh
+        cp -f ../diy/lean/lean3.sh ./        
+        chmod +x ./lean3.sh && ./lean3.sh
 
         cp -f ../diy/lean/hostapd.sh ./        
         chmod +x ./hostapd.sh && ./hostapd.sh      
               
-    - name: Configuration Customization - Custom_wr30u
+    - name: Configuration Customization - Custom_ax6000
       env:
-        CONFIG_FILE: './configs/ARM/Custom/lean_wr30u.config'
+        CONFIG_FILE: './configs/ARM/Custom/lean_ax6000.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -85,27 +86,26 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-xiaomi_mi-router-wr30u-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/Routes.Live-R2023_Xiaomi-WR30U-$(date +%Y%m%d)_${md5}.bin
-     
+        cp -a $rom ./ARM_Out/Routes.Live-R2023_Redmi-AX6000-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: WR30U-OpenWrt
+        name: AX6000-OpenWrt
         path: ARM_Out/*.bin
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: wr30u-config
+        name: ax6000-config
         path: openwrt/.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: WR30U-Packages
+        name: AX6000-515-Packages
         path: openwrt/bin/packages
 
 
@@ -113,6 +113,6 @@ jobs:
       run: |  
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf Xiaomi-WR30U-$(date +%Y%m%d).zip *
+        jar cf AX6000-5.15-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Custom" --file "ARM_Out/Xiaomi-WR30U-$(date +%Y%m%d).zip"                               
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Custom" --file "ARM_Out/AX6000-5.15-$(date +%Y%m%d).zip"                               
