@@ -42,7 +42,7 @@ jobs:
     - name: Clone source code
       env: 
         REPO_URL: https://github.com/xiangfeidexiaohuo/lede
-        REPO_BRANCH: mi
+        REPO_BRANCH: ipq
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
@@ -58,9 +58,7 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
-        
-        cp -f ../diy/lean/hostapd.sh ./        
-        chmod +x ./hostapd.sh && ./hostapd.sh        
+     
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX9000-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
