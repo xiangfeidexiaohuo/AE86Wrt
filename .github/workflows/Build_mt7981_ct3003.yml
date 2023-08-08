@@ -63,7 +63,7 @@ jobs:
               
     - name: Configuration Customization - Build_mt7981_ct3003
       env:
-        CONFIG_FILE: './configs/ARM/other/mt7981_ct3003.config'
+        CONFIG_FILE: './configs/ARM/mt798x/mt7981_ct3003.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig

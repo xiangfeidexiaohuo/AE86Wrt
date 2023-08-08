@@ -63,7 +63,7 @@ jobs:
               
     - name: Configuration Customization - Build_mt7986_ax6000
       env:
-        CONFIG_FILE: './configs/ARM/other/mt7986_ax6000.config'
+        CONFIG_FILE: './configs/ARM/mt798x/mt7986_ax6000.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
