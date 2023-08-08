@@ -55,7 +55,7 @@ jobs:
               
     - name: Configuration Customization - Custom_wr30u
       env:
-        CONFIG_FILE: './configs/ARM/Custom/lean_wr30u.config'
+        CONFIG_FILE: './configs/ARM/x/lean_wr30u.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig

@@ -56,7 +56,7 @@ jobs:
               
     - name: Configuration Customization - Custom_t7
       env:
-        CONFIG_FILE: './configs/ARM/Custom/lean_t7.config'
+        CONFIG_FILE: './configs/ARM/x/lean_t7.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
