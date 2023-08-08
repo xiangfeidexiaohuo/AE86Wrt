@@ -67,7 +67,7 @@ jobs:
               
     - name: Configuration Customization - Build_ax6_515
       env:
-        CONFIG_FILE: './configs/ARM/mi/ax6_515.config'
+        CONFIG_FILE: './configs/ARM/ipq/ax6_515.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig

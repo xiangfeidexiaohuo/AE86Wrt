@@ -67,7 +67,7 @@ jobs:
               
     - name: Configuration Customization - Build_wr30u
       env:
-        CONFIG_FILE: './configs/ARM/mi/wr30u_515.config'
+        CONFIG_FILE: './configs/ARM/mtk/wr30u.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig

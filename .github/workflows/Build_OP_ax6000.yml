@@ -67,7 +67,7 @@ jobs:
               
     - name: Configuration Customization - Build_ax6000
       env:
-        CONFIG_FILE: './configs/ARM/mi/ax6000_515.config'
+        CONFIG_FILE: './configs/ARM/mtk/ax6000.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
