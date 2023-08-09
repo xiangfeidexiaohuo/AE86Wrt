@@ -5,9 +5,11 @@
 #=================================================
 
 
-##补充汉化       
-cp -f ./feeds/xiangfeidexiaohuo/patch/udpxy.lua ./feeds/luci/applications/luci-app-udpxy/luasrc/model/cbi
-##
+#补充汉化
+echo -e "\nmsgid \"Control\"" >> feeds/luci/modules/luci-base/po/zh-cn/base.po
+echo -e "msgstr \"控制\"" >> feeds/luci/modules/luci-base/po/zh-cn/base.po
+
+##补充汉化
 echo -e "\nmsgid \"General\"" >> package/feeds/luci/luci-app-dnsforwarder/po/zh-cn/dnsforwarder.po
 echo -e "msgstr \"常规\"" >> package/feeds/luci/luci-app-dnsforwarder/po/zh-cn/dnsforwarder.po
 
