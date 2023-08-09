@@ -106,3 +106,6 @@ sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/model/cbi/bypass/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/view/bypass/*.htm
 
+###
+cp -af feeds/xiangfeidexiaohuo/patch/rockchip/etc/opkg target/linux/rockchip/armv8/base-files/etc/
+
