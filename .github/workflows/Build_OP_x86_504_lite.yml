@@ -59,6 +59,8 @@ jobs:
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
         
+        cp -af feeds/xiangfeidexiaohuo/patch/patches  package/lean/r8152/
+        
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.4/g" target/linux/x86/Makefile
         sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.4/g" target/linux/x86/Makefile       
 
