@@ -9,6 +9,10 @@
 echo -e "\nmsgid \"Control\"" >> feeds/luci/modules/luci-base/po/zh-cn/base.po
 echo -e "msgstr \"控制\"" >> feeds/luci/modules/luci-base/po/zh-cn/base.po
 
+echo -e "\nmsgid \"NAS\"" >> feeds/luci/modules/luci-base/po/zh-cn/base.po
+echo -e "msgstr \"网络存储\"" >> feeds/luci/modules/luci-base/po/zh-cn/base.po
+
+
 ##补充汉化       
 echo -e "\nmsgid \"General\"" >> package/feeds/luci/luci-app-dnsforwarder/po/zh-cn/dnsforwarder.po
 echo -e "msgstr \"常规\"" >> package/feeds/luci/luci-app-dnsforwarder/po/zh-cn/dnsforwarder.po
@@ -57,8 +61,8 @@ cp -af feeds/xiangfeidexiaohuo/patch/diy/banner  package/base-files/files/etc/
 sed -i "s/hostname='.*'/hostname='Routes.Live'/g" package/base-files/files/bin/config_generate
 
 ##WiFi
-sed -i "s/OpenWrt/routes.live/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
-sed -i "s/encryption=.*/encryption=sae-mixed\nset wireless.default_radio\${devidx}.key=routes.live/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i "s/OpenWrt/Routes.Live/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i "s/encryption=.*/encryption=sae-mixed\nset wireless.default_radio\${devidx}.key=Routes.Live/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 sed -i "/ae86_openwrt_chat/d" package/feeds/xiangfeidexiaohuo/autocore/files/arm/index.htm
 
