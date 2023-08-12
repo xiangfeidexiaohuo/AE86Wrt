@@ -51,7 +51,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-design/g' feeds/luci/collections/luci-
 ##加入作者信息
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='Routes.Live R2023'/g" package/lean/default-settings/files/zzz-default-settings   
 sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' $(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-cp -af feeds/xiangfeidexiaohuo/diy/banner  package/base-files/files/etc/
+cp -af feeds/xiangfeidexiaohuo/patch/diy/banner  package/base-files/files/etc/
 
 ##更改主机名
 sed -i "s/hostname='.*'/hostname='Routes.Live'/g" package/base-files/files/bin/config_generate
