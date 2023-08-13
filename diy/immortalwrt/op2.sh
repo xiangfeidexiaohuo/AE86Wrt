@@ -54,7 +54,7 @@ sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' By YaoDao'/g" package/base-f
 cp -af feeds/xiangfeidexiaohuo/patch/banner  package/base-files/files/etc/
 
 ##WiFi
-sed -i "s/OpenWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i "s/ImmortalWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 ##
 sed -i "53iLUCI_LANG.zh-cn=\$(LUCI_LANG.zh_Hans)" feeds/luci/luci.mk
