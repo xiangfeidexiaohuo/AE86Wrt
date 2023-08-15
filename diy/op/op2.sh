@@ -54,6 +54,9 @@ sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-$(date +%Y%m%d)
 sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' By YaoDao'/g" package/base-files/files/etc/openwrt_release
 cp -af feeds/xiangfeidexiaohuo/patch/banner  package/base-files/files/etc/
 
+sed -i "2iuci set istore.istore.channel='ae86_daodao'" package/base-files/files/bin/config_generate
+sed -i "3iuci commit istore" package/base-files/files/bin/config_generate
+
 ##
 sed -i "53iLUCI_LANG.zh-cn=\$(LUCI_LANG.zh_Hans)" feeds/luci/luci.mk
 sed -i "54iLUCI_LANG.zh-tw=\$(LUCI_LANG.zh_Hant)" feeds/luci/luci.mk

@@ -53,6 +53,9 @@ sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-$(date +%Y%m%d)
 sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' By YaoDao'/g" package/base-files/files/etc/openwrt_release
 cp -af feeds/xiangfeidexiaohuo/patch/banner  package/base-files/files/etc/
 
+sed -i "2iuci set istore.istore.channel='ae86_daodao'" package/emortal/default-settings/files/99-default-settings
+sed -i "3iuci commit istore" package/emortal/default-settings/files/99-default-settings
+
 ##WiFi
 sed -i "s/ImmortalWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
