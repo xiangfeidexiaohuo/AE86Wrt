@@ -67,7 +67,11 @@ jobs:
         sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=6.1/g" target/linux/rockchip/Makefile           
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-H69K-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-       
+        
+        ### wwan
+        rm -rf package/wwan
+        svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/wwan package/wwan
+            
               
     - name: Configuration Customization - Build_h69k_61
       env:
