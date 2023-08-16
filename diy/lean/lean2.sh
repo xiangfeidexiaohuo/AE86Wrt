@@ -126,4 +126,6 @@ sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.c
 ## rockchip
 cp -af feeds/xiangfeidexiaohuo/patch/rockchip/*  target/linux/rockchip/armv8/base-files/
 
+##
+cp -af feeds/xiangfeidexiaohuo/patch/qmi_wwan_f.c package/wwan/driver/fibocom_QMI_WWAN/src/
 
