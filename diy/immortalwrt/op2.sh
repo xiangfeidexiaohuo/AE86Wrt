@@ -53,9 +53,6 @@ sed -i "3iuci commit istore" package/emortal/default-settings/files/99-default-s
 ##WiFi
 sed -i "s/ImmortalWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
-##
-sed -i "53iLUCI_LANG.zh-cn=\$(LUCI_LANG.zh_Hans)" feeds/luci/luci.mk
-sed -i "54iLUCI_LANG.zh-tw=\$(LUCI_LANG.zh_Hant)" feeds/luci/luci.mk
 
 
 ##FQ全部调到VPN菜单

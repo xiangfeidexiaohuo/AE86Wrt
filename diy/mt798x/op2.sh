@@ -59,11 +59,6 @@ sed -i "s/MT7981_AX3000_2.4G/AE86-2.4G/g" package/mtk/drivers/wifi-profile/files
 sed -i "s/MT7981_AX3000_5G/AE86-5G/g" package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
 
 
-##
-sed -i "53iLUCI_LANG.zh-cn=\$(LUCI_LANG.zh_Hans)" feeds/luci/luci.mk
-sed -i "54iLUCI_LANG.zh-tw=\$(LUCI_LANG.zh_Hant)" feeds/luci/luci.mk
-
-
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua
