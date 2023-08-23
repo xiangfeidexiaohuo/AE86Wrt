@@ -98,7 +98,7 @@ jobs:
         getmd5 $rom        
         cp -a $rom ./ARM_Out/AE86Wrt-Redmi-AX6-R2305-5.15-$(date +%Y%m%d)_${md5}.bin
         
-        rom=openwrt/bin/targets/ipq807x/generic/immortalwrt-ipq807x-generic-redmi_ax6-initramfs-factory.ubi
+        rom=openwrt/bin/targets/ipq807x/generic/immortalwrt-ipq807x-generic-redmi_ax6-squashfs-factory.ubi
         getmd5 $rom           
         cp -a $rom ./ARM_Out/AE86Wrt-Redmi-AX6-R2305-5.15-$(date +%Y%m%d)_${md5}.ubi
                
