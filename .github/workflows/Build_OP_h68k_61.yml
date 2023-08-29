@@ -57,10 +57,7 @@ jobs:
         ./scripts/feeds install -a
 
         cp -f ../diy/lean/lean2.sh ./        
-        chmod +x ./lean2.sh && ./lean2.sh
-        
-        cp -f ../diy/lean/mt7921.sh ./        
-        chmod +x ./mt7921.sh && ./mt7921.sh        
+        chmod +x ./lean2.sh && ./lean2.sh    
         
         ## 强制默认rockchip编译内核为6.1  
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.1/g" target/linux/rockchip/Makefile
