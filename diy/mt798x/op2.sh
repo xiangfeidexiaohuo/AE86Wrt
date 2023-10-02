@@ -106,5 +106,5 @@ sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc
 
 ## wget-ssl
 rm -rf feeds/packages/net/wget/*
-cp -af feeds/xiangfeidexiaohuo/patch/wget/*  feeds/packages/net/wget/
+cp -af feeds/xiangfeidexiaohuo/patch/wget-ssl  feeds/packages/net/wget/Makefile
 
