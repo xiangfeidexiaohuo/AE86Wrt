@@ -103,3 +103,8 @@ sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/model/cbi/bypass/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/view/bypass/*.htm
 
+
+## wget-ssl
+rm -rf feeds/packages/net/wget/*
+cp -af feeds/xiangfeidexiaohuo/patch/wget/*  feeds/packages/net/wget/
+
