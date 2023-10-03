@@ -57,7 +57,11 @@ jobs:
         ./scripts/feeds install -a
 
         cp -f ../diy/mt798x/op2.sh ./        
-        chmod +x ./op2.sh && ./op2.sh      
+        chmod +x ./op2.sh && ./op2.sh
+        
+        ## wget-ssl
+        rm -rf feeds/packages/net/wget/*
+        cp -af feeds/xiangfeidexiaohuo/patch/wget-ssl  feeds/packages/net/wget/Makefile     
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-CMCC-RAX3000M-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
               

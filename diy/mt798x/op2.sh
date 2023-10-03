@@ -59,6 +59,17 @@ sed -i "s/MT7981_AX3000_2.4G/AE86-2.4G/g" package/mtk/drivers/wifi-profile/files
 sed -i "s/MT7981_AX3000_5G/AE86-5G/g" package/mtk/drivers/wifi-profile/files/mt7981/mt7981.dbdc.b1.dat
 
 
+##更新FQ
+rm -rf feeds/luci/applications/luci-app-passwall/*
+cp -af feeds/xiangfeidexiaohuo/patch/wall-luci/luci-app-passwall/*  feeds/luci/applications/luci-app-passwall/
+
+rm -rf feeds/luci/applications/luci-app-ssr-plus/*
+cp -af feeds/xiangfeidexiaohuo/patch/wall-luci/luci-app-ssr-plus/*  feeds/luci/applications/luci-app-ssr-plus/
+
+rm -rf feeds/luci/applications/luci-app-openclash/*
+cp -af feeds/xiangfeidexiaohuo/patch/wall-luci/luci-app-openclash/*  feeds/luci/applications/luci-app-openclash/
+
+
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua
@@ -102,9 +113,4 @@ sed -i 's/services/vpn/g' package/feeds/luci/luci-app-openclash/luasrc/view/open
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/model/cbi/bypass/*.lua
 sed -i 's/services/vpn/g' package/feeds/xiangfeidexiaohuo/luci-app-bypass/luasrc/view/bypass/*.htm
-
-
-## wget-ssl
-rm -rf feeds/packages/net/wget/*
-cp -af feeds/xiangfeidexiaohuo/patch/wget-ssl  feeds/packages/net/wget/Makefile
 

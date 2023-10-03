@@ -53,6 +53,15 @@ sed -i "3iuci commit istore" package/emortal/default-settings/files/99-default-s
 ##WiFi
 sed -i "s/ImmortalWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
+##更新FQ
+rm -rf feeds/luci/applications/luci-app-passwall/*
+cp -af feeds/xiangfeidexiaohuo/patch/wall-luci/luci-app-passwall/*  feeds/luci/applications/luci-app-passwall/
+
+rm -rf feeds/luci/applications/luci-app-ssr-plus/*
+cp -af feeds/xiangfeidexiaohuo/patch/wall-luci/luci-app-ssr-plus/*  feeds/luci/applications/luci-app-ssr-plus/
+
+rm -rf feeds/luci/applications/luci-app-openclash/*
+cp -af feeds/xiangfeidexiaohuo/patch/wall-luci/luci-app-openclash/*  feeds/luci/applications/luci-app-openclash/
 
 
 ##FQ全部调到VPN菜单
