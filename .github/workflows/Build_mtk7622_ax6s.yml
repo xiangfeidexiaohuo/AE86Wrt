@@ -1,4 +1,4 @@
-name: Build_ax6s
+name: Build_mtk7622_ax6s
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_ax6s:
+  Build_mtk7622_ax6s:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -65,7 +65,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Redmi-AX6S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
 
               
-    - name: Configuration Customization - Build_ax6s
+    - name: Configuration Customization - Build_mtk7622_ax6s
       env:
         CONFIG_FILE: './configs/ARM/mtk/ax6s.config'
       run: |
