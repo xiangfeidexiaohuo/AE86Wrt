@@ -1,4 +1,4 @@
-name: Build_rk_r6c_61
+name: Build_rk3588_r6c_61
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_rk_r6c_61:
+  Build_rk3588_r6c_61:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -64,7 +64,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-NanoPi-R6C-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
        
               
-    - name: Configuration Customization - Build_rk_r6c_61
+    - name: Configuration Customization - Build_rk3588_r6c_61
       env:
         CONFIG_FILE: './configs/ARM/rk3588/rk_r6c.config'
       run: |
