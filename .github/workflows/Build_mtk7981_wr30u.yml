@@ -1,4 +1,4 @@
-name: Build_wr30u
+name: Build_mtk7981_wr30u
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_wr30u:
+  Build_mtk7981_wr30u:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -65,7 +65,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-WR30U-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
               
-    - name: Configuration Customization - Build_wr30u
+    - name: Configuration Customization - Build_mtk7981_wr30u
       env:
         CONFIG_FILE: './configs/ARM/mtk/wr30u.config'
       run: |

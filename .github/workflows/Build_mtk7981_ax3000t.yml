@@ -1,19 +1,19 @@
-name: Build_360_t7
+name: Build_mtk7981_ax3000t
 
 on: 
   repository_dispatch:
   workflow_dispatch:
 
 # 定时触发编译
-#  schedule:
-#    - cron: 1 22 * * 4
+  schedule:
+    - cron: 47 22 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_360_t7:
+  Build_mtk7981_ax3000t:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -58,16 +58,16 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
-
+        
         cp -f ../diy/lean/hostapd.sh ./        
         chmod +x ./hostapd.sh && ./hostapd.sh
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-360-T7-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX3000T-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
               
-    - name: Configuration Customization - Build_360_t7
+    - name: Configuration Customization - Build_mtk7981_ax3000t
       env:
-        CONFIG_FILE: './configs/ARM/mtk/360_t7.config'
+        CONFIG_FILE: './configs/ARM/mtk/ax3000t.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -81,7 +81,7 @@ jobs:
 
     - name: Build firmware
       working-directory: ./openwrt
-      run: |      
+      run: |
         make -j$(nproc) V=s
         
     - name: Assemble Artifact
@@ -97,26 +97,26 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-qihoo_360t7-squashfs-sysupgrade.bin
-        getmd5 $rom       
-        cp -a $rom ./ARM_Out/AE86Wrt-360-T7-5.15-$(date +%Y%m%d)_${md5}.bin     
+        rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3000T-5.15-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: 360-T7-OpenWrt
+        name: AX3000T-OpenWrt
         path: ARM_Out/*.bin
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: t7-config
+        name: ax3000t-config
         path: openwrt/.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: 360-T7-Packages
+        name: AX3000T-515-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
@@ -124,7 +124,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="360-T7-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        release_name="小米AX3000T-OpenWrt-5.15内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
@@ -137,11 +137,11 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Upload Aliyun
-      run: |  
+      run: |
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf 360-T7-5.15-$(date +%Y%m%d).zip *
+        jar cf Xiaomi-AX3000T-5.15-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/MT798x/T7/5.15" --file "ARM_Out/360-T7-5.15-$(date +%Y%m%d).zip"  
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/MT798x/AX3000T/5.15" --file "ARM_Out/Xiaomi-AX3000T-5.15-$(date +%Y%m%d).zip"  
        
                                
