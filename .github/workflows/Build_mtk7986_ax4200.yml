@@ -1,4 +1,4 @@
-name: Build_ax4200
+name: Build_mtk7986_tuf_ax4200
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_ax4200:
+  Build_mtk7986_tuf_ax4200:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -65,7 +65,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-TUF-AX4200-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
               
-    - name: Configuration Customization - Build_ax4200
+    - name: Configuration Customization - Build_mtk7986_tuf_ax4200
       env:
         CONFIG_FILE: './configs/ARM/mtk/ax4200.config'
       run: |

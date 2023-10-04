@@ -1,4 +1,4 @@
-name: Build_mt3000
+name: Build_mtk7986_mt3000
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_mt3000:
+  Build_mtk7986_mt3000:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -65,7 +65,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-GL-MT3000-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
               
-    - name: Configuration Customization - Build_mt3000
+    - name: Configuration Customization - Build_mtk7986_mt3000
       env:
         CONFIG_FILE: './configs/ARM/mtk/mt3000.config'
       run: |
