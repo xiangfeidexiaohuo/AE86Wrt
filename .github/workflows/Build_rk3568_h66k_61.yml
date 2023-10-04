@@ -1,4 +1,4 @@
-name: Build_t68m_61
+name: Build_rk3568_h66k_61
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 5 20 * * 4
+    - cron: 13 20 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_t68m_61:
+  Build_rk3568_h66k_61:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -57,18 +57,21 @@ jobs:
         ./scripts/feeds install -a
 
         cp -f ../diy/lean/lean2.sh ./        
-        chmod +x ./lean2.sh && ./lean2.sh    
+        chmod +x ./lean2.sh && ./lean2.sh
+        
+        cp -f ../diy/lean/mt7921.sh ./        
+        chmod +x ./mt7921.sh && ./mt7921.sh        
         
         ## 强制默认rockchip编译内核为6.1  
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.1/g" target/linux/rockchip/Makefile
         sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=6.1/g" target/linux/rockchip/Makefile           
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-T68M-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-H66K-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
-    - name: Configuration Customization - Build_t68m_61
+    - name: Configuration Customization - Build_rk3568_h66k_61
       env:
-        CONFIG_FILE: './configs/ARM/rk3568/t68m_61.config'
+        CONFIG_FILE: './configs/ARM/rk3568/h66k_61.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -101,24 +104,24 @@ jobs:
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-*-squashfs-sysupgrade.img.gz
         getmd5 $rom
                 
-        cp -a $rom ./ARM_Out/AE86Wrt-T68M-6.1-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-H66K-6.1-$(date +%Y%m%d)_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: T68M-OpenWrt_61
+        name: H66K-OpenWrt_61
         path: ARM_Out/*.img.gz 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: t68m-61-config
+        name: h66k-61-config
         path: openwrt/.config  
  
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: T68M-Packages
+        name: H66K-Packages
         path: openwrt/bin/packages 
 
 
@@ -127,7 +130,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="LYT_T68M-OpenWrt-6.1内核-$(date +%Y%m%d)"
+        release_name="H66K-OpenWrt-6.1内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 
@@ -144,6 +147,6 @@ jobs:
       run: | 
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf T68M-6.1-$(date +%Y%m%d).zip *
+        jar cf H66K-6.1-$(date +%Y%m%d).zip *
         cd ..       
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Rockchip/T68M/6.1" --file "ARM_Out/T68M-6.1-$(date +%Y%m%d).zip"                        
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Rockchip/H66K/6.1" --file "ARM_Out/H66K-6.1-$(date +%Y%m%d).zip"                        

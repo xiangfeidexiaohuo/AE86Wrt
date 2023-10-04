@@ -1,4 +1,4 @@
-name: Build_r5s_61
+name: Build_rk3568_r66s_61
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 15 20 * * 4
+    - cron: 20 20 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_r5s_61:
+  Build_rk3568_r66s_61:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -57,18 +57,18 @@ jobs:
         ./scripts/feeds install -a
 
         cp -f ../diy/lean/lean2.sh ./        
-        chmod +x ./lean2.sh && ./lean2.sh 
+        chmod +x ./lean2.sh && ./lean2.sh
         
-        ## 强制默认r2s/r4s/r5s编译内核为6.1  
+        ## 强制默认r2s/r4s/r5s/r68s编译内核为6.1  
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.1/g" target/linux/rockchip/Makefile
         sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=6.1/g" target/linux/rockchip/Makefile           
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R5S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-R66S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
-    - name: Configuration Customization - Build_r5s_61
+    - name: Configuration Customization - Build_rk3568_r66s_61
       env:
-        CONFIG_FILE: './configs/ARM/rk3568/r5s_61.config'
+        CONFIG_FILE: './configs/ARM/rk3568/r66s_61.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -98,27 +98,27 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
+        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-fastrhino_r66s-squashfs-sysupgrade.img.gz
         getmd5 $rom
                 
-        cp -a $rom ./ARM_Out/AE86Wrt-R5S-6.1-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-R66S-6.1-$(date +%Y%m%d)_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: R5S-OpenWrt_61
+        name: R66S-OpenWrt_61
         path: ARM_Out/*.img.gz 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: r5s-61-config
+        name: r66s-61-config
         path: openwrt/.config  
  
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: R5S-Packages
+        name: R66S-Packages
         path: openwrt/bin/packages 
 
 
@@ -127,9 +127,9 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="R5S-OpenWrt-6.1内核-$(date +%Y%m%d)"
+        release_name="R66S-OpenWrt-6.1内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
-        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT        
+        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1
@@ -144,6 +144,6 @@ jobs:
       run: | 
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf R5S-6.1-$(date +%Y%m%d).zip *
+        jar cf R66S-6.1-$(date +%Y%m%d).zip *
         cd ..       
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Rockchip/R5S/6.1" --file "ARM_Out/R5S-6.1-$(date +%Y%m%d).zip"                        
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Rockchip/R66S/6.1" --file "ARM_Out/R66S-6.1-$(date +%Y%m%d).zip"                        
