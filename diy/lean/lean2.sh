@@ -126,7 +126,4 @@ sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.c
 ## rockchip
 cp -af feeds/xiangfeidexiaohuo/patch/rockchip/*  target/linux/rockchip/armv8/base-files/
 
-## 68m
-rm -rf target/linux/rockchip/files/arch/arm64/boot/dts/rockchip/rk3568-t68m.dts
-cp -af feeds/xiangfeidexiaohuo/patch/t68m/*  target/linux/rockchip/files/arch/arm64/boot/dts/rockchip/
 
