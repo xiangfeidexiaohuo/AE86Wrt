@@ -35,7 +35,7 @@ rm -rf ./package/feeds/xiangfeidexiaohuo/theme/luci-theme-neobird
 
 ## iptables
 rm -rf ./package/network/utils/iptables
-svn export https://github.com/immortalwrt/immortalwrt/trunk/package/network/utils/iptables ./package/network/utils/iptables
+svn export https://github.com/xiangfeidexiaohuo/lede/trunk/package/network/utils/iptables ./package/network/utils/iptables
 
 
 ##取消bootstrap为默认主题
