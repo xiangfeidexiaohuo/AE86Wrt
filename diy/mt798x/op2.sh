@@ -33,10 +33,6 @@ rm -rf ./package/feeds/xiangfeidexiaohuo/theme/luci-theme-ifit
 rm -rf ./package/feeds/xiangfeidexiaohuo/theme/luci-theme-opentopd
 rm -rf ./package/feeds/xiangfeidexiaohuo/theme/luci-theme-neobird
 
-## iptables
-rm -rf ./package/network/utils/iptables
-svn export https://github.com/xiangfeidexiaohuo/lede/trunk/package/network/utils/iptables ./package/network/utils/iptables
-
 
 ##取消bootstrap为默认主题
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
