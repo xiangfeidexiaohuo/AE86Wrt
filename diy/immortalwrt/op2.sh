@@ -57,6 +57,9 @@ sed -i "s/ImmortalWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 ##MosDNS
 rm -rf feeds/packages/net/mosdns/*
 cp -af feeds/xiangfeidexiaohuo/op-mosdns/mosdns/* feeds/packages/net/mosdns/
+rm -rf feeds/packages/net/v2ray-geodata/*
+cp -af feeds/xiangfeidexiaohuo/op-mosdns/v2ray-geodata/* feeds/packages/net/v2ray-geodata/
+
 
 ##更新FQ
 rm -rf feeds/luci/applications/luci-app-passwall/*

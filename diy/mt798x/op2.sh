@@ -70,6 +70,13 @@ rm -rf feeds/luci/applications/luci-app-openclash/*
 cp -af feeds/xiangfeidexiaohuo/patch/wall-luci/luci-app-openclash/*  feeds/luci/applications/luci-app-openclash/
 
 
+##MosDNS
+rm -rf feeds/packages/net/mosdns/*
+cp -af feeds/xiangfeidexiaohuo/op-mosdns/mosdns/* feeds/packages/net/mosdns/
+rm -rf feeds/packages/net/v2ray-geodata/*
+cp -af feeds/xiangfeidexiaohuo/op-mosdns/v2ray-geodata/* feeds/packages/net/v2ray-geodata/
+
+
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua
