@@ -53,6 +53,11 @@ sed -i "3iuci commit istore" package/emortal/default-settings/files/99-default-s
 ##WiFi
 sed -i "s/ImmortalWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
+
+##MosDNS
+rm -rf feeds/packages/net/mosdns/*
+cp -af feeds/xiangfeidexiaohuo/op-mosdns/mosdns/* feeds/packages/net/mosdns/
+
 ##更新FQ
 rm -rf feeds/luci/applications/luci-app-passwall/*
 cp -af feeds/xiangfeidexiaohuo/patch/wall-luci/luci-app-passwall/*  feeds/luci/applications/luci-app-passwall/
