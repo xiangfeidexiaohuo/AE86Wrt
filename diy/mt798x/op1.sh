@@ -1,7 +1,6 @@
 #!/bin/bash
 #=================================================
-# DIY script
-# jsjson@163.com 
+# DaoDao's script
 #=================================================
 ##添加自己的插件库
-echo -e "\nsrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" >> feeds.conf.default
+echo -e "\nsrc-git extraipk https://github.com/xiangfeidexiaohuo/extra-ipk" >> feeds.conf.default
