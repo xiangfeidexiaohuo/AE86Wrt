@@ -68,6 +68,9 @@ cp -af feeds/extraipk/patch/wall-luci/luci-app-ssr-plus/*  feeds/luci/applicatio
 rm -rf feeds/luci/applications/luci-app-openclash/*
 cp -af feeds/extraipk/patch/wall-luci/luci-app-openclash/*  feeds/luci/applications/luci-app-openclash/
 
+##
+git clone https://github.com/xiangfeidexiaohuo/luci-theme-design -b js package/luci-theme-design
+
 
 ##MosDNS
 rm -rf feeds/packages/net/mosdns/*
