@@ -1,0 +1,29 @@
+name: Delete-Old-Workflows
+
+on: 
+  repository_dispatch:
+  workflow_dispatch:
+
+# 定时触发编译
+  schedule:
+    - cron: 0 0 * * 0
+
+jobs:
+  Delete-Old-Workflows:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Clone Repository
+      uses: actions/checkout@v3
+
+    - name: Set git
+      run : |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        sudo timedatectl set-timezone "Asia/Shanghai"
+
+    - name: Delete workflow runs
+      uses: xiangfeidexiaohuo/delete-workflow-runs@main
+      continue-on-error: true
+      with:
+        retain_days: 3
+        keep_minimum_runs: 0
