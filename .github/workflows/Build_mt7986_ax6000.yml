@@ -138,6 +138,6 @@ jobs:
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
         jar cf Redmi-AX6000-5.4-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/MT798x/AX6000_Redmi/5.4" --file "ARM_Out/Redmi-AX6000-5.4-$(date +%Y%m%d).zip"  
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/XiaoMi/RedMi_AX6000/5.4" --file "ARM_Out/Redmi-AX6000-5.4-$(date +%Y%m%d).zip"  
        
                                
