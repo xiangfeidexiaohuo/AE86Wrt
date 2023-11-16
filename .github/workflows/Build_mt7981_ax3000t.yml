@@ -1,4 +1,4 @@
-name: Build_mtk7981_ax3000t
+name: Build_mt7981_ax3000t
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_mtk7981_ax3000t:
+  Build_mt7981_ax3000t:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -41,13 +41,13 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/coolsnowwolf/lede
-        REPO_BRANCH: master
+        REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x
+        REPO_BRANCH: openwrt-21.02
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/lean/lean1.sh ./
-        chmod +x ./lean1.sh && ./lean1.sh
+        cp -f ../diy/mt798x/op1.sh ./
+        chmod +x ./op1.sh && ./op1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -56,18 +56,14 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/lean/lean2.sh ./        
-        chmod +x ./lean2.sh && ./lean2.sh
-        
-        cp -f ../diy/lean/hostapd.sh ./        
-        chmod +x ./hostapd.sh && ./hostapd.sh
+        cp -f ../diy/mt798x/op2.sh ./        
+        chmod +x ./op2.sh && ./op2.sh      
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX3000T-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-      
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX3000T-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release     
               
-    - name: Configuration Customization - Build_mtk7981_ax3000t
+    - name: Configuration Customization - Build_mt7981_ax3000t
       env:
-        CONFIG_FILE: './configs/ARM/mtk/ax3000t.config'
+        CONFIG_FILE: './configs/ARM/mt798x/mt7981_ax3000t.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -97,9 +93,9 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/mediatek/filogic/openwrt-mediatek-filogic-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3000T-5.15-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3000T-5.4-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -116,7 +112,7 @@ jobs:
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX3000T-515-Packages
+        name: AX3000T-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
@@ -124,7 +120,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="小米AX3000T-OpenWrt-5.15内核-$(date +%Y%m%d)"
+        release_name="小米AX3000T-OpenWrt-5.4内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
@@ -140,8 +136,8 @@ jobs:
       run: |
         cd ARM_Out
         echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf Xiaomi-AX3000T-5.15-$(date +%Y%m%d).zip *
+        jar cf Xiaomi-AX3000T-5.4-$(date +%Y%m%d).zip *
         cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/XiaoMi/AX3000T/5.15" --file "ARM_Out/Xiaomi-AX3000T-5.15-$(date +%Y%m%d).zip"  
+        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/XiaoMi/AX3000T/5.4" --file "ARM_Out/Xiaomi-AX3000T-5.4-$(date +%Y%m%d).zip"  
        
                                
