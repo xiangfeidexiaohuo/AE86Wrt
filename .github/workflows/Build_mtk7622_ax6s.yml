@@ -67,7 +67,7 @@ jobs:
               
     - name: Configuration Customization - Build_mtk7622_ax6s
       env:
-        CONFIG_FILE: './configs/ARM/mtk/ax6s.config'
+        CONFIG_FILE: './configs/ARM/other/ax6s.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
