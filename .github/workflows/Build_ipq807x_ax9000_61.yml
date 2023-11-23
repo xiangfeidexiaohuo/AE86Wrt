@@ -58,8 +58,6 @@ jobs:
 
         cp -f ../diy/immortalwrt/op2.sh ./        
         chmod +x ./op2.sh && ./op2.sh  
-        
-        sed -i "s/exit\ 0/wifi\ config\ \&\&\ wifi\nexit\ 0/g"  target/linux/rockchip/armv8/base-files/etc/board.d/02_network      
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX9000-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
        
@@ -96,10 +94,13 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/qualcommax/ipq807x/immortalwrt-xiaomi_ax9000-squashfs-sysupgrade.img.gz
+        rom=openwrt/bin/targets/qualcommax/ipq807x/immortalwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-sysupgrade.bin
         getmd5 $rom
-                
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX9000-6.1-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX9000-6.1-$(date +%Y%m%d)_${md5}-sysupgrade.bin
+        
+        rom=openwrt/bin/targets/qualcommax/ipq807x/immortalwrt-qualcommax-ipq807x-xiaomi_ax9000-initramfs-factory.ubi
+        getmd5 $rom
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX9000-6.1-$(date +%Y%m%d)_${md5}-factory.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
