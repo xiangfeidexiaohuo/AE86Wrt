@@ -107,7 +107,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: Redmi-AX6-OpenWrt_61
-        path: ARM_Out/*.img.gz 
+        path: ARM_Out/AE86*
 
     - name: Upload config
       uses: actions/upload-artifact@main
