@@ -41,12 +41,12 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/immortalwrt/immortalwrt
-        REPO_BRANCH: master
+        REPO_URL: https://github.com/openwrt/openwrt
+        REPO_BRANCH: main
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/immortalwrt/op1.sh ./
+        cp -f ../diy/op/op1.sh ./
         chmod +x ./op1.sh && ./op1.sh
 
     - name: Update & Install feeds
@@ -56,7 +56,7 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/immortalwrt/op2.sh ./        
+        cp -f ../diy/op/op2.sh ./        
         chmod +x ./op2.sh && ./op2.sh    
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX3600-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
@@ -94,11 +94,11 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/qualcommax/ipq807x/immortalwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-sysupgrade.bin
         getmd5 $rom       
         cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-6.1-$(date +%Y%m%d)_${md5}-sysupgrade.bin
         
-        rom=openwrt/bin/targets/qualcommax/ipq807x/immortalwrt-qualcommax-ipq807x-xiaomi_ax3600-initramfs-factory.ubi
+        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax3600-initramfs-factory.ubi
         getmd5 $rom
         cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-6.1-$(date +%Y%m%d)_${md5}-factory.ubi
                
