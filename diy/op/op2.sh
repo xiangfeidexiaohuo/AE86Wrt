@@ -68,6 +68,9 @@ sed -i "54iLUCI_LANG.zh-tw=\$(LUCI_LANG.zh_Hant)" feeds/luci/luci.mk
 rm -rf feeds/packages/net/v2ray-geodata/*
 cp -af feeds/extraipk/op-mosdns/v2ray-geodata/* feeds/packages/net/v2ray-geodata/
 
+##Adblock
+# rm -rf feeds/luci/applications/luci-app-adblock/*
+# cp -af feeds/extraipk/luci-app-adblock/*  feeds/luci/applications/luci-app-adblock/
 
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-ssr-plus/luasrc/controller/*.lua

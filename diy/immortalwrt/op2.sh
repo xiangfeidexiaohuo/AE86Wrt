@@ -72,6 +72,9 @@ cp -af feeds/extraipk/patch/wall-luci/luci-app-ssr-plus/*  feeds/luci/applicatio
 rm -rf feeds/luci/applications/luci-app-openclash/*
 cp -af feeds/extraipk/patch/wall-luci/luci-app-openclash/*  feeds/luci/applications/luci-app-openclash/
 
+##Adblock
+# rm -rf feeds/luci/applications/luci-app-adblock/*
+# cp -af feeds/extraipk/luci-app-adblock/*  feeds/luci/applications/luci-app-adblock/
 
 ##FQ全部调到VPN菜单
 sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/controller/*.lua
