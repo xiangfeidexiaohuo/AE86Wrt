@@ -22,7 +22,7 @@ jobs:
         sudo timedatectl set-timezone "Asia/Shanghai"
 
     - name: Delete workflow runs
-      uses: xiangfeidexiaohuo/delete-workflow-runs@main
+      uses: Mattraks/delete-workflow-runs@main
       continue-on-error: true
       with:
         retain_days: 3
