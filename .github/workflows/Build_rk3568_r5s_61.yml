@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@main
 
     - name: Initialization environment
       env:
@@ -132,7 +132,7 @@ jobs:
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT        
 
     - name: Create Release & Upload
-      uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@main
       with:
         artifacts: ARM_Out/*.img.gz
         name: ${{ steps.generate_name.outputs.release_name }}
