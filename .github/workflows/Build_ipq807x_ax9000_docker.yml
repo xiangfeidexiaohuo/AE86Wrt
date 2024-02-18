@@ -139,13 +139,4 @@ jobs:
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        
-    - name: Upload Aliyun
-      run: |  
-        cd ARM_Out
-        echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf Xiaomi-AX9000-5.15-Docker-$(date +%Y%m%d).zip *
-        cd ..    
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/XiaoMi/AX9000/5.15-docker" --file "ARM_Out/Xiaomi-AX9000-5.15-Docker-$(date +%Y%m%d).zip"  
-       
-                               
+

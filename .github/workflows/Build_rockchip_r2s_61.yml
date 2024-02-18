@@ -140,11 +140,4 @@ jobs:
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        
-    - name: Upload Aliyun
-      run: | 
-        cd ARM_Out
-        echo "请自动忽略META-INF文件夹。" > 忽略META-INF文件夹.txt
-        jar cf R2S-6.1-$(date +%Y%m%d).zip *
-        cd ..       
-        python diy/aliupload.py --token "${{ secrets.ALIYUN_TOKEN }}" --uploadFloder "OpenWrt/Rockchip/R2S/6.1" --file "ARM_Out/R2S-6.1-$(date +%Y%m%d).zip"                        
+   
