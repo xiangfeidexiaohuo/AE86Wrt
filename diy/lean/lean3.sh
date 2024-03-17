@@ -127,4 +127,6 @@ sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.c
 ## rockchip
 cp -af feeds/extraipk/patch/rockchip/*  target/linux/rockchip/armv8/base-files/
 
-
+## golang 为 1.22.x
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
