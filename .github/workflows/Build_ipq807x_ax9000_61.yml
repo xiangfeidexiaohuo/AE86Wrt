@@ -97,11 +97,11 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax9000-squashfs-nand-sysupgrade.bin
+        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-sysupgrade.bin
         getmd5 $rom        
         cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX9000-6.1-sysupgrade-$(date +%Y%m%d)_${md5}.bin
         
-        rom=openwrt/bin/targets/ipq807x/generic/openwrt-ipq807x-generic-xiaomi_ax9000-squashfs-nand-factory.ubi
+        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-factory.ubi
         getmd5 $rom         
         cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX9000-6.1-factory-$(date +%Y%m%d)_${md5}.ubi
                
