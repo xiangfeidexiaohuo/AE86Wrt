@@ -4,9 +4,9 @@ on:
   repository_dispatch:
   workflow_dispatch:
 
-# 定时触发编译
-#  schedule:
-#    - cron: 3 23 * * 4
+ 定时触发编译
+  schedule:
+    - cron: 3 23 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
