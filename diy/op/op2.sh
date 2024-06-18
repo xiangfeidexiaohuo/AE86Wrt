@@ -111,3 +111,6 @@ sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-bypass/luasrc/controll
 sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-bypass/luasrc/model/cbi/bypass/*.lua
 sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-bypass/luasrc/view/bypass/*.htm
 
+##
+# rm -rf feeds/packages/net/shadowsocks-libev
+# rm -rf package/feeds/packages/shadowsocks-libev
