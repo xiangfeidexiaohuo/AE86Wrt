@@ -111,3 +111,10 @@ sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-bypass/luasrc/controll
 sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-bypass/luasrc/model/cbi/bypass/*.lua
 sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-bypass/luasrc/view/bypass/*.htm
 
+
+## fix_ss_libv
+rm -rf package/libs/mbedtls
+rm -rf package/libs/uclient
+rm -rf package/libs/ustream-ssl
+cp -af feeds/extraipk/patch/fix_ss_libv/*  package/libs/
+

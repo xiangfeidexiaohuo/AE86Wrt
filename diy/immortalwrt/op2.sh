@@ -54,7 +54,7 @@ sed -i "2iuci set istore.istore.channel='ae86_daodao'" package/emortal/default-s
 sed -i "3iuci commit istore" package/emortal/default-settings/files/99-default-settings
 
 ##WiFi
-sed -i "s/ImmortalWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
+# sed -i "s/ImmortalWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 
 ##MosDNS
@@ -68,8 +68,8 @@ cp -af feeds/extraipk/op-mosdns/v2ray-geodata/* feeds/packages/net/v2ray-geodata
 rm -rf feeds/luci/applications/luci-app-passwall/*
 cp -af feeds/extraipk/patch/wall-luci/luci-app-passwall/*  feeds/luci/applications/luci-app-passwall/
 
-rm -rf feeds/luci/applications/luci-app-ssr-plus/*
-cp -af feeds/extraipk/patch/wall-luci/luci-app-ssr-plus/*  feeds/luci/applications/luci-app-ssr-plus/
+# rm -rf feeds/luci/applications/luci-app-ssr-plus/*
+# cp -af feeds/extraipk/patch/wall-luci/luci-app-ssr-plus/*  feeds/luci/applications/luci-app-ssr-plus/
 
 rm -rf feeds/luci/applications/luci-app-openclash/*
 cp -af feeds/extraipk/patch/wall-luci/luci-app-openclash/*  feeds/luci/applications/luci-app-openclash/
@@ -79,9 +79,12 @@ cp -af feeds/extraipk/patch/wall-luci/luci-app-openclash/*  feeds/luci/applicati
 # cp -af feeds/extraipk/luci-app-adblock/*  feeds/luci/applications/luci-app-adblock/
 
 ##FQ全部调到VPN菜单
-sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/controller/*.lua
-sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua
-sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/view/shadowsocksr/*.htm
+# sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/controller/*.lua
+# sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua
+# sed -i 's/services/vpn/g' package/feeds/luci/luci-app-ssr-plus/luasrc/view/shadowsocksr/*.htm
+sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-ssr-plus/luasrc/controller/*.lua
+sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua
+sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-ssr-plus/luasrc/view/shadowsocksr/*.htm
 
 sed -i 's/services/vpn/g' package/feeds/luci/luci-app-passwall/luasrc/controller/*.lua
 sed -i 's/services/vpn/g' package/feeds/luci/luci-app-passwall/luasrc/passwall/*.lua
@@ -125,4 +128,10 @@ sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-bypass/luasrc/view/byp
 
 ###
 cp -af feeds/extraipk/patch/rockchip/etc/opkg target/linux/rockchip/armv8/base-files/etc/
+
+## fix_ss_libv
+rm -rf package/libs/mbedtls
+rm -rf package/libs/uclient
+rm -rf package/libs/ustream-ssl
+cp -af feeds/extraipk/patch/fix_ss_libv/*  package/libs/
 
