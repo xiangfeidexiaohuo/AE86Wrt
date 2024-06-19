@@ -129,6 +129,9 @@ sed -i 's/services/vpn/g' package/feeds/extraipk/luci-app-bypass/luasrc/view/byp
 ###
 cp -af feeds/extraipk/patch/rockchip/etc/opkg target/linux/rockchip/armv8/base-files/etc/
 
-##
-# rm -rf feeds/packages/net/shadowsocks-libev
-# rm -rf package/feeds/packages/shadowsocks-libev
+## fix_ss_libv
+rm -rf package/libs/mbedtls
+rm -rf package/libs/uclient
+rm -rf package/libs/ustream-ssl
+cp -af feeds/extraipk/patch/fix_ss_libv/*  package/libs/
+
