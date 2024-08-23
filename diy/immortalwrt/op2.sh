@@ -137,3 +137,16 @@ cp -af feeds/extraipk/patch/fix_ss_libv/*  package/libs/
 
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 23.x feeds/packages/lang/golang
+
+
+# 安装GCC13 By Mibore99
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+sudo apt-get update
+  
+sudo apt-get install -y gcc-13 g++-13     
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 60
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 60
+
+sudo update-alternatives --set gcc /usr/bin/gcc-13
+sudo update-alternatives --set g++ /usr/bin/g++-13
+
