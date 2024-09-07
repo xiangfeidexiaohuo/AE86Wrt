@@ -90,6 +90,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
+        cp -a ./openwrt/.config ./ARM_Out/ae86.config
         
         getmd5()
         {
@@ -113,7 +114,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: r68s-66-config
-        path: openwrt/.config  
+        path: ARM_Out/ae86.config  
  
     - name: Upload Packages
       uses: actions/upload-artifact@main
