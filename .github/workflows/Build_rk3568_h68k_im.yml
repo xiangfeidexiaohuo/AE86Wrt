@@ -1,12 +1,12 @@
-name: Build_rk3568_h68k_immortalwrt
+name: Build_rk3568_h68k_im
 
 on: 
   repository_dispatch:
   workflow_dispatch:
 
 # 定时触发编译
-#  schedule:
-#    - cron: 31 20 * * 4
+  schedule:
+    - cron: 9 23 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
@@ -61,7 +61,7 @@ jobs:
               
     - name: Configuration Customization - Build_rk3568_h68k_immortalwrt
       env:
-        CONFIG_FILE: './configs/ARM/rk3568/immortalwrt/h68k_66.config'
+        CONFIG_FILE: './configs/ARM/rk3568/im/h68k_66.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
