@@ -107,7 +107,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: x86-5.4-lite-config
-        path: openwrt/.config
+        path: ARM_Out/ae86.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
