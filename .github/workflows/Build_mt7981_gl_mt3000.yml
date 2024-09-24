@@ -94,15 +94,15 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-glinet_gl-mt3000-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-glinet_gl-mt3000-squashfs-sysupgrade.tar
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-GL-MT3000-5.4-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-GL-MT3000-5.4-$(date +%Y%m%d)_${md5}.tar
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
         name: MT3000-OpenWrt
-        path: ARM_Out/*.bin
+        path: ARM_Out/*.tar
 
     - name: Upload config
       uses: actions/upload-artifact@main
