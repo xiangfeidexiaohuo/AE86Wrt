@@ -84,6 +84,7 @@ jobs:
       run: |
         rm -rf ./X86_Out
         mkdir -p ./X86_Out/
+        cp -a ./openwrt/.config ./ARM_Out/ae86.config
         
         getmd5()
         {
