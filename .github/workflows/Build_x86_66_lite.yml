@@ -83,6 +83,7 @@ jobs:
       run: |
         rm -rf ./X86_Out
         mkdir -p ./X86_Out/
+        cp -a ./openwrt/.config ./X86_Out/ae86.config
         
         getmd5()
         {
@@ -106,7 +107,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: x86-6.6-lite-config
-        path: ARM_Out/ae86.config
+        path: X86_Out/ae86.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
