@@ -1,19 +1,19 @@
-name: Build_ipq807x_ax3600_66
+name: Build_ipq807x_ax3600_61
 
 on: 
   repository_dispatch:
   workflow_dispatch:
 
 # 定时触发编译
-#  schedule:
-#    - cron: 3 23 * * 5
+  schedule:
+    - cron: 3 23 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_ipq807x_ax3600_66:
+  Build_ipq807x_ax3600_61:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -41,13 +41,13 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/qosmio/openwrt-ipq
-        REPO_BRANCH: qualcommax-6.x-nss-wifi
+        REPO_URL: https://github.com/coolsnowwolf/lede
+        REPO_BRANCH: master
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/op/op1.sh ./
-        chmod +x ./op1.sh && ./op1.sh
+        cp -f ../diy/lean/lean1.sh ./
+        chmod +x ./lean1.sh && ./lean1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -56,14 +56,18 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/op/op2.sh ./        
-        chmod +x ./op2.sh && ./op2.sh       
+        cp -f ../diy/lean/lean2.sh ./        
+        chmod +x ./lean2.sh && ./lean2.sh
+        
+        cp -f ../diy/lean/hostapd.sh ./        
+        chmod +x ./hostapd.sh && ./hostapd.sh
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX3600-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
-           
-    - name: Configuration Customization - Build_ipq807x_ax3600_66
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX3600-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+      
+              
+    - name: Configuration Customization - Build_ipq807x_ax3600_61
       env:
-        CONFIG_FILE: './configs/ARM/ipq/66/ax3600_66.config'
+        CONFIG_FILE: './configs/ARM/ipq/61/ax3600_61.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -96,11 +100,11 @@ jobs:
         
         rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-6.6-sysupgrade-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-6.1-sysupgrade-$(date +%Y%m%d)_${md5}.bin
         
         rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-factory.ubi
         getmd5 $rom         
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-6.6-factory-$(date +%Y%m%d)_${md5}.ubi
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-6.1-factory-$(date +%Y%m%d)_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -117,7 +121,7 @@ jobs:
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX3600-66-Packages
+        name: AX3600-61-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
@@ -125,7 +129,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="小米AX3600-OpenWrt-6.6内核-测试版-$(date +%Y%m%d)"
+        release_name="小米AX3600-OpenWrt-6.1内核-测试版-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 
