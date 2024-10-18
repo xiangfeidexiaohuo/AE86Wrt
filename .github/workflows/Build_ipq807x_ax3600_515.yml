@@ -46,8 +46,8 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/lean/lean1.sh ./
-        chmod +x ./lean1.sh && ./lean1.sh
+        cp -f ../diy/lean/lean0.sh ./
+        chmod +x ./lean0.sh && ./lean0.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
