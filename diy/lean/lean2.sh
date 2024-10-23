@@ -29,7 +29,7 @@ sed -i '/V4UetPzk$CYXluq4wUazHjmCDBCqXF/d' package/lean/default-settings/files/z
 
 ##替换K3无线驱动为69027
 rm -rf ./package/lean/k3-brcmfmac4366c-firmware/files/lib/firmware/brcm/brcmfmac4366c-pcie.bin
-cp -af feeds/extraipk/patch/brcmfmac4366c-pcie.bin ./package/lean/k3-brcmfmac4366c-firmware/files/lib/firmware/brcm/brcmfmac4366c-pcie.bin
+cp -af feeds/2305ipk/patch/brcmfmac4366c-pcie.bin ./package/lean/k3-brcmfmac4366c-firmware/files/lib/firmware/brcm/brcmfmac4366c-pcie.bin
 
 
 ##取消bootstrap为默认主题
@@ -49,7 +49,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-n
 ##加入作者信息
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings   
 sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' By DaoDao'/g" package/lean/default-settings/files/zzz-default-settings
-cp -af feeds/extraipk/patch/diy/banner  package/base-files/files/etc/banner
+cp -af feeds/2305ipk/patch/diy/banner  package/base-files/files/etc/banner
 
 sed -i "2iuci set istore.istore.channel='ae86_daodao'" package/lean/default-settings/files/zzz-default-settings
 sed -i "3iuci commit istore" package/lean/default-settings/files/zzz-default-settings
@@ -76,7 +76,7 @@ sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.c
 
 
 ## rockchip
-cp -af feeds/extraipk/patch/rockchip/*  target/linux/rockchip/armv8/base-files/
+cp -af feeds/2305ipk/patch/rockchip/*  target/linux/rockchip/armv8/base-files/
 
 ## golang 为 1.23.x
 rm -rf feeds/packages/lang/golang
