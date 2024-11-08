@@ -55,7 +55,7 @@ jobs:
         chmod +x ./op2.sh && ./op2.sh       
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
-        
+        sed -i "s/OPENWRT_RELEASE='*.*'/OPENWRT_RELEASE='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g"  package/base-files/files/usr/lib/os-release
         
     - name: Configuration Customization - Build_x86_r2410
       env:
