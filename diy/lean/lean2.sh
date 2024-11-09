@@ -27,10 +27,6 @@ sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/luci2/bin/config_generat
 sed -i '/V4UetPzk$CYXluq4wUazHjmCDBCqXF/d' package/lean/default-settings/files/zzz-default-settings
 
 
-##替换K3无线驱动为69027
-rm -rf ./package/lean/k3-brcmfmac4366c-firmware/files/lib/firmware/brcm/brcmfmac4366c-pcie.bin
-cp -af feeds/2305ipk/patch/brcmfmac4366c-pcie.bin ./package/lean/k3-brcmfmac4366c-firmware/files/lib/firmware/brcm/brcmfmac4366c-pcie.bin
-
 
 ##取消bootstrap为默认主题
 rm -rf ./feeds/luci/themes/luci-theme-argon
