@@ -1,4 +1,4 @@
-name: Build_ipq807x_ax3600_66
+name: Build_ipq807x_ax3600_61
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_ipq807x_ax3600_66:
+  Build_ipq807x_ax3600_61:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -60,15 +60,15 @@ jobs:
         chmod +x ./lean2.sh && ./lean2.sh
         
 
-        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile
-        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile   
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.1/g" target/linux/qualcommax/Makefile
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.1/g" target/linux/qualcommax/Makefile   
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX3600-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
               
-    - name: Configuration Customization - Build_ipq807x_ax3600_66
+    - name: Configuration Customization - Build_ipq807x_ax3600_61
       env:
-        CONFIG_FILE: './configs/ARM/ipq/66/ax3600_66.config'
+        CONFIG_FILE: './configs/ARM/ipq/61/ax3600_61.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -105,7 +105,7 @@ jobs:
         
         rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-factory.ubi
         getmd5 $rom         
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-6.1-factory-$(date +%Y%m%d)_${md5}.ubi
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-2305-factory-$(date +%Y%m%d)_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -122,7 +122,7 @@ jobs:
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX3600-66-Packages
+        name: AX3600-61-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
