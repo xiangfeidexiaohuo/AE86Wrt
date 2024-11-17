@@ -1,4 +1,4 @@
-name: Build_ipq807x_ax9000_66
+name: Build_ipq807x_ax6_61
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
 #  schedule:
-#    - cron: 5 23 * * 5
+#    - cron: 1 23 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_ipq807x_ax9000_66:
+  Build_ipq807x_ax6_61:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -58,17 +58,17 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
-        
-    
-        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile
-        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX9000-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-      
+        
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.1/g" target/linux/qualcommax/Makefile
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.1/g" target/linux/qualcommax/Makefile  
+
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Redmi-AX6-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+
               
-    - name: Configuration Customization - Build_ipq807x_ax9000_66
+    - name: Configuration Customization - Build_ipq807x_ax6_61
       env:
-        CONFIG_FILE: './configs/ARM/ipq/66/ax9000_66.config'
+        CONFIG_FILE: './configs/ARM/ipq/61/ax6_61.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -82,7 +82,7 @@ jobs:
 
     - name: Build firmware
       working-directory: ./openwrt
-      run: |      
+      run: |     
         make -j$(nproc) V=s
         
     - name: Assemble Artifact
@@ -99,38 +99,38 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-redmi_ax6-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX9000-2305-sysupgrade-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-Redmi-AX6-2305-sysupgrade-$(date +%Y%m%d)_${md5}.bin
         
-        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-factory.ubi
-        getmd5 $rom         
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX9000-2305-factory-$(date +%Y%m%d)_${md5}.ubi
+        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-redmi_ax6-squashfs-factory.ubi
+        getmd5 $rom           
+        cp -a $rom ./ARM_Out/AE86Wrt-Redmi-AX6-2305-factory-$(date +%Y%m%d)_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: AX9000-OpenWrt
+        name: AX6-OpenWrt
         path: ARM_Out/AE86* 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: ax9000-config
+        name: ax6-config
         path: ARM_Out/ae86.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX9000-66-Packages
+        name: AX6-61-Packages
         path: openwrt/bin/packages
-        
+                
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="小米AX9000-OpenWrt-2305-测试版-$(date +%Y%m%d)"
+        release_name="红米AX6-OpenWrt-2305-测试版-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT     
 
@@ -142,4 +142,4 @@ jobs:
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
         
- 
+                          
