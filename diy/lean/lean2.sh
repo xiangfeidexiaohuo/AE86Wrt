@@ -56,7 +56,7 @@ sed -i "s/hostname='.*'/hostname='AE86Wrt'/g" package/base-files/files/bin/confi
 sed -i "s/hostname='.*'/hostname='AE86Wrt'/g" package/base-files/luci2/bin/config_generate
 
 ##WiFi
-sed -i "s/OpenWrt/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i "s/LEDE/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 ### fix speed
 sed -i "s/speed = <2500>;/speed = <1000>;/g" target/linux/mediatek/dts/mt7622-*.dts
