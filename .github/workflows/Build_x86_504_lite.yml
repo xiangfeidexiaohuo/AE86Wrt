@@ -96,7 +96,7 @@ jobs:
         rom=openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img.gz
         getmd5 $rom
                 
-        cp -a $rom ./X86_Out/AE86Wrt-X86_64-Lite-5.4-2305-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./X86_Out/AE86Wrt-X86-Lite-5.4-2305-$(date +%Y%m%d)_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
