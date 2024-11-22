@@ -6,7 +6,7 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 25 18 * * 4
+    - cron: 29 18 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
@@ -88,7 +88,7 @@ jobs:
       run: |
         rm -rf ./X86_Out
         mkdir -p ./X86_Out/
-        cp -a ./openwrt/.config ./X86_Out/ae86.config
+        cp -a ./openwrt/.config ./X86_Out/x86_612_lite.config
         
         getmd5()
         {
@@ -111,8 +111,8 @@ jobs:
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: x86-6.12-lite-config
-        path: X86_Out/ae86.config
+        name: X86-6.12-lite-config
+        path: X86_Out/x86_612_lite.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
