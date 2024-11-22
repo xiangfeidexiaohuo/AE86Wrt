@@ -68,7 +68,7 @@ jobs:
               
     - name: Configuration Customization - Build_rk3528_h28k_66
       env:
-        CONFIG_FILE: './configs/ARM/rockchip/66/h28k_66.config'
+        CONFIG_FILE: './configs/ARM/rockchip/h28k_66.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig

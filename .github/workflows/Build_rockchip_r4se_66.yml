@@ -68,7 +68,7 @@ jobs:
               
     - name: Configuration Customization - Build_rockchip_r4se_66
       env:
-        CONFIG_FILE: './configs/ARM/rockchip/66/r4se_66.config'
+        CONFIG_FILE: './configs/ARM/rockchip/r4se_66.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
