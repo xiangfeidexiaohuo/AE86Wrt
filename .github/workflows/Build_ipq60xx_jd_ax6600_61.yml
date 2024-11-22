@@ -110,19 +110,19 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: ER1-OpenWrt
+        name: JD-AX6600-OpenWrt
         path: ARM_Out/AE86* 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: er1-config
+        name: JD-AX6600-config
         path: ARM_Out/ae86.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: ER1-61-Packages
+        name: JD-AX6600-61-Packages
         path: openwrt/bin/packages
                 
     - name: Generate Tag & Release Name

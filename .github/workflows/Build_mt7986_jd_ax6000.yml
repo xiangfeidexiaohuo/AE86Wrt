@@ -107,7 +107,7 @@ jobs:
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: JD-ax6000-config
+        name: JD-AX6000-config
         path: ARM_Out/ae86.config
 
     - name: Upload Packages
