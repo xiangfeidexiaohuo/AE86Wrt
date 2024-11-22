@@ -68,7 +68,7 @@ jobs:
               
     - name: Configuration Customization - Build_rk3588_r6c_66
       env:
-        CONFIG_FILE: './configs/ARM/rk3588/rk_r6c.config'
+        CONFIG_FILE: './configs/ARM/rk3588/r6c_66.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -90,7 +90,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/rk_r6c.config
+        cp -a ./openwrt/.config ./ARM_Out/r6c_66.config
         
         getmd5()
         {
@@ -114,7 +114,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: R6C-66-config
-        path: ARM_Out/rk_r6c.config
+        path: ARM_Out/r6c_66.config
  
     - name: Upload Packages
       uses: actions/upload-artifact@main
