@@ -121,7 +121,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="小米AX3000T-OpenWrt-5.4内核-$(date +%Y%m%d)"
+        release_name="小米AX3000T-5.4内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 

@@ -101,11 +101,11 @@ jobs:
         
         rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-2305-sysupgrade-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-6.1-2305-sysupgrade-$(date +%Y%m%d)_${md5}.bin
         
         rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-factory.ubi
         getmd5 $rom         
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-2305-factory-$(date +%Y%m%d)_${md5}.ubi
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3600-6.1-2305-factory-$(date +%Y%m%d)_${md5}.ubi
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -130,7 +130,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="小米AX3600-OpenWrt-2305-$(date +%Y%m%d)"
+        release_name="小米AX3600-6.1内核-2305-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 

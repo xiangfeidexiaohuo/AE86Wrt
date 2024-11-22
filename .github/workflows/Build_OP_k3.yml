@@ -101,7 +101,7 @@ jobs:
         rom=openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm_k3-squashfs.trx
         getmd5 $rom
                 
-        cp -a $rom ./ARM_Out/AE86Wrt-K3-2305-$(date +%Y%m%d)_${md5}.trx
+        cp -a $rom ./ARM_Out/AE86Wrt-K3-5.4-2305-$(date +%Y%m%d)_${md5}.trx
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -126,7 +126,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="斐讯K3-OpenWrt-2305-$(date +%Y%m%d)"
+        release_name="斐讯K3-5.4内核-2305-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 
