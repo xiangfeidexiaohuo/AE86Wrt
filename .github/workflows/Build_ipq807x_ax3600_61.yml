@@ -68,7 +68,7 @@ jobs:
               
     - name: Configuration Customization - Build_ipq807x_ax3600_61
       env:
-        CONFIG_FILE: './configs/ARM/ipq/61/ax3600_61.config'
+        CONFIG_FILE: './configs/ARM/ipq/ax3600_61.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
