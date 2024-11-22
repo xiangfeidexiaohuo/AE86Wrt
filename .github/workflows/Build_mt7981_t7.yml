@@ -6,7 +6,7 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 5 22 * * 4
+    - cron: 21 22 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
@@ -85,7 +85,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/ae86.config
+        cp -a ./openwrt/.config ./ARM_Out/mt7981_t7.config
         
         getmd5()
         {
@@ -107,8 +107,8 @@ jobs:
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: t7-config
-        path: ARM_Out/ae86.config
+        name: T7-config
+        path: ARM_Out/mt7981_t7.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main

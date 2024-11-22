@@ -85,7 +85,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/ae86.config
+        cp -a ./openwrt/.config ./ARM_Out/mt7986_ax6000.config
         
         getmd5()
         {
@@ -107,8 +107,8 @@ jobs:
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: ax6000-config
-        path: ARM_Out/ae86.config
+        name: AX6000-config
+        path: ARM_Out/mt7986_ax6000.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main

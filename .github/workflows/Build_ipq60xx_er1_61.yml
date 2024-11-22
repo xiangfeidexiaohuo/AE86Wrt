@@ -6,7 +6,7 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 10 23 * * 5
+    - cron: 22 18 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
@@ -90,7 +90,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/ae86.config
+        cp -a ./openwrt/.config ./ARM_Out/er1_61.config
         
         getmd5()
         {
@@ -117,7 +117,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: JD-ER1-config
-        path: ARM_Out/ae86.config
+        path: ARM_Out/er1_61.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
