@@ -59,7 +59,7 @@ jobs:
         
     - name: Configuration Customization - Build_x86_r2410
       env:
-        CONFIG_FILE: './configs/X86/Lite/x86_r2410.config'
+        CONFIG_FILE: './configs/X86/x86_r2410.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig

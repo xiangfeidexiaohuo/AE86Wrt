@@ -66,7 +66,7 @@ jobs:
         
     - name: Configuration Customization - Build_x86_66_lite
       env:
-        CONFIG_FILE: './configs/X86/Lite/x86_66_lite.config'
+        CONFIG_FILE: './configs/X86/x86_66_lite.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
