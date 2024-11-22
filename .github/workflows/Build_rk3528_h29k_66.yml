@@ -6,7 +6,7 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 52 20 * * 4
+    - cron: 46 21 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
@@ -90,7 +90,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/ae86.config
+        cp -a ./openwrt/.config ./ARM_Out/h29k_66.config
         
         getmd5()
         {
@@ -113,8 +113,8 @@ jobs:
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: h29k-66-config
-        path: ARM_Out/ae86.config  
+        name: H29K-66-config
+        path: ARM_Out/h29k_66.config
  
     - name: Upload Packages
       uses: actions/upload-artifact@main

@@ -6,7 +6,7 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 35 21 * * 4
+    - cron: 26 21 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
@@ -93,7 +93,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/ae86.config
+        cp -a ./openwrt/.config ./ARM_Out/r2s_66.config
         
         getmd5()
         {
@@ -116,8 +116,8 @@ jobs:
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: r2s-66-config
-        path: ARM_Out/ae86.config  
+        name: R2S-66-config
+        path: ARM_Out/r2s_66.config
  
     - name: Upload Packages
       uses: actions/upload-artifact@main
