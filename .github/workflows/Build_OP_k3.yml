@@ -61,7 +61,7 @@ jobs:
             
         sed -i 's/+!TARGET_ramips:kmod-usb-storage-uas //g'  ./package/lean/automount/Makefile
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.4/g" target/linux/bcm53xx/Makefile
-        sed -i 's/\${Arch}/armv5/g' feeds/extraipk/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
+        sed -i 's/\${Arch}/armv5/g' feeds/2305ipk/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
         sed -i 's/\${Arch}/armv5/g' feeds/luci/applications/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
         
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K3-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings  
