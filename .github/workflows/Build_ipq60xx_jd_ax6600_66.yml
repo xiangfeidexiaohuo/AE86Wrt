@@ -1,4 +1,4 @@
-name: Build_ipq807x_ax9000_61
+name: Build_ipq60xx_jd_ax6600_66
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 15 18 * * 5
+    - cron: 29 18 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_ipq807x_ax9000_61:
+  Build_ipq60xx_jd_ax6600_66:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -58,17 +58,17 @@ jobs:
 
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh
-        
-    
-        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.1/g" target/linux/qualcommax/Makefile
-        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.1/g" target/linux/qualcommax/Makefile
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX9000-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-      
+        
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile  
+
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-JDCloud-AX6600-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+
               
-    - name: Configuration Customization - Build_ipq807x_ax9000_61
+    - name: Configuration Customization - Build_ipq60xx_jd_ax6600_66
       env:
-        CONFIG_FILE: './configs/ARM/ipq/ax9000_61.config'
+        CONFIG_FILE: './configs/ARM/ipq/jd_ax6600_66.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -82,7 +82,7 @@ jobs:
 
     - name: Build firmware
       working-directory: ./openwrt
-      run: |      
+      run: |     
         make -j$(nproc) V=s
         
     - name: Assemble Artifact
@@ -90,7 +90,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/ax9000_61.config
+        cp -a ./openwrt/.config ./ARM_Out/jd_ax6600_66.config
         
         getmd5()
         {
@@ -99,38 +99,38 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/qualcommax/ipq60xx/openwrt-qualcommax-ipq60xx-jdcloud_re-cs-02-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX9000-6.1-2305-sysupgrade-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-JDCloud-AX6600-6.6-2305-sysupgrade-$(date +%Y%m%d)_${md5}.bin
         
-        rom=openwrt/bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-factory.ubi
-        getmd5 $rom         
-        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX9000-6.1-2305-factory-$(date +%Y%m%d)_${md5}.ubi
+        rom=openwrt/bin/targets/qualcommax/ipq60xx/openwrt-qualcommax-ipq60xx-jdcloud_re-cs-02-squashfs-factory.bin
+        getmd5 $rom           
+        cp -a $rom ./ARM_Out/AE86Wrt-JDCloud-AX6600-6.6-2305-factory-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: AX9000-OpenWrt
+        name: JD-AX6600-OpenWrt
         path: ARM_Out/AE86* 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: AX9000-config
-        path: ARM_Out/ax9000_61.config
+        name: JD-AX6600-config
+        path: ARM_Out/jd_ax6600_66.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX9000-61-Packages
+        name: JD-AX6600-66-Packages
         path: openwrt/bin/packages
-        
+                
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="小米AX9000-6.1内核-2305-$(date +%Y%m%d)"
+        release_name="京东云雅典娜AX6600-6.6内核-2305-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT     
 
@@ -142,4 +142,4 @@ jobs:
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
         
- 
+                          

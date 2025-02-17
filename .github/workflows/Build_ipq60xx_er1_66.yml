@@ -1,4 +1,4 @@
-name: Build_ipq60xx_jd_ax6600_61
+name: Build_ipq60xx_er1_66
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 29 18 * * 5
+    - cron: 22 18 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_ipq60xx_jd_ax6600_61:
+  Build_ipq60xx_er1_66:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -60,15 +60,15 @@ jobs:
         chmod +x ./lean2.sh && ./lean2.sh
 
         
-        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.1/g" target/linux/qualcommax/Makefile
-        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.1/g" target/linux/qualcommax/Makefile  
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile  
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-JDCloud-AX6600-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-ER1-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
 
               
-    - name: Configuration Customization - Build_ipq60xx_jd_ax6600_61
+    - name: Configuration Customization - Build_ipq60xx_er1_66
       env:
-        CONFIG_FILE: './configs/ARM/ipq/jd_ax6600_61.config'
+        CONFIG_FILE: './configs/ARM/ipq/er1_66.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -90,7 +90,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/jd_ax6600_61.config
+        cp -a ./openwrt/.config ./ARM_Out/er1_66.config
         
         getmd5()
         {
@@ -99,30 +99,30 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/qualcommax/ipq60xx/openwrt-qualcommax-ipq60xx-jdcloud_re-cs-02-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/qualcommax/ipq60xx/openwrt-qualcommax-ipq60xx-jdcloud_re-cs-07-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-JDCloud-AX6600-6.1-2305-sysupgrade-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-ER1-6.6-2305-sysupgrade-$(date +%Y%m%d)_${md5}.bin
         
-        rom=openwrt/bin/targets/qualcommax/ipq60xx/openwrt-qualcommax-ipq60xx-jdcloud_re-cs-02-squashfs-factory.bin
+        rom=openwrt/bin/targets/qualcommax/ipq60xx/openwrt-qualcommax-ipq60xx-jdcloud_re-cs-07-squashfs-factory.bin
         getmd5 $rom           
-        cp -a $rom ./ARM_Out/AE86Wrt-JDCloud-AX6600-6.1-2305-factory-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-ER1-6.6-2305-factory-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: JD-AX6600-OpenWrt
+        name: JD-ER1-OpenWrt
         path: ARM_Out/AE86* 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: JD-AX6600-config
-        path: ARM_Out/jd_ax6600_61.config
+        name: JD-ER1-config
+        path: ARM_Out/er1_66.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: JD-AX6600-61-Packages
+        name: JD-ER1-66-Packages
         path: openwrt/bin/packages
                 
     - name: Generate Tag & Release Name
@@ -130,7 +130,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="京东云雅典娜AX6600-6.1内核-2305-$(date +%Y%m%d)"
+        release_name="京东云太乙ER1-6.6内核-2305-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT     
 
