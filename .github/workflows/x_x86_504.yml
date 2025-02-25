@@ -33,8 +33,8 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../diy/lean/lean01.sh ./
-        chmod +x ./lean01.sh && ./lean01.sh
+        cp -f ../diy/lean/lean1.sh ./
+        chmod +x ./lean1.sh && ./lean1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -43,8 +43,8 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/lean/lean02.sh ./        
-        chmod +x ./lean02.sh && ./lean02.sh
+        cp -f ../diy/lean/lean2.sh ./        
+        chmod +x ./lean2.sh && ./lean2.sh
         
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.4/g" target/linux/x86/Makefile
         sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.4/g" target/linux/x86/Makefile       
