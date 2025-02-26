@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 jobs:
   x_wr30u:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - name: Clone Repository
       uses: actions/checkout@v4

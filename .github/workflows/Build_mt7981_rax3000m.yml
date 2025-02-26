@@ -14,7 +14,7 @@ on:
 
 jobs:
   Build_mt7981_rax3000m:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - name: Clone Repository
       uses: actions/checkout@v4
