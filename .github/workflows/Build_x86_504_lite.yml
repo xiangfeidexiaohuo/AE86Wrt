@@ -16,18 +16,20 @@ jobs:
   Build_x86_504_lite:
     runs-on: ubuntu-24.04
     steps:
-    - name: Clone Repository
-      uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@main
+
+    - name: Free disk space
+      uses: sbwml/actions@free-disk
+      with:
+        build-mount-path: /home/runner/work/AE86Wrt/AE86Wrt
 
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
-        sudo docker image prune --all --force
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libfuse-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libpython3-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools python3-setuptools qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev g++ file clang nano genisoimage
-        sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         
         sudo timedatectl set-timezone "Asia/Shanghai"
@@ -39,6 +41,7 @@ jobs:
         REPO_URL: https://github.com/coolsnowwolf/lede
         REPO_BRANCH: master
       run: |
+        git clone https://github.com/xiangfeidexiaohuo/AE86Wrt ./
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         cp -f ../diy/lean/lean1.sh ./
