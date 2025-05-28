@@ -10,4 +10,4 @@ sed -i "1isrc-git extraipk https://github.com/xiangfeidexiaohuo/extra-ipk\n" fee
 
 sed -i 's/#src-git luci/src-git luci/g' feeds.conf.default
 sed -i '/luci.git;openwrt-23.05/d' feeds.conf.default
-
+sed -i '/luci.git;openwrt-24.10/d' feeds.conf.default
