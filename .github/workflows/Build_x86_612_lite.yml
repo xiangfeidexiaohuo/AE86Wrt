@@ -98,7 +98,7 @@ jobs:
         rom=openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img.gz
         getmd5 $rom
 
-        cp -a $rom ./X86_Out/AE86Wrt-X86-Lite-6.12-2410-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./X86_Out/AE86Wrt-X86-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -123,7 +123,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="软路由(X86_64)精简版-6.12内核-2410-$(date +%Y%m%d)"
+        release_name="软路由(X86_64)-Lean--6.12内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT   
 
