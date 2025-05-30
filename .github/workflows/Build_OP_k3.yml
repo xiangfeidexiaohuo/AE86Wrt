@@ -102,6 +102,14 @@ jobs:
         getmd5 $rom
                 
         cp -a $rom ./ARM_Out/AE86Wrt-K3-Lean-5.4-$(date +%Y%m%d)_${md5}.trx
+        
+        cp -a openwrt/bin/packages/2305ipk/luci-app-openclash_*.ipk ./ARM_Out/
+        cp -a openwrt/bin/packages/2305ipk/luci-app-lucky_*.ipk ./ARM_Out/
+        cp -a openwrt/bin/packages/2305ipk/luci-i18n-lucky-zh-cn_*.ipk ./ARM_Out/
+        cp -a openwrt/bin/packages/2305ipk/lucky_*.ipk ./ARM_Out/
+        cp -a openwrt/bin/packages/2305ipk/luci-app-nikki_*.ipk ./ARM_Out/
+        cp -a openwrt/bin/packages/2305ipk/luci-i18n-nikki-zh-cn_*.ipk ./ARM_Out/
+        cp -a openwrt/bin/packages/2305ipk/nikki_*.ipk ./ARM_Out/ 
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -133,7 +141,7 @@ jobs:
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1.14.0
       with:
-        artifacts: ARM_Out/*.trx
+        artifacts: ARM_Out/*.trx ARM_Out/*.ipk
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
