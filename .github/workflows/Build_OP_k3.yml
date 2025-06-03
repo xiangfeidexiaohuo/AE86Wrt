@@ -90,9 +90,23 @@ jobs:
       id: assemble_artifact
       run: |
         rm -rf ./ARM_Out
-        mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./openwrt/k3.config
+        mkdir -p ./ARM_Out/ipk/lucky
+        mkdir -p ./ARM_Out/ipk/mihomo
         
+        cp -a ./openwrt/.config ./openwrt/k3.config
+
+        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-app-openclash_*.ipk ./ARM_Out/ipk/
+        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-app-lucky_*.ipk ./ARM_Out/ipk/lucky/
+        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-i18n-lucky-zh-cn_*.ipk ./ARM_Out/ipk/lucky/
+        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/lucky_*.ipk ./ARM_Out/ipk/lucky/
+        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-app-nikki_*.ipk ./ARM_Out/ipk/mihomo/
+        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-i18n-nikki-zh-cn_*.ipk ./ARM_Out/ipk/mihomo/
+        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/nikki_*.ipk ./ARM_Out/ipk/mihomo/
+        cd ARM_Out
+        zip -9 -r "mihomo+openclash+lucky插件" ./ipk
+        rm -rf ./ipk
+        cd ..
+
         getmd5()
         {
         md5sum=`md5sum $1`
@@ -104,19 +118,12 @@ jobs:
         getmd5 $rom
                 
         cp -a $rom ./ARM_Out/AE86Wrt-K3-Lean-6.6-$(date +%Y%m%d)_${md5}.trx
-        
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-app-openclash_*.ipk ./ARM_Out/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-app-lucky_*.ipk ./ARM_Out/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-i18n-lucky-zh-cn_*.ipk ./ARM_Out/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/lucky_*.ipk ./ARM_Out/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-app-nikki_*.ipk ./ARM_Out/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-i18n-nikki-zh-cn_*.ipk ./ARM_Out/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/nikki_*.ipk ./ARM_Out/ 
+
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: K3-OpenWrt_504
+        name: K3-OpenWrt
         path: ARM_Out/*.trx   
 
     - name: Upload config
