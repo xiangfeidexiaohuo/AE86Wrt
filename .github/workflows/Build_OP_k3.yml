@@ -103,7 +103,7 @@ jobs:
         cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-i18n-nikki-zh-cn_*.ipk ./ARM_Out/ipk/mihomo/
         cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/nikki_*.ipk ./ARM_Out/ipk/mihomo/
         cd ARM_Out
-        zip -9 -r "mihomo+openclash+lucky插件" ./ipk
+        zip -9 -r "mihomo+openclash+lucky" ./ipk
         rm -rf ./ipk
         cd ..
 
