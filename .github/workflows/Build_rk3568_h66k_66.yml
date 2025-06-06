@@ -1,4 +1,4 @@
-name: Build_rk3568_h66k_66
+name: Build_rk3568_h66k_612
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 06 20 * * 4
+    - cron: 25 20 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_rk3568_h66k_66:
+  Build_rk3568_h66k_612:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -57,16 +57,16 @@ jobs:
         cp -f ../diy/lean/lean2.sh ./        
         chmod +x ./lean2.sh && ./lean2.sh    
         
-        ## 强制默认rockchip编译内核为6.6  
-        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.6/g" target/linux/rockchip/Makefile
-        sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=6.6/g" target/linux/rockchip/Makefile           
+        ## 强制默认rockchip编译内核为6.12  
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.12/g" target/linux/rockchip/Makefile
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.12/g" target/linux/rockchip/Makefile                      
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-H66K-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
-    - name: Configuration Customization - Build_rk3568_h66k_66
+    - name: Configuration Customization - Build_rk3568_h66k_612
       env:
-        CONFIG_FILE: './configs/ARM/rk3568/h66k_66.config'
+        CONFIG_FILE: './configs/ARM/rk3568/h66k_612.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -88,7 +88,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/h66k_66.config
+        cp -a ./openwrt/.config ./ARM_Out/h66k_612.config
         
         getmd5()
         {
@@ -100,19 +100,19 @@ jobs:
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-*-squashfs-sysupgrade.img.gz
         getmd5 $rom
                 
-        cp -a $rom ./ARM_Out/AE86Wrt-H66K-Lean-6.6-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-H66K-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: H66K-OpenWrt_66
+        name: H66K-OpenWrt_612
         path: ARM_Out/*.img.gz 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: H66K-66-config
-        path: ARM_Out/h66k_66.config
+        name: H66K-612-config
+        path: ARM_Out/h66k_612.config
  
     - name: Upload Packages
       uses: actions/upload-artifact@main
@@ -126,7 +126,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="H66K-Lean-6.6内核-$(date +%Y%m%d)"
+        release_name="H66K-Lean-6.12内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 

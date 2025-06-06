@@ -59,7 +59,7 @@ jobs:
         
         ## 强制默认rockchip编译内核为6.12  
         sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.12/g" target/linux/rockchip/Makefile
-        sed -i "s/KERNEL_PATCHVER=*.*/KERNEL_PATCHVER=6.12/g" target/linux/rockchip/Makefile           
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.12/g" target/linux/rockchip/Makefile
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-H68K-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
