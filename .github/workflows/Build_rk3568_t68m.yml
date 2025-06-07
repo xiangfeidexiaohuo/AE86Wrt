@@ -1,4 +1,4 @@
-name: Build_rk3568_t68m_612
+name: Build_rk3568_t68m
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_rk3568_t68m_612:
+  Build_rk3568_t68m:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -64,7 +64,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-T68M-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
-    - name: Configuration Customization - Build_rk3568_t68m_612
+    - name: Configuration Customization - Build_rk3568_t68m
       env:
         CONFIG_FILE: './configs/ARM/rk3568/t68m_612.config'
       run: |
@@ -105,13 +105,13 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: T68M-OpenWrt_612
+        name: T68M-OpenWrt
         path: ARM_Out/*.img.gz 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: T68M-612-config
+        name: T68M-config
         path: ARM_Out/t68m_612.config
  
     - name: Upload Packages

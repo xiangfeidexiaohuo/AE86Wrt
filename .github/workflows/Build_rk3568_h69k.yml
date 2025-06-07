@@ -1,4 +1,4 @@
-name: Build_rk3568_h69k_612
+name: Build_rk3568_h69k
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_rk3568_h69k_612:
+  Build_rk3568_h69k:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -64,7 +64,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-H69K-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
-    - name: Configuration Customization - Build_rk3568_h69k_612
+    - name: Configuration Customization - Build_rk3568_h69k
       env:
         CONFIG_FILE: './configs/ARM/rk3568/h69k_612.config'
       run: |
@@ -105,13 +105,13 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: H69K-OpenWrt_612
+        name: H69K-OpenWrt
         path: ARM_Out/*.img.gz 
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: H69K-612-config
+        name: H69K-config
         path: ARM_Out/h69k_612.config
  
     - name: Upload Packages

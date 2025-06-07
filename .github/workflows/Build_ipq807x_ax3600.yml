@@ -1,4 +1,4 @@
-name: Build_ipq807x_ax3600_66
+name: Build_ipq807x_ax3600
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_ipq807x_ax3600_66:
+  Build_ipq807x_ax3600:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -64,7 +64,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Xiaomi-AX3600-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
       
               
-    - name: Configuration Customization - Build_ipq807x_ax3600_66
+    - name: Configuration Customization - Build_ipq807x_ax3600
       env:
         CONFIG_FILE: './configs/ARM/ipq/ax3600_66.config'
       run: |
@@ -120,7 +120,7 @@ jobs:
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX3600-66-Packages
+        name: AX3600-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
