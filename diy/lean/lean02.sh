@@ -31,7 +31,6 @@ sed -i '/V4UetPzk$CYXluq4wUazHjmCDBCqXF/d' package/lean/default-settings/files/z
 
 
 ##替换K3无线驱动为69027
-rm -rf ./package/lean/k3-firmware/files/brcmfmac4366c-pcie.bin
 cp -af feeds/extraipk/patch/brcmfmac4366c-pcie.bin ./package/lean/k3-firmware/files/brcmfmac4366c-pcie.bin
 
 

@@ -26,7 +26,8 @@ sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/luci2/bin/config_generat
 ##清除默认密码password
 sed -i '/V4UetPzk$CYXluq4wUazHjmCDBCqXF/d' package/lean/default-settings/files/zzz-default-settings
 
-
+##替换K3无线驱动为69027
+cp -af feeds/2305ipk/patch/brcmfmac4366c-pcie.bin ./package/lean/k3-firmware/files/brcmfmac4366c-pcie.bin
 
 ##取消bootstrap为默认主题
 rm -rf ./feeds/luci/themes/luci-theme-argon
