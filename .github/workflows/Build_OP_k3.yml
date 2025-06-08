@@ -91,22 +91,8 @@ jobs:
       id: assemble_artifact
       run: |
         rm -rf ./ARM_Out
-        mkdir -p ./ARM_Out/ipk/lucky
-        mkdir -p ./ARM_Out/ipk/mihomo
-        
-        cp -a ./openwrt/.config ./openwrt/k3.config
-
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-app-openclash_*.ipk ./ARM_Out/ipk/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-app-lucky_*.ipk ./ARM_Out/ipk/lucky/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-i18n-lucky-zh-cn_*.ipk ./ARM_Out/ipk/lucky/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/lucky_*.ipk ./ARM_Out/ipk/lucky/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-app-nikki_*.ipk ./ARM_Out/ipk/mihomo/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/luci-i18n-nikki-zh-cn_*.ipk ./ARM_Out/ipk/mihomo/
-        cp -a openwrt/bin/packages/arm_cortex-a9/2305ipk/nikki_*.ipk ./ARM_Out/ipk/mihomo/
-        cd ARM_Out
-        zip -9 -r "mihomo+openclash+lucky" ./ipk
-        rm -rf ./ipk
-        cd ..
+        mkdir -p ./ARM_Out/
+        cp -a ./openwrt/.config ./ARM_Out/k3.config
 
         getmd5()
         {
@@ -131,7 +117,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: K3-config
-        path: openwrt/k3.config
+        path: ARM_Out/k3.config
  
     - name: Upload Packages
       uses: actions/upload-artifact@main
@@ -151,7 +137,7 @@ jobs:
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1.14.0
       with:
-        artifacts: ARM_Out/*
+        artifacts: ARM_Out/*.trx
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
