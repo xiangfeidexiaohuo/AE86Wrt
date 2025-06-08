@@ -104,13 +104,13 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: X86-OpenWrt-5.4-lite
+        name: X86-OpenWrt-5.4
         path: X86_Out/*.img.gz
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: X86-5.4-lite-config
+        name: X86-5.4-config
         path: X86_Out/x86_504.config
 
     - name: Upload Packages
