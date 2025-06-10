@@ -55,7 +55,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon-18.06/g' feeds/luci/collections/
 ##加入作者信息
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='Tiger-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings   
 sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' By Aaron'/g" package/lean/default-settings/files/zzz-default-settings
-cp -af feeds/extraipk/patch/diy/banner  package/base-files/files/etc/banner
+cp -af feeds/extraipk/patch/diy/banner-a  package/base-files/files/etc/banner
 
 sed -i "2iuci set istore.istore.channel='ae86_daodao'" package/lean/default-settings/files/zzz-default-settings
 sed -i "3iuci commit istore" package/lean/default-settings/files/zzz-default-settings
@@ -65,7 +65,7 @@ sed -i "3iuci commit istore" package/lean/default-settings/files/zzz-default-set
 sed -i "s/hostname='.*'/hostname='Tiger'/g" package/base-files/files/bin/config_generate
 
 ##WiFi
-sed -i "s/LEDE/AE86/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i "s/LEDE/Tiger/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 ### fix speed
 sed -i "s/speed = <2500>;/speed = <1000>;/g" target/linux/mediatek/dts/mt7622-*.dts
