@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@main
 
     - name: Free disk space
-      uses: sbwml/actions@free-disk
+      uses: xiangfeidexiaohuo/actions@free-disk
       with:
         build-mount-path: /home/runner/work/AE86Wrt/AE86Wrt
         
