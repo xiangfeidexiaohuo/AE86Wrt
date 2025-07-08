@@ -1,4 +1,4 @@
-name: Build_isosrk_r2410
+name: Build_istoreos_rk_2410
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 35 18 * * 4
+    - cron: 50 18 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_isosrk_r2410:
+  Build_istoreos_rk_2410:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -58,7 +58,7 @@ jobs:
         chmod +x ./isos2.sh && ./isos2.sh       
 
         
-    - name: Configuration Customization - Build_isosrk_r2410
+    - name: Configuration Customization - Build_istoreos_rk_2410
       env:
         CONFIG_FILE: './configs/ARM/other/isos_rk.config'
       run: |
@@ -90,12 +90,84 @@ jobs:
         md5=`echo ${md5sum% *}`
         md5=`echo ${md5:0:10}`
         }
-                   
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-nanopi-r2s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r3s-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-nanopi-r3s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-nanopi-r4s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-nanopi-r4se-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-nanopi-r5s_r5c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r6s-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-nanopi-r6s_r6c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e52c-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-radxa_e52c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e54c-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-radxa_e54c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-radxa_e20c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-fastrhino_r6xs-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-fastrhino_r6xs-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hinlink_opc-h6xk-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-hinlink_h6xk-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hinlink_h88k-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-hinlink_h88k-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r1-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-easepi_r1-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r1-lite-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-easepi_r1-lite-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_ars4-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-easepi_ars4-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+
+            
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
         name: Rockchip-iStoreOS-R24.10.2
-        path: rk_out/istoreos-*-squashfs.img.gz
+        path: rk_out/istoreos-*.img.gz
 
     - name: Upload config
       uses: actions/upload-artifact@main
@@ -121,7 +193,7 @@ jobs:
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1.14.0
       with:
-        artifacts: rk_out/istoreos-*-squashfs.img.gz
+        artifacts: rk_out/istoreos-*.img.gz
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
