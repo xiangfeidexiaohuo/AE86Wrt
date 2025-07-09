@@ -60,7 +60,7 @@ jobs:
         
     - name: Configuration Customization - Build_istoreos_x86_2410
       env:
-        CONFIG_FILE: './configs/ARM/other/isos_rk.config'
+        CONFIG_FILE: './configs/ARM/other/isos_x86.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
