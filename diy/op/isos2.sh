@@ -3,6 +3,10 @@
 # DaoDao's script
 #=================================================             
 
+##信息
+sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='%D %V - $(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
+sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' - DaoDao'/g" package/base-files/files/etc/openwrt_release
+
 ## fix_ss_libv
 rm -rf package/libs/mbedtls
 rm -rf package/libs/uclient
