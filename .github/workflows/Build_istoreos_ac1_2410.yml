@@ -1,0 +1,135 @@
+name: Build_istoreos_ac1_2410
+
+on: 
+  repository_dispatch:
+  workflow_dispatch:
+
+# 定时触发编译
+  schedule:
+    - cron: 50 18 * * 4
+
+# 点赞☆Star触发编译
+#  watch:
+#    types: [started]
+
+jobs:
+  Build_istoreos_ac1_2410:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+
+    - name: Free disk space
+      uses: xiangfeidexiaohuo/actions@free-disk
+      with:
+        build-mount-path: /home/runner/work/AE86Wrt/AE86Wrt
+
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo timedatectl set-timezone "Asia/Shanghai"
+        sudo -E apt-get update -y
+        sudo -E apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libfuse-dev python3-setuptools g++ file clang nano genisoimage
+        pip install aligo
+        sudo -E apt-get clean
+        git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
+        df -h
+        
+    - name: Clone source code
+      env: 
+        REPO_URL: https://github.com/xiangfeidexiaohuo/istoreos
+        REPO_BRANCH: seed
+      run: |
+        git clone https://github.com/xiangfeidexiaohuo/AE86Wrt ./
+        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+        cd openwrt
+        cp -f ../diy/op/isos1.sh ./
+        chmod +x ./isos1.sh && ./isos1.sh
+
+    - name: Update & Install feeds
+      working-directory: ./openwrt
+      run: |
+        ./scripts/feeds update -a
+
+        ./scripts/feeds install -a
+
+        cp -f ../diy/op/isos2.sh ./        
+        chmod +x ./isos2.sh && ./isos2.sh       
+
+        
+    - name: Configuration Customization - Build_istoreos_ac1_2410
+      env:
+        CONFIG_FILE: './configs/ARM/other/isos_ac1.config'
+      run: |
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        cd openwrt && make defconfig
+        
+    - name: Download package
+      working-directory: ./openwrt
+      run: |
+        make download -j$(nproc)
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: Build firmware
+      working-directory: ./openwrt
+      run: |     
+        make -j$(nproc) V=s
+
+    - name: Assemble Artifact
+      id: assemble_artifact
+      run: |
+        rm -rf ./rk_out
+        mkdir -p ./rk_out/
+        cp -a ./openwrt/.config ./rk_out/isos_ac1.config
+        
+        getmd5()
+        {
+        md5sum=`md5sum $1`
+        md5=`echo ${md5sum% *}`
+        md5=`echo ${md5:0:10}`
+        }
+
+
+        rom=openwrt/bin/targets/mediatek/filogic/istoreos-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-seed-ac1-24.10.2-$(date +%Y%m%d)_${md5}.bin
+
+            
+    - name: Upload Firmwares
+      uses: actions/upload-artifact@main
+      with:
+        name: AC1-iStoreOS-R24.10.2
+        path: rk_out/istoreos-*.bin
+
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: AC1-iStoreOS-config
+        path: rk_out/isos_ac1.config
+
+    - name: Upload Packages
+      uses: actions/upload-artifact@main
+      with:
+        name: AC1-iStoreOS-Packages
+        path: openwrt/bin/packages
+        
+    - name: Generate Tag & Release Name
+      id: generate_name
+      run: |
+        time=$(date +%Y%m%d%H%M%S)
+        release_tag="$time"
+        release_name="AC1-iStoreOS-R24.10.2-$(date +%Y%m%d)"
+        echo "release_name=$release_name" >> $GITHUB_OUTPUT
+        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
+
+    - name: Create Release & Upload
+      uses: ncipollo/release-action@v1.14.0
+      with:
+        artifacts: rk_out/istoreos-*.bin
+        name: ${{ steps.generate_name.outputs.release_name }}
+        tag: ${{ steps.generate_name.outputs.release_tag }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+
