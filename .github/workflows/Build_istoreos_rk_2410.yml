@@ -94,73 +94,73 @@ jobs:
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-nanopi-r2s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r2s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r3s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-nanopi-r3s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r3s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-nanopi-r4s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r4s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-nanopi-r4se-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r4se-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-nanopi-r5s_r5c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r5s_r5c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r6s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-nanopi-r6s_r6c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r6s_r6c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e52c-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-radxa_e52c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-radxa_e52c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e54c-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-radxa_e54c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-radxa_e54c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-radxa_e20c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-radxa_e20c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-fastrhino_r6xs-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-fastrhino_r6xs-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-fastrhino_r6xs-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hinlink_opc-h6xk-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-hinlink_h6xk-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-hinlink_h6xk-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hinlink_h88k-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-hinlink_h88k-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-hinlink_h88k-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r1-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-easepi_r1-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-easepi_r1-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r1-lite-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-easepi_r1-lite-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-easepi_r1-lite-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_ars4-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-easepi_ars4-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-easepi_ars4-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
             
     - name: Upload Firmwares
@@ -186,7 +186,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="Rockchip机型-iStoreOS-R24.10.2-$(date +%Y%m%d)"
+        release_name="Rockchip机型-iStoreOS-3rd-R24.10.2-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
