@@ -115,7 +115,7 @@ jobs:
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AE86Wrt-X86-612-Packages
+        name: AE86Wrt-X86-6.12-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
