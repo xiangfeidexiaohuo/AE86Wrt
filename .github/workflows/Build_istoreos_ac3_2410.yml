@@ -92,7 +92,6 @@ jobs:
       run: |
         rm -rf ./rk_out
         mkdir -p ./rk_out/
-        cp -a ./openwrt/.config ./rk_out/isos_ac3.config
         
         getmd5()
         {
@@ -114,11 +113,6 @@ jobs:
         name: AC3-iStoreOS-R24.10.2
         path: rk_out/istoreos-*.bin
 
-    - name: Upload config
-      uses: actions/upload-artifact@main
-      with:
-        name: AC3-iStoreOS-config
-        path: rk_out/isos_ac3.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
