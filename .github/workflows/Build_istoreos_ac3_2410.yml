@@ -70,8 +70,11 @@ jobs:
         path: AC
         
     - name: Configuration Customization - Build_istoreos_ac3_2410
+      env:
+        CONFIG_FILE: './configs/ARM/other/isos_other.config'
       run: |
-        mv AC/isos_ac3.config openwrt/.config
+        mv AC/config_seed_ac3.config openwrt/.config
+        [ -e $CONFIG_FILE ] && cat $CONFIG_FILE >> openwrt/.config
         cd openwrt && make defconfig
         
     - name: Download package
