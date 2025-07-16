@@ -60,9 +60,12 @@ jobs:
         
     - name: Configuration Customization - Build_istoreos_rk_2410
       env:
-        CONFIG_FILE: './configs/ARM/other/isos_rk.config'
+        CONFIG_FILE: './configs/ARM/other/isos_other.config'
       run: |
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        wget -P  openwrt/ http://fw.koolcenter.com/iStoreOS/easepi-r1/config.seed
+        [ -e $CONFIG_FILE ] && cat $CONFIG_FILE >> openwrt/config.seed
+        mv openwrt/config.seed openwrt/.config
+
         cd openwrt && make defconfig
         
     - name: Download package
