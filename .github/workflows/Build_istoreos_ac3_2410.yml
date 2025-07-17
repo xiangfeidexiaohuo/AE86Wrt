@@ -71,7 +71,7 @@ jobs:
         
     - name: Configuration Customization - Build_istoreos_ac3_2410
       env:
-        CONFIG_FILE: './configs/ARM/other/isos_other.config'
+        CONFIG_FILE: './configs/ARM/other/isos_add.config'
       run: |
         mv AC/config_seed_ac3.config openwrt/.config
         [ -e $CONFIG_FILE ] && cat $CONFIG_FILE >> openwrt/.config

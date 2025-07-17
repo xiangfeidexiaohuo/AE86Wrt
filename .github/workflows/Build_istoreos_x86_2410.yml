@@ -60,7 +60,7 @@ jobs:
         
     - name: Configuration Customization - Build_istoreos_x86_2410
       env:
-        CONFIG_FILE: './configs/ARM/other/isos_other.config'
+        CONFIG_FILE: './configs/ARM/other/isos_add.config'
       run: |
         wget -P  openwrt/ http://fw.koolcenter.com/iStoreOS/x86_64_efi/config.seed
         [ -e $CONFIG_FILE ] && cat $CONFIG_FILE >> openwrt/config.seed
