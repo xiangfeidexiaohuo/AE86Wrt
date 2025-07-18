@@ -22,7 +22,7 @@ jobs:
     - name: Free disk space
       uses: xiangfeidexiaohuo/actions@free-disk
       with:
-        build-mount-path: /home/runner/work/AE86Wrt/AE86Wrt
+        build-mount-path: /home/runner/work/AE86Wrt
 
     - name: Initialization environment
       env:
@@ -41,7 +41,7 @@ jobs:
         REPO_URL: https://github.com/coolsnowwolf/lede
         REPO_BRANCH: master
       run: |
-        git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./  && rm -rf ./AE86Wrt
+        ## git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./  && rm -rf ./AE86Wrt
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         cp -f ../diy/lean/lean1.sh ./
