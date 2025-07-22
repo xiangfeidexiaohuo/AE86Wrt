@@ -99,91 +99,91 @@ jobs:
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r2c-squashfs-sysupgrade.img.gz
         getmd5 $rom            
-        cp -a $rom ./ARM_Out/AE86Wrt-R2C-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R2C-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz
         getmd5 $rom               
-        cp -a $rom ./ARM_Out/AE86Wrt-R2S-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R2S-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r2c-plus-squashfs-sysupgrade.img.gz
         getmd5 $rom            
-        cp -a $rom ./ARM_Out/AE86Wrt-R2C-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R2CPlus-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-plus-squashfs-sysupgrade.img.gz
         getmd5 $rom               
-        cp -a $rom ./ARM_Out/AE86Wrt-R2S-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R2SPlus-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
 
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r3s-squashfs-sysupgrade.img.gz
         getmd5 $rom               
-        cp -a $rom ./ARM_Out/AE86Wrt-R2S-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R3S-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-R4S-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R4S-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-R4SE-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R4SE-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r5c-squashfs-sysupgrade.img.gz
         getmd5 $rom       
-        cp -a $rom ./ARM_Out/AE86Wrt-R5C-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R5C-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
         getmd5 $rom      
-        cp -a $rom ./ARM_Out/AE86Wrt-R5S-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R5S-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
 
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r6c-squashfs-sysupgrade.img.gz
         getmd5 $rom           
-        cp -a $rom ./ARM_Out/AE86Wrt-R6C-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R6C-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r6s-squashfs-sysupgrade.img.gz
         getmd5 $rom          
-        cp -a $rom ./ARM_Out/AE86Wrt-R6S-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R6S-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopc-t6-squashfs-sysupgrade.img.gz
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-T6-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPC-T6-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
 
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-fastrhino_r66s-squashfs-sysupgrade.img.gz
         getmd5 $rom       
-        cp -a $rom ./ARM_Out/AE86Wrt-R66S-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-FastRhino-R66S-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-fastrhino_r68s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./ARM_Out/AE86Wrt-R68S-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-FastRhino-R68S-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-*-squashfs-sysupgrade.img.gz
         getmd5 $rom   
-        cp -a $rom ./ARM_Out/AE86Wrt-T68M-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-LYT-T68M--6.12-$(date +%Y%m%d)_${md5}.img.gz
 
 
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-hinlink_opc-h66k-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./ARM_Out/AE86Wrt-H66K-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-Hinlink-H66K-6.12-$(date +%Y%m%d)_${md5}.img.gz
         
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-hinlink_opc-h68k-squashfs-sysupgrade.img.gz
         getmd5 $rom           
-        cp -a $rom ./ARM_Out/AE86Wrt-H68K-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-Hinlink-H68K-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-hinlink_opc-h69k-squashfs-sysupgrade.img.gz
         getmd5 $rom          
-        cp -a $rom ./ARM_Out/AE86Wrt-H69K-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-Hinlink-H69K-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-hinlink_opc-h28k-squashfs-sysupgrade.img.gz
         getmd5 $rom           
-        cp -a $rom ./ARM_Out/AE86Wrt-H28K-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-Hinlink-H28K-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-hinlink_opc-h29k-squashfs-sysupgrade.img.gz
         getmd5 $rom          
-        cp -a $rom ./ARM_Out/AE86Wrt-H29K-Lean-6.12-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./ARM_Out/AE86Wrt-Hinlink-H29K-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
                
     - name: Upload Firmwares
@@ -210,7 +210,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="AE86Wrt-Rockchip-Lean-6.12内核-$(date +%Y%m%d)"
+        release_name="AE86Wrt-Rockchip-6.12内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT    
 
