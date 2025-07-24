@@ -1,4 +1,4 @@
-name: Build_k3
+name: Build_istoreos_ac3_2410
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 1 23 * * 4
+    - cron: 10 19 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_k3:
+  Build_istoreos_ac3_2410:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -35,17 +35,22 @@ jobs:
         sudo -E apt-get clean
         git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
         df -h
-        
-    - name: Clone source code
-      env: 
-        REPO_URL: https://github.com/xiangfeidexiaohuo/lede
-        REPO_BRANCH: k3
+
+    - name: Checkout Main repo
+      uses: actions/checkout@main
+      with:
+        repository: xiangfeidexiaohuo/istoreos-seed-ac
+        token: ${{ secrets.AC_TOKEN }}
+        ref: dev
+        path: openwrt
+
+
+    - name: Start
+      working-directory: ./openwrt
       run: |
-        git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./  && rm -rf ./AE86Wrt
-        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
-        cd openwrt
-        cp -f ../diy/lean/lean1.sh ./
-        chmod +x ./lean1.sh && ./lean1.sh
+        git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git
+        cp -f ./AE86Wrt/diy/op/isos1.sh ./
+        chmod +x ./isos1.sh && ./isos1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -54,26 +59,21 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ../diy/lean/lean2.sh ./        
-        chmod +x ./lean2.sh && ./lean2.sh  
-            
-        sed -i 's/+!TARGET_ramips:kmod-usb-storage-uas //g'  ./package/lean/automount/Makefile
-        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.4/g" target/linux/bcm53xx/Makefile
-        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.4/g" target/linux/bcm53xx/Makefile
-                
-        sed -i 's/\${Arch}/armv5/g' feeds/2305ipk/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
-        ## sed -i 's/\${Arch}/armv5/g' feeds/extraipk/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
-        sed -i 's/\${Arch}/armv5/g' feeds/luci/applications/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
+        cp -f ./AE86Wrt/diy/op/isos2.sh ./        
+        chmod +x ./isos2.sh && ./isos2.sh       
+
+    - name: Checkout Config repo
+      uses: actions/checkout@main
+      with:
+        repository: xiangfeidexiaohuo/istoreos-seed-ac
+        token: ${{ secrets.AC_TOKEN }}
+        ref: config
+        path: AC
         
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K3-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings  
-       
-              
-    - name: Configuration Customization - Build_k3
-      env:
-        CONFIG_FILE: './configs/ARM/other/k3.config'
+    - name: Configuration Customization - Build_istoreos_ac3_2410
       run: |
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        cd openwrt && make defconfig
+        mv AC/config_seed_ac3.config openwrt/.config
+        cd openwrt  && cat ./AE86Wrt/configs/ARM/other/isos_add.config >> .config  && make defconfig
         
     - name: Download package
       working-directory: ./openwrt
@@ -85,61 +85,57 @@ jobs:
     - name: Build firmware
       working-directory: ./openwrt
       run: |
+        date '+%Y%m%d%H' > version    
         make -j$(nproc) V=s
-        
+
     - name: Assemble Artifact
       id: assemble_artifact
       run: |
-        rm -rf ./ARM_Out
-        mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/k3.config
-
+        rm -rf ./rk_out
+        mkdir -p ./rk_out/
+        
         getmd5()
         {
         md5sum=`md5sum $1`
         md5=`echo ${md5sum% *}`
         md5=`echo ${md5:0:10}`
         }
-        
-        rom=openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm_k3-squashfs.trx
-        getmd5 $rom
-                
-        cp -a $rom ./ARM_Out/AE86Wrt-K3-5.4-$(date +%Y%m%d)_${md5}.trx
 
-               
+
+        # rom=openwrt/bin/targets/mediatek/filogic/istoreos-24.10.2-r0-e40e56e-mediatek-filogic-beeconmini_seed-ac3-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/mediatek/filogic/istoreos-*-beeconmini_seed-ac3-squashfs-sysupgrade.bin
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-seed-ac3-24.10.2-$(date +%Y%m%d)_${md5}.bin
+
+            
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: K3-OpenWrt
-        path: ARM_Out/*.trx   
+        name: AC3-iStoreOS-R24.10.2
+        path: rk_out/istoreos-*.bin
 
-    - name: Upload config
-      uses: actions/upload-artifact@main
-      with:
-        name: K3-config
-        path: ARM_Out/k3.config
- 
+
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: K3-Packages
-        path: openwrt/bin/packages 
+        name: AC3-iStoreOS-Packages
+        path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="斐讯K3-5.4内核-$(date +%Y%m%d)"
+        release_name="AC3-iStoreOS-3rd-R24.10.2-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
-        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
+        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1.14.0
       with:
-        artifacts: ARM_Out/*.trx
+        artifacts: rk_out/istoreos-*.bin
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        
-    
+
+
