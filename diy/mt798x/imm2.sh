@@ -15,11 +15,7 @@ echo -e "msgstr \"魔法网络\"" >> feeds/luci/modules/luci-base/po/zh_Hans/bas
 
 ##配置IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-
-
-## 24.10-fw4-turboacc
-## curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
-
+sed -i 's/192.168.6.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
 ##取消bootstrap为默认主题
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
@@ -49,31 +45,10 @@ date '+%Y%m%d%H' > package/base-files/files/etc/openwrt_version
 sed -i "s/NAME=\"*.*\"/NAME=\"AE86Wrt\"/g" package/base-files/files/usr/lib/os-release
 sed -i "s/BUILD_ID=\"*.*\"/BUILD_ID=\"$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
 
-
-##MosDNS
-# rm -rf feeds/packages/net/mosdns/*
-# cp -af feeds/2305ipk/op-mosdns/mosdns/* feeds/packages/net/mosdns/
-rm -rf feeds/packages/net/v2ray-geodata/*
-cp -af feeds/2305ipk/op-mosdns/v2ray-geodata/* feeds/packages/net/v2ray-geodata/
-
-##antiblock
-rm -rf feeds/luci/applications/luci-app-antiblock/*
-cp -af feeds/2305ipk/op-antiblock/luci-app-antiblock/* feeds/luci/applications/luci-app-antiblock/
-
-##Dockerman
-rm -rf feeds/luci/applications/luci-app-dockerman/*
-cp -af feeds/2305ipk/luci-app-dockerman/* feeds/luci/applications/luci-app-dockerman/
-
-## fix_ss_libv
-#rm -rf package/libs/mbedtls
-#rm -rf package/libs/uclient
-#rm -rf package/libs/ustream-ssl
-#cp -af feeds/2305ipk/patch/fix_ss_libv/*  package/libs/
+##WiFi
+sed -i "s/ImmortalWrt-2.4G/AE86-2.4G/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
+sed -i "s/ImmortalWrt-5G/AE86-5G/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
 ## golang
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
-
-## rust(ci false)
-# sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
-sed -i 's/--build-dir\ $(HOST_BUILD_DIR)\/build/--build-dir\ $(HOST_BUILD_DIR)\/build\ \\\n\		--ci\ false/' feeds/packages/lang/rust/Makefile
