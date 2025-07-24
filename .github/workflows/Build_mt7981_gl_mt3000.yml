@@ -1,4 +1,4 @@
-name: Build_mt7986_gl_mt6000
+name: Build_mt7981_gl_mt3000
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 6 22 * * 4
+    - cron: 26 22 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_mt7986_gl_mt6000:
+  Build_mt7981_gl_mt3000:
     runs-on: ubuntu-latest
     steps:
     - name: Clone Repository
@@ -59,11 +59,11 @@ jobs:
         cp -f ../diy/mt798x/op2.sh ./        
         chmod +x ./op2.sh && ./op2.sh      
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-GL-MT6000-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-GL-MT3000-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
               
-    - name: Configuration Customization - Build_mt7986_gl_mt6000
+    - name: Configuration Customization - Build_mt7981_gl_mt3000
       env:
-        CONFIG_FILE: './configs/ARM/mt798x/mt7986_gl_mt6000.config'
+        CONFIG_FILE: './configs/ARM/mt798x/mt7981_gl_mt3000.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -85,7 +85,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/mt7986_gl_mt6000.config
+        cp -a ./openwrt/.config ./ARM_Out/mt7981_gl_mt3000.config
         
         getmd5()
         {
@@ -94,26 +94,26 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/mediatek/mt7986/immortalwrt-mediatek-mt7986-glinet_gl-mt6000-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-glinet_gl-mt3000-squashfs-sysupgrade.tar
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-GL-MT6000-5.4-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-GL-MT3000-5.4-$(date +%Y%m%d)_${md5}.tar
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: MT6000-OpenWrt
-        path: ARM_Out/*.bin
+        name: MT3000-OpenWrt
+        path: ARM_Out/*.tar
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: MT6000-config
-        path: ARM_Out/mt7986_gl_mt6000.config
+        name: MT3000-config
+        path: ARM_Out/mt7981_gl_mt3000.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: MT6000-Packages
+        name: MT3000-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
@@ -121,14 +121,14 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="AE86Wrt-GL-MT6000-5.4内核-$(date +%Y%m%d)"
+        release_name="AE86Wrt-GL-MT3000-5.4内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1.14.0
       with:
-        artifacts: ARM_Out/*.bin
+        artifacts: ARM_Out/*.tar
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
