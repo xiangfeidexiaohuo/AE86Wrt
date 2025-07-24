@@ -1,4 +1,4 @@
-name: Build_mt7986_gl_mt6000
+name: Build_mt7981_all
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 6 22 * * 4
+    - cron: 21 22 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_mt7986_gl_mt6000:
+  Build_mt7981_all:
     runs-on: ubuntu-latest
     steps:
     - name: Clone Repository
@@ -59,11 +59,11 @@ jobs:
         cp -f ../diy/mt798x/op2.sh ./        
         chmod +x ./op2.sh && ./op2.sh      
 
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-GL-MT6000-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-MT7981-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
               
-    - name: Configuration Customization - Build_mt7986_gl_mt6000
+    - name: Configuration Customization - Build_mt7981_all
       env:
-        CONFIG_FILE: './configs/ARM/mt798x/mt7986_gl_mt6000.config'
+        CONFIG_FILE: './configs/ARM/mt798x/mt7981.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -77,7 +77,7 @@ jobs:
 
     - name: Build firmware
       working-directory: ./openwrt
-      run: |      
+      run: |
         make -j$(nproc) V=s
         
     - name: Assemble Artifact
@@ -85,7 +85,7 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/mt7986_gl_mt6000.config
+        cp -a ./openwrt/.config ./ARM_Out/mt7981.config
         
         getmd5()
         {
@@ -94,26 +94,60 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/mediatek/mt7986/immortalwrt-mediatek-mt7986-glinet_gl-mt6000-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-mt7981-360-t7-108M-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-GL-MT6000-5.4-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/AE86Wrt-360-T7-5.4-$(date +%Y%m%d)_${md5}.bin
+
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-konka_komi-a31-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-KOMI-A31-5.4-$(date +%Y%m%d)_${md5}.bin
+
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3000T-5.4-$(date +%Y%m%d)_${md5}.bin
+
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-an8855-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-AX3000T(an8855)-5.4-$(date +%Y%m%d)_${md5}.bin
+
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-cetron_ct3003-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-Cetron-CT3003-5.4-$(date +%Y%m%d)_${md5}.bin
+
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-nokia_ea0326gmp-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-Nokia-AX3000-5.4-$(date +%Y%m%d)_${md5}.bin
+
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-h3c_nx30pro-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-H3C-NX30Pro-5.4-$(date +%Y%m%d)_${md5}.bin
+
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-jcg_q30-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-JCG-Q30Pro-5.4-$(date +%Y%m%d)_${md5}.bin
+
+        rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-xiaomi_mi-router-wr30u-112m-squashfs-sysupgrade.bin
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-Xiaomi-WR30U-5.4-$(date +%Y%m%d)_${md5}.bin
+
+
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: MT6000-OpenWrt
+        name: MT7981-OpenWrt
         path: ARM_Out/*.bin
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: MT6000-config
-        path: ARM_Out/mt7986_gl_mt6000.config
+        name: MT7981-config
+        path: ARM_Out/mt7981.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: MT6000-Packages
+        name: MT7981-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
@@ -121,7 +155,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="GL-MT6000-5.4内核-$(date +%Y%m%d)"
+        release_name="AE86Wrt-MT7981-5.4内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
@@ -133,4 +167,4 @@ jobs:
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
         
-     
+   
