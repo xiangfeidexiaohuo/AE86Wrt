@@ -1,4 +1,4 @@
-name: Build_istoreos_ac3_2410
+name: Build_isos_3rd_armsr
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 10 19 * * 5
+    - cron: 30 20 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_istoreos_ac3_2410:
+  Build_isos_3rd_armsr:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -35,21 +35,16 @@ jobs:
         sudo -E apt-get clean
         git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
         df -h
-
-    - name: Checkout Main repo
-      uses: actions/checkout@main
-      with:
-        repository: xiangfeidexiaohuo/istoreos-seed-ac
-        token: ${{ secrets.AC_TOKEN }}
-        ref: dev
-        path: openwrt
-
-
-    - name: Start
-      working-directory: ./openwrt
+        
+    - name: Clone source code
+      env: 
+        REPO_URL: https://github.com/xiangfeidexiaohuo/istoreos
+        REPO_BRANCH: test
       run: |
-        git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git
-        cp -f ./AE86Wrt/diy/op/isos1.sh ./
+        git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./  && rm -rf ./AE86Wrt
+        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+        cd openwrt
+        cp -f ../diy/op/isos1.sh ./
         chmod +x ./isos1.sh && ./isos1.sh
 
     - name: Update & Install feeds
@@ -59,21 +54,19 @@ jobs:
 
         ./scripts/feeds install -a
 
-        cp -f ./AE86Wrt/diy/op/isos2.sh ./        
+        cp -f ../diy/op/isos2.sh ./        
         chmod +x ./isos2.sh && ./isos2.sh       
 
-    - name: Checkout Config repo
-      uses: actions/checkout@main
-      with:
-        repository: xiangfeidexiaohuo/istoreos-seed-ac
-        token: ${{ secrets.AC_TOKEN }}
-        ref: config
-        path: AC
         
-    - name: Configuration Customization - Build_istoreos_ac3_2410
+    - name: Configuration Customization - Build_isos_3rd_armsr
+      env:
+        CONFIG_FILE: './configs/ARM/other/isos_add.config'
       run: |
-        mv AC/config_seed_ac3.config openwrt/.config
-        cd openwrt  && cat ./AE86Wrt/configs/ARM/other/isos_add.config >> .config  && make defconfig
+        wget -P  openwrt/ http://fw.koolcenter.com/iStoreOS/armsr/config.seed
+        [ -e $CONFIG_FILE ] && cat $CONFIG_FILE >> openwrt/config.seed
+        mv openwrt/config.seed openwrt/.config
+
+        cd openwrt && make defconfig
         
     - name: Download package
       working-directory: ./openwrt
@@ -85,7 +78,7 @@ jobs:
     - name: Build firmware
       working-directory: ./openwrt
       run: |
-        date '+%Y%m%d%H' > version    
+        date '+%Y%m%d%H' > version   
         make -j$(nproc) V=s
 
     - name: Assemble Artifact
@@ -93,6 +86,7 @@ jobs:
       run: |
         rm -rf ./rk_out
         mkdir -p ./rk_out/
+        cp -a ./openwrt/.config ./rk_out/isos_armsr.config
         
         getmd5()
         {
@@ -102,23 +96,27 @@ jobs:
         }
 
 
-        # rom=openwrt/bin/targets/mediatek/filogic/istoreos-24.10.2-r0-e40e56e-mediatek-filogic-beeconmini_seed-ac3-squashfs-sysupgrade.bin
-        rom=openwrt/bin/targets/mediatek/filogic/istoreos-*-beeconmini_seed-ac3-squashfs-sysupgrade.bin
+        rom=openwrt/bin/targets/armsr/armv8/istoreos-armsr-*.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-seed-ac3-24.10.2-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./rk_out/istoreos-3rd-armsr-efi-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
             
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: AC3-iStoreOS-R24.10.2
-        path: rk_out/istoreos-*.bin
+        name: ARMSR-iStoreOS-R24.10.2
+        path: rk_out/istoreos-*.img.gz
 
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: ARMSR-iStoreOS-config
+        path: rk_out/isos_armsr.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AC3-iStoreOS-Packages
+        name: ARMSR-iStoreOS-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
@@ -126,14 +124,14 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="AC3-iStoreOS-3rd-R24.10.2-$(date +%Y%m%d)"
+        release_name="ARMSR-iStoreOS-3rd-R24.10.2-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1.14.0
       with:
-        artifacts: rk_out/istoreos-*.bin
+        artifacts: rk_out/istoreos-*.img.gz
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}

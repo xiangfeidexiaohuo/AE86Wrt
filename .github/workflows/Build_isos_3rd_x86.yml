@@ -1,4 +1,4 @@
-name: Build_istoreos_rk_2410
+name: Build_isos_3rd_x86
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 40 18 * * 5
+    - cron: 30 18 * * 5
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_istoreos_rk_2410:
+  Build_isos_3rd_x86:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -58,11 +58,11 @@ jobs:
         chmod +x ./isos2.sh && ./isos2.sh       
 
         
-    - name: Configuration Customization - Build_istoreos_rk_2410
+    - name: Configuration Customization - Build_isos_3rd_x86
       env:
         CONFIG_FILE: './configs/ARM/other/isos_add.config'
       run: |
-        wget -P  openwrt/ http://fw.koolcenter.com/iStoreOS/easepi-r1/config.seed
+        wget -P  openwrt/ http://fw.koolcenter.com/iStoreOS/x86_64_efi/config.seed
         [ -e $CONFIG_FILE ] && cat $CONFIG_FILE >> openwrt/config.seed
         mv openwrt/config.seed openwrt/.config
 
@@ -86,7 +86,7 @@ jobs:
       run: |
         rm -rf ./rk_out
         mkdir -p ./rk_out/
-        cp -a ./openwrt/.config ./rk_out/isos_rk.config
+        cp -a ./openwrt/.config ./rk_out/isos_x86.config
         
         getmd5()
         {
@@ -96,93 +96,32 @@ jobs:
         }
 
 
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz
+        rom=openwrt/bin/targets/x86/64/istoreos-x86-64-generic-squashfs-combined-efi.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r2s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-x86-efi-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
 
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r3s-squashfs-sysupgrade.img.gz
+        rom=openwrt/bin/targets/x86/64/istoreos-x86-64-generic-squashfs-combined.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r3s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r4s-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r4se-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r5s_r5c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r6s-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r6s_r6c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e52c-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-radxa_e52c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e54c-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-radxa_e54c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-radxa_e20c-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-fastrhino_r6xs-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-fastrhino_r6xs-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hinlink_opc-h6xk-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-hinlink_h6xk-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hinlink_h88k-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-hinlink_h88k-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r1-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-easepi_r1-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r1-lite-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-easepi_r1-lite-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
-
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_ars4-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-easepi_ars4-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-x86-24.10.2-$(date +%Y%m%d)_${md5}.img.gz
 
             
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: Rockchip-iStoreOS-R24.10.2
+        name: X86-iStoreOS-R24.10.2
         path: rk_out/istoreos-*.img.gz
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: Rockchip-iStoreOS-config
-        path: rk_out/isos_rk.config
+        name: X86-iStoreOS-config
+        path: rk_out/isos_x86.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: Rockchip-iStoreOS-Packages
+        name: X86-iStoreOS-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
@@ -190,7 +129,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="Rockchip-iStoreOS-3rd-R24.10.2-$(date +%Y%m%d)"
+        release_name="X86-iStoreOS-3rd-R24.10.2-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
