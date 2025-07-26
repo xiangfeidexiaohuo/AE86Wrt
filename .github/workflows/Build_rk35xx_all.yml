@@ -149,6 +149,10 @@ jobs:
         getmd5 $rom        
         cp -a $rom ./ARM_Out/AE86Wrt-NanoPC-T6-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
+        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r76s-squashfs-sysupgrade.img.gz
+        getmd5 $rom          
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R76S-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
 
 
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-fastrhino_r66s-squashfs-sysupgrade.img.gz
