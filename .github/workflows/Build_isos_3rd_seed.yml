@@ -1,0 +1,156 @@
+name: Build_isos_3rd_seed
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+
+# 定时触发编译
+#  schedule:
+#    - cron: 10 19 * * 5
+
+jobs:
+  build:
+    name: Build ${{ matrix.model }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        model: ["AC1", "AC3"]
+        include:
+          - model: "AC1"
+            config_file: "config_seed_ac1.config"
+            output_pattern: "*-beeconmini_seed-ac1-squashfs-sysupgrade.bin"
+            lower_model: "ac1"
+          - model: "AC3"
+            config_file: "config_seed_ac3.config"
+            output_pattern: "*-beeconmini_seed-ac3-squashfs-sysupgrade.bin"
+            lower_model: "ac3"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Free disk space
+        uses: xiangfeidexiaohuo/actions@free-disk
+        with:
+          build-mount-path: /home/runner/work/AE86Wrt/AE86Wrt
+
+      - name: Initialization environment
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          sudo -E apt-get update -y
+          sudo -E apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libfuse-dev python3-setuptools g++ file clang nano genisoimage
+          pip install aligo
+          sudo -E apt-get clean
+          git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
+          df -h
+
+      - name: Checkout Main repo
+        uses: actions/checkout@main
+        with:
+          repository: xiangfeidexiaohuo/istoreos-seed-ac
+          token: ${{ secrets.AC_TOKEN }}
+          path: openwrt-${{ matrix.model }}
+
+      - name: Start build
+        working-directory: ./openwrt-${{ matrix.model }}
+        run: |
+          git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git
+          cp -f ./AE86Wrt/diy/op/isos1.sh ./
+          chmod +x ./isos1.sh && ./isos1.sh
+
+      - name: Update & Install feeds
+        working-directory: ./openwrt-${{ matrix.model }}
+        run: |
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          cp -f ./AE86Wrt/diy/op/isos2.sh ./        
+          chmod +x ./isos2.sh && ./isos2.sh
+
+      - name: Checkout Config repo
+        uses: actions/checkout@main
+        with:
+          repository: xiangfeidexiaohuo/istoreos-seed-ac
+          token: ${{ secrets.AC_TOKEN }}
+          ref: config
+          path: AC-${{ matrix.model }}
+
+      - name: Configuration Customization
+        working-directory: ./openwrt-${{ matrix.model }}
+        run: |
+          mv ../AC-${{ matrix.model }}/${{ matrix.config_file }} .config
+          cat ./AE86Wrt/configs/ARM/other/isos_add.config >> .config
+          make defconfig
+
+      - name: Download package
+        working-directory: ./openwrt-${{ matrix.model }}
+        run: |
+          make download -j$(nproc)
+          find dl -size -1024c -exec ls -l {} \;
+          find dl -size -1024c -exec rm -f {} \;
+
+      - name: Build firmware
+        working-directory: ./openwrt-${{ matrix.model }}
+        run: |
+          date '+%Y%m%d%H' > version
+          echo -n 6a9e125268c43e0bae8cecb014c8ab03 > .vermagic 
+          make -j$(nproc) V=s
+
+      - name: Prepare artifacts
+        id: prepare_artifacts
+        run: |
+          mkdir -p artifacts/${{ matrix.model }}
+          
+          getmd5() {
+            md5sum=`md5sum $1`
+            md5=`echo ${md5sum% *}`
+            md5=`echo ${md5:0:10}`
+          }
+          
+          rom=openwrt-${{ matrix.model }}/bin/targets/mediatek/filogic/${{ matrix.output_pattern }}
+          getmd5 $rom
+          cp -a $rom artifacts/${{ matrix.model }}/istoreos-3rd-seed-${{ matrix.lower_model }}-$(date +%Y%m%d)_${md5}.bin
+
+      - name: Upload Firmware Artifacts
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.model }}-Firmware
+          path: artifacts/${{ matrix.model }}/*.bin
+
+      - name: Upload Packages Artifacts
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.model }}-Packages
+          path: openwrt-${{ matrix.model }}/bin/packages/*
+
+  create_release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@main
+        with:
+          path: downloaded_artifacts
+
+      - name: Prepare release assets
+        run: |
+          mkdir -p release_assets
+          find downloaded_artifacts -name "*.bin" -exec cp {} release_assets \;
+          
+      - name: Generate release info
+        id: release_info
+        run: |
+          echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+          echo "release_name=isos-3rd-seed-acx-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.release_info.outputs.release_tag }}
+          name: ${{ steps.release_info.outputs.release_name }}
+          files: |
+            release_assets/*
+          token: ${{ secrets.GITHUB_TOKEN }}
