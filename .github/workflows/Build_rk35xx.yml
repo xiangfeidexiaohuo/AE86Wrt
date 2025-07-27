@@ -1,4 +1,4 @@
-name: Build_rk35xx_all
+name: Build_rk35xx
 
 on: 
   repository_dispatch:
@@ -6,14 +6,10 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 01 20 * * 4
-
-# 点赞☆Star触发编译
-#  watch:
-#    types: [started]
+    - cron: 1 20 * * 4
 
 jobs:
-  Build_rk35xx_all:
+  Build_rk35xx:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -64,7 +60,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-RK-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
        
               
-    - name: Configuration Customization - Build_rk35xx_all
+    - name: Configuration Customization - Build_rk35xx
       env:
         CONFIG_FILE: './configs/ARM/other/rk_612.config'
       run: |
