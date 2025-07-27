@@ -5,16 +5,21 @@ on:
   workflow_dispatch:
 
 # 定时触发编译
-  schedule:
-    - cron: 40 18 * * 5
-
-# 点赞☆Star触发编译
-#  watch:
-#    types: [started]
+#  schedule:
+#    - cron: 40 18 * * 5
 
 jobs:
-  Build_isos_3rd_rk:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [armsr, rk]
+        include:
+          - arch: armsr
+            config_url: "http://fw.koolcenter.com/iStoreOS/armsr/config.seed"
+          - arch: rk
+            config_url: "http://fw.koolcenter.com/iStoreOS/easepi-r1/config.seed"
+
     steps:
     - name: Checkout
       uses: actions/checkout@main
@@ -62,7 +67,7 @@ jobs:
       env:
         CONFIG_FILE: './configs/ARM/other/isos_add.config'
       run: |
-        wget -P  openwrt/ http://fw.koolcenter.com/iStoreOS/easepi-r1/config.seed
+        wget -P  openwrt/ ${{ matrix.config_url }}
         [ -e $CONFIG_FILE ] && cat $CONFIG_FILE >> openwrt/config.seed
         mv openwrt/config.seed openwrt/.config
 
@@ -78,15 +83,21 @@ jobs:
     - name: Build firmware
       working-directory: ./openwrt
       run: |
-        date '+%Y%m%d%H' > version   
+        date '+%Y%m%d%H' > version
+        if [ "${{ matrix.arch }}" = "rk" ]; then
+           echo -n 77d4782035a23e6f19f9c4751451b4e3 > .vermagic
+        elif [ "${{ matrix.arch }}" = "armsr" ]; then
+           echo -n b388b781da4bc000e0f3f3a5a1a34eac > .vermagic
+        fi
+
         make -j$(nproc) V=s
 
     - name: Assemble Artifact
       id: assemble_artifact
       run: |
-        rm -rf ./rk_out
-        mkdir -p ./rk_out/
-        cp -a ./openwrt/.config ./rk_out/isos_rk.config
+        rm -rf ./${{ matrix.arch }}_out
+        mkdir -p ./${{ matrix.arch }}_out/
+        cp -a ./openwrt/.config ./${{ matrix.arch }}_out/isos_${{ matrix.arch }}.config
         
         getmd5()
         {
@@ -95,111 +106,138 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
 
-
+        if [ "${{ matrix.arch }}" = "rk" ]; then
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r2s-$(date +%Y%m%d)_${md5}.img.gz
-
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-nanopi-r2s_r2c-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r3s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r3s-$(date +%Y%m%d)_${md5}.img.gz
-
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-nanopi-r3s-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r4s-$(date +%Y%m%d)_${md5}.img.gz
-
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-nanopi-r4s-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r4se-$(date +%Y%m%d)_${md5}.img.gz
-
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-nanopi-r4se-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r5s_r5c-$(date +%Y%m%d)_${md5}.img.gz
-
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-nanopi-r5s_r5c-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r6s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r6s_r6c-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-nanopi-r6s_r6c-$(date +%Y%m%d)_${md5}.img.gz
 
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r76s-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-nanopi-r76s_r6c-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e52c-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-radxa_e52c-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-radxa_e52c-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e54c-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-radxa_e54c-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-radxa_e54c-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-radxa_e20c-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-radxa_e20c-$(date +%Y%m%d)_${md5}.img.gz
 
 
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-lyt_t68m-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-lyt_t68m-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-lyt_t88m-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-lyt_t88m-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hlink_h28k-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-hinlink_h28k-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-fastrhino_r6xs-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-fastrhino_r6xs-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-fastrhino_r6xs-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hinlink_opc-h6xk-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-hinlink_h6xk-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-hinlink_h6xk-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hinlink_h88k-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-hinlink_h88k-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-hinlink_h88k-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r1-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-easepi_r1-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-easepi_r1-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r1-lite-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-easepi_r1-lite-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-easepi_r1-lite-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_ars4-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-easepi_ars4-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-easepi_ars4-$(date +%Y%m%d)_${md5}.img.gz
 
-            
+        elif [ "${{ matrix.arch }}" = "armsr" ]; then
+        rom=openwrt/bin/targets/armsr/armv8/istoreos-armsr-armv8-generic-squashfs-combined-efi.img.gz
+        getmd5 $rom
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-armsr-efi-$(date +%Y%m%d)_${md5}.img.gz
+        fi
+                 
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: Rockchip-iStoreOS
-        path: rk_out/istoreos-*.img.gz
+        name: ${{ matrix.arch }}-Firmware
+        path: ${{ matrix.arch }}_out/istoreos-*.img.gz
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: Rockchip-iStoreOS-config
-        path: rk_out/isos_rk.config
+        name: ${{ matrix.arch }}-config
+        path: ${{ matrix.arch }}_out/isos_*.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: Rockchip-iStoreOS-Packages
-        path: openwrt/bin/packages
-        
-    - name: Generate Tag & Release Name
-      id: generate_name
-      run: |
-        time=$(date +%Y%m%d%H%M%S)
-        release_tag="$time"
-        release_name="Rockchip-iStoreOS-3rd-$(date +%Y%m%d)"
-        echo "release_name=$release_name" >> $GITHUB_OUTPUT
-        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
+        name: ${{ matrix.arch }}-Packages
+        path: openwrt/bin/packages/**
 
-    - name: Create Release & Upload
-      uses: ncipollo/release-action@v1.14.0
+  create_release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@main
       with:
-        artifacts: rk_out/istoreos-*.img.gz
-        name: ${{ steps.generate_name.outputs.release_name }}
-        tag: ${{ steps.generate_name.outputs.release_tag }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        path: downloaded_artifacts
 
+    - name: Prepare release assets
+      run: |
+        mkdir -p release_assets
+        find downloaded_artifacts -name "*.img.gz" -exec cp {} release_assets \;
+
+    - name: Generate release info
+      id: release_info
+      run: |
+        echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+        echo "release_name=isos-3rd-rockchip-armsr-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.release_info.outputs.release_tag }}
+        name: ${{ steps.release_info.outputs.release_name }}
+        files: |
+          release_assets/*.img.gz
+        token: ${{ secrets.GITHUB_TOKEN }}
 
