@@ -1,0 +1,164 @@
+name: Build_isos_3rd_x86_armsr
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: 30 18 * * 5
+
+env:
+  TIMEZONE: "Asia/Shanghai"
+  REPO_URL: "https://github.com/istoreos/istoreos"
+  REPO_BRANCH: "istoreos-24.10"
+  BUILD_PKGS: "ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libfuse-dev python3-setuptools g++ file clang nano genisoimage"
+  PYTHON_PKGS: "aligo"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [armsr, x86]
+        include:
+          - arch: armsr
+            target: "armsr/armv8"
+            config_url: "http://fw.koolcenter.com/iStoreOS/armsr/config.seed"
+            output_file: "istoreos-armsr-armv8-generic-squashfs-combined-efi.img.gz"
+            output_name: "ARMSR"
+          - arch: x86
+            target: "x86/64"
+            config_url: "http://fw.koolcenter.com/iStoreOS/x86_64_efi/config.seed"
+            output_file: "istoreos-x86-64-generic-squashfs-combined-efi.img.gz"
+            output_name: "X86"
+            extra_file: "istoreos-x86-64-generic-squashfs-combined.img.gz"
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+
+    - name: Free disk space
+      uses: xiangfeidexiaohuo/actions@free-disk
+      with:
+        build-mount-path: /home/runner/work/AE86Wrt/AE86Wrt
+
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo timedatectl set-timezone "${{ env.TIMEZONE }}"
+        sudo -E apt-get update -y
+        sudo -E apt-get install -y ${{ env.BUILD_PKGS }}
+        pip install ${{ env.PYTHON_PKGS }}
+        sudo -E apt-get clean
+        git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
+        df -h
+
+    - name: Clone source code
+      run: |
+        git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./ && rm -rf ./AE86Wrt
+        git clone --depth 1 ${{ env.REPO_URL }} -b ${{ env.REPO_BRANCH }} openwrt
+        cd openwrt
+        cp -f ../diy/op/isos1.sh ./
+        chmod +x ./isos1.sh && ./isos1.sh
+
+    - name: Update & Install feeds
+      working-directory: ./openwrt
+      run: |
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
+        cp -f ../diy/op/isos2.sh ./        
+        chmod +x ./isos2.sh && ./isos2.sh
+
+    - name: Configuration Customization
+      run: |
+        wget -P openwrt/ ${{ matrix.config_url }}
+        [ -e './configs/ARM/other/isos_add.config' ] && cat './configs/ARM/other/isos_add.config' >> openwrt/config.seed
+        mv openwrt/config.seed openwrt/.config
+        cd openwrt && make defconfig
+
+    - name: Download package
+      working-directory: ./openwrt
+      run: |
+        make download -j$(nproc)
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: Build firmware
+      working-directory: ./openwrt
+      run: |
+        date '+%Y%m%d%H' > version   
+        make -j$(nproc) V=s
+
+    - name: Assemble Artifact
+      id: assemble_artifact
+      run: |
+        rm -rf ./out_${{ matrix.arch }}
+        mkdir -p ./out_${{ matrix.arch }}/
+        cp -a ./openwrt/.config ./out_${{ matrix.arch }}/isos_${{ matrix.arch }}.config
+        
+        getmd5() {
+          md5sum=`md5sum $1`
+          md5=`echo ${md5sum% *}`
+          md5=`echo ${md5:0:10}`
+        }
+        
+        rom=openwrt/bin/targets/${{ matrix.target }}/${{ matrix.output_file }}
+        getmd5 $rom     
+        cp -a $rom ./out_${{ matrix.arch }}/istoreos-3rd-${{ matrix.arch }}-efi-$(date +%Y%m%d)_${md5}.img.gz
+        
+        if [[ "${{ matrix.arch }}" == "x86" && -n "${{ matrix.extra_file }}" ]]; then
+          rom=openwrt/bin/targets/${{ matrix.target }}/${{ matrix.extra_file }}
+          getmd5 $rom
+          cp -a $rom ./out_${{ matrix.arch }}/istoreos-3rd-${{ matrix.arch }}-$(date +%Y%m%d)_${md5}.img.gz
+        fi
+
+    - name: Upload Firmwares
+      uses: actions/upload-artifact@main
+      with:
+        name: ${{ matrix.output_name }}-iStoreOS
+        path: out_${{ matrix.arch }}/istoreos-*.img.gz
+
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: ${{ matrix.output_name }}-iStoreOS-config
+        path: out_${{ matrix.arch }}/isos_${{ matrix.arch }}.config
+
+    - name: Upload Packages
+      uses: actions/upload-artifact@main
+      with:
+        name: ${{ matrix.output_name }}-iStoreOS-Packages
+        path: openwrt/bin/packages
+
+  create_release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download artifacts (armsr)
+      uses: actions/download-artifact@main
+      with:
+        name: ARMSR-iStoreOS
+        path: out_armsr
+
+    - name: Download artifacts (x86)
+      uses: actions/download-artifact@main
+      with:
+        name: X86-iStoreOS
+        path: out_x86
+
+    - name: Generate Tag & Release Name
+      id: generate_name
+      run: |
+        time=$(date +%Y%m%d%H%M%S)
+        release_tag="$time"
+        release_name="X86(ARMSR)-iStoreOS-3rd-$(date +%Y%m%d)"
+        echo "release_name=$release_name" >> $GITHUB_OUTPUT
+        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT
+
+    - name: Create Release & Upload
+      uses: ncipollo/release-action@v1.14.0
+      with:
+        artifacts: |
+          out_armsr/istoreos-*.img.gz
+          out_x86/istoreos-*.img.gz
+        name: ${{ steps.generate_name.outputs.release_name }}
+        tag: ${{ steps.generate_name.outputs.release_tag }}
+        token: ${{ secrets.GITHUB_TOKEN }}

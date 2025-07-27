@@ -98,7 +98,7 @@ jobs:
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r2s-$(date +%Y%m%d)_${md5}.img.gz
+        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r2s_r2c-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r3s-squashfs-sysupgrade.img.gz
@@ -135,9 +135,9 @@ jobs:
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-radxa_e54c-$(date +%Y%m%d)_${md5}.img.gz
 
-        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
-        getmd5 $rom     
-        cp -a $rom ./rk_out/istoreos-3rd-radxa_e20c-$(date +%Y%m%d)_${md5}.img.gz
+        # rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
+        # getmd5 $rom     
+        # cp -a $rom ./rk_out/istoreos-3rd-radxa_e20c-$(date +%Y%m%d)_${md5}.img.gz
 
 
 
