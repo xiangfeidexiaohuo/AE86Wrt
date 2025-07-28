@@ -1,4 +1,4 @@
-name: Build_mi_ax6s
+name: Build_phicomm_k3
 
 on: 
   repository_dispatch:
@@ -6,14 +6,14 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 6 23 * * 4
+    - cron: 1 23 * * 4
 
 # 点赞☆Star触发编译
 #  watch:
 #    types: [started]
 
 jobs:
-  Build_mi_ax6s:
+  Build_phicomm_k3:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -38,8 +38,8 @@ jobs:
         
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/coolsnowwolf/lede
-        REPO_BRANCH: master
+        REPO_URL: https://github.com/xiangfeidexiaohuo/lede
+        REPO_BRANCH: k3
       run: |
         git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./  && rm -rf ./AE86Wrt
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
@@ -55,17 +55,22 @@ jobs:
         ./scripts/feeds install -a
 
         cp -f ../diy/lean/lean2.sh ./        
-        chmod +x ./lean2.sh && ./lean2.sh
-
-        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.1/g" target/linux/mediatek/Makefile
-        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.1/g" target/linux/mediatek/Makefile
-
-        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Redmi-AX6S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-
+        chmod +x ./lean2.sh && ./lean2.sh  
+            
+        sed -i 's/+!TARGET_ramips:kmod-usb-storage-uas //g'  ./package/lean/automount/Makefile
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.4/g" target/linux/bcm53xx/Makefile
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.4/g" target/linux/bcm53xx/Makefile
+                
+        sed -i 's/\${Arch}/armv5/g' feeds/2305ipk/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
+        ## sed -i 's/\${Arch}/armv5/g' feeds/extraipk/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
+        sed -i 's/\${Arch}/armv5/g' feeds/luci/applications/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
+        
+        sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K3-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings  
+       
               
-    - name: Configuration Customization - Build_mi_ax6s
+    - name: Configuration Customization - Build_phicomm_k3
       env:
-        CONFIG_FILE: './configs/ARM/other/ax6s.config'
+        CONFIG_FILE: './configs/ARM/other/k3.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -79,7 +84,7 @@ jobs:
 
     - name: Build firmware
       working-directory: ./openwrt
-      run: |     
+      run: |
         make -j$(nproc) V=s
         
     - name: Assemble Artifact
@@ -87,8 +92,8 @@ jobs:
       run: |
         rm -rf ./ARM_Out
         mkdir -p ./ARM_Out/
-        cp -a ./openwrt/.config ./ARM_Out/ax6s.config
-        
+        cp -a ./openwrt/.config ./ARM_Out/k3.config
+
         getmd5()
         {
         md5sum=`md5sum $1`
@@ -96,43 +101,45 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
         
-        rom=openwrt/bin/targets/mediatek/mt7622/openwrt-mediatek-mt7622-xiaomi_redmi-router-ax6s-squashfs-sysupgrade.bin
-        getmd5 $rom        
-        cp -a $rom ./ARM_Out/AE86Wrt-Redmi-AX6S-6.1-$(date +%Y%m%d)_${md5}.bin
+        rom=openwrt/bin/targets/bcm53xx/generic/openwrt-bcm53xx-generic-phicomm_k3-squashfs.trx
+        getmd5 $rom
+                
+        cp -a $rom ./ARM_Out/AE86Wrt-K3-5.4-$(date +%Y%m%d)_${md5}.trx
 
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: AX6S-OpenWrt
-        path: ARM_Out/*.bin
+        name: K3-OpenWrt
+        path: ARM_Out/*.trx   
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: AX6S-config
-        path: ARM_Out/ax6s.config
-
+        name: K3-config
+        path: ARM_Out/k3.config
+ 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: AX6S-Packages
-        path: openwrt/bin/packages
-                
+        name: K3-Packages
+        path: openwrt/bin/packages 
+        
     - name: Generate Tag & Release Name
       id: generate_name
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="AE86Wrt-红米AX6S-6.1内核-$(date +%Y%m%d)"
+        release_name="AE86Wrt-斐讯K3-5.4内核-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
-        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT     
+        echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1.14.0
       with:
-        artifacts: ARM_Out/*.bin
+        artifacts: ARM_Out/*.trx
         name: ${{ steps.generate_name.outputs.release_name }}
         tag: ${{ steps.generate_name.outputs.release_tag }}
         token: ${{ secrets.GITHUB_TOKEN }}
-   
+        
+    
