@@ -149,7 +149,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="X86(ARMSR)-iStoreOS-3rd-$(date +%Y%m%d)"
+        release_name="isos-3rd-x86-armsr-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT
 

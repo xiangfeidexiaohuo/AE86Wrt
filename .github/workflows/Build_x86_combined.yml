@@ -28,7 +28,7 @@ jobs:
             file_name: "x86_612"
             diy_script: "lean"
 
-          - name: "X86-R24.10"
+          - name: "X86-R24.10-6.6"
             repo_url: "https://github.com/openwrt/openwrt"
             repo_branch: "openwrt-24.10"
             kernel_ver: "6.6"
