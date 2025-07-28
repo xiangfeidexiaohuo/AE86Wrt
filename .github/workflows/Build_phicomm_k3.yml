@@ -1,4 +1,4 @@
-name: Build_k3
+name: Build_phicomm_k3
 
 on: 
   repository_dispatch:
@@ -6,14 +6,10 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 1 23 * * 4
-
-# 点赞☆Star触发编译
-#  watch:
-#    types: [started]
+    - cron: 1 22 * * 4
 
 jobs:
-  Build_k3:
+  Build_phicomm_k3:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -68,7 +64,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K3-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings  
        
               
-    - name: Configuration Customization - Build_k3
+    - name: Configuration Customization - Build_phicomm_k3
       env:
         CONFIG_FILE: './configs/ARM/other/k3.config'
       run: |

@@ -1,4 +1,4 @@
-name: Build_mi_ax6s
+name: Build_redmi_ax6s
 
 on: 
   repository_dispatch:
@@ -6,14 +6,10 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 6 23 * * 4
-
-# 点赞☆Star触发编译
-#  watch:
-#    types: [started]
+    - cron: 10 22 * * 4
 
 jobs:
-  Build_mi_ax6s:
+  Build_redmi_ax6s:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -63,7 +59,7 @@ jobs:
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Redmi-AX6S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
 
               
-    - name: Configuration Customization - Build_mi_ax6s
+    - name: Configuration Customization - Build_redmi_ax6s
       env:
         CONFIG_FILE: './configs/ARM/other/ax6s.config'
       run: |

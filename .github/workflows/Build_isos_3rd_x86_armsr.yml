@@ -2,6 +2,8 @@ name: Build_isos_3rd_x86_armsr
 on:
   repository_dispatch:
   workflow_dispatch:
+
+# 定时触发编译
   schedule:
     - cron: 30 18 * * 5
 
@@ -149,7 +151,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="X86(ARMSR)-iStoreOS-3rd-$(date +%Y%m%d)"
+        release_name="isos-3rd-x86-armsr-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT
 

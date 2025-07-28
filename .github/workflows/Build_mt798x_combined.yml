@@ -2,8 +2,11 @@ name: Build_mt798x_combined
 on:
   repository_dispatch:
   workflow_dispatch:
+
+# 定时触发编译
   schedule:
-    - cron: 20 22 * * 4
+    - cron: 10 23 * * 4
+
 jobs:
   build:
     name: Build ${{ matrix.soc || matrix.model }}

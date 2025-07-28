@@ -3,6 +3,8 @@ name: Build_isos_3rd_seed
 on:
   repository_dispatch:
   workflow_dispatch:
+
+# 定时触发编译
   schedule:
     - cron: 10 19 * * 5
 
@@ -141,7 +143,7 @@ jobs:
         id: release_info
         run: |
           echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-          echo "release_name=SEED-ACX-iStoreOS-3rd-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "release_name=isos-3rd-seed-acx-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
       - name: Create release
         uses: softprops/action-gh-release@v1
