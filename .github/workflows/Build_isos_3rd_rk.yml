@@ -74,7 +74,8 @@ jobs:
     - name: Build firmware
       working-directory: ./openwrt
       run: |
-        date '+%Y%m%d%H' > version   
+        date '+%Y%m%d%H' > version
+        echo -n 3d87fa32d9aace8c2ddc2c539721f4a1 > .vermagic   
         make -j$(nproc) V=s
 
     - name: Assemble Artifact
@@ -131,10 +132,23 @@ jobs:
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-radxa_e54c-$(date +%Y%m%d)_${md5}.img.gz
 
-        # rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
-        # getmd5 $rom     
-        # cp -a $rom ./rk_out/istoreos-3rd-radxa_e20c-$(date +%Y%m%d)_${md5}.img.gz
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-radxa_e20c-$(date +%Y%m%d)_${md5}.img.gz
 
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-lyt_t68m-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-lyt_t68m-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-lyt_t88m-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-lyt_t88m-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hlink_h28k-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-hinlink_h28k-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-fastrhino_r6xs-squashfs-sysupgrade.img.gz
