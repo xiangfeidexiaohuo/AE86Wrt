@@ -137,11 +137,11 @@ jobs:
                 "output_file": "immortalwrt-mediatek-mt7981-konka_komi-a31-squashfs-sysupgrade.bin"
               },
               {
-                "name": "Xiaomi-AX3000T",
+                "name": "Xiaomi-AX3000T-MTK",
                 "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin"
               },
               {
-                "name": "Xiaomi-AX3000T_an8855",
+                "name": "Xiaomi-AX3000T-MTK_an8855",
                 "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-an8855-squashfs-sysupgrade.bin"
               },
               {
