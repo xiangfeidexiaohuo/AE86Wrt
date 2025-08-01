@@ -86,7 +86,8 @@ jobs:
     - name: Build firmware
       working-directory: ./openwrt
       run: |
-        date '+%Y%m%d%H' > version   
+        date '+%Y%m%d%H' > version
+        echo -n 1745ebad77278f5cdc8330d17a3f43d6 > .vermagic 
         make -j$(nproc) V=s
 
     - name: Assemble Artifact
