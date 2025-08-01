@@ -132,11 +132,23 @@ jobs:
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-radxa_e54c-$(date +%Y%m%d)_${md5}.img.gz
 
-        # rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
-        # getmd5 $rom     
-        # cp -a $rom ./rk_out/istoreos-3rd-radxa_e20c-$(date +%Y%m%d)_${md5}.img.gz
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-radxa_e20c-$(date +%Y%m%d)_${md5}.img.gz
 
 
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-lyt_t68m-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-alpha-lyt_t68m-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-lyt_t88m-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-alpha-lyt_t88m-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hinlink_h28k-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-alpha-hinlink_h28k-$(date +%Y%m%d)_${md5}.img.gz
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-fastrhino_r6xs-squashfs-sysupgrade.img.gz
         getmd5 $rom     
