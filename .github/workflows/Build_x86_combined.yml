@@ -78,7 +78,7 @@ jobs:
 
 
         if [ -f "package/lean/default-settings/files/zzz-default-settings" ]; then
-           sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Lite-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+           sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
         else
            sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
            sed -i "s/OPENWRT_RELEASE='[^']*'/OPENWRT_RELEASE='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g" package/base-files/files/usr/lib/os-release
