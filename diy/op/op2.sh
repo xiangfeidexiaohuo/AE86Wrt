@@ -16,9 +16,9 @@ echo -e "msgstr \"魔法网络\"" >> feeds/luci/modules/luci-base/po/zh_Hans/bas
 ##配置IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
-##
-rm -rf ./feeds/2305ipk/patch/luci-app-turboacc
-rm -rf ./package/feeds/2305ipk/luci-app-turboacc
+
+## 24.10-fw4-turboacc
+curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
 
 
 ##取消bootstrap为默认主题
@@ -40,6 +40,10 @@ sed -i "3iuci commit istore" package/base-files/files/bin/config_generate
 ##Immortalwrt
 sed -i "2iuci set istore.istore.channel='ae86_daodao'" package/emortal/default-settings/files/99-default-settings
 sed -i "3iuci commit istore" package/emortal/default-settings/files/99-default-settings
+
+##
+sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='AE86Wrt'/g" package/base-files/files/etc/openwrt_release
+date '+%Y%m%d%H' > package/base-files/files/etc/openwrt_version
 
 
 ##
@@ -63,5 +67,10 @@ rm -rf package/libs/uclient
 rm -rf package/libs/ustream-ssl
 cp -af feeds/2305ipk/patch/fix_ss_libv/*  package/libs/
 
+## golang
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
+
+## rust(ci false)
+# sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
+sed -i 's/--build-dir\ $(HOST_BUILD_DIR)\/build/--build-dir\ $(HOST_BUILD_DIR)\/build\ \\\n\		--ci\ false/' feeds/packages/lang/rust/Makefile
