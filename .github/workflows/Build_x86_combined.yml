@@ -21,6 +21,16 @@ jobs:
             config_file: "./configs/X86/x86_504.config"
             file_name: "x86_504"
             diy_script: "lean"
+            type: "lede"
+
+          - name: "X86-6.12-tiny"
+            repo_url: "https://github.com/coolsnowwolf/lede"
+            repo_branch: "master"
+            kernel_ver: "6.12"
+            config_file: "./configs/X86/x86_612_tiny.config"
+            file_name: "x86_612_tiny"
+            diy_script: "lean"
+            type: "lede"
 
           - name: "X86-6.12"
             repo_url: "https://github.com/coolsnowwolf/lede"
@@ -29,6 +39,7 @@ jobs:
             config_file: "./configs/X86/x86_612.config"
             file_name: "x86_612"
             diy_script: "lean"
+            type: "lede"
 
           - name: "X86-R24.10-6.6"
             repo_url: "https://github.com/openwrt/openwrt"
@@ -37,6 +48,7 @@ jobs:
             config_file: "./configs/X86/x86_r2410.config"
             file_name: "x86_r2410"
             diy_script: "op"
+            type: "op"
 
     steps:
     - name: Checkout
@@ -76,12 +88,12 @@ jobs:
         sed -i "s/KERNEL_TESTING_PATCHVER:=.*/KERNEL_TESTING_PATCHVER:=${{ matrix.config.kernel_ver }}/g" target/linux/x86/Makefile
         
 
-
-        if [ -f "package/lean/default-settings/files/zzz-default-settings" ]; then
-           sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Lite-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-        else
-           sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
-           sed -i "s/OPENWRT_RELEASE='[^']*'/OPENWRT_RELEASE='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g" package/base-files/files/usr/lib/os-release
+        if [ "${{ matrix.config.type }}" = "lede" ]; then
+           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
+        elif [ "${{ matrix.config.type }}" = "op" ]; then
+           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
+           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-R24.10-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
         fi
 
     - name: Configuration Customization
@@ -115,11 +127,22 @@ jobs:
         getmd5 $rom
         cp -a $rom ./X86_Out/AE86Wrt-${{ matrix.config.name }}-$(date +%Y%m%d)_${md5}.img.gz
 
+        rom=openwrt/bin/targets/x86/64/openwrt-x86-64-generic-rootfs.tar.gz
+        ## rom=openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-rootfs.img.gz
+        getmd5 $rom
+        cp -a $rom ./X86_Out/AE86Wrt-${{ matrix.config.name }}-rootfs-$(date +%Y%m%d)_${md5}.tar.gz
+
     - name: Upload Firmware
       uses: actions/upload-artifact@main
       with:
         name: ${{ matrix.config.name }}-firmware
         path: X86_Out/AE86Wrt-*.img.gz
+
+    - name: Upload Rootfs
+      uses: actions/upload-artifact@main
+      with:
+        name: ${{ matrix.config.name }}-rootfs
+        path: X86_Out/AE86Wrt-*.tar.gz
 
     - name: Upload Config
       uses: actions/upload-artifact@main
