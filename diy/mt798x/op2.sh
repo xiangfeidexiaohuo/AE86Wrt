@@ -58,6 +58,10 @@ cp -af feeds/extraipk/patch/diy/banner  package/base-files/files/etc/banner
 sed -i "2iuci set istore.istore.channel='ae86_daodao'" package/emortal/default-settings/files/99-default-settings
 sed -i "3iuci commit istore" package/emortal/default-settings/files/99-default-settings
 
+##
+sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='AE86Wrt'/g" package/base-files/files/etc/openwrt_release
+date '+%Y%m%d%H' > package/base-files/files/etc/openwrt_version
+
 
 ##WiFi
 sed -i "s/MT7986_AX6000_2.4G/AE86-2.4G/g" package/mtk/drivers/wifi-profile/files/mt7986/mt7986-ax6000.dbdc.b0.dat

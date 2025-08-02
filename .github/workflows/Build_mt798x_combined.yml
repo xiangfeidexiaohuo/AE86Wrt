@@ -82,7 +82,7 @@ jobs:
           chmod +x ./op2.sh && ./op2.sh
 
           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='${{ matrix.description }}-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
-
+          sed -i "s/OPENWRT_RELEASE="*.*"/OPENWRT_RELEASE=\"${{ matrix.description }}-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
       
       - name: Configuration Customization
         run: |
@@ -147,6 +147,10 @@ jobs:
               {
                 "name": "Cetron-CT3003",
                 "output_file": "immortalwrt-mediatek-mt7981-cetron_ct3003-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "CMCC-RAX3000M",
+                "output_file": "immortalwrt-mediatek-mt7981-cmcc_rax3000m-squashfs-sysupgrade.bin"
               },
               {
                 "name": "Nokia-AX3000",
