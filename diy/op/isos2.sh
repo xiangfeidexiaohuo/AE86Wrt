@@ -15,3 +15,6 @@ cp -af feeds/2305ipk/patch/fix_ss_libv/*  package/libs/
 
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
+
+## rust(ci false)
+sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
