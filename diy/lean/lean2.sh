@@ -31,12 +31,7 @@ cp -af feeds/2305ipk/patch/brcmfmac4366c-pcie.bin ./package/lean/k3-firmware/fil
 
 ##取消bootstrap为默认主题
 rm -rf ./feeds/luci/themes/luci-theme-argon
-rm -rf ./feeds/luci/themes/luci-theme-design
-rm -rf ./feeds/luci/themes/luci-theme-argon-mod
-
 rm -rf ./package/feeds/luci/luci-theme-argon
-rm -rf ./package/feeds/luci/luci-theme-design
-rm -rf ./package/feeds/luci/luci-theme-argon-mod
 
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
