@@ -16,9 +16,9 @@ echo -e "msgstr \"魔法网络\"" >> feeds/luci/modules/luci-base/po/zh_Hans/bas
 ##配置IP
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
-##
-rm -rf ./feeds/2305ipk/patch/luci-app-turboacc
-rm -rf ./package/feeds/2305ipk/luci-app-turboacc
+
+## 24.10-fw4-turboacc
+curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
 
 
 ##取消bootstrap为默认主题
