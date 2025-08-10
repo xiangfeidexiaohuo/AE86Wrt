@@ -24,22 +24,6 @@ jobs:
             config_file: "./configs/ARM/mt798x/mt7986.config"
             description: "AE86Wrt-MT7986"
             type: "standard"
-          
-          - model: "mt3000"
-            soc_prefix: "mt7981"
-            config_file: "./configs/ARM/mt798x/mt3000.config"
-            output_file: "immortalwrt-mediatek-mt7981-glinet_gl-mt3000-squashfs-sysupgrade.tar"
-            output_suffix: "tar"
-            description: "AE86Wrt-GL-MT3000"
-            type: "gl"
-
-          - model: "mt6000"
-            soc_prefix: "mt7986"
-            config_file: "./configs/ARM/mt798x/mt6000.config"
-            output_file: "immortalwrt-mediatek-mt7986-glinet_gl-mt6000-squashfs-sysupgrade.bin"
-            output_suffix: "bin"
-            description: "AE86Wrt-GL-MT6000"
-            type: "gl"
     steps:
       - name: Clone Repository
         uses: actions/checkout@main
@@ -176,14 +160,6 @@ jobs:
                 echo "⚠️ 文件不存在: $rom"
               fi
             done
-          else
-            rom=openwrt-${{ matrix.soc || matrix.model }}/bin/targets/mediatek/${{ matrix.soc_prefix }}/${{ matrix.output_file }}
-            if [ -f "$rom" ]; then
-              getmd5 "$rom"
-              cp -a "$rom" "./${{ matrix.soc || matrix.model }}_out/${{ matrix.description }}-5.4-$(date +%Y%m%d)_${md5}.${{ matrix.output_suffix }}"
-            else
-              echo "⚠️ 文件不存在: $rom"
-            fi
           fi
       
       - name: Upload Firmware Artifacts
@@ -217,7 +193,7 @@ jobs:
       - name: Prepare release assets
         run: |
           mkdir -p release_assets
-          find downloaded_artifacts \( -name "*.bin" -o -name "*.tar" \) -exec cp {} release_assets \;
+          find downloaded_artifacts -name "*.bin" -exec cp {} release_assets \;
       
       - name: Generate release info
         id: release_info
