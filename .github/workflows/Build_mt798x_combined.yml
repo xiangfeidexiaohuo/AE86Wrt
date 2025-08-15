@@ -149,6 +149,10 @@ jobs:
                 "output_file": "immortalwrt-mediatek-mt7981-cetron_ct3003-squashfs-sysupgrade.bin"
               },
               {
+                "name": "CMCC-RAX3000M",
+                "output_file": "immortalwrt-mediatek-mt7981-cmcc_rax3000m-squashfs-sysupgrade.bin"
+              },
+              {
                 "name": "Nokia-AX3000",
                 "output_file": "immortalwrt-mediatek-mt7981-nokia_ea0326gmp-squashfs-sysupgrade.bin"
               },

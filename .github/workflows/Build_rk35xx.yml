@@ -93,6 +93,10 @@ jobs:
         md5=`echo ${md5:0:10}`
         }
 
+        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-neo3-squashfs-sysupgrade.img.gz
+        getmd5 $rom            
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-Neo3-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r2c-squashfs-sysupgrade.img.gz
         getmd5 $rom            
         cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R2C-6.12-$(date +%Y%m%d)_${md5}.img.gz
@@ -145,9 +149,19 @@ jobs:
         getmd5 $rom        
         cp -a $rom ./ARM_Out/AE86Wrt-NanoPC-T6-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
+        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopc-t4-squashfs-sysupgrade.img.gz
+        getmd5 $rom        
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPC-T4-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+
+
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r76s-squashfs-sysupgrade.img.gz
         getmd5 $rom          
         cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-R76S-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-m5-squashfs-sysupgrade.img.gz
+        getmd5 $rom          
+        cp -a $rom ./ARM_Out/AE86Wrt-NanoPi-M5-6.12-$(date +%Y%m%d)_${md5}.img.gz
 
 
 
@@ -184,6 +198,16 @@ jobs:
         rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-hinlink_opc-h29k-squashfs-sysupgrade.img.gz
         getmd5 $rom          
         cp -a $rom ./ARM_Out/AE86Wrt-Hinlink-H29K-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-hinlink_opc-ht2-squashfs-sysupgrade.img.gz
+        getmd5 $rom          
+        cp -a $rom ./ARM_Out/AE86Wrt-Hinlink-HT2-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+
+        rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
+        getmd5 $rom          
+        cp -a $rom ./ARM_Out/AE86Wrt-Radxa_E20C-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
 
                
     - name: Upload Firmwares
