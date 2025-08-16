@@ -46,6 +46,10 @@ cp -af feeds/2305ipk/patch/diy/banner  package/base-files/files/etc/banner
 sed -i "2iuci set istore.istore.channel='ae86_daodao'" package/lean/default-settings/files/zzz-default-settings
 sed -i "3iuci commit istore" package/lean/default-settings/files/zzz-default-settings
 
+##
+sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='AE86Wrt'/g" package/base-files/files/etc/openwrt_release
+date '+%Y%m%d%H' > package/base-files/files/etc/openwrt_version
+
 
 ##更改主机名
 sed -i "s/hostname='.*'/hostname='AE86Wrt'/g" package/base-files/files/bin/config_generate

@@ -57,6 +57,7 @@ jobs:
         sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.12/g" target/linux/mediatek/Makefile
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-Redmi-AX6S-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+        sed -i "s/OPENWRT_RELEASE="*.*"/OPENWRT_RELEASE=\"AE86Wrt-Redmi-AX6S-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
 
               
     - name: Configuration Customization - Build_redmi_ax6s

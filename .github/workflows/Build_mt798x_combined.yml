@@ -82,7 +82,7 @@ jobs:
           chmod +x ./op2.sh && ./op2.sh
 
           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='${{ matrix.description }}-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
-
+          sed -i "s/OPENWRT_RELEASE="*.*"/OPENWRT_RELEASE=\"${{ matrix.description }}-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
       
       - name: Configuration Customization
         run: |

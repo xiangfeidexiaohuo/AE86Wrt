@@ -74,7 +74,7 @@ jobs:
     - name: Build firmware
       working-directory: ./openwrt
       run: |
-        date '+%Y%m%d%H' > version
+        date '+%Y%m%d' > version
         echo -n 3d87fa32d9aace8c2ddc2c539721f4a1 > .vermagic   
         make -j$(nproc) V=s
 
