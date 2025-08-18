@@ -6,7 +6,7 @@
 ##信息
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='%D %V 3rd - $(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
 sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' - DaoDao'/g" package/base-files/files/etc/openwrt_release
-sed -i "s/OPENWRT_RELEASE="*.*"/OPENWRT_RELEASE=\"%D %V 3rd - $(date +%Y%m%d) - DaoDao\"/g" package/base-files/files/usr/lib/os-release
+sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"%D %V 3rd - $(date +%Y%m%d) - DaoDao\"/g" package/base-files/files/usr/lib/os-release
 
 ## fix_ss_libv
 rm -rf package/libs/mbedtls
