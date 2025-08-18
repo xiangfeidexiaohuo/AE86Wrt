@@ -27,8 +27,8 @@ jobs:
             repo_url: "https://github.com/coolsnowwolf/lede"
             repo_branch: "master"
             kernel_ver: "6.12"
-            config_file: "./configs/X86/x86_612_no_docker.config"
-            file_name: "x86_612_no_docker"
+            config_file: "./configs/X86/x86_612_non.config"
+            file_name: "x86_612_non"
             diy_script: "lean"
             type: "lede"
 
