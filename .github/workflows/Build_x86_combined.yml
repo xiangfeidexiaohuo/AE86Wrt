@@ -90,10 +90,10 @@ jobs:
 
         if [ "${{ matrix.config.type }}" = "lede" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
-           sed -i "s/OPENWRT_RELEASE="*.*"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
         elif [ "${{ matrix.config.type }}" = "op" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
-           sed -i "s/OPENWRT_RELEASE="*.*"/OPENWRT_RELEASE=\"AE86Wrt-X86-R24.10-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-R24.10-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
         fi
 
     - name: Configuration Customization
