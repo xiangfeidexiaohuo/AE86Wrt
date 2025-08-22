@@ -15,8 +15,8 @@ jobs:
       matrix:
         config:
           - name: "X86-5.4"
-            repo_url: "https://github.com/xiangfeidexiaohuo/lede"
-            repo_branch: "k3"
+            repo_url: "https://github.com/coolsnowwolf/lede"
+            repo_branch: "master"
             kernel_ver: "5.4"
             config_file: "./configs/X86/x86_504.config"
             file_name: "x86_504"
