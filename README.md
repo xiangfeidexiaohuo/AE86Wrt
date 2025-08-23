@@ -13,18 +13,16 @@
 ***
 
 * X86_64 设备固件，均为 efi 固件；基于 [Lede](https://github.com/coolsnowwolf/lede) 5.4 内核和 6.12 内核，基于 [官方 OpenWrt](https://github.com/openwrt/openwrt) 24.10 分支 6.6 内核；
-* X86-5.4：经典版，适合老机器，养老固件，不带 Docker 组件；
-* X86-6.12：常规版，带 Docker 组件，实用插件等；
-* X86-6.12-tiny：常规版去除 Docker 组件；
-* X86-R24.10：体验版，最新的 r24.10 源码，不带 Docker 组件；移植 TurboACC，支持 SFE 转发、全锥形 NAT；
+* **X86-5.4**：经典版，5.4 内核，适合老机器，养老固件，不带 Docker 组件；
+* **X86-6.12**：常规版，6.12 内核，带 Docker 组件，实用插件等；**“tiny”版**：常规版去除 Docker 组件；
+* **X86-R24.10**：体验版，最新的 r24.10 源码，6.6 内核，不带 Docker 组件；移植 TurboACC，支持 SFE 转发、全锥形 NAT；
 
 ***
 
 * Rockchip 系列固件，基于 [Lede](https://github.com/coolsnowwolf/lede) 6.12 内核；
-* 常规版：带 Docker 组件，实用插件等；
-* “tiny”版：常规版去除 Docker 组件；
+* 常规版：带 Docker 组件，实用插件等；**“tiny”版**：常规版去除 Docker 组件；
 ```
-R2S、H28K、R4S、H68K、R6S、R76S等
+R2S/R2C、R3S、R4S、R5S/R5C、R6S/R6C、H28K/H29K、H66K/H68K/H69K、电犀牛R66S/R68S、M5、R76S等
 ```
 
 ***
