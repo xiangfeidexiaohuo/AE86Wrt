@@ -59,6 +59,10 @@ sed -i "54iLUCI_LANG.zh-tw=\$(LUCI_LANG.zh_Hant)" feeds/luci/luci.mk
 rm -rf feeds/packages/net/v2ray-geodata/*
 cp -af feeds/2305ipk/op-mosdns/v2ray-geodata/* feeds/packages/net/v2ray-geodata/
 
+##antiblock
+rm -rf feeds/luci/applications/luci-app-antiblock/*
+cp -af feeds/2305ipk/op-antiblock/luci-app-antiblock/* feeds/luci/applications/luci-app-antiblock/
+
 ##Dockerman
 rm -rf feeds/luci/applications/luci-app-dockerman/*
 cp -af feeds/2305ipk/luci-app-dockerman/* feeds/luci/applications/luci-app-dockerman/
