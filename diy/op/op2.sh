@@ -46,6 +46,7 @@ sed -i "3iuci commit istore" package/emortal/default-settings/files/99-default-s
 ##
 sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='AE86Wrt'/g" package/base-files/files/etc/openwrt_release
 date '+%Y%m%d%H' > package/base-files/files/etc/openwrt_version
+sed -i "s/NAME=\"*.*\"/NAME=\"AE86Wrt\"/g" package/base-files/files/usr/lib/os-release
 
 
 ##
@@ -59,15 +60,19 @@ sed -i "54iLUCI_LANG.zh-tw=\$(LUCI_LANG.zh_Hant)" feeds/luci/luci.mk
 rm -rf feeds/packages/net/v2ray-geodata/*
 cp -af feeds/2305ipk/op-mosdns/v2ray-geodata/* feeds/packages/net/v2ray-geodata/
 
+##antiblock
+rm -rf feeds/luci/applications/luci-app-antiblock/*
+cp -af feeds/2305ipk/op-antiblock/luci-app-antiblock/* feeds/luci/applications/luci-app-antiblock/
+
 ##Dockerman
 rm -rf feeds/luci/applications/luci-app-dockerman/*
 cp -af feeds/2305ipk/luci-app-dockerman/* feeds/luci/applications/luci-app-dockerman/
 
 ## fix_ss_libv
-rm -rf package/libs/mbedtls
-rm -rf package/libs/uclient
-rm -rf package/libs/ustream-ssl
-cp -af feeds/2305ipk/patch/fix_ss_libv/*  package/libs/
+#rm -rf package/libs/mbedtls
+#rm -rf package/libs/uclient
+#rm -rf package/libs/ustream-ssl
+#cp -af feeds/2305ipk/patch/fix_ss_libv/*  package/libs/
 
 ## golang
 rm -rf feeds/packages/lang/golang
