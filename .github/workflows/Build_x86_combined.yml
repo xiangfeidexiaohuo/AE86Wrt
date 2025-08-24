@@ -21,7 +21,7 @@ jobs:
             config_file: "./configs/X86/x86_504.config"
             file_name: "x86_504"
             diy_script: "lean"
-            type: "lede"
+            type: "lede54"
 
           - name: "X86-6.12-tiny"
             repo_url: "https://github.com/coolsnowwolf/lede"
@@ -94,6 +94,9 @@ jobs:
         elif [ "${{ matrix.config.type }}" = "op" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
            sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-R24.10-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+        elif [ "${{ matrix.config.type }}" = "lede54" ]; then
+           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
+           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
         fi
 
     - name: Configuration Customization

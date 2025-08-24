@@ -223,7 +223,32 @@ jobs:
 
            rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
            getmd5 $rom          
-           cp -a $rom ./ARM_Out/AE86Wrt-Radxa_E20C-6.12-$(date +%Y%m%d)_${md5}.img.gz
+           cp -a $rom ./ARM_Out/AE86Wrt-Radxa-E20C-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-radxa_e24c-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-Radxa-E24C-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-radxa_e52c-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-Radxa-E52C-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-radxa_e54c-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-Radxa-E54C-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-xunlong_orangepi-5-max-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-OrangePi-5Max-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-xunlong_orangepi-5-plus-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-OrangePi-5Plus-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-xunlong_orangepi-5-ultra-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-OrangePi-5Ultra-6.12-$(date +%Y%m%d)_${md5}.img.gz
         ## 不带Docker的固件
         elif [ "${{ matrix.type }}" = "tiny" ]; then
            rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-neo3-squashfs-sysupgrade.img.gz
@@ -339,7 +364,32 @@ jobs:
 
            rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-radxa_e20c-squashfs-sysupgrade.img.gz
            getmd5 $rom          
-           cp -a $rom ./ARM_Out/AE86Wrt-Radxa_E20C-tiny-6.12-$(date +%Y%m%d)_${md5}.img.gz
+           cp -a $rom ./ARM_Out/AE86Wrt-Radxa-E20C-tiny-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-radxa_e24c-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-Radxa-E24C-tiny-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-radxa_e52c-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-Radxa-E52C-tiny-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-radxa_e54c-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-Radxa-E54C-tiny-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-xunlong_orangepi-5-max-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-OrangePi-5Max-tiny-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-xunlong_orangepi-5-plus-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-OrangePi-5Plus-tiny-6.12-$(date +%Y%m%d)_${md5}.img.gz
+
+           rom=openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-xunlong_orangepi-5-ultra-squashfs-sysupgrade.img.gz
+           getmd5 $rom          
+           cp -a $rom ./ARM_Out/AE86Wrt-OrangePi-5Ultra-tiny-6.12-$(date +%Y%m%d)_${md5}.img.gz
         fi
 
                
