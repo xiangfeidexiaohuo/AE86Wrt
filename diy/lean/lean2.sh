@@ -41,7 +41,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci-n
 ##加入作者信息
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings   
 sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' By DaoDao'/g" package/lean/default-settings/files/zzz-default-settings
-sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
+# sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
 
 cp -af feeds/2305ipk/patch/diy/banner  package/base-files/files/etc/banner
 
