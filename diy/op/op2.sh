@@ -69,10 +69,10 @@ rm -rf feeds/luci/applications/luci-app-dockerman/*
 cp -af feeds/2305ipk/luci-app-dockerman/* feeds/luci/applications/luci-app-dockerman/
 
 ## fix_ss_libv
-rm -rf package/libs/mbedtls
-rm -rf package/libs/uclient
-rm -rf package/libs/ustream-ssl
-cp -af feeds/2305ipk/patch/fix_ss_libv/*  package/libs/
+#rm -rf package/libs/mbedtls
+#rm -rf package/libs/uclient
+#rm -rf package/libs/ustream-ssl
+#cp -af feeds/2305ipk/patch/fix_ss_libv/*  package/libs/
 
 ## golang
 rm -rf feeds/packages/lang/golang
