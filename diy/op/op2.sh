@@ -47,7 +47,7 @@ sed -i "3iuci commit istore" package/emortal/default-settings/files/99-default-s
 sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='AE86Wrt'/g" package/base-files/files/etc/openwrt_release
 date '+%Y%m%d%H' > package/base-files/files/etc/openwrt_version
 sed -i "s/NAME=\"*.*\"/NAME=\"AE86Wrt\"/g" package/base-files/files/usr/lib/os-release
-
+sed -i "s/BUILD_ID=\"*.*\"/BUILD_ID=\"$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
 
 ##
 sed -i "53iLUCI_LANG.zh-cn=\$(LUCI_LANG.zh_Hans)" feeds/luci/luci.mk
