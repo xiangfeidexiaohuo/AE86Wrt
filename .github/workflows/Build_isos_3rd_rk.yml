@@ -97,31 +97,29 @@ jobs:
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-nanopi-r2s_r2c-$(date +%Y%m%d)_${md5}.img.gz
 
-
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r3s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-nanopi-r3s-$(date +%Y%m%d)_${md5}.img.gz
-
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-nanopi-r4s-$(date +%Y%m%d)_${md5}.img.gz
 
-
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-nanopi-r4se-$(date +%Y%m%d)_${md5}.img.gz
-
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-nanopi-r5s_r5c-$(date +%Y%m%d)_${md5}.img.gz
 
-
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r6s-squashfs-sysupgrade.img.gz
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-nanopi-r6s_r6c-$(date +%Y%m%d)_${md5}.img.gz
 
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-friendlyarm_nanopi-r76s-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./rk_out/istoreos-3rd-nanopi-r76s_r6c-$(date +%Y%m%d)_${md5}.img.gz
 
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-radxa_e52c-squashfs-sysupgrade.img.gz
@@ -149,7 +147,6 @@ jobs:
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-hlink_h28k-squashfs-sysupgrade.img.gz
         getmd5 $rom     
         cp -a $rom ./rk_out/istoreos-3rd-hinlink_h28k-$(date +%Y%m%d)_${md5}.img.gz
-
 
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-fastrhino_r6xs-squashfs-sysupgrade.img.gz
         getmd5 $rom     
