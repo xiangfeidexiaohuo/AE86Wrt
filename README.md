@@ -8,50 +8,20 @@
 
 #### 固件下载
 
-* 认准自己设备型号，本项目 Releases 即可 **[下载](https://github.com/xiangfeidexiaohuo/AE86Wrt/releases)** 对应固件。
+* 认准自己设备型号，本项目Releases即可 **[下载](https://github.com/xiangfeidexiaohuo/AE86Wrt/releases)** 对应固件。
 
-***
-
-* X86_64 设备固件，均为 efi 固件；基于 [Lede](https://github.com/coolsnowwolf/lede) 5.4 内核和 6.12 内核，基于 [官方 OpenWrt](https://github.com/openwrt/openwrt) 24.10 分支 6.6 内核；
-* **X86-5.4**：经典版，5.4 内核，适合老机器，养老固件，不带 Docker 组件；
-* **X86-6.12**：常规版，6.12 内核，带 Docker 组件，实用插件等；**“tiny”版**：常规版去除 Docker 组件；
-* **X86-R24.10**：体验版，最新的 r24.10 源码，6.6 内核，不带 Docker 组件；移植 TurboACC，支持 SFE 转发、全锥形 NAT；
-
-***
-
-* Rockchip 系列固件，基于 [Lede](https://github.com/coolsnowwolf/lede) 6.12 内核；
-* 常规版：带 Docker 组件，实用插件等；**“tiny”版**：常规版去除 Docker 组件；
+* 基于[Lede](https://github.com/coolsnowwolf/lede)源码，支持：
 ```
-R2S/R2C、R3S、R4S、R5S/R5C、R6S/R6C、H28K/H29K、H66K/H68K/H69K、电犀牛R66S/R68S、M5、R76S等
+X86_64（efi固件）
+Rockchip（R2S/R2C、R3S、R4S、R5S/R5C、R6S/R6C、H28K/H29K、H66K/H68K/H69K、电犀牛R66S/R68S、M5、R76S等）
+小米IPQ807x（AX3600、AX9000、红米AX6）、红米AX6S、斐讯K3 
 ```
-
-***
-
-* 小米 IPQ807x 系列固件，基于 [Lede](https://github.com/coolsnowwolf/lede) 6.12 内核；
+* 其中X86-R24.10基于[openwrt-24.10](https://github.com/openwrt/openwrt/tree/openwrt-24.10)源码，体验最新OpenWrt；
+* 基于[hanwckf-mt798x](https://github.com/hanwckf/immortalwrt-mt798x)源码的MT798x系列，闭源无线驱动，信号稳定；[相关uboot](https://github.com/hanwckf/bl-mt798x/releases)；
 ```
-小米 AX3600、AX9000、红米 AX6
+360-T7、小米AX3000T-MTK、H3C-NX30Pro、小米WR30U、红米AX6000、Netcore-N60等
 ```
-
-***
-
-* MT798x 系列固件，基于 [hanwckf](https://github.com/hanwckf/immortalwrt-mt798x) 5.4 内核，闭源无线驱动，信号稳定；
-* hanwckf 出品的 MT798x 设备 [uboot](https://github.com/hanwckf/bl-mt798x/releases)；
-```
-360-T7、Xiaomi-AX3000T-MTK、H3C-NX30Pro、Xiaomi-WR30U、Redmi-AX6000、Netcore-N60等
-```
-
-***
-
-* 红米 AX6S 固件，基于 [Lede](https://github.com/coolsnowwolf/lede) 6.12 内核；
-
-***
-
-* 斐讯 K3 固件，基于 [Lede](https://github.com/coolsnowwolf/lede) 5.4 内核；
-
-***
-
-* 固件附带常规实用插件，和 iStore 应用商店；
-* 因设备硬件配置、性能、是否带 USB 等不一样，所带插件有差异。
+* 固件附带常规实用插件，因设备硬件配置、性能、是否带USB等不一样，所带插件有些微差异。
 
 ![png](./preview.png)
 
