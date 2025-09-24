@@ -193,7 +193,7 @@ jobs:
       - name: Upload Firmware Artifacts
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.soc || matrix.model }}-firmware
+          name: ${{ matrix.soc || matrix.model }}-Firmware
           path: ${{ matrix.soc || matrix.model }}_out/AE86Wrt-*
       
       - name: Upload Config Artifacts
@@ -205,7 +205,7 @@ jobs:
       - name: Upload Packages Artifacts
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.soc || matrix.model }}-packages
+          name: ${{ matrix.soc || matrix.model }}-Packages
           path: openwrt-${{ matrix.soc || matrix.model }}/bin/packages/*
   
   release:
