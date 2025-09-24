@@ -101,7 +101,7 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: AX6S-OpenWrt
+        name: AX6S-Firmware
         path: ARM_Out/*.bin
 
     - name: Upload config

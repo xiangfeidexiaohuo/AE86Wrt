@@ -52,6 +52,7 @@ jobs:
         with:
           repository: xiangfeidexiaohuo/istoreos-seed-ac
           token: ${{ secrets.AC_TOKEN }}
+          ref: dev
           path: openwrt-${{ matrix.model }}
 
       - name: Start build
@@ -116,13 +117,13 @@ jobs:
       - name: Upload Firmware Artifacts
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.model }}-firmware
+          name: ${{ matrix.model }}-Firmware
           path: artifacts/${{ matrix.model }}/*.bin
 
       - name: Upload Packages Artifacts
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.model }}-packages
+          name: ${{ matrix.model }}-Packages
           path: openwrt-${{ matrix.model }}/bin/packages/*
 
   create_release:

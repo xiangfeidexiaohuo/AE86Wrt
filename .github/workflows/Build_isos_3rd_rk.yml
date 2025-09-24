@@ -196,7 +196,7 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: ${{ matrix.arch }}-isos
+        name: ${{ matrix.arch }}-Firmware
         path: ${{ matrix.arch }}_out/istoreos-*.img.gz
 
     - name: Upload config
@@ -208,7 +208,7 @@ jobs:
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: ${{ matrix.arch }}-isos-packages
+        name: ${{ matrix.arch }}-Packages
         path: openwrt/bin/packages/**
 
   create_release:
