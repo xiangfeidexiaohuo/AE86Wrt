@@ -85,7 +85,7 @@ jobs:
       run: |
         date '+%Y%m%d%H' > version
         if [ "${{ matrix.arch }}" = "rk" ]; then
-           echo -n 3d87fa32d9aace8c2ddc2c539721f4a1 > .vermagic
+           echo -n 77d4782035a23e6f19f9c4751451b4e3 > .vermagic
         elif [ "${{ matrix.arch }}" = "armsr" ]; then
            echo -n b388b781da4bc000e0f3f3a5a1a34eac > .vermagic
         fi
