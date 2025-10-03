@@ -29,7 +29,7 @@ jobs:
             kernel_ver: "6.12"
             config_file: "./configs/X86/x86_light.config"
             file_name: "x86_light"
-            diy_script: "lean"
+            diy_script: "lean_nft"
             type: "light"
 
           - name: "X86-6.12"
