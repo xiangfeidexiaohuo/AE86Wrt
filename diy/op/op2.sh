@@ -76,7 +76,7 @@ cp -af feeds/2305ipk/luci-app-dockerman/* feeds/luci/applications/luci-app-docke
 
 ## golang
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
 
 ## rust(ci false)
 # sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile

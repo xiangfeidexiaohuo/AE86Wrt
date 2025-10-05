@@ -113,7 +113,7 @@ jobs:
           
           rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
           getmd5 $rom
-          cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.ubi
+          cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
 
       - name: Upload Firmwares
         uses: actions/upload-artifact@main
@@ -146,7 +146,7 @@ jobs:
       - name: Prepare release assets
         run: |
           mkdir -p release_assets
-          find downloaded_artifacts \( -name "*.bin" -o -name "*.ubi" \) -exec cp {} release_assets \;
+          find downloaded_artifacts -name "*.ubi" -exec cp {} release_assets \;
 
       - name: Generate release info
         id: release_info
