@@ -22,16 +22,35 @@ jobs:
             description_prefix: "AE86Wrt-Redmi-AX6"
             sysupgrade_file: "openwrt-qualcommax-ipq807x-redmi_ax6-squashfs-sysupgrade.bin"
             factory_file: "openwrt-qualcommax-ipq807x-redmi_ax6-squashfs-factory.ubi"
+            type: "ipq807x"
+
           - model: "AX3600"
             config_file: "./configs/ARM/ipq/AX3600.config"
             description_prefix: "AE86Wrt-Xiaomi-AX3600"
             sysupgrade_file: "openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-sysupgrade.bin"
             factory_file: "openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-factory.ubi"
+            type: "ipq807x"
+
           - model: "AX9000"
             config_file: "./configs/ARM/ipq/AX9000.config"
             description_prefix: "AE86Wrt-Xiaomi-AX9000"
             sysupgrade_file: "openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-sysupgrade.bin"
             factory_file: "openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-factory.ubi"
+            type: "ipq807x"
+
+          - model: "301W"
+            config_file: "./configs/ARM/ipq/301W.config"
+            description_prefix: "AE86Wrt-QNAP-301W"
+            sysupgrade_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-sysupgrade.bin"
+            factory_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-factory.bin"
+            type: "qnap"
+
+          - model: "BE7000"
+            config_file: "./configs/ARM/ipq/BE7000.config"
+            description_prefix: "AE86Wrt-Xiaomi-BE7000"
+            sysupgrade_file: "openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-sysupgrade.bin"
+            factory_file: "openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-factory.ubi"
+            type: "ipq95xx"
 
     steps:
       - name: Checkout
@@ -47,12 +66,10 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo timedatectl set-timezone "Asia/Shanghai"
-          sudo -E apt-get update -y
-          sudo -E apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libfuse-dev python3-setuptools g++ file clang nano genisoimage
-          pip install aligo
-          sudo -E apt-get clean
+          sudo apt-get update -y
+          sudo apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp libnsl-dev nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libfuse-dev python3-setuptools g++ file clang nano genisoimage
+          sudo apt-get clean
           git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
-          df -h
 
       - name: Clone source code
         env:
@@ -106,14 +123,23 @@ jobs:
             md5=`echo ${md5sum% *}`
             md5=`echo ${md5:0:10}`
           }
-          
-          rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
-          getmd5 $rom
-          cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin
-          
-          rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
-          getmd5 $rom
-          cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.ubi
+
+          if [ "${{ matrix.type }}" = "ipq807x" ]; then
+             ##rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
+             ##getmd5 $rom
+             ##cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin       
+             rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
+             getmd5 $rom
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
+          elif [ "${{ matrix.type }}" = "qnap" ]; then
+             rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
+             getmd5 $rom
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.bin
+          elif [ "${{ matrix.type }}" = "ipq95xx" ]; then          
+             rom=openwrt/bin/targets/qualcommbe/ipq95xx/${{ matrix.factory_file }}
+             getmd5 $rom
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
+          fi
 
       - name: Upload Firmwares
         uses: actions/upload-artifact@main
@@ -152,7 +178,7 @@ jobs:
         id: release_info
         run: |
           echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-          echo "release_name=AE86Wrt-小米IPQ807x-6.12内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "release_name=AE86Wrt-IPQ807x_IPQ95XX-6.12内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
       - name: Create release
         uses: softprops/action-gh-release@v1

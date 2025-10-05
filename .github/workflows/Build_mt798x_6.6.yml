@@ -1,45 +1,29 @@
-name: Build_mt798x_combined
+name: Build_mt798x_6.6
 on:
   repository_dispatch:
   workflow_dispatch:
 
 # 定时触发编译
-  schedule:
-    - cron: 10 23 * * 4
+#  schedule:
+#    - cron: 30 23 * * 4
 
 jobs:
   build:
-    name: Build ${{ matrix.soc || matrix.model }}
+    name: Build ${{ matrix.type }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          - soc: "mt7981"
-            config_file: "./configs/ARM/mt798x/mt7981.config"
+          - soc: "filogic"
+            config_file: "./configs/ARM/mt798x/7981_66.config"
             description: "AE86Wrt-MT7981"
-            type: "standard"
+            type: "7981_66"
 
-          - soc: "mt7986"
-            config_file: "./configs/ARM/mt798x/mt7986.config"
+          - soc: "filogic"
+            config_file: "./configs/ARM/mt798x/7986_66.config"
             description: "AE86Wrt-MT7986"
-            type: "standard"
-          
-          - model: "mt3000"
-            soc_prefix: "mt7981"
-            config_file: "./configs/ARM/mt798x/mt3000.config"
-            output_file: "immortalwrt-mediatek-mt7981-glinet_gl-mt3000-squashfs-sysupgrade.tar"
-            output_suffix: "tar"
-            description: "AE86Wrt-GL-MT3000"
-            type: "gl"
-
-          - model: "mt6000"
-            soc_prefix: "mt7986"
-            config_file: "./configs/ARM/mt798x/mt6000.config"
-            output_file: "immortalwrt-mediatek-mt7986-glinet_gl-mt6000-squashfs-sysupgrade.bin"
-            output_suffix: "bin"
-            description: "AE86Wrt-GL-MT6000"
-            type: "gl"
+            type: "7986_66"
     steps:
       - name: Clone Repository
         uses: actions/checkout@main
@@ -48,7 +32,7 @@ jobs:
         uses: xiangfeidexiaohuo/actions@free-disk
         with:
           build-mount-path: /home/runner/work/AE86Wrt/AE86Wrt
- 
+    
       - name: Initialization environment
         env:
           DEBIAN_FRONTEND: noninteractive
@@ -61,48 +45,48 @@ jobs:
       
       - name: Clone source code
         env:
-          REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x
-          REPO_BRANCH: openwrt-21.02
+          REPO_URL: https://github.com/padavanonly/immortalwrt-mt798x-6.6
+          REPO_BRANCH: openwrt-24.10-6.6
         run: |
           git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./ && rm -rf ./AE86Wrt
-          git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt-${{ matrix.soc || matrix.model }}
-          cd openwrt-${{ matrix.soc || matrix.model }}
-          cp -f ../diy/mt798x/op1.sh ./
-          chmod +x ./op1.sh && ./op1.sh
+          git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt-${{ matrix.type }}
+          cd openwrt-${{ matrix.type }}
+          cp -f ../diy/op/imm1.sh ./
+          chmod +x ./imm1.sh && ./imm1.sh
       
       - name: Update & Install feeds
-        working-directory: ./openwrt-${{ matrix.soc || matrix.model }}
+        working-directory: ./openwrt-${{ matrix.type }}
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          cp -f ../diy/mt798x/op2.sh ./        
-          chmod +x ./op2.sh && ./op2.sh
+          cp -f ../diy/op/imm2.sh ./        
+          chmod +x ./imm2.sh && ./imm2.sh
 
           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='${{ matrix.description }}-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"${{ matrix.description }}-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
       
       - name: Configuration Customization
         run: |
-          [ -e "${{ matrix.config_file }}" ] && mv "${{ matrix.config_file }}" openwrt-${{ matrix.soc || matrix.model }}/.config
-          cd openwrt-${{ matrix.soc || matrix.model }} && make defconfig
+          [ -e "${{ matrix.config_file }}" ] && mv "${{ matrix.config_file }}" openwrt-${{ matrix.type }}/.config
+          cd openwrt-${{ matrix.type }} && make defconfig
       
       - name: Download package
-        working-directory: ./openwrt-${{ matrix.soc || matrix.model }}
+        working-directory: ./openwrt-${{ matrix.type }}
         run: |
           make download -j$(nproc)
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
       
       - name: Build firmware
-        working-directory: ./openwrt-${{ matrix.soc || matrix.model }}
+        working-directory: ./openwrt-${{ matrix.type }}
         run: |
           make -j$(nproc) V=s
       
       - name: Prepare artifacts
         id: prepare_artifacts
         run: |
-          mkdir -p ${{ matrix.soc || matrix.model }}_out
-          cp openwrt-${{ matrix.soc || matrix.model }}/.config ${{ matrix.soc || matrix.model }}_out/${{ matrix.soc || matrix.model }}.config
+          mkdir -p ${{ matrix.type }}_out
+          cp openwrt-${{ matrix.type }}/.config ${{ matrix.type }}_out/${{ matrix.type }}.config
           
           getmd5()
           {
@@ -114,44 +98,20 @@ jobs:
           if [ "${{ matrix.type }}" = "standard" ]; then
             models_json='[
               {
-                "name": "Redmi-AX6000",
-                "output_file": "immortalwrt-mediatek-mt7986-xiaomi_redmi-router-ax6000-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "JDCloud-AX6000",
-                "output_file": "immortalwrt-mediatek-mt7986-jdcloud_re-cp-03-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "Netcore-N60",
-                "output_file": "immortalwrt-mediatek-mt7986-netcore_n60-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "360-T7",
-                "output_file": "immortalwrt-mediatek-mt7981-mt7981-360-t7-108M-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "KOMI-A31",
-                "output_file": "immortalwrt-mediatek-mt7981-konka_komi-a31-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "Xiaomi-AX3000T-MTK",
-                "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "Xiaomi-AX3000T-MTK_an8855",
-                "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-an8855-squashfs-sysupgrade.bin"
-              },
-              {
                 "name": "Cetron-CT3003",
-                "output_file": "immortalwrt-mediatek-mt7981-cetron_ct3003-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-cetron_ct3003-ubootmod-squashfs-sysupgrade.bin"
               },
               {
                 "name": "CMCC-RAX3000M",
                 "output_file": "immortalwrt-mediatek-mt7981-cmcc_rax3000m-squashfs-sysupgrade.bin"
               },
               {
-                "name": "Nokia-AX3000",
-                "output_file": "immortalwrt-mediatek-mt7981-nokia_ea0326gmp-squashfs-sysupgrade.bin"
+                "name": "CMCC-RAX3000M-eMMC",
+                "output_file": "immortalwrt-mediatek-mt7981-cmcc_rax3000m-emmc-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "KOMI-A31",
+                "output_file": "immortalwrt-mediatek-mt7981-konka_komi-a31-squashfs-sysupgrade.bin"
               },
               {
                 "name": "H3C-NX30Pro",
@@ -162,48 +122,64 @@ jobs:
                 "output_file": "immortalwrt-mediatek-mt7981-jcg_q30-squashfs-sysupgrade.bin"
               },
               {
+                "name": "Nokia-AX3000",
+                "output_file": "immortalwrt-mediatek-mt7981-nokia_ea0326gmp-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "360-T7",
+                "output_file": "immortalwrt-mediatek-mt7981-mt7981-360-t7-108M-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "Xiaomi-AX3000T-MTK",
+                "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin"
+              },
+              {
                 "name": "Xiaomi-WR30U",
                 "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-wr30u-112m-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "Redmi-AX6000",
+                "output_file": "immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-ubootmod-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "JDCloud-AX6000",
+                "output_file": "immortalwrt-mediatek-filogic-jdcloud_re-cp-03-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "Netcore-N60",
+                "output_file": "immortalwrt-mediatek-filogic-netcore_n60-squashfs-sysupgrade.bin"
               }
             ]'
             echo "$models_json" | jq -c '.[]' | while read -r model; do
               name=$(echo "$model" | jq -r '.name')
               output_file=$(echo "$model" | jq -r '.output_file')
-              rom="openwrt-${{ matrix.soc || matrix.model }}/bin/targets/mediatek/${{ matrix.soc }}/$output_file"
+              rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/${{ matrix.soc }}/$output_file"
               if [ -f "$rom" ]; then
                 getmd5 "$rom"
-                cp -a "$rom" "./${{ matrix.soc || matrix.model }}_out/AE86Wrt-$name-5.4-$(date +%Y%m%d)_${md5}.bin"
+                cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-$name-6.6-$(date +%Y%m%d)_${md5}.bin"
               else
                 echo "⚠️ 文件不存在: $rom"
               fi
             done
-          else
-            rom=openwrt-${{ matrix.soc || matrix.model }}/bin/targets/mediatek/${{ matrix.soc_prefix }}/${{ matrix.output_file }}
-            if [ -f "$rom" ]; then
-              getmd5 "$rom"
-              cp -a "$rom" "./${{ matrix.soc || matrix.model }}_out/${{ matrix.description }}-5.4-$(date +%Y%m%d)_${md5}.${{ matrix.output_suffix }}"
-            else
-              echo "⚠️ 文件不存在: $rom"
-            fi
           fi
       
       - name: Upload Firmware Artifacts
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.soc || matrix.model }}-Firmware
-          path: ${{ matrix.soc || matrix.model }}_out/AE86Wrt-*
+          name: ${{ matrix.type }}-Firmware
+          path: ${{ matrix.type }}_out/AE86Wrt-*
       
       - name: Upload Config Artifacts
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.soc || matrix.model }}-config
-          path: ${{ matrix.soc || matrix.model }}_out/${{ matrix.soc || matrix.model }}.config
+          name: ${{ matrix.type }}-config
+          path: ${{ matrix.type }}_out/${{ matrix.type }}.config
       
       - name: Upload Packages Artifacts
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.soc || matrix.model }}-Packages
-          path: openwrt-${{ matrix.soc || matrix.model }}/bin/packages/*
+          name: ${{ matrix.type }}-Packages
+          path: openwrt-${{ matrix.type }}/bin/packages/*
   
   release:
     name: Create Release
@@ -224,7 +200,7 @@ jobs:
         id: release_info
         run: |
           echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-          echo "release_name=AE86Wrt-MT798x-5.4内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "release_name=AE86Wrt-MT798x-6.6内核-测试-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
       
       - name: Create release
         uses: softprops/action-gh-release@v1
