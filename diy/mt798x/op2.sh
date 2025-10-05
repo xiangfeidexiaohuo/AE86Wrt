@@ -79,4 +79,4 @@ sed -i "s/ImmortalWrt-5G/AE86-5G/g" package/mtk/applications/mtwifi-cfg/files/mt
 
 ## golang 为 1.24.x
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
