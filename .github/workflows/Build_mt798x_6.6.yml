@@ -27,25 +27,21 @@ jobs:
     steps:
       - name: Clone Repository
         uses: actions/checkout@main
-      
+
+      - name: Free disk space
+        uses: xiangfeidexiaohuo/actions@free-disk
+        with:
+          build-mount-path: /home/runner/work/AE86Wrt/AE86Wrt
+    
       - name: Initialization environment
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo timedatectl set-timezone "Asia/Shanghai"
-          sudo -E swapoff -a
-          sudo -E rm -f /swapfile
-          sudo -E docker image prune -a -f
-          sudo -E snap set system refresh.retain=2
-          sudo -E apt-get -y purge dotnet* firefox ghc* google* llvm* mono* mysql* openjdk* php* zulu*
-          sudo -E apt-get -y autoremove --purge
-          sudo -E rm -rf /usr/share/dotnet /usr/local/lib/android/sdk /etc/mysql /etc/php /usr/local/share/boost
-          [ -n "$AGENT_TOOLSDIRECTORY" ] && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-          sudo -E apt-get update -y
-          sudo -E apt-get install -y ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs libnsl-dev nano ninja-build p7zip p7zip-full patch pkgconf python3.8 python3-pip libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libfuse-dev libfuse-dev libfuse-dev python3-setuptools g++ file clang nano genisoimage
-          sudo -E apt-get clean
+          sudo apt-get update -y
+          sudo apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp libnsl-dev nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libfuse-dev python3-setuptools g++ file clang nano genisoimage
+          sudo apt-get clean
           git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
-          df -h
       
       - name: Clone source code
         env:
@@ -102,39 +98,43 @@ jobs:
             models_json='[
               {
                 "name": "Cetron-CT3003",
-                "output_file": "immortalwrt-mediatek-filogic-cetron_ct3003-ubootmod-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-cetron_ct3003-ubootmod-squashfs-sysupgrade.bin"
               },
               {
                 "name": "CMCC-RAX3000M",
-                "output_file": "immortalwrt-mediatek-filogic-cmcc_rax3000m-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-cmcc_rax3000m-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "CMCC-RAX3000M-eMMC",
+                "output_file": "immortalwrt-mediatek-mt7981-cmcc_rax3000m-emmc-squashfs-sysupgrade.bin"
               },
               {
                 "name": "KOMI-A31",
-                "output_file": "immortalwrt-mediatek-filogic-konka_komi-a31-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-konka_komi-a31-squashfs-sysupgrade.bin"
               },
               {
                 "name": "H3C-NX30Pro",
-                "output_file": "immortalwrt-mediatek-filogic-h3c_magic-nx30-pro-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-h3c_nx30pro-squashfs-sysupgrade.bin"
               },
               {
                 "name": "JCG-Q30Pro",
-                "output_file": "immortalwrt-mediatek-filogic-jcg_q30-pro-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-jcg_q30-squashfs-sysupgrade.bin"
               },
               {
                 "name": "Nokia-AX3000",
-                "output_file": "immortalwrt-mediatek-filogic-nokia_ea0326gmp-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-nokia_ea0326gmp-squashfs-sysupgrade.bin"
               },
               {
                 "name": "360-T7",
-                "output_file": "immortalwrt-mediatek-filogic-mt7981-qihoo_360t7-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-mt7981-360-t7-108M-squashfs-sysupgrade.bin"
               },
               {
                 "name": "Xiaomi-AX3000T-MTK",
-                "output_file": "immortalwrt-mediatek-filogic-xiaomi_mi-router-ax3000t-ubootmod-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin"
               },
               {
                 "name": "Xiaomi-WR30U",
-                "output_file": "immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-ubootmod-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-wr30u-112m-squashfs-sysupgrade.bin"
               },
               {
                 "name": "Redmi-AX6000",
