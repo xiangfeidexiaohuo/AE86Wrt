@@ -22,16 +22,35 @@ jobs:
             description_prefix: "AE86Wrt-Redmi-AX6"
             sysupgrade_file: "openwrt-qualcommax-ipq807x-redmi_ax6-squashfs-sysupgrade.bin"
             factory_file: "openwrt-qualcommax-ipq807x-redmi_ax6-squashfs-factory.ubi"
+            type: "ipq807x"
+
           - model: "AX3600"
             config_file: "./configs/ARM/ipq/AX3600.config"
             description_prefix: "AE86Wrt-Xiaomi-AX3600"
             sysupgrade_file: "openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-sysupgrade.bin"
             factory_file: "openwrt-qualcommax-ipq807x-xiaomi_ax3600-squashfs-factory.ubi"
+            type: "ipq807x"
+
           - model: "AX9000"
             config_file: "./configs/ARM/ipq/AX9000.config"
             description_prefix: "AE86Wrt-Xiaomi-AX9000"
             sysupgrade_file: "openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-sysupgrade.bin"
             factory_file: "openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-factory.ubi"
+            type: "ipq807x"
+
+          - model: "301W"
+            config_file: "./configs/ARM/ipq/301W.config"
+            description_prefix: "AE86Wrt-QNAP-301W"
+            sysupgrade_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-sysupgrade.bin"
+            factory_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-factory.ubi"
+            type: "ipq807x"
+
+          - model: "BE7000"
+            config_file: "./configs/ARM/ipq/BE7000.config"
+            description_prefix: "AE86Wrt-Xiaomi-BE7000"
+            sysupgrade_file: "openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-sysupgrade.bin"
+            factory_file: "openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-factory.ubi"
+            type: "ipq95xx"
 
     steps:
       - name: Checkout
@@ -104,14 +123,24 @@ jobs:
             md5=`echo ${md5sum% *}`
             md5=`echo ${md5:0:10}`
           }
+
+          if [ "${{ matrix.type }}" = "ipq807x" ]; then         
+             rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
+             getmd5 $rom
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin
           
-          rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
-          getmd5 $rom
-          cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin
+             rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
+             getmd5 $rom
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
+          else
+             rom=openwrt/bin/targets/qualcommbe/ipq95xx/${{ matrix.sysupgrade_file }}
+             getmd5 $rom
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin
           
-          rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
-          getmd5 $rom
-          cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
+             rom=openwrt/bin/targets/qualcommbe/ipq95xx/${{ matrix.factory_file }}
+             getmd5 $rom
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
+          fi
 
       - name: Upload Firmwares
         uses: actions/upload-artifact@main
@@ -144,13 +173,13 @@ jobs:
       - name: Prepare release assets
         run: |
           mkdir -p release_assets
-          find downloaded_artifacts -name "*.ubi" -exec cp {} release_assets \;
+          find downloaded_artifacts \( -name "*.bin" -o -name "*.ubi" \) -exec cp {} release_assets \;
 
       - name: Generate release info
         id: release_info
         run: |
           echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-          echo "release_name=AE86Wrt-小米IPQ807x-6.12内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "release_name=AE86Wrt-IPQ807x_IPQ95XX-6.12内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
       - name: Create release
         uses: softprops/action-gh-release@v1
