@@ -95,47 +95,47 @@ jobs:
             md5=`echo ${md5:0:10}`
           }
           
-          if [ "${{ matrix.type }}" = "standard" ]; then
+          if [ "${{ matrix.soc }}" = "filogic" ]; then
             models_json='[
               {
-                "name": "Cetron-CT3003",
-                "output_file": "immortalwrt-mediatek-mt7981-cetron_ct3003-ubootmod-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "CMCC-RAX3000M",
-                "output_file": "immortalwrt-mediatek-mt7981-cmcc_rax3000m-squashfs-sysupgrade.bin"
-              },
-              {
                 "name": "CMCC-RAX3000M-eMMC",
-                "output_file": "immortalwrt-mediatek-mt7981-cmcc_rax3000m-emmc-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "KOMI-A31",
-                "output_file": "immortalwrt-mediatek-mt7981-konka_komi-a31-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "H3C-NX30Pro",
-                "output_file": "immortalwrt-mediatek-mt7981-h3c_nx30pro-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-filogic-cmcc_rax3000m-emmc-squashfs-sysupgrade.bin"
               },
               {
                 "name": "JCG-Q30Pro",
-                "output_file": "immortalwrt-mediatek-mt7981-jcg_q30-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-filogic-jcg_q30-pro-squashfs-sysupgrade.bin"
               },
               {
                 "name": "Nokia-AX3000",
-                "output_file": "immortalwrt-mediatek-mt7981-nokia_ea0326gmp-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-filogic-nokia_ea0326gmp-squashfs-sysupgrade.bin"
               },
               {
-                "name": "360-T7",
-                "output_file": "immortalwrt-mediatek-mt7981-mt7981-360-t7-108M-squashfs-sysupgrade.bin"
-              },
-              {
-                "name": "Xiaomi-AX3000T-MTK",
-                "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin"
+                "name": "Cetron-CT3003",
+                "output_file": "immortalwrt-mediatek-filogic-cetron_ct3003-squashfs-sysupgrade.bin"
               },
               {
                 "name": "Xiaomi-WR30U",
-                "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-wr30u-112m-squashfs-sysupgrade.bin"
+                "output_file": "immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-ubootmod-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "360-T7",
+                "output_file": "immortalwrt-mediatek-filogic-qihoo_360t7-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "CMCC-RAX3000M",
+                "output_file": "immortalwrt-mediatek-filogic-cmcc_rax3000m-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "KOMI-A31",
+                "output_file": "immortalwrt-mediatek-filogic-konka_komi-a31-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "Xiaomi-AX3000T-MTK",
+                "output_file": "immortalwrt-mediatek-filogic-xiaomi_mi-router-ax3000t-ubootmod-squashfs-sysupgrade.bin"
+              },
+              {
+                "name": "H3C-NX30Pro",
+                "output_file": "immortalwrt-mediatek-filogic-h3c_magic-nx30-pro-squashfs-sysupgrade.bin"
               },
               {
                 "name": "Redmi-AX6000",
@@ -180,6 +180,12 @@ jobs:
         with:
           name: ${{ matrix.type }}-Packages
           path: openwrt-${{ matrix.type }}/bin/packages/*
+
+      - name: Upload All Firmware Files
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.type }}-Files
+          path: openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic
   
   release:
     name: Create Release
