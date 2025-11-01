@@ -42,8 +42,8 @@ jobs:
             config_file: "./configs/ARM/ipq/301W.config"
             description_prefix: "AE86Wrt-QNAP-301W"
             sysupgrade_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-sysupgrade.bin"
-            factory_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-factory.ubi"
-            type: "ipq807x"
+            factory_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-factory.bin"
+            type: "qnap"
 
           - model: "BE7000"
             config_file: "./configs/ARM/ipq/BE7000.config"
@@ -124,19 +124,18 @@ jobs:
             md5=`echo ${md5:0:10}`
           }
 
-          if [ "${{ matrix.type }}" = "ipq807x" ]; then         
-             rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
-             getmd5 $rom
-             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin
-          
+          if [ "${{ matrix.type }}" = "ipq807x" ]; then
+             ##rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
+             ##getmd5 $rom
+             ##cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin       
              rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
              getmd5 $rom
              cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
-          else
-             rom=openwrt/bin/targets/qualcommbe/ipq95xx/${{ matrix.sysupgrade_file }}
+          elif [ "${{ matrix.type }}" = "qnap" ]; then
+             rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
              getmd5 $rom
-             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin
-          
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.bin
+          elif [ "${{ matrix.type }}" = "ipq95xx" ]; then          
              rom=openwrt/bin/targets/qualcommbe/ipq95xx/${{ matrix.factory_file }}
              getmd5 $rom
              cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi

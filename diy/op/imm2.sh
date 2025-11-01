@@ -44,22 +44,6 @@ date '+%Y%m%d%H' > package/base-files/files/etc/openwrt_version
 sed -i "s/NAME=\"*.*\"/NAME=\"AE86Wrt\"/g" package/base-files/files/usr/lib/os-release
 sed -i "s/BUILD_ID=\"*.*\"/BUILD_ID=\"$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
 
-##
-sed -i "53iLUCI_LANG.zh-cn=\$(LUCI_LANG.zh_Hans)" feeds/luci/luci.mk
-sed -i "54iLUCI_LANG.zh-tw=\$(LUCI_LANG.zh_Hant)" feeds/luci/luci.mk
-
-
-##MosDNS
-rm -rf feeds/packages/net/v2ray-geodata/*
-cp -af feeds/2305ipk/op-mosdns/v2ray-geodata/* feeds/packages/net/v2ray-geodata/
-
-##antiblock
-rm -rf feeds/luci/applications/luci-app-antiblock/*
-cp -af feeds/2305ipk/op-antiblock/luci-app-antiblock/* feeds/luci/applications/luci-app-antiblock/
-
-##Dockerman
-rm -rf feeds/luci/applications/luci-app-dockerman/*
-cp -af feeds/2305ipk/luci-app-dockerman/* feeds/luci/applications/luci-app-dockerman/
 
 ## golang
 rm -rf feeds/packages/lang/golang
