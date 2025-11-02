@@ -45,12 +45,12 @@ jobs:
             factory_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-factory.bin"
             type: "qnap"
 
-          - model: "BE7000"
-            config_file: "./configs/ARM/ipq/BE7000.config"
-            description_prefix: "AE86Wrt-Xiaomi-BE7000"
-            sysupgrade_file: "openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-sysupgrade.bin"
-            factory_file: "openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-factory.ubi"
-            type: "ipq95xx"
+          ##- model: "BE7000"
+          ##  config_file: "./configs/ARM/ipq/BE7000.config"
+          ##  description_prefix: "AE86Wrt-Xiaomi-BE7000"
+          ##  sysupgrade_file: "openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-sysupgrade.bin"
+          ##  factory_file: "openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-factory.ubi"
+          ##  type: "ipq95xx"
 
     steps:
       - name: Checkout
@@ -178,7 +178,7 @@ jobs:
         id: release_info
         run: |
           echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-          echo "release_name=AE86Wrt-IPQ807x_IPQ95XX-6.12内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "release_name=AE86Wrt-IPQ807x-6.12内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
       - name: Create release
         uses: softprops/action-gh-release@v1
