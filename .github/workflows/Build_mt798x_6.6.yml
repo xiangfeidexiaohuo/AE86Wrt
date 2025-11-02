@@ -51,7 +51,7 @@ jobs:
           git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./ && rm -rf ./AE86Wrt
           git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt-${{ matrix.type }}
           cd openwrt-${{ matrix.type }}
-          cp -f ../diy/op/imm1.sh ./
+          cp -f ../diy/mt798x/imm1.sh ./
           chmod +x ./imm1.sh && ./imm1.sh
       
       - name: Update & Install feeds
@@ -59,7 +59,7 @@ jobs:
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          cp -f ../diy/op/imm2.sh ./        
+          cp -f ../diy/mt798x/imm2.sh ./        
           chmod +x ./imm2.sh && ./imm2.sh
 
           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='${{ matrix.description }}-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
@@ -86,7 +86,43 @@ jobs:
         id: prepare_artifacts
         run: |
           mkdir -p ${{ matrix.type }}_out
-          cp openwrt-${{ matrix.type }}/.config ${{ matrix.type }}_out/${{ matrix.type }}.config      
+          cp openwrt-${{ matrix.type }}/.config ${{ matrix.type }}_out/${{ matrix.type }}.config
+          
+          getmd5()
+          {
+            md5sum=`md5sum $1`
+            md5=`echo ${md5sum% *}`
+            md5=`echo ${md5:0:10}`
+          }
+          
+          if [ "${{ matrix.type }}" = "7981_66" ]; then
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-qihoo_360t7-squashfs-sysupgrade.bin"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-360-T7-6.6-$(date +%Y%m%d)_${md5}.bin"
+
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-ubootmod-initramfs-factory.ubi"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Xiaomi-WR30U-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi"
+
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-ubootmod-squashfs-sysupgrade.bin"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Xiaomi-WR30U-6.6-$(date +%Y%m%d)_${md5}.bin"
+
+          elif [ "${{ matrix.type }}" = "7986_66" ]; then
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-ubootmod-initramfs-factory.ubi"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Redmi-AX6000-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi"
+
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-ubootmod-squashfs-sysupgrade.bin"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Redmi-AX6000-6.6-$(date +%Y%m%d)_${md5}.bin"
+          fi   
+
+      - name: Upload Firmware Artifacts
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.type }}-Firmware
+          path: ${{ matrix.type }}_out/AE86Wrt-*
       
       - name: Upload Config Artifacts
         uses: actions/upload-artifact@main
@@ -100,11 +136,11 @@ jobs:
           name: ${{ matrix.type }}-Packages
           path: openwrt-${{ matrix.type }}/bin/packages/*
 
-      - name: Upload All Firmware Files
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ matrix.type }}-Files
-          path: openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic
+      ##- name: Upload All Firmware Files
+      ##  uses: actions/upload-artifact@main
+      ##  with:
+      ##    name: ${{ matrix.type }}-Files
+      ##    path: openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic
   
   release:
     name: Create Release
