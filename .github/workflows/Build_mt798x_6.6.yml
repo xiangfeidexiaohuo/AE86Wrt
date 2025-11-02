@@ -1,0 +1,173 @@
+name: Build_mt798x_6.6
+on:
+  repository_dispatch:
+  workflow_dispatch:
+
+# 定时触发编译
+#  schedule:
+#    - cron: 30 23 * * 4
+
+jobs:
+  build:
+    name: Build ${{ matrix.type }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - soc: "filogic"
+            config_file: "./configs/ARM/mt798x/7981_66.config"
+            description: "AE86Wrt-MT7981"
+            type: "7981_66"
+
+          - soc: "filogic"
+            config_file: "./configs/ARM/mt798x/7986_66.config"
+            description: "AE86Wrt-MT7986"
+            type: "7986_66"
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@main
+
+      - name: Free disk space
+        uses: xiangfeidexiaohuo/actions@free-disk
+        with:
+          build-mount-path: /home/runner/work/AE86Wrt/AE86Wrt
+    
+      - name: Initialization environment
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          sudo apt-get update -y
+          sudo apt-get install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp libnsl-dev nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev libfuse-dev python3-setuptools g++ file clang nano genisoimage
+          sudo apt-get clean
+          git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
+      
+      - name: Clone source code
+        env:
+          REPO_URL: https://github.com/padavanonly/immortalwrt-mt798x-6.6
+          REPO_BRANCH: openwrt-24.10-6.6
+        run: |
+          git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./ && rm -rf ./AE86Wrt
+          git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt-${{ matrix.type }}
+          cd openwrt-${{ matrix.type }}
+          cp -f ../diy/mt798x/imm1.sh ./
+          chmod +x ./imm1.sh && ./imm1.sh
+      
+      - name: Update & Install feeds
+        working-directory: ./openwrt-${{ matrix.type }}
+        run: |
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          cp -f ../diy/mt798x/imm2.sh ./        
+          chmod +x ./imm2.sh && ./imm2.sh
+
+          sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='${{ matrix.description }}-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
+          sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"${{ matrix.description }}-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+      
+      - name: Configuration Customization
+        run: |
+          [ -e "${{ matrix.config_file }}" ] && mv "${{ matrix.config_file }}" openwrt-${{ matrix.type }}/.config
+          cd openwrt-${{ matrix.type }} && make defconfig
+      
+      - name: Download package
+        working-directory: ./openwrt-${{ matrix.type }}
+        run: |
+          make download -j$(nproc)
+          find dl -size -1024c -exec ls -l {} \;
+          find dl -size -1024c -exec rm -f {} \;
+      
+      - name: Build firmware
+        working-directory: ./openwrt-${{ matrix.type }}
+        run: |
+          make -j$(nproc) V=s
+      
+      - name: Prepare artifacts
+        id: prepare_artifacts
+        run: |
+          mkdir -p ${{ matrix.type }}_out
+          cp openwrt-${{ matrix.type }}/.config ${{ matrix.type }}_out/${{ matrix.type }}.config
+          
+          getmd5()
+          {
+            md5sum=`md5sum $1`
+            md5=`echo ${md5sum% *}`
+            md5=`echo ${md5:0:10}`
+          }
+          
+          if [ "${{ matrix.type }}" = "7981_66" ]; then
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-qihoo_360t7-squashfs-sysupgrade.bin"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-360-T7-6.6-$(date +%Y%m%d)_${md5}.bin"
+
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-ubootmod-initramfs-factory.ubi"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Xiaomi-WR30U-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi"
+
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-ubootmod-squashfs-sysupgrade.bin"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Xiaomi-WR30U-6.6-$(date +%Y%m%d)_${md5}.bin"
+
+          elif [ "${{ matrix.type }}" = "7986_66" ]; then
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-ubootmod-initramfs-factory.ubi"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Redmi-AX6000-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi"
+
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-ubootmod-squashfs-sysupgrade.bin"
+             getmd5 "$rom"
+             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Redmi-AX6000-6.6-$(date +%Y%m%d)_${md5}.bin"
+          fi   
+
+      - name: Upload Firmware Artifacts
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.type }}-Firmware
+          path: ${{ matrix.type }}_out/AE86Wrt-*
+      
+      - name: Upload Config Artifacts
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.type }}-config
+          path: ${{ matrix.type }}_out/${{ matrix.type }}.config
+      
+      - name: Upload Packages Artifacts
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.type }}-Packages
+          path: openwrt-${{ matrix.type }}/bin/packages/*
+
+      ##- name: Upload All Firmware Files
+      ##  uses: actions/upload-artifact@main
+      ##  with:
+      ##    name: ${{ matrix.type }}-Files
+      ##    path: openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic
+  
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@main
+        with:
+          path: downloaded_artifacts
+      
+      - name: Prepare release assets
+        run: |
+          mkdir -p release_assets
+          find downloaded_artifacts \( -name "*.bin" -o -name "*.tar" -o -name "*.itb" -o -name "*.fip" -o -name "*.ubi" \) -exec cp {} release_assets \;
+      
+      - name: Generate release info
+        id: release_info
+        run: |
+          echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+          echo "release_name=AE86Wrt-MT798x-6.6内核-测试-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+      
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.release_info.outputs.release_tag }}
+          name: ${{ steps.release_info.outputs.release_name }}
+          files: |
+            release_assets/*
+          token: ${{ secrets.GITHUB_TOKEN }}
