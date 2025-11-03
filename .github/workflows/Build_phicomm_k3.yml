@@ -60,8 +60,7 @@ jobs:
         
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K3-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings  
         sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-K3-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
-    
-              
+        
     - name: Configuration Customization - Build_phicomm_k3
       env:
         CONFIG_FILE: './configs/ARM/other/k3.config'
