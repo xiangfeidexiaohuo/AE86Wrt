@@ -60,6 +60,8 @@ jobs:
         
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-K3-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings  
         sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-K3-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+        rm -rf ./package/feeds/2305ipk/luci-app-airplay2/*
+        cp -af ./feeds/luci/applications/luci-app-airplay2/* ./package/feeds/2305ipk/luci-app-airplay2/
     
               
     - name: Configuration Customization - Build_phicomm_k3
