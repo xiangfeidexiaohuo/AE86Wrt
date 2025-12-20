@@ -100,20 +100,20 @@ jobs:
              getmd5 "$rom"
              cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-360-T7-6.6-$(date +%Y%m%d)_${md5}.bin"
 
-             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-ubootmod-initramfs-factory.ubi"
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-stock-initramfs-factory.ubi"
              getmd5 "$rom"
              cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Xiaomi-WR30U-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi"
 
-             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-ubootmod-squashfs-sysupgrade.bin"
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-stock-squashfs-sysupgrade.bin"
              getmd5 "$rom"
              cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Xiaomi-WR30U-6.6-$(date +%Y%m%d)_${md5}.bin"
 
           elif [ "${{ matrix.type }}" = "7986_66" ]; then
-             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-ubootmod-initramfs-factory.ubi"
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-stock-initramfs-factory.ubi"
              getmd5 "$rom"
              cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Redmi-AX6000-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi"
 
-             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-ubootmod-squashfs-sysupgrade.bin"
+             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-stock-squashfs-sysupgrade.bin"
              getmd5 "$rom"
              cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Redmi-AX6000-6.6-$(date +%Y%m%d)_${md5}.bin"
           fi   
