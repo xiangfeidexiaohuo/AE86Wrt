@@ -1,11 +1,11 @@
-name: Build_x86_combined
+name: Build_x86_25.12
 on:
   repository_dispatch:
   workflow_dispatch:
 
 # 定时触发编译
-  schedule:
-    - cron: '30 21 29 * *'
+#  schedule:
+#    - cron: '30 21 29 * *'
 
 jobs:
   build:
@@ -14,39 +14,12 @@ jobs:
     strategy:
       matrix:
         config:
-          - name: "X86-5.4"
-            repo_url: "https://github.com/xiangfeidexiaohuo/lede"
-            repo_branch: "k3"
-            kernel_ver: "5.4"
-            config_file: "./configs/X86/x86_504.config"
-            file_name: "x86_504"
-            diy_script: "lean"
-            type: "lede54"
-
-          - name: "X86-Light-6.12"
-            repo_url: "https://github.com/coolsnowwolf/lede"
-            repo_branch: "master"
-            kernel_ver: "6.12"
-            config_file: "./configs/X86/x86_light.config"
-            file_name: "x86_light"
-            diy_script: "lean"
-            type: "light"
-
-          - name: "X86-6.12"
-            repo_url: "https://github.com/coolsnowwolf/lede"
-            repo_branch: "master"
-            kernel_ver: "6.12"
-            config_file: "./configs/X86/x86_612.config"
-            file_name: "x86_612"
-            diy_script: "lean"
-            type: "lede"
-
-          - name: "X86-R24.10-6.6"
+          - name: "X86-R25.12-6.12"
             repo_url: "https://github.com/openwrt/openwrt"
-            repo_branch: "openwrt-24.10"
-            kernel_ver: "6.6"
-            config_file: "./configs/X86/x86_r2410.config"
-            file_name: "x86_r2410"
+            repo_branch: "openwrt-25.12"
+            kernel_ver: "6.12"
+            config_file: "./configs/X86/x86_r2512.config"
+            file_name: "x86_r2512"
             diy_script: "op"
             type: "op"
 
@@ -181,7 +154,7 @@ jobs:
       id: release_info
       run: |
         echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-        echo "release_name=AE86Wrt-软路由(X86_64)-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+        echo "release_name=AE86Wrt-软路由(X86_64)-测试版-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
     - name: Create release
       uses: softprops/action-gh-release@v1
