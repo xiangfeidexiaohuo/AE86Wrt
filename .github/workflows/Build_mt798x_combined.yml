@@ -5,7 +5,7 @@ on:
 
 # 定时触发编译
   schedule:
-    - cron: 10 23 * * 4
+    - cron: 10 23 29 * *
 
 jobs:
   build:
