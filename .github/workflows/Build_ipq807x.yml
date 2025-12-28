@@ -125,17 +125,20 @@ jobs:
           }
 
           if [ "${{ matrix.type }}" = "ipq807x" ]; then
-             ##rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
-             ##getmd5 $rom
-             ##cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin       
+             rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
+             getmd5 $rom
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin       
              rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
              getmd5 $rom
              cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
           elif [ "${{ matrix.type }}" = "qnap" ]; then
+             rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
+             getmd5 $rom
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin
              rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
              getmd5 $rom
              cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.bin
-          elif [ "${{ matrix.type }}" = "ipq95xx" ]; then          
+          elif [ "${{ matrix.type }}" = "ipq95xx" ]; then     
              rom=openwrt/bin/targets/qualcommbe/ipq95xx/${{ matrix.factory_file }}
              getmd5 $rom
              cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
