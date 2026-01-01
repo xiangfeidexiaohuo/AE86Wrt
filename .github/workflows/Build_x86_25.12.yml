@@ -89,7 +89,9 @@ jobs:
 
     - name: Build firmware
       working-directory: ./openwrt
-      run: make -j$(nproc) V=s
+      run: |
+        rm -rf feeds/2305ipk/op-socat/luci-app-socat/root/etc/config/socat
+        make -j$(nproc) V=s
 
     - name: Package artifacts
       run: |
