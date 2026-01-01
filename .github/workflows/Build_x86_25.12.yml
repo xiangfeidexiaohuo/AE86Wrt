@@ -21,7 +21,7 @@ jobs:
             config_file: "./configs/X86/x86_r2512.config"
             file_name: "x86_r2512"
             diy_script: "op"
-            type: "op"
+            type: "op2512"
 
     steps:
     - name: Checkout
@@ -64,9 +64,9 @@ jobs:
         if [ "${{ matrix.config.type }}" = "lede" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
            sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
-        elif [ "${{ matrix.config.type }}" = "op" ]; then
-           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
-           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-R24.10-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+        elif [ "${{ matrix.config.type }}" = "op2512" ]; then
+           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R25.12-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
+           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-R25.12-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
         elif [ "${{ matrix.config.type }}" = "lede54" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
            sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
@@ -89,7 +89,9 @@ jobs:
 
     - name: Build firmware
       working-directory: ./openwrt
-      run: make -j$(nproc) V=s
+      run: |
+        rm -rf feeds/2305ipk/op-socat/luci-app-socat/root/etc/config/socat
+        make -j$(nproc) V=s
 
     - name: Package artifacts
       run: |
@@ -154,7 +156,7 @@ jobs:
       id: release_info
       run: |
         echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-        echo "release_name=AE86Wrt-软路由(X86_64)-测试版-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+        echo "release_name=AE86Wrt-软路由(X86_64)-R25.12-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
     - name: Create release
       uses: softprops/action-gh-release@v1
