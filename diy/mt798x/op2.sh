@@ -77,6 +77,6 @@ sed -i "s/MT7981_AX3000_5G/AE86-5G/g" package/mtk/drivers/wifi-profile/files/mt7
 sed -i "s/ImmortalWrt-2.4G/AE86-2.4G/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 sed -i "s/ImmortalWrt-5G/AE86-5G/g" package/mtk/applications/mtwifi-cfg/files/mtwifi.sh
 
-## golang 为 1.24.x
+## golang
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
