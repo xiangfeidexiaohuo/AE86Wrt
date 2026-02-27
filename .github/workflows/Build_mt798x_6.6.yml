@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 # 定时触发编译
-#  schedule:
-#    - cron: 30 23 * * 4
+  schedule:
+    - cron: 30 23 * * 4
 
 jobs:
   build:
@@ -161,7 +161,7 @@ jobs:
         id: release_info
         run: |
           echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-          echo "release_name=AE86Wrt-MT798x-6.6内核-测试-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "release_name=AE86Wrt-MT798x-6.6内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
       
       - name: Create release
         uses: softprops/action-gh-release@v1

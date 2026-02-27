@@ -89,8 +89,8 @@ jobs:
           ./scripts/feeds install -a
           cp -f ../diy/lean/lean2.sh ./
           chmod +x ./lean2.sh && ./lean2.sh
-          sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile
-          sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.6/g" target/linux/qualcommax/Makefile
+          sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=6.12/g" target/linux/qualcommax/Makefile
+          sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=6.12/g" target/linux/qualcommax/Makefile
           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='${{ matrix.description_prefix }}-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"${{ matrix.description_prefix }}-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
 
@@ -127,21 +127,21 @@ jobs:
           if [ "${{ matrix.type }}" = "ipq807x" ]; then
              rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
              getmd5 $rom
-             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.6-$(date +%Y%m%d)_${md5}.bin       
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin       
              rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
              getmd5 $rom
-             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
           elif [ "${{ matrix.type }}" = "qnap" ]; then
              rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.sysupgrade_file }}
              getmd5 $rom
-             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.6-$(date +%Y%m%d)_${md5}.bin
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)_${md5}.bin
              rom=openwrt/bin/targets/qualcommax/ipq807x/${{ matrix.factory_file }}
              getmd5 $rom
-             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.6-$(date +%Y%m%d)-uboot_${md5}.bin
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.bin
           elif [ "${{ matrix.type }}" = "ipq95xx" ]; then     
              rom=openwrt/bin/targets/qualcommbe/ipq95xx/${{ matrix.factory_file }}
              getmd5 $rom
-             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi
+             cp -a $rom ./${{ matrix.model }}_Out/${{ matrix.description_prefix }}-6.12-$(date +%Y%m%d)-uboot_${md5}.ubi
           fi
 
       - name: Upload Firmwares
@@ -181,7 +181,7 @@ jobs:
         id: release_info
         run: |
           echo "release_tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-          echo "release_name=AE86Wrt-IPQ807x-6.6内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "release_name=AE86Wrt-IPQ807x-6.12内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
       - name: Create release
         uses: softprops/action-gh-release@v1
