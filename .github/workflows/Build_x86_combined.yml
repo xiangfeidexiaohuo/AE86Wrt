@@ -50,6 +50,15 @@ jobs:
             diy_script: "op"
             type: "op"
 
+          - name: "X86-R25.12-6.12"
+            repo_url: "https://github.com/openwrt/openwrt"
+            repo_branch: "openwrt-25.12"
+            kernel_ver: "6.12"
+            config_file: "./configs/X86/x86_r2512.config"
+            file_name: "x86_r2512"
+            diy_script: "op"
+            type: "op2512"
+
     steps:
     - name: Checkout
       uses: actions/checkout@main
@@ -91,9 +100,14 @@ jobs:
         if [ "${{ matrix.config.type }}" = "lede" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
            sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
+           git clone https://github.com/xiangfeidexiaohuo/extra-others && rm -rf package/network/services/hostapd && mv extra-others/hostapd package/network/services/ && rm -rf extra-others
         elif [ "${{ matrix.config.type }}" = "op" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R24.10-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
            sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-R24.10-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+        elif [ "${{ matrix.config.type }}" = "op2512" ]; then
+           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-R25.12-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
+           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-R25.12-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+           rm -rf feeds/2305ipk/op-socat/luci-app-socat/root/etc/config/socat
         elif [ "${{ matrix.config.type }}" = "lede54" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
            sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
