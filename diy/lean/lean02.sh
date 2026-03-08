@@ -92,4 +92,4 @@ cp -af feeds/extraipk/patch/opkg  target/linux/rockchip/armv8/base-files/etc/
 
 ## golang
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
