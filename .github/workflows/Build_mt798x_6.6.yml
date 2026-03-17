@@ -19,11 +19,6 @@ jobs:
             config_file: "./configs/ARM/mt798x/7981_66.config"
             description: "AE86Wrt-MT7981"
             type: "7981_66"
-
-          - soc: "filogic"
-            config_file: "./configs/ARM/mt798x/7986_66.config"
-            description: "AE86Wrt-MT7986"
-            type: "7986_66"
     steps:
       - name: Clone Repository
         uses: actions/checkout@main
@@ -76,12 +71,12 @@ jobs:
           make download -j$(nproc)
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
-      
+ 
       - name: Build firmware
         working-directory: ./openwrt-${{ matrix.type }}
         run: |
           make -j$(nproc) V=s
-      
+
       - name: Prepare artifacts
         id: prepare_artifacts
         run: |
@@ -99,23 +94,6 @@ jobs:
              rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-qihoo_360t7-squashfs-sysupgrade.bin"
              getmd5 "$rom"
              cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-360-T7-6.6-$(date +%Y%m%d)_${md5}.bin"
-
-             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-stock-initramfs-factory.ubi"
-             getmd5 "$rom"
-             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Xiaomi-WR30U-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi"
-
-             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_mi-router-wr30u-stock-squashfs-sysupgrade.bin"
-             getmd5 "$rom"
-             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Xiaomi-WR30U-6.6-$(date +%Y%m%d)_${md5}.bin"
-
-          elif [ "${{ matrix.type }}" = "7986_66" ]; then
-             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-stock-initramfs-factory.ubi"
-             getmd5 "$rom"
-             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Redmi-AX6000-6.6-$(date +%Y%m%d)-uboot_${md5}.ubi"
-
-             rom="openwrt-${{ matrix.type }}/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-xiaomi_redmi-router-ax6000-stock-squashfs-sysupgrade.bin"
-             getmd5 "$rom"
-             cp -a "$rom" "./${{ matrix.type }}_out/AE86Wrt-Redmi-AX6000-6.6-$(date +%Y%m%d)_${md5}.bin"
           fi   
 
       - name: Upload Firmware Artifacts
