@@ -18,6 +18,7 @@ jobs:
           - soc: "mt7981"
             kernel: "5.4"
             config_file: "./configs/ARM/mt798x/mt7981.config"
+            config_name: "mt7981.config"
             description: "AE86Wrt-MT7981"
             type: "standard"
             repo_url: "https://github.com/hanwckf/immortalwrt-mt798x"
@@ -28,6 +29,7 @@ jobs:
           - soc: "mt7986"
             kernel: "5.4"
             config_file: "./configs/ARM/mt798x/mt7986.config"
+            config_name: "mt7986.config"
             description: "AE86Wrt-MT7986"
             type: "standard"
             repo_url: "https://github.com/hanwckf/immortalwrt-mt798x"
@@ -40,6 +42,7 @@ jobs:
           - soc: "filogic"
             kernel: "6.6"
             config_file: "./configs/ARM/mt798x/7981_66.config"
+            config_name: "7981_66.config"
             description: "AE86Wrt-MT7981"
             type: "7981_66"
             repo_url: "https://github.com/padavanonly/immortalwrt-mt798x-6.6"
@@ -109,7 +112,7 @@ jobs:
         id: prepare_artifacts
         run: |
           mkdir -p ${{ matrix.soc }}_${{ matrix.kernel }}_out
-          cp openwrt-${{ matrix.soc }}/.config ${{ matrix.soc }}_${{ matrix.kernel }}_out/config-${{ matrix.kernel }}.txt
+          cp openwrt-${{ matrix.soc }}/.config ${{ matrix.soc }}_${{ matrix.kernel }}_out/${{ matrix.config_name }}
 
           getmd5() {
             md5sum=`md5sum "$1"`
@@ -168,7 +171,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: ${{ matrix.soc }}-${{ matrix.kernel }}-config
-          path: ${{ matrix.soc }}_${{ matrix.kernel }}_out/config-*.txt
+          path: ${{ matrix.soc }}_${{ matrix.kernel }}_out/${{ matrix.config_name }}
 
       - name: Upload Packages Artifacts
         uses: actions/upload-artifact@main
@@ -198,7 +201,7 @@ jobs:
           echo "release_name=AE86Wrt-MT798x-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@master
         with:
           tag_name: ${{ steps.release_info.outputs.release_tag }}
           name: ${{ steps.release_info.outputs.release_name }}
