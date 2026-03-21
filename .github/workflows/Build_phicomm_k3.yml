@@ -128,7 +128,7 @@ jobs:
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT       
 
     - name: Create Release & Upload
-      uses: ncipollo/release-action@v1.14.0
+      uses: ncipollo/release-action@v1
       with:
         artifacts: ARM_Out/*.trx
         name: ${{ steps.generate_name.outputs.release_name }}
