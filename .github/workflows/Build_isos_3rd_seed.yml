@@ -145,7 +145,7 @@ jobs:
           echo "release_name=isos-3rd-seed-acx-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@master
         with:
           tag_name: ${{ steps.release_info.outputs.release_tag }}
           name: ${{ steps.release_info.outputs.release_name }}
