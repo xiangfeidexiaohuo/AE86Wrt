@@ -273,7 +273,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@main
         with:
           path: downloaded_artifacts
 
@@ -289,7 +289,7 @@ jobs:
           echo "release_name=AE86Wrt-Rockchip-6.12内核-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
 
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@master
         with:
           tag_name: ${{ steps.release_info.outputs.release_tag }}
           name: ${{ steps.release_info.outputs.release_name }}
