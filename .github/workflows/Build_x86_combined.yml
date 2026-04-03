@@ -41,15 +41,6 @@ jobs:
             diy_script: "lean"
             type: "lede"
 
-          - name: "X86-R24.10-6.6"
-            repo_url: "https://github.com/openwrt/openwrt"
-            repo_branch: "openwrt-24.10"
-            kernel_ver: "6.6"
-            config_file: "./configs/X86/x86_r2410.config"
-            file_name: "x86_r2410"
-            diy_script: "op"
-            type: "op"
-
           - name: "X86-R25.12-6.12"
             repo_url: "https://github.com/openwrt/openwrt"
             repo_branch: "openwrt-25.12"
