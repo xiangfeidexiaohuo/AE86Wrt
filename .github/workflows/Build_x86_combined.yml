@@ -23,10 +23,10 @@ jobs:
             diy_script: "lean"
             type: "lede54"
 
-          - name: "X86-Light-6.12"
+          - name: "X86-Light-6.18"
             repo_url: "https://github.com/coolsnowwolf/lede"
             repo_branch: "master"
-            kernel_ver: "6.12"
+            kernel_ver: "6.18"
             config_file: "./configs/X86/x86_light.config"
             file_name: "x86_light"
             diy_script: "lean"
