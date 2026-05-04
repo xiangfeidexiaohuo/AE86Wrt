@@ -102,6 +102,7 @@ jobs:
         elif [ "${{ matrix.config.type }}" = "lede54" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
            sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+           sed -i '/BUILD_VARIANT.*ssl/,/endif/ s|ADDON.*USE_QUIC=1|# &|' feeds/packages/net/haproxy/Makefile
         elif [ "${{ matrix.config.type }}" = "light" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Light-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
            sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Light-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
