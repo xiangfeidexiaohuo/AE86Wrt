@@ -32,8 +32,8 @@ jobs:
             config_name: "mt7986.config"
             description: "AE86Wrt-MT7986"
             type: "standard"
-            repo_url: "https://github.com/hanwckf/immortalwrt-mt798x"
-            repo_branch: "openwrt-21.02"
+            repo_url: "https://github.com/xiangfeidexiaohuo/immortalwrt-mt798x"
+            repo_branch: "n60pro"
             pre_script: "op1.sh"
             post_script: "op2.sh"
 
@@ -127,6 +127,7 @@ jobs:
               {"name": "Redmi-AX6000",              "output_file": "immortalwrt-mediatek-mt7986-xiaomi_redmi-router-ax6000-squashfs-sysupgrade.bin"},
               {"name": "JDCloud-AX6000",            "output_file": "immortalwrt-mediatek-mt7986-jdcloud_re-cp-03-squashfs-sysupgrade.bin"},
               {"name": "Netcore-N60",               "output_file": "immortalwrt-mediatek-mt7986-netcore_n60-squashfs-sysupgrade.bin"},
+              {"name": "Netcore-N60Pro",            "output_file": "immortalwrt-mediatek-mt7986-netcore_n60-pro-squashfs-sysupgrade.bin"},
               {"name": "360-T7",                    "output_file": "immortalwrt-mediatek-mt7981-mt7981-360-t7-108M-squashfs-sysupgrade.bin"},
               {"name": "KOMI-A31",                  "output_file": "immortalwrt-mediatek-mt7981-konka_komi-a31-squashfs-sysupgrade.bin"},
               {"name": "Xiaomi-AX3000T-MTK",        "output_file": "immortalwrt-mediatek-mt7981-xiaomi_mi-router-ax3000t-squashfs-sysupgrade.bin"},
