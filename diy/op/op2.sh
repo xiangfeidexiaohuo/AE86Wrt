@@ -51,24 +51,12 @@ sed -i "s/BUILD_ID=\"*.*\"/BUILD_ID=\"$(date +%Y%m%d) By DaoDao\"/g" package/bas
 
 
 ##MosDNS
-# rm -rf feeds/packages/net/mosdns/*
-# cp -af feeds/2305ipk/op-mosdns/mosdns/* feeds/packages/net/mosdns/
 rm -rf feeds/packages/net/v2ray-geodata/*
 cp -af feeds/2305ipk/op-mosdns/v2ray-geodata/* feeds/packages/net/v2ray-geodata/
 
 ##antiblock
 rm -rf feeds/luci/applications/luci-app-antiblock/*
 cp -af feeds/2305ipk/op-antiblock/luci-app-antiblock/* feeds/luci/applications/luci-app-antiblock/
-
-##Dockerman
-rm -rf feeds/luci/applications/luci-app-dockerman/*
-cp -af feeds/2305ipk/luci-app-dockerman/* feeds/luci/applications/luci-app-dockerman/
-
-## fix_ss_libv
-#rm -rf package/libs/mbedtls
-#rm -rf package/libs/uclient
-#rm -rf package/libs/ustream-ssl
-#cp -af feeds/2305ipk/patch/fix_ss_libv/*  package/libs/
 
 ## golang
 rm -rf feeds/packages/lang/golang

@@ -14,15 +14,6 @@ jobs:
     strategy:
       matrix:
         config:
-          - name: "X86-5.4"
-            repo_url: "https://github.com/xiangfeidexiaohuo/lede"
-            repo_branch: "k3"
-            kernel_ver: "5.4"
-            config_file: "./configs/X86/x86_504.config"
-            file_name: "x86_504"
-            diy_script: "lean"
-            type: "lede54"
-
           - name: "X86-Light-6.12"
             repo_url: "https://github.com/coolsnowwolf/lede"
             repo_branch: "master"
