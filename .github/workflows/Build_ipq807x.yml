@@ -73,8 +73,8 @@ jobs:
 
       - name: Clone source code
         env:
-          REPO_URL: https://github.com/coolsnowwolf/lede
-          REPO_BRANCH: master
+          REPO_URL: https://github.com/xiangfeidexiaohuo/lede
+          REPO_BRANCH: tmp
         run: |
           git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./ && rm -rf ./AE86Wrt
           git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
