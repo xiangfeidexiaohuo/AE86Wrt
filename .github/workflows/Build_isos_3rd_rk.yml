@@ -177,6 +177,14 @@ jobs:
         getmd5 $rom     
         cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-easepi_r1-$(date +%Y%m%d)_${md5}.img.gz
 
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_a2-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-easepi_a2-$(date +%Y%m%d)_${md5}.img.gz
+
+        rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r2-squashfs-sysupgrade.img.gz
+        getmd5 $rom     
+        cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-easepi_r2-$(date +%Y%m%d)_${md5}.img.gz
+
         rom=openwrt/bin/targets/rockchip/armv8/istoreos-rockchip-armv8-easepi_r1-lite-squashfs-sysupgrade.img.gz
         getmd5 $rom     
         cp -a $rom ./${{ matrix.arch }}_out/istoreos-3rd-easepi_r1-lite-$(date +%Y%m%d)_${md5}.img.gz
