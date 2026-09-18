@@ -10,19 +10,10 @@ on:
 jobs:
   build:
     name: Build ${{ matrix.config.name }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         config:
-          - name: "X86-Light-6.12"
-            repo_url: "https://github.com/coolsnowwolf/lede"
-            repo_branch: "master"
-            kernel_ver: "6.12"
-            config_file: "./configs/X86/x86_light.config"
-            file_name: "x86_light"
-            diy_script: "lean"
-            type: "light"
-
           - name: "X86-Light-6.18"
             repo_url: "https://github.com/coolsnowwolf/lede"
             repo_branch: "master"
@@ -31,15 +22,6 @@ jobs:
             file_name: "x86_light_618"
             diy_script: "lean"
             type: "light"
-
-          - name: "X86-6.12"
-            repo_url: "https://github.com/coolsnowwolf/lede"
-            repo_branch: "master"
-            kernel_ver: "6.12"
-            config_file: "./configs/X86/x86_612.config"
-            file_name: "x86_612"
-            diy_script: "lean"
-            type: "lede"
 
           - name: "X86-6.18"
             repo_url: "https://github.com/coolsnowwolf/lede"
@@ -147,22 +129,11 @@ jobs:
         getmd5 $rom
         cp -a $rom ./X86_Out/AE86Wrt-${{ matrix.config.name }}-$(date +%Y%m%d)_${md5}.img.gz
 
-        rom=openwrt/bin/targets/x86/64/openwrt-x86-64-generic-rootfs.tar.gz
-        ## rom=openwrt/bin/targets/x86/64/openwrt-x86-64-generic-squashfs-rootfs.img.gz
-        getmd5 $rom
-        cp -a $rom ./X86_Out/AE86Wrt-${{ matrix.config.name }}-rootfs-$(date +%Y%m%d)_${md5}.tar.gz
-
     - name: Upload Firmware
       uses: actions/upload-artifact@main
       with:
         name: ${{ matrix.config.name }}-Firmware
         path: X86_Out/AE86Wrt-*.img.gz
-
-    - name: Upload Rootfs
-      uses: actions/upload-artifact@main
-      with:
-        name: ${{ matrix.config.name }}-ROOTFS
-        path: X86_Out/AE86Wrt-*.tar.gz
 
     - name: Upload Config
       uses: actions/upload-artifact@main
@@ -179,7 +150,7 @@ jobs:
   create_release:
     name: Create Release
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - name: Download all artifacts
       uses: actions/download-artifact@main
