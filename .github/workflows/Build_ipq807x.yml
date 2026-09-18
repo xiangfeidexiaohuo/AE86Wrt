@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build ${{ matrix.model }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -37,13 +37,6 @@ jobs:
             sysupgrade_file: "openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-sysupgrade.bin"
             factory_file: "openwrt-qualcommax-ipq807x-xiaomi_ax9000-squashfs-factory.ubi"
             type: "ipq807x"
-
-          - model: "301W"
-            config_file: "./configs/ARM/ipq/301W.config"
-            description_prefix: "AE86Wrt-QNAP-301W"
-            sysupgrade_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-sysupgrade.bin"
-            factory_file: "openwrt-qualcommax-ipq807x-qnap_301w-squashfs-factory.bin"
-            type: "qnap"
 
           ##- model: "BE7000"
           ##  config_file: "./configs/ARM/ipq/BE7000.config"
