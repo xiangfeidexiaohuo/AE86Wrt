@@ -52,7 +52,7 @@ sed -i "3iuci commit istore" package/lean/default-settings/files/zzz-default-set
 sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='AE86Wrt'/g" package/base-files/files/etc/openwrt_release
 date '+%Y%m%d%H' > package/base-files/files/etc/openwrt_version
 sed -i "s/NAME=\"*.*\"/NAME=\"AE86Wrt\"/g" package/base-files/files/usr/lib/os-release
-sed -i "s/BUILD_ID=\"*.*\"/BUILD_ID=\"$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+sed -i "s/^BUILD_ID=.*/BUILD_ID=\"$(date +%Y%m%d) By DaoDao\"/" package/base-files/files/usr/lib/os-release
 
 sed -i "s/VERSION=\"*.*\"/VERSION=\"25.12\"/g" package/base-files/files/usr/lib/os-release
 sed -i "s/VERSION_ID=\"*.*\"/VERSION_ID=\"25.12\"/g" package/base-files/files/usr/lib/os-release
@@ -83,3 +83,22 @@ sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.c
 ## golang
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+
+sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
+
+
+PATCHES="target/linux/qualcommax/patches-6.12"
+# ① 适配 6.12.112：qcom_scm_pas_* 参数名 peripheral -> pas_id
+sed -i \
+  -e 's/qcom_scm_pas_auth_and_reset(u32 peripheral)/qcom_scm_pas_auth_and_reset(u32 pas_id)/' \
+  -e 's/qcom_scm_pas_shutdown(u32 peripheral)/qcom_scm_pas_shutdown(u32 pas_id)/' \
+  -e 's/qcom_scm_pas_supported(u32 peripheral)/qcom_scm_pas_supported(u32 pas_id)/' \
+  "$PATCHES/0803-firmware-qcom_scm-ipq5332-add-msa-lock-unlock-suppor.patch" \
+  "$PATCHES/0811-firmware-qcom_scm-support-MPD.patch"
+
+# ② 修复 6.12 内核 net_device_read_tx 分组超 160 字节 → 放宽断言到 192
+printf '%b\n' '--- a/net/core/dev.c' '+++ b/net/core/dev.c' '@@ -11982,6 +11982,6 @@' \
+' #ifdef CONFIG_NET_XGRESS' ' \tCACHELINE_ASSERT_GROUP_MEMBER(struct net_device, net_device_read_tx, tcx_egress);' ' #endif' \
+'-\tCACHELINE_ASSERT_GROUP_SIZE(struct net_device, net_device_read_tx, 160);' \
+'+\tCACHELINE_ASSERT_GROUP_SIZE(struct net_device, net_device_read_tx, 192);' ' ' ' \t/* TXRX read-mostly hotpath */' \
+> "$PATCHES/9999-fix-net-device-read-tx.patch"
