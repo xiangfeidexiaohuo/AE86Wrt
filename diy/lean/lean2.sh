@@ -83,3 +83,19 @@ sed -i '/option Interface/d'  package/network/services/dropbear/files/dropbear.c
 ## golang
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+
+## 修复 qualcommax 6.12 内核编译失败：
+## QCA NSS ECM 补丁把 priv_flags_ext 放进 net_device_read_tx 组，使该组 160->168
+cat > target/linux/qualcommax/patches-6.12/0699-fix-net_device_read_tx-cacheline.patch <<'EOF'
+--- a/net/core/dev.c
++++ b/net/core/dev.c
+@@ -11982,7 +11982,7 @@ static void __init net_dev_struct_check(void)
+ #ifdef CONFIG_NET_XGRESS
+ 	CACHELINE_ASSERT_GROUP_MEMBER(struct net_device, net_device_read_tx, tcx_egress);
+ #endif
+-	CACHELINE_ASSERT_GROUP_SIZE(struct net_device, net_device_read_tx, 160);
++	CACHELINE_ASSERT_GROUP_SIZE(struct net_device, net_device_read_tx, 168);
+ 
+ 	/* TXRX read-mostly hotpath */
+ 	CACHELINE_ASSERT_GROUP_MEMBER(struct net_device, net_device_read_txrx, lstats);
+EOF
