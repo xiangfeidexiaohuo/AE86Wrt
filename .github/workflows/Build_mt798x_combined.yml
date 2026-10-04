@@ -90,6 +90,7 @@ jobs:
           chmod +x ./${{ matrix.post_script }} && ./${{ matrix.post_script }}
           sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='${{ matrix.description }}-${{ matrix.kernel }}-$(date +%Y%m%d)'/g" package/base-files/files/etc/openwrt_release
           sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"${{ matrix.description }}-${{ matrix.kernel }}-$(date +%Y%m%d) By DaoDao\"/g" package/base-files/files/usr/lib/os-release
+          sed -i 's#--set=llvm.download-ci-llvm=true#--set=llvm.download-ci-llvm=false#' feeds/packages/lang/rust/Makefile
 
       - name: Configuration Customization
         run: |
