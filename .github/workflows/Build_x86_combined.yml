@@ -77,8 +77,8 @@ jobs:
         chmod +x ./${{ matrix.config.diy_script }}2.sh && ./${{ matrix.config.diy_script }}2.sh
         sed -i "s/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=${{ matrix.config.kernel_ver }}/g" target/linux/x86/Makefile
         sed -i "s/KERNEL_TESTING_PATCHVER:=.*/KERNEL_TESTING_PATCHVER:=${{ matrix.config.kernel_ver }}/g" target/linux/x86/Makefile
+        rm -rf package/feeds/packages/net/mwan3 && git clone https://github.com/dl12345/mwan3.git package/feeds/packages/net/mwan3
         
-
         if [ "${{ matrix.config.type }}" = "lede" ]; then
            sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-X86-Pure-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
            sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-X86-Pure-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
