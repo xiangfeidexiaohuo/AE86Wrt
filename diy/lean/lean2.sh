@@ -99,3 +99,11 @@ cat > target/linux/qualcommax/patches-6.12/0699-fix-net_device_read_tx-cacheline
  	/* TXRX read-mostly hotpath */
  	CACHELINE_ASSERT_GROUP_MEMBER(struct net_device, net_device_read_txrx, lstats);
 EOF
+
+## 修复 qualcommax 6.12 内核编译失败：
+## 6.12.112 把 qcom_scm.h 中 pas_* 参数名由 peripheral 改成 pas_id，
+## 导致 0803/0811 补丁上下文不匹配、target/linux 编译中断
+sed -i -E 's/^ (int qcom_scm_pas_auth_and_reset|int qcom_scm_pas_shutdown|bool qcom_scm_pas_supported)$u32 peripheral$;$/ \1(u32 pas_id);/' target/linux/qualcommax/patches-6.12/0803-firmware-qcom_scm-ipq5332-add-msa-lock-unlock-suppor.patch \
+sed -i -E 's/^ (int qcom_scm_pas_auth_and_reset|int qcom_scm_pas_shutdown|bool qcom_scm_pas_supported)$u32 peripheral$;$/ \1(u32 pas_id);/' target/linux/qualcommax/patches-6.12/0811-firmware-qcom_scm-support-MPD.patch
+
+sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
