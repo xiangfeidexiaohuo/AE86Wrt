@@ -68,6 +68,7 @@ jobs:
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-RK-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
         sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-RK-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
+        sed -i "s/^BUILD_ID=.*/BUILD_ID=\"$(date +%Y%m%d) By DaoDao\"/" package/base-files/files/usr/lib/os-release
        
               
     - name: Configuration Customization
