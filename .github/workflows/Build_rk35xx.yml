@@ -68,8 +68,11 @@ jobs:
 
         sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='AE86Wrt-RK-$(date +%Y%m%d)'/g" package/lean/default-settings/files/zzz-default-settings
         sed -i "s/OPENWRT_RELEASE=\"*.*\"/OPENWRT_RELEASE=\"AE86Wrt-RK-$(date +%Y%m%d) By DaoDao\"/g" package/lean/default-settings/files/zzz-default-settings
-       
-              
+
+        ##内嵌 arm64 Mihomo/Meta 内核
+        mkdir -p feeds/2305ipk/patch/wall-luci/luci-app-openclash/root/etc/openclash/core
+        curl -fL --retry 3 https://raw.githubusercontent.com/vernesong/OpenClash/core/master/meta/clash-linux-arm64.tar.gz -o /tmp/openclash-core.tar.gz && tar -xzf /tmp/openclash-core.tar.gz -C /tmp && install -m 0755 /tmp/clash feeds/2305ipk/patch/wall-luci/luci-app-openclash/root/etc/openclash/core/clash_meta
+                
     - name: Configuration Customization
       run: |
         [ -e "${{ matrix.config_file }}" ] && mv "${{ matrix.config_file }}" openwrt/.config
