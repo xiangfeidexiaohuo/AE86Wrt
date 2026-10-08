@@ -4,6 +4,7 @@
 #=================================================
 ##添加自己的插件库
 rm -rf ./package/lean/k3screenctrl
-               
-sed -i "1isrc-git 2305ipk https://github.com/xiangfeidexiaohuo/2305-ipk\n" feeds.conf.default
+
+sed -i '1isrc-git dk https://github.com/xiangfeidexiaohuo/2305-ipk.git;nft' feeds.conf.default
+sed -i '2isrc-git 2305ipk https://github.com/xiangfeidexiaohuo/2305-ipk' feeds.conf.default
 
