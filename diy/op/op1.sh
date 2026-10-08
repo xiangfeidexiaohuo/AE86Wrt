@@ -6,4 +6,5 @@
 sed -i 's/git.openwrt.org\/feed/github.com\/openwrt/g' feeds.conf.default
 sed -i 's/git.openwrt.org\/project/github.com\/openwrt/g' feeds.conf.default
 
-sed -i "1isrc-git 2305ipk https://github.com/xiangfeidexiaohuo/2305-ipk\n" feeds.conf.default
+sed -i '1isrc-git dk https://github.com/xiangfeidexiaohuo/2305-ipk.git;nft' feeds.conf.default
+sed -i '2isrc-git 2305ipk https://github.com/xiangfeidexiaohuo/2305-ipk' feeds.conf.default
