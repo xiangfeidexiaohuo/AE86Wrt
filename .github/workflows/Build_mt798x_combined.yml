@@ -50,6 +50,21 @@ jobs:
             pre_script: "imm1.sh"
             post_script: "imm2.sh"
 
+          - soc: "7dr7299"
+            kernel: "6.6"
+            config_file: "./configs/ARM/mt798x/7dr7299.config"
+            config_name: "7dr7299.config"
+            description: "AE86Wrt-7DR7299"
+            type: "7dr7299"
+            repo_url: "https://github.com/padavanonly/immortalwrt-mt798x-6.6"
+            repo_branch: "mt798x-mt799x-6.6-mtwifi"
+            # 与已知良好的 TL-7DR7299 固件保持一致的源码版本 (r1-6b7374feb)
+            source_commit: "6b7374feb2c7e4b0a9486333578f2b8950008840"
+            # 先以源码树自带 defconfig 为底，再叠加本项目配置
+            base_config: "defconfig/mt7988_mt7992.config"
+            pre_script: "7299_1.sh"
+            post_script: "7299_2.sh"
+
     steps:
       - name: Clone Repository
         uses: actions/checkout@main
@@ -78,6 +93,11 @@ jobs:
           git clone https://github.com/xiangfeidexiaohuo/AE86Wrt.git && mv ./AE86Wrt/* ./ && rm -rf ./AE86Wrt
           git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt-${{ matrix.soc }}
           cd openwrt-${{ matrix.soc }}
+          if [ -n "${{ matrix.source_commit }}" ]; then
+            git fetch --depth 1 origin ${{ matrix.source_commit }}
+            git checkout --detach ${{ matrix.source_commit }}
+            test "$(git rev-parse HEAD)" = "${{ matrix.source_commit }}"
+          fi
           cp -f ../diy/mt798x/${{ matrix.pre_script }} ./
           chmod +x ./${{ matrix.pre_script }} && ./${{ matrix.pre_script }}
 
@@ -93,8 +113,20 @@ jobs:
 
       - name: Configuration Customization
         run: |
-          [ -e "${{ matrix.config_file }}" ] && mv "${{ matrix.config_file }}" openwrt-${{ matrix.soc }}/.config
+          if [ -n "${{ matrix.base_config }}" ] && [ -f "openwrt-${{ matrix.soc }}/${{ matrix.base_config }}" ]; then
+            cp -f "openwrt-${{ matrix.soc }}/${{ matrix.base_config }}" openwrt-${{ matrix.soc }}/.config
+            cat "${{ matrix.config_file }}" >> openwrt-${{ matrix.soc }}/.config
+          elif [ -e "${{ matrix.config_file }}" ]; then
+            mv "${{ matrix.config_file }}" openwrt-${{ matrix.soc }}/.config
+          fi
           cd openwrt-${{ matrix.soc }} && make defconfig
+          if [ "${{ matrix.type }}" = "7dr7299" ]; then
+            grep -qx 'CONFIG_TARGET_mediatek_filogic_a73_DEVICE_tplink_tl-7dr7299-v1=y' .config
+            grep -qx 'CONFIG_MTK_WIFI7_FIRST_IF_IPAILNA=y' .config
+            grep -qx '# CONFIG_MTK_WIFI7_FIRST_IF_EPAELNA is not set' .config
+            grep -qx 'CONFIG_MTK_WIFI7_SECOND_IF_EPAELNA=y' .config
+            grep -E 'CONFIG_PACKAGE_(luci-app-store|luci-app-openclash|luci-app-turboacc-mtk|luci-app-ttyd|luci-app-samba4|luci-app-nlbwmon|luci-app-upnp|luci-app-filemanager|kmod-tun|tailscale)=' .config
+          fi
 
       - name: Download package
         working-directory: ./openwrt-${{ matrix.soc }}
@@ -160,6 +192,27 @@ jobs:
             else
               echo "⚠️ Not found: $rom"
             fi
+
+          elif [ "${{ matrix.type }}" = "7dr7299" ]; then
+            rom_dir="openwrt-${{ matrix.soc }}/bin/targets/mediatek/filogic_a73"
+            models_json='[
+              {"name": "TL-7DR7299",          "output_file": "immortalwrt-mediatek-filogic_a73-tplink_tl-7dr7299-v1-squashfs-sysupgrade.itb"},
+              {"name": "TL-7DR7299-recovery", "output_file": "immortalwrt-mediatek-filogic_a73-tplink_tl-7dr7299-v1-initramfs-recovery.itb"},
+              {"name": "TL-7DR7299-bl2",      "output_file": "mt7988-ram-comb-bl2.bin"}
+            ]'
+
+            echo "$models_json" | jq -c '.[]' | while read -r model; do
+              name=$(echo "$model" | jq -r '.name')
+              file=$(echo "$model" | jq -r '.output_file')
+              rom="$rom_dir/$file"
+              if [ -f "$rom" ]; then
+                md5=$(getmd5 "$rom")
+                ext="${file##*.}"
+                cp -a "$rom" "${{ matrix.soc }}_${{ matrix.kernel }}_out/AE86Wrt-$name-${{ matrix.kernel }}-${DATE}_${md5}.$ext"
+              else
+                echo "⚠️ Not found: $rom"
+              fi
+            done
           fi
 
       - name: Upload Firmware Artifacts
